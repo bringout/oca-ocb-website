@@ -1,0 +1,51 @@
+[project]
+name = "odoo-bringout-oca-ocb-website"
+version = "16.0.0"
+description = "Website - Enterprise website builder"
+authors = [
+    { name = "Ernad Husremovic", email = "hernad@bring.out.ba" }
+]
+dependencies = [
+    "odoo-bringout-oca-ocb-digest>=16.0.0",
+    "odoo-bringout-oca-ocb-web>=16.0.0",
+    "odoo-bringout-oca-ocb-web_editor>=16.0.0",
+    "odoo-bringout-oca-ocb-http_routing>=16.0.0",
+    "odoo-bringout-oca-ocb-portal>=16.0.0",
+    "odoo-bringout-oca-ocb-social_media>=16.0.0",
+    "odoo-bringout-oca-ocb-auth_signup>=16.0.0",
+    "odoo-bringout-oca-ocb-mail>=16.0.0",
+    "odoo-bringout-oca-ocb-google_recaptcha>=16.0.0",
+    "odoo-bringout-oca-ocb-utm>=16.0.0",
+    "requests>=2.25.1"
+]
+readme = "README.md"
+requires-python = ">= 3.11"
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11", 
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Office/Business",
+]
+
+[project.urls]
+homepage = "https://github.com/bringout/odoo-bringout-oca-ocb-website"
+repository = "https://github.com/bringout/odoo-bringout-oca-ocb-website"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["website"]
+
+[tool.rye]
+managed = true
+dev-dependencies = [
+    "pytest>=8.4.1",
+]
