@@ -2,5 +2,5 @@
 
 This addon depends on:
 
-- [website_sms](https://github.com/bringout/oca-ocb-website/tree/cb9a46cc55f7bd1957cc3060c4c132de447e2276/odoo-bringout-oca-ocb-website_sms)
-- [crm](https://github.com/bringout/oca-ocb-crm/tree/91c84355b39d24bdefbb75d18ca9c90b7ce8e9be/odoo-bringout-oca-ocb-crm)
+- [website_sms](https://github.com/bringout/oca-ocb-website/tree/c163049a3e96080ea491b42bd2bc22efde70af98/odoo-bringout-oca-ocb-website_sms)
+- [crm](https://github.com/bringout/oca-ocb-crm/tree/1abf2e5aabae09f7db4369444d5c2df2227c4226/odoo-bringout-oca-ocb-crm)

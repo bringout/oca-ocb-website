@@ -2,13 +2,13 @@
 
 This addon depends on:
 
-- [digest](https://github.com/bringout/oca-ocb-core/tree/3269462e6a0442fbf5ae30a27b3c18135ac733b9/odoo-bringout-oca-ocb-digest)
-- [web](https://github.com/bringout/oca-ocb-core/tree/3269462e6a0442fbf5ae30a27b3c18135ac733b9/odoo-bringout-oca-ocb-web)
-- [web_editor](https://github.com/bringout/oca-ocb-web/tree/4d306a7c06b02d25ac5bc33ac128c0cd8fd56baf/odoo-bringout-oca-ocb-web_editor)
-- [http_routing](https://github.com/bringout/oca-ocb-core/tree/3269462e6a0442fbf5ae30a27b3c18135ac733b9/odoo-bringout-oca-ocb-http_routing)
-- [portal](https://github.com/bringout/oca-ocb-website/tree/cb9a46cc55f7bd1957cc3060c4c132de447e2276/odoo-bringout-oca-ocb-portal)
-- [social_media](https://github.com/bringout/oca-ocb-core/tree/3269462e6a0442fbf5ae30a27b3c18135ac733b9/odoo-bringout-oca-ocb-social_media)
-- [auth_signup](https://github.com/bringout/oca-ocb-security/tree/1ebe5c84cf7259a9afc320bc3b46260f401d65af/odoo-bringout-oca-ocb-auth_signup)
-- [mail](https://github.com/bringout/oca-ocb-core/tree/3269462e6a0442fbf5ae30a27b3c18135ac733b9/odoo-bringout-oca-ocb-mail)
-- [google_recaptcha](https://github.com/bringout/oca-ocb-security/tree/1ebe5c84cf7259a9afc320bc3b46260f401d65af/odoo-bringout-oca-ocb-google_recaptcha)
-- [utm](https://github.com/bringout/oca-ocb-core/tree/3269462e6a0442fbf5ae30a27b3c18135ac733b9/odoo-bringout-oca-ocb-utm)
+- [digest](https://github.com/bringout/oca-ocb-core/tree/680f309d65868a57afe7e3be0f9905cc2a7043fb/odoo-bringout-oca-ocb-digest)
+- [web](https://github.com/bringout/oca-ocb-core/tree/680f309d65868a57afe7e3be0f9905cc2a7043fb/odoo-bringout-oca-ocb-web)
+- [web_editor](https://github.com/bringout/oca-ocb-web/tree/390af320269d12935b357759c1589e8a2fc80f93/odoo-bringout-oca-ocb-web_editor)
+- [http_routing](https://github.com/bringout/oca-ocb-core/tree/680f309d65868a57afe7e3be0f9905cc2a7043fb/odoo-bringout-oca-ocb-http_routing)
+- [portal](https://github.com/bringout/oca-ocb-website/tree/c163049a3e96080ea491b42bd2bc22efde70af98/odoo-bringout-oca-ocb-portal)
+- [social_media](https://github.com/bringout/oca-ocb-core/tree/680f309d65868a57afe7e3be0f9905cc2a7043fb/odoo-bringout-oca-ocb-social_media)
+- [auth_signup](https://github.com/bringout/oca-ocb-security/tree/ca0674fd02795dffb0b74140d45f11c96354445b/odoo-bringout-oca-ocb-auth_signup)
+- [mail](https://github.com/bringout/oca-ocb-core/tree/680f309d65868a57afe7e3be0f9905cc2a7043fb/odoo-bringout-oca-ocb-mail)
+- [google_recaptcha](https://github.com/bringout/oca-ocb-security/tree/ca0674fd02795dffb0b74140d45f11c96354445b/odoo-bringout-oca-ocb-google_recaptcha)
+- [utm](https://github.com/bringout/oca-ocb-core/tree/680f309d65868a57afe7e3be0f9905cc2a7043fb/odoo-bringout-oca-ocb-utm)
