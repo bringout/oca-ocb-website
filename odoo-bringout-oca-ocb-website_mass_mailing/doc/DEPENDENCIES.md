@@ -2,6 +2,6 @@
 
 This addon depends on:
 
-- [website](https://github.com/bringout/oca-ocb-website/tree/9965a93c2c7a8a1f9155e81e743ed695c59b8c50/odoo-bringout-oca-ocb-website)
-- [mass_mailing](https://github.com/bringout/oca-ocb-mail/tree/2dc809464e48860dddf786981d61e5e473bcca60/odoo-bringout-oca-ocb-mass_mailing)
-- [google_recaptcha](https://github.com/bringout/oca-ocb-security/tree/ace2632072430576f81503e33d1aca2ba20a6c27/odoo-bringout-oca-ocb-google_recaptcha)
+- [website](https://github.com/bringout/oca-ocb-website/tree/d4409ad46e8021555059a5fb87598f6d572458a3/odoo-bringout-oca-ocb-website)
+- [mass_mailing](https://github.com/bringout/oca-ocb-mail/tree/cffb62e0bf029e6c8c3a67645e546468462f261d/odoo-bringout-oca-ocb-mass_mailing)
+- [google_recaptcha](https://github.com/bringout/oca-ocb-security/tree/7fc5982b6b53543a3a2f50ff6c43d02d7cee1e7c/odoo-bringout-oca-ocb-google_recaptcha)
