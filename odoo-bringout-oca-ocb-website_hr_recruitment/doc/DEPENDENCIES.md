@@ -2,5 +2,5 @@
 
 This addon depends on:
 
-- [hr_recruitment](https://github.com/bringout/oca-ocb-hr/tree/f288f1185aa474d2fbc3385a757b169c442c3acf/odoo-bringout-oca-ocb-hr_recruitment)
-- [website_mail](https://github.com/bringout/oca-ocb-website/tree/d4409ad46e8021555059a5fb87598f6d572458a3/odoo-bringout-oca-ocb-website_mail)
+- [hr_recruitment](https://github.com/bringout/oca-ocb-hr/tree/aa000c65134cd084402a3f35a3bfc3672d5c1d57/odoo-bringout-oca-ocb-hr_recruitment)
+- [website_mail](https://github.com/bringout/oca-ocb-website/tree/727598c0d7a6eb8cd7e5356eb5e2c1b21390e0c1/odoo-bringout-oca-ocb-website_mail)
