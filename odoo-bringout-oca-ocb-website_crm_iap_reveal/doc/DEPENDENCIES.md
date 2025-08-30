@@ -2,7 +2,7 @@
 
 This addon depends on:
 
-- [iap_crm](https://github.com/bringout/oca-ocb-technical/tree/8fcba78f213552797a003ba001cde6c4c59e6785/odoo-bringout-oca-ocb-iap_crm)
-- [iap_mail](https://github.com/bringout/oca-ocb-technical/tree/8fcba78f213552797a003ba001cde6c4c59e6785/odoo-bringout-oca-ocb-iap_mail)
-- [crm_iap_mine](https://github.com/bringout/oca-ocb-crm/tree/1abf2e5aabae09f7db4369444d5c2df2227c4226/odoo-bringout-oca-ocb-crm_iap_mine)
-- [website_crm](https://github.com/bringout/oca-ocb-website/tree/c163049a3e96080ea491b42bd2bc22efde70af98/odoo-bringout-oca-ocb-website_crm)
+- [iap_crm](https://github.com/bringout/oca-ocb-technical/tree/b2a91e3b975dae4980028dc64efeda7a6a77a647/odoo-bringout-oca-ocb-iap_crm)
+- [iap_mail](https://github.com/bringout/oca-ocb-technical/tree/b2a91e3b975dae4980028dc64efeda7a6a77a647/odoo-bringout-oca-ocb-iap_mail)
+- [crm_iap_mine](https://github.com/bringout/oca-ocb-crm/tree/f57c024d38b5558f0e9ad32b1e05486b4c39cc36/odoo-bringout-oca-ocb-crm_iap_mine)
+- [website_crm](https://github.com/bringout/oca-ocb-website/tree/bd6600a1205eb4c26e7f290fe92240c883985125/odoo-bringout-oca-ocb-website_crm)

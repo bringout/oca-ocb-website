@@ -2,5 +2,5 @@
 
 This addon depends on:
 
-- [website_event_track_live](https://github.com/bringout/oca-ocb-website/tree/c163049a3e96080ea491b42bd2bc22efde70af98/odoo-bringout-oca-ocb-website_event_track_live)
-- [website_event_track_quiz](https://github.com/bringout/oca-ocb-website/tree/c163049a3e96080ea491b42bd2bc22efde70af98/odoo-bringout-oca-ocb-website_event_track_quiz)
+- [website_event_track_live](https://github.com/bringout/oca-ocb-website/tree/bd6600a1205eb4c26e7f290fe92240c883985125/odoo-bringout-oca-ocb-website_event_track_live)
+- [website_event_track_quiz](https://github.com/bringout/oca-ocb-website/tree/bd6600a1205eb4c26e7f290fe92240c883985125/odoo-bringout-oca-ocb-website_event_track_quiz)
