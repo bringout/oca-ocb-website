@@ -2,5 +2,5 @@
 
 This addon depends on:
 
-- [website](../../../../odoo-bringout-oca-ocb-website)
-- [link_tracker](../../../../../oca-ocb-core/odoo-bringout-oca-ocb-link_tracker)
+- [website](https://github.com/bringout/oca-ocb-website)
+- [link_tracker](https://github.com/bringout/oca-ocb-core)

@@ -2,5 +2,5 @@
 
 This addon depends on:
 
-- [website_partner](../../../../odoo-bringout-oca-ocb-website_partner)
-- [gamification](../../../../../oca-ocb-vertical-industry/odoo-bringout-oca-ocb-gamification)
+- [website_partner](https://github.com/bringout/oca-ocb-website)
+- [gamification](https://github.com/bringout/oca-ocb-vertical-industry)

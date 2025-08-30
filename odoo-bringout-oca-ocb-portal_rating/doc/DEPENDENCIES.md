@@ -2,5 +2,5 @@
 
 This addon depends on:
 
-- [portal](../../../../odoo-bringout-oca-ocb-portal)
-- [rating](../../../../../oca-ocb-core/odoo-bringout-oca-ocb-rating)
+- [portal](https://github.com/bringout/oca-ocb-website)
+- [rating](https://github.com/bringout/oca-ocb-core)

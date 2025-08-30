@@ -2,6 +2,6 @@
 
 This addon depends on:
 
-- [auth_signup](../../../../../oca-ocb-security/odoo-bringout-oca-ocb-auth_signup)
-- [website_mail](../../../../odoo-bringout-oca-ocb-website_mail)
-- [website_profile](../../../../odoo-bringout-oca-ocb-website_profile)
+- [auth_signup](https://github.com/bringout/oca-ocb-security)
+- [website_mail](https://github.com/bringout/oca-ocb-website)
+- [website_profile](https://github.com/bringout/oca-ocb-website)

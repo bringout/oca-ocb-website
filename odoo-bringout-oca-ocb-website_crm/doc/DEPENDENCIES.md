@@ -2,5 +2,5 @@
 
 This addon depends on:
 
-- [website](../../../../odoo-bringout-oca-ocb-website)
-- [crm](../../../../../oca-ocb-crm/odoo-bringout-oca-ocb-crm)
+- [website](https://github.com/bringout/oca-ocb-website)
+- [crm](https://github.com/bringout/oca-ocb-crm)

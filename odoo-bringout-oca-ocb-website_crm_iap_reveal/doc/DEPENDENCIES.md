@@ -2,7 +2,7 @@
 
 This addon depends on:
 
-- [iap_crm](../../../../../oca-ocb-technical/odoo-bringout-oca-ocb-iap_crm)
-- [iap_mail](../../../../../oca-ocb-technical/odoo-bringout-oca-ocb-iap_mail)
-- [crm_iap_mine](../../../../../oca-ocb-crm/odoo-bringout-oca-ocb-crm_iap_mine)
-- [website_crm](../../../../odoo-bringout-oca-ocb-website_crm)
+- [iap_crm](https://github.com/bringout/oca-ocb-technical)
+- [iap_mail](https://github.com/bringout/oca-ocb-technical)
+- [crm_iap_mine](https://github.com/bringout/oca-ocb-crm)
+- [website_crm](https://github.com/bringout/oca-ocb-website)

@@ -2,5 +2,5 @@
 
 This addon depends on:
 
-- [mail_group](../../../../../oca-ocb-core/odoo-bringout-oca-ocb-mail_group)
-- [website](../../../../odoo-bringout-oca-ocb-website)
+- [mail_group](https://github.com/bringout/oca-ocb-core)
+- [website](https://github.com/bringout/oca-ocb-website)

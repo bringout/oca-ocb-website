@@ -2,5 +2,5 @@
 
 This addon depends on:
 
-- [website_slides](../../../../odoo-bringout-oca-ocb-website_slides)
-- [website_forum](../../../../odoo-bringout-oca-ocb-website_forum)
+- [website_slides](https://github.com/bringout/oca-ocb-website)
+- [website_forum](https://github.com/bringout/oca-ocb-website)

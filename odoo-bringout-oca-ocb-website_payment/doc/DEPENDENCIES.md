@@ -2,6 +2,6 @@
 
 This addon depends on:
 
-- [website](../../../../odoo-bringout-oca-ocb-website)
-- [account_payment](../../../../../oca-ocb-accounting/odoo-bringout-oca-ocb-account_payment)
-- [portal](../../../../odoo-bringout-oca-ocb-portal)
+- [website](https://github.com/bringout/oca-ocb-website)
+- [account_payment](https://github.com/bringout/oca-ocb-accounting)
+- [portal](https://github.com/bringout/oca-ocb-website)

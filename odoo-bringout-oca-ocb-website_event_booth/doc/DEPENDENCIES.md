@@ -2,5 +2,5 @@
 
 This addon depends on:
 
-- [website_event](../../../../odoo-bringout-oca-ocb-website_event)
-- [event_booth](../../../../../oca-ocb-core/odoo-bringout-oca-ocb-event_booth)
+- [website_event](https://github.com/bringout/oca-ocb-website)
+- [event_booth](https://github.com/bringout/oca-ocb-core)

@@ -2,13 +2,13 @@
 
 This addon depends on:
 
-- [digest](../../../../../oca-ocb-core/odoo-bringout-oca-ocb-digest)
-- [web](../../../../../oca-ocb-core/odoo-bringout-oca-ocb-web)
-- [web_editor](../../../../../oca-ocb-web/odoo-bringout-oca-ocb-web_editor)
-- [http_routing](../../../../../oca-ocb-core/odoo-bringout-oca-ocb-http_routing)
-- [portal](../../../../odoo-bringout-oca-ocb-portal)
-- [social_media](../../../../../oca-ocb-core/odoo-bringout-oca-ocb-social_media)
-- [auth_signup](../../../../../oca-ocb-security/odoo-bringout-oca-ocb-auth_signup)
-- [mail](../../../../../oca-ocb-core/odoo-bringout-oca-ocb-mail)
-- [google_recaptcha](../../../../../oca-ocb-security/odoo-bringout-oca-ocb-google_recaptcha)
-- [utm](../../../../../oca-ocb-core/odoo-bringout-oca-ocb-utm)
+- [digest](https://github.com/bringout/oca-ocb-core)
+- [web](https://github.com/bringout/oca-ocb-core)
+- [web_editor](https://github.com/bringout/oca-ocb-web)
+- [http_routing](https://github.com/bringout/oca-ocb-core)
+- [portal](https://github.com/bringout/oca-ocb-website)
+- [social_media](https://github.com/bringout/oca-ocb-core)
+- [auth_signup](https://github.com/bringout/oca-ocb-security)
+- [mail](https://github.com/bringout/oca-ocb-core)
+- [google_recaptcha](https://github.com/bringout/oca-ocb-security)
+- [utm](https://github.com/bringout/oca-ocb-core)

@@ -2,8 +2,8 @@
 
 This addon depends on:
 
-- [web](../../../../../oca-ocb-core/odoo-bringout-oca-ocb-web)
-- [web_editor](../../../../../oca-ocb-web/odoo-bringout-oca-ocb-web_editor)
-- [http_routing](../../../../../oca-ocb-core/odoo-bringout-oca-ocb-http_routing)
-- [mail](../../../../../oca-ocb-core/odoo-bringout-oca-ocb-mail)
-- [auth_signup](../../../../../oca-ocb-security/odoo-bringout-oca-ocb-auth_signup)
+- [web](https://github.com/bringout/oca-ocb-core)
+- [web_editor](https://github.com/bringout/oca-ocb-web)
+- [http_routing](https://github.com/bringout/oca-ocb-core)
+- [mail](https://github.com/bringout/oca-ocb-core)
+- [auth_signup](https://github.com/bringout/oca-ocb-security)

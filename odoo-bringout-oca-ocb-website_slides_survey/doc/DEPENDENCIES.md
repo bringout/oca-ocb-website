@@ -2,5 +2,5 @@
 
 This addon depends on:
 
-- [website_slides](../../../../odoo-bringout-oca-ocb-website_slides)
-- [survey](../../../../../oca-ocb-core/odoo-bringout-oca-ocb-survey)
+- [website_slides](https://github.com/bringout/oca-ocb-website)
+- [survey](https://github.com/bringout/oca-ocb-core)
