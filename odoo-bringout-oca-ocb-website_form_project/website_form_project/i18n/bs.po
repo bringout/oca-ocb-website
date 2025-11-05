@@ -15,30 +15,33 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
+# taken from hr.po
 #. module: website_form_project
 #. odoo-javascript
-#: code:addons/website_form_project/static/src/js/website_form_project_editor.js:0
+#: code:addons/website_form_project/static/src/js/website_form_project_editor.js
 #, python-format
 msgid "Description"
 msgstr "Opis"
 
+# taken from hr.po
 #. module: website_form_project
 #. odoo-javascript
-#: code:addons/website_form_project/static/src/js/website_form_project_editor.js:0
+#: code:addons/website_form_project/static/src/js/website_form_project_editor.js
 #, python-format
 msgid "Project"
 msgstr "Projekt"
 
+# taken from hr.po
 #. module: website_form_project
 #. odoo-javascript
-#: code:addons/website_form_project/static/src/js/website_form_project_editor.js:0
+#: code:addons/website_form_project/static/src/js/website_form_project_editor.js
 #, python-format
 msgid "Task Title"
 msgstr "Naslov zadatka"
 
 #. module: website_form_project
 #. odoo-javascript
-#: code:addons/website_form_project/static/src/js/website_form_project_editor.js:0
+#: code:addons/website_form_project/static/src/js/website_form_project_editor.js
 #, python-format
 msgid "Your Email"
 msgstr "Vaš e-mail"

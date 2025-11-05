@@ -31,7 +31,9 @@ msgid ""
 "Charge order directly or authorize at the order and capture the payment "
 "later on, manually."
 msgstr ""
+"Naplatite narudžbu odmah ili je autorizujte pa ručno naplatite kasnije."
 
+# taken from hr.po
 #. module: website_payment_authorize
 #: model:ir.model,name:website_payment_authorize.model_res_config_settings
 msgid "Config Settings"

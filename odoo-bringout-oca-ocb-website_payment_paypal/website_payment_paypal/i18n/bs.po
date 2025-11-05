@@ -15,6 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
+# taken from hr.po
 #. module: website_payment_paypal
 #: model:ir.model,name:website_payment_paypal.model_res_config_settings
 msgid "Config Settings"

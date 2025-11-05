@@ -25,6 +25,7 @@ msgstr "<span class=\"o_stat_text\">Idi na <br/>Web stranicu</span>"
 msgid "Create a public discussion group in your backend"
 msgstr "Kreiraj javnu diskusijsku grupu u vašem pozadinski"
 
+# taken from hr.po
 #. module: website_mail_group
 #: model_terms:ir.ui.view,arch_db:website_mail_group.snippets
 msgid "Discussion Group"
@@ -35,9 +36,9 @@ msgstr "Grupa za raspravu"
 msgid "Mail Group"
 msgstr "Email grupa"
 
+# taken from hr.po
 #. module: website_mail_group
 #: model:ir.ui.menu,name:website_mail_group.mail_group_menu_website
-#: model:ir.ui.menu,name:website_mail_group.mail_group_menu_website_root
 msgid "Mailing Lists"
 msgstr "Liste za slanje mailova"
 
@@ -46,35 +47,38 @@ msgstr "Liste za slanje mailova"
 msgid "Moderation Rules"
 msgstr "Pravila moderacije"
 
+# taken from hr.po
 #. module: website_mail_group
 #. odoo-javascript
-#: code:addons/website_mail_group/static/src/snippets/s_group/options.js:0
+#: code:addons/website_mail_group/static/src/snippets/s_group/options.js
 #, python-format
 msgid "Name"
 msgstr "Naziv"
 
 #. module: website_mail_group
 #. odoo-javascript
-#: code:addons/website_mail_group/static/src/snippets/s_group/options.js:0
+#: code:addons/website_mail_group/static/src/snippets/s_group/options.js
 #, python-format
 msgid "New Mail Group"
 msgstr "Nova email grupa"
 
+# taken from hr.po
 #. module: website_mail_group
 #. odoo-javascript
-#: code:addons/website_mail_group/static/src/snippets/s_group/options.js:0
-#: model_terms:ir.ui.view,arch_db:website_mail_group.s_group
+#: code:addons/website_mail_group/static/src/snippets/s_group/options.js
 #, python-format
 msgid "Subscribe"
 msgstr "Pretplatite se"
 
+# taken from hr.po
 #. module: website_mail_group
 #. odoo-javascript
-#: code:addons/website_mail_group/static/src/snippets/s_group/000.js:0
+#: code:addons/website_mail_group/static/src/snippets/s_group/000.js
 #, python-format
 msgid "Unsubscribe"
 msgstr "Odjava"
 
+# taken from hr.po
 #. module: website_mail_group
 #: model_terms:ir.ui.view,arch_db:website_mail_group.s_group
 msgid "your email..."

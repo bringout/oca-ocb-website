@@ -25,9 +25,10 @@ msgstr "<small>Prati</small><i class=\"fa fa-fw ms-1\"/>"
 msgid "<small>Unfollow</small><i class=\"fa fa-fw ms-1\"/>"
 msgstr "<small>Ne prati</small><i class=\"fa fa-fw ms-1\"/>"
 
+# taken from hr.po
 #. module: website_mail
 #. odoo-javascript
-#: code:addons/website_mail/static/src/js/follow.js:0
+#: code:addons/website_mail/static/src/js/follow.js
 #, python-format
 msgid "Error"
 msgstr "Greška"
@@ -37,6 +38,7 @@ msgstr "Greška"
 msgid "Publisher Warranty Contract"
 msgstr "Izdavački ugovor o garanciji"
 
+# taken from hr.po
 #. module: website_mail
 #: model_terms:ir.ui.view,arch_db:website_mail.follow
 msgid "Subscribe"
@@ -44,16 +46,18 @@ msgstr "Pretplatite se"
 
 #. module: website_mail
 #. odoo-python
-#: code:addons/website_mail/controllers/main.py:0
+#: code:addons/website_mail/controllers/main.py
 #, python-format
 msgid "Suspicious activity detected by Google reCaptcha."
 msgstr "Sumnjiva aktivnost otkrivena od Google reCaptcha."
 
+# taken from hr.po
 #. module: website_mail
 #: model_terms:ir.ui.view,arch_db:website_mail.follow
 msgid "Unsubscribe"
 msgstr "Odjavi pretplatu"
 
+# taken from hr.po
 #. module: website_mail
 #: model_terms:ir.ui.view,arch_db:website_mail.follow
 msgid "your email..."

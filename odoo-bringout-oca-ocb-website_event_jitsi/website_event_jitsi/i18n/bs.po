@@ -15,6 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
+# taken from hr.po
 #. module: website_event_jitsi
 #: model:ir.model,name:website_event_jitsi.model_res_config_settings
 msgid "Config Settings"
@@ -31,6 +32,8 @@ msgid ""
 "The Jitsi server domain can be customized through the settings to use a "
 "different server than the default \"meet.jit.si\""
 msgstr ""
+"Domena Jitsi servera se može prilagoditi kroz postavke da koristi drugi "
+"server od zadanog \"meet.jit.si\""
 
 #. module: website_event_jitsi
 #: model_terms:ir.ui.view,arch_db:website_event_jitsi.res_config_settings_view_form

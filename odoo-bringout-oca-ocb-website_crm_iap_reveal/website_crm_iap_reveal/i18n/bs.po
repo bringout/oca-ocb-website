@@ -21,6 +21,8 @@ msgid ""
 "1 credit is consumed per visitor matching the website traffic conditions and"
 " whose company can be identified.<br/>"
 msgstr ""
+"1 kredit se troši po posjetitelju koji odgovara uslovima web prometa i čija "
+"kompanija može biti identificirana.<br/>"
 
 #. module: website_crm_iap_reveal
 #: model_terms:ir.ui.view,arch_db:website_crm_iap_reveal.crm_reveal_rule_form
@@ -32,16 +34,19 @@ msgstr "<span class=\"o_stat_text\"> Potencijali </span>"
 msgid "<span class=\"o_stat_text\"> Opportunities </span>"
 msgstr "<span class=\"o_stat_text\"> Mogućnosti </span>"
 
+# taken from hr.po
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,field_description:website_crm_iap_reveal.field_crm_reveal_rule__active
 msgid "Active"
 msgstr "Aktivan"
 
+# taken from hr.po
 #. module: website_crm_iap_reveal
 #: model_terms:ir.ui.view,arch_db:website_crm_iap_reveal.crm_reveal_rule_view_search
 msgid "Archived"
 msgstr "Arhivirano"
 
+# taken from hr.po
 #. module: website_crm_iap_reveal
 #: model:ir.model,name:website_crm_iap_reveal.model_crm_reveal_rule
 msgid "CRM Lead Generation Rules"
@@ -55,8 +60,10 @@ msgstr "CRM Reveal prikaz"
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,help:website_crm_iap_reveal.field_crm_reveal_rule__lead_for
 msgid "Choose whether to track companies only or companies and their contacts"
-msgstr "Izaberite da li da pratite samo kompanije ili kompanije i njihove kontakte"
+msgstr ""
+"Izaberite da li da pratite samo kompanije ili kompanije i njihove kontakte"
 
+# taken from hr.po
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields.selection,name:website_crm_iap_reveal.selection__crm_reveal_rule__lead_for__companies
 msgid "Companies"
@@ -82,11 +89,13 @@ msgstr "Maksimalna veličina kompanje"
 msgid "Contact Filter"
 msgstr "Filter kontakata"
 
+# taken from hr.po
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,field_description:website_crm_iap_reveal.field_crm_reveal_rule__country_ids
 msgid "Countries"
 msgstr "Države"
 
+# taken from hr.po
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,field_description:website_crm_iap_reveal.field_crm_reveal_view__create_date
 msgid "Create Date"
@@ -102,13 +111,16 @@ msgstr "Kreiraj pravilo konverzije"
 msgid ""
 "Create rules to generate B2B leads/opportunities from your website visitors."
 msgstr ""
+"Kreiraj pravila za generiranje B2B potencijala/mogućnosti iz posjetilaca "
+"vaše web stranice."
 
+# taken from hr.po
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,field_description:website_crm_iap_reveal.field_crm_reveal_rule__create_uid
-#: model:ir.model.fields,field_description:website_crm_iap_reveal.field_crm_reveal_view__create_uid
 msgid "Created by"
 msgstr "Kreirao"
 
+# taken from hr.po
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,field_description:website_crm_iap_reveal.field_crm_reveal_rule__create_date
 msgid "Created on"
@@ -119,15 +131,15 @@ msgstr "Kreirano"
 msgid "Data Tracking"
 msgstr "Praćenje podataka"
 
+# taken from hr.po
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,field_description:website_crm_iap_reveal.field_crm_reveal_rule__display_name
-#: model:ir.model.fields,field_description:website_crm_iap_reveal.field_crm_reveal_view__display_name
 msgid "Display Name"
 msgstr "Naziv"
 
 #. module: website_crm_iap_reveal
 #. odoo-python
-#: code:addons/website_crm_iap_reveal/models/crm_reveal_rule.py:0
+#: code:addons/website_crm_iap_reveal/models/crm_reveal_rule.py
 #, python-format
 msgid "Enter Valid Regex."
 msgstr "Unesite važeći Regex."
@@ -147,6 +159,7 @@ msgstr "Filtriraj kompanije na osnovu njihove veličine."
 msgid "Filter on Size"
 msgstr "Filtriraj po veličini"
 
+# taken from hr.po
 #. module: website_crm_iap_reveal
 #: model_terms:ir.ui.view,arch_db:website_crm_iap_reveal.crm_reveal_rule_form
 msgid "From"
@@ -157,11 +170,13 @@ msgstr "Od"
 msgid "Generated Lead / Opportunity"
 msgstr "Generiran potencijal/mogućnost"
 
+# taken from hr.po
 #. module: website_crm_iap_reveal
 #: model:ir.model,name:website_crm_iap_reveal.model_ir_http
 msgid "HTTP Routing"
 msgstr "HTTP usmjeravanje"
 
+# taken from hr.po
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields.selection,name:website_crm_iap_reveal.selection__crm_reveal_rule__priority__2
 msgid "High"
@@ -174,39 +189,40 @@ msgstr "IAP krediti"
 
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,field_description:website_crm_iap_reveal.field_crm_reveal_rule__id
-#: model:ir.model.fields,field_description:website_crm_iap_reveal.field_crm_reveal_view__id
 msgid "ID"
 msgstr "ID"
 
+# taken from hr.po
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,field_description:website_crm_iap_reveal.field_crm_lead__reveal_ip
-#: model:ir.model.fields,field_description:website_crm_iap_reveal.field_crm_reveal_view__reveal_ip
 msgid "IP Address"
 msgstr "IP adresa"
 
+# taken from hr.po
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,field_description:website_crm_iap_reveal.field_crm_reveal_rule__industry_tag_ids
 msgid "Industries"
 msgstr "Industrije"
 
+# taken from hr.po
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,field_description:website_crm_iap_reveal.field_crm_reveal_rule____last_update
-#: model:ir.model.fields,field_description:website_crm_iap_reveal.field_crm_reveal_view____last_update
 msgid "Last Modified on"
 msgstr "Zadnja promjena"
 
+# taken from hr.po
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,field_description:website_crm_iap_reveal.field_crm_reveal_rule__write_uid
-#: model:ir.model.fields,field_description:website_crm_iap_reveal.field_crm_reveal_view__write_uid
 msgid "Last Updated by"
 msgstr "Promijenio"
 
+# taken from hr.po
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,field_description:website_crm_iap_reveal.field_crm_reveal_rule__write_date
-#: model:ir.model.fields,field_description:website_crm_iap_reveal.field_crm_reveal_view__write_date
 msgid "Last Updated on"
 msgstr "Vrijeme promjene"
 
+# taken from hr.po
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields.selection,name:website_crm_iap_reveal.selection__crm_reveal_rule__lead_type__lead
 msgid "Lead"
@@ -222,24 +238,23 @@ msgstr "Podaci potencijala"
 msgid "Lead Generation Information"
 msgstr "Informacije generiranja potencijala"
 
+# taken from hr.po
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,field_description:website_crm_iap_reveal.field_crm_lead__reveal_rule_id
-#: model:ir.model.fields,field_description:website_crm_iap_reveal.field_crm_reveal_view__reveal_rule_id
 msgid "Lead Generation Rule"
 msgstr "Pravilo generiranja potencijala"
 
 #. module: website_crm_iap_reveal
 #: model:ir.actions.act_window,name:website_crm_iap_reveal.crm_reveal_view_action
-#: model:ir.ui.menu,name:website_crm_iap_reveal.crm_reveal_view_menu_action
 msgid "Lead Generation Views"
 msgstr "Pogledi generiranja potencijala"
 
 #. module: website_crm_iap_reveal
 #: model:ir.actions.server,name:website_crm_iap_reveal.ir_cron_crm_reveal_lead_ir_actions_server
-#: model:ir.cron,cron_name:website_crm_iap_reveal.ir_cron_crm_reveal_lead
 msgid "Lead Generation: Leads/Opportunities Generation"
 msgstr "Generiranje potencijala: Generiranje potencijala/mogućnosti"
 
+# taken from hr.po
 #. module: website_crm_iap_reveal
 #: model:ir.model,name:website_crm_iap_reveal.model_crm_lead
 msgid "Lead/Opportunity"
@@ -248,8 +263,11 @@ msgstr "Potencijal/prilika"
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,help:website_crm_iap_reveal.field_crm_reveal_rule__industry_tag_ids
 msgid "Leave empty to always match. Odoo will not create lead if no match"
-msgstr "Ostavite prazno da se uvijek poklopi. Odoo neće kreirati potencijal ako nema poklapanja"
+msgstr ""
+"Ostavite prazno da se uvijek poklopi. Odoo neće kreirati potencijal ako nema"
+" poklapanja"
 
+# taken from hr.po
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields.selection,name:website_crm_iap_reveal.selection__crm_reveal_rule__priority__0
 msgid "Low"
@@ -261,12 +279,15 @@ msgid ""
 "Make sure you know if you have to be GDPR compliant for storing personal "
 "data."
 msgstr ""
+"Uvjerite se da znate da li morate biti GDPR kompatibilni za čuvanje ličnih "
+"podataka."
 
 #. module: website_crm_iap_reveal
 #: model:ir.model.constraint,message:website_crm_iap_reveal.constraint_crm_reveal_rule_limit_extra_contacts
 msgid "Maximum 5 contacts are allowed!"
 msgstr "Maksimalno 5 kontakata je dozvoljeno!"
 
+# taken from hr.po
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields.selection,name:website_crm_iap_reveal.selection__crm_reveal_rule__priority__1
 msgid "Medium"
@@ -277,6 +298,7 @@ msgstr "Medij"
 msgid "Not Found"
 msgstr "Nije pronađeno"
 
+# taken from hr.po
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,field_description:website_crm_iap_reveal.field_crm_reveal_rule__extra_contacts
 msgid "Number of Contacts"
@@ -298,6 +320,8 @@ msgid ""
 "Only visitors of following countries will be converted into "
 "leads/opportunities (using GeoIP)."
 msgstr ""
+"Samo posjetitelji sljedećih zemalja će biti pretvoreni u "
+"potencijale/mogućnosti (koristeći GeoIP)."
 
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,help:website_crm_iap_reveal.field_crm_reveal_rule__state_ids
@@ -305,7 +329,10 @@ msgid ""
 "Only visitors of following states will be converted into "
 "leads/opportunities."
 msgstr ""
+"Samo posjetitelji sljedećih država/kantona će biti pretvoreni u "
+"potencijale/mogućnosti."
 
+# taken from hr.po
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields.selection,name:website_crm_iap_reveal.selection__crm_reveal_rule__lead_type__opportunity
 msgid "Opportunity"
@@ -323,7 +350,7 @@ msgstr "Uslovi generiranja mogućnosti"
 
 #. module: website_crm_iap_reveal
 #. odoo-python
-#: code:addons/website_crm_iap_reveal/models/crm_reveal_rule.py:0
+#: code:addons/website_crm_iap_reveal/models/crm_reveal_rule.py
 #, python-format
 msgid "Opportunity created by Odoo Lead Generation"
 msgstr "Mogućnost kreirana od Odoo generiranja potencijala"
@@ -338,6 +365,7 @@ msgstr "Druge uloge"
 msgid "Preferred Role"
 msgstr "Preferirana uloga"
 
+# taken from hr.po
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,field_description:website_crm_iap_reveal.field_crm_reveal_rule__priority
 msgid "Priority"
@@ -350,32 +378,40 @@ msgid ""
 "to target the homepage. Example: /page* to track all the pages which begin "
 "with /page"
 msgstr ""
+"Regex za praćenje stranica web stranice. Ostavite prazno za praćenje cijele "
+"web stranice, ili / za targeting početne stranice. Primjer: /stranica* za "
+"praćenje svih stranica koje počinju sa /stranica"
 
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,help:website_crm_iap_reveal.field_crm_reveal_rule__website_id
 msgid "Restrict Lead generation to this website."
 msgstr "Ograniči generiranje potencijala na ovu web stranicu."
 
+# taken from hr.po
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields.selection,name:website_crm_iap_reveal.selection__crm_reveal_rule__contact_filter_type__role
 msgid "Role"
 msgstr "Uloga"
 
+# taken from hr.po
 #. module: website_crm_iap_reveal
 #: model_terms:ir.ui.view,arch_db:website_crm_iap_reveal.crm_reveal_rule_view_search
 msgid "Rule"
 msgstr "Pravilo"
 
+# taken from hr.po
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,field_description:website_crm_iap_reveal.field_crm_reveal_rule__name
 msgid "Rule Name"
 msgstr "Naziv pravila"
 
+# taken from hr.po
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,field_description:website_crm_iap_reveal.field_crm_reveal_rule__team_id
 msgid "Sales Team"
 msgstr "Prodajni tim"
 
+# taken from hr.po
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,field_description:website_crm_iap_reveal.field_crm_reveal_rule__user_id
 msgid "Salesperson"
@@ -388,30 +424,34 @@ msgstr "Pretraži CRM Reveal pravilo"
 
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,field_description:website_crm_iap_reveal.field_crm_reveal_rule__seniority_id
-#: model:ir.model.fields.selection,name:website_crm_iap_reveal.selection__crm_reveal_rule__contact_filter_type__seniority
 msgid "Seniority"
 msgstr "Starješinstvo"
 
+# taken from hr.po
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,field_description:website_crm_iap_reveal.field_crm_reveal_rule__sequence
 msgid "Sequence"
 msgstr "Sekvenca"
 
+# taken from hr.po
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,field_description:website_crm_iap_reveal.field_crm_reveal_view__reveal_state
 msgid "State"
 msgstr "Županija/fed.država"
 
+# taken from hr.po
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,field_description:website_crm_iap_reveal.field_crm_reveal_rule__state_ids
 msgid "States"
 msgstr "Županije/fed.države"
 
+# taken from hr.po
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,field_description:website_crm_iap_reveal.field_crm_reveal_rule__suffix
 msgid "Suffix"
 msgstr "Sufiks"
 
+# taken from hr.po
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,field_description:website_crm_iap_reveal.field_crm_reveal_rule__tag_ids
 msgid "Tags"
@@ -424,6 +464,10 @@ msgid ""
 "criteria. Their details will show up in the history thread of generated "
 "leads/opportunities. One credit is consumed per tracked contact."
 msgstr ""
+"Ovo je broj kontakata za praćenje ako se njihova uloga/starješinstvo poklapa"
+" sa vašim kriterijumima. Njihovi detalji će se pojaviti u istorijskim "
+"zapisima generiranih potencijala/mogućnosti. Jedan kredit se troši po "
+"praćenom kontaktu."
 
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,help:website_crm_iap_reveal.field_crm_reveal_rule__suffix
@@ -431,12 +475,16 @@ msgid ""
 "This will be appended in name of generated lead so you can identify "
 "lead/opportunity is generated with this rule"
 msgstr ""
+"Ovo će biti dodano u naziv generiranog potencijala tako da možete "
+"identificirati da je potencijal/mogućnost generiran ovim pravilom"
 
+# taken from hr.po
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields.selection,name:website_crm_iap_reveal.selection__crm_reveal_view__reveal_state__to_process
 msgid "To Process"
 msgstr "Za obraditi"
 
+# taken from hr.po
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,field_description:website_crm_iap_reveal.field_crm_reveal_rule__lead_type
 msgid "Type"
@@ -458,7 +506,10 @@ msgid ""
 "Used to order the rules with same URL and countries. Rules with a lower "
 "sequence number will be processed first."
 msgstr ""
+"Koristi se za sortiranje pravila sa istim URL i zemljama. Pravila sa nižim "
+"brojem sekvence će biti obrađena prva."
 
+# taken from hr.po
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields.selection,name:website_crm_iap_reveal.selection__crm_reveal_rule__priority__3
 msgid "Very High"
@@ -466,10 +517,10 @@ msgstr "Jako visok"
 
 #. module: website_crm_iap_reveal
 #: model:ir.actions.act_window,name:website_crm_iap_reveal.crm_reveal_rule_action
-#: model:ir.ui.menu,name:website_crm_iap_reveal.crm_reveal_rule_menu_action
 msgid "Visits to Leads Rules"
 msgstr "Posjete u pravila potencijala"
 
+# taken from hr.po
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,field_description:website_crm_iap_reveal.field_crm_reveal_rule__website_id
 msgid "Website"
@@ -500,6 +551,7 @@ msgstr "npr. US posjetitelji"
 msgid "employees"
 msgstr "zaposleni"
 
+# taken from hr.po
 #. module: website_crm_iap_reveal
 #: model_terms:ir.ui.view,arch_db:website_crm_iap_reveal.crm_reveal_rule_form
 msgid "to"

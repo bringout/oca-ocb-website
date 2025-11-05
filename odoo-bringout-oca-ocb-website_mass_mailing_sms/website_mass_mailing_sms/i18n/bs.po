@@ -35,11 +35,13 @@ msgstr "SMS Newsletter"
 msgid "SMS Subscription"
 msgstr "Pretplata na SMS"
 
+# taken from hr.po
 #. module: website_mass_mailing_sms
 #: model_terms:ir.ui.view,arch_db:website_mass_mailing_sms.s_newsletter_block_sms_template
 msgid "Subscribe"
 msgstr "Sadržaj popup-a web stranice"
 
+# taken from hr.po
 #. module: website_mass_mailing_sms
 #: model_terms:ir.ui.view,arch_db:website_mass_mailing_sms.s_newsletter_block_sms_template
 msgid "Thanks"

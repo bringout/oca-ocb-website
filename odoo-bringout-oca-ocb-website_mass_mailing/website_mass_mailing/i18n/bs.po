@@ -26,6 +26,8 @@ msgid ""
 ".s_newsletter_block .s_newsletter_list, .o_newsletter_popup "
 ".s_newsletter_list"
 msgstr ""
+".s_newsletter_block .s_newsletter_list, .o_newsletter_popup "
+".s_newsletter_list"
 
 #. module: website_mass_mailing
 #: model_terms:ir.ui.view,arch_db:website_mass_mailing.newsletter_subscribe_options
@@ -38,6 +40,8 @@ msgid ""
 "<span class=\"fa fa-check-circle\"/>\n"
 "                                Thank you for subscribing !"
 msgstr ""
+"<span class=\"fa fa-check-circle\"/>\n"
+"                                Hvala vam na pretplati !"
 
 #. module: website_mass_mailing
 #: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_block_form_template
@@ -45,6 +49,8 @@ msgid ""
 "<span class=\"s_website_form_label_content\">I agree to receive updates</span>\n"
 "                                <span class=\"s_website_form_mark\"> *</span>"
 msgstr ""
+"<span class=\"s_website_form_label_content\">I agree to receive updates</span>\n"
+"                                <span class=\"s_website_form_mark\"> *</span>"
 
 #. module: website_mass_mailing
 #: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_block_form_template
@@ -52,20 +58,28 @@ msgid ""
 "<span class=\"s_website_form_label_content\">Subscribe to</span>\n"
 "                                <span class=\"s_website_form_mark\"> *</span>"
 msgstr ""
+"<span class=\"s_website_form_label_content\">Subscribe to</span>\n"
+"                                <span class=\"s_website_form_mark\"> *</span>"
 
+# taken from hr.po
 #. module: website_mass_mailing
 #: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_block_form_template
 msgid ""
 "<span class=\"s_website_form_label_content\">Your Email</span>\n"
 "                                <span class=\"s_website_form_mark\"> *</span>"
 msgstr ""
+"<span class=\"s_website_form_label_content\">Vaš Email</span>\n"
+"                                <span class=\"s_website_form_mark\"> *</span>"
 
+# taken from hr.po
 #. module: website_mass_mailing
 #: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_block_form_template
 msgid ""
 "<span class=\"s_website_form_label_content\">Your Name</span>\n"
 "                                <span class=\"s_website_form_mark\"> *</span>"
 msgstr ""
+"<span class=\"s_website_form_label_content\">Vaše ime</span>\n"
+"                                <span class=\"s_website_form_mark\"> *</span>"
 
 #. module: website_mass_mailing
 #: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_subscribe_popup
@@ -87,29 +101,33 @@ msgstr "Be the first to find out sve the latest news, products, and trends."
 msgid ""
 "Be the first to find out all the latest news,<br/> products, and trends."
 msgstr ""
+"Be the first to find out all the latest news,<br/> products, and trends."
 
+# taken from hr.po
 #. module: website_mass_mailing
 #. odoo-javascript
-#: code:addons/website_mass_mailing/static/src/xml/website_mass_mailing.xml:0
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_subscribe_popup
+#: code:addons/website_mass_mailing/static/src/xml/website_mass_mailing.xml
 #, python-format
 msgid "Close"
-msgstr "<strong>Newsletter Popup!</strong> Efekat newsletter popup snippeta je aktivan na ovoj stranici. Kliknite"
+msgstr ""
+"<strong>Newsletter Popup!</strong> Efekat newsletter popup snippeta je "
+"aktivan na ovoj stranici. Kliknite"
 
+# taken from hr.po
 #. module: website_mass_mailing
 #: model:ir.model,name:website_mass_mailing.model_res_company
 msgid "Companies"
 msgstr "Ukucajte ovdje ..."
 
+# taken from hr.po
 #. module: website_mass_mailing
 #: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_mail_block_footer_social
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_mail_block_footer_social_left
 msgid "Contact"
 msgstr "Dodaj dugme za pretplatu na newsletter"
 
 #. module: website_mass_mailing
 #. odoo-javascript
-#: code:addons/website_mass_mailing/static/src/js/website_mass_mailing.editor.js:0
+#: code:addons/website_mass_mailing/static/src/js/website_mass_mailing.editor.js
 #, python-format
 msgid "Display Thanks Button"
 msgstr "Dodaj popup za pretplatu na newsletter"
@@ -119,10 +137,10 @@ msgstr "Dodaj popup za pretplatu na newsletter"
 msgid "Email Subscription"
 msgstr "email Subscription"
 
+# taken from hr.po
 #. module: website_mass_mailing
 #. odoo-javascript
-#: code:addons/website_mass_mailing/static/src/js/website_mass_mailing.js:0
-#: code:addons/website_mass_mailing/static/src/js/website_mass_mailing.js:0
+#: code:addons/website_mass_mailing/static/src/js/website_mass_mailing.js
 #, python-format
 msgid "Error"
 msgstr "Greška"
@@ -134,16 +152,17 @@ msgstr "Form Subscription"
 
 #. module: website_mass_mailing
 #. odoo-python
-#: code:addons/website_mass_mailing/controllers/website_form.py:0
+#: code:addons/website_mass_mailing/controllers/website_form.py
 #, python-format
 msgid "Mailing List(s) not found!"
 msgstr "Mailing lista(s) not found!"
 
+# taken from hr.po
 #. module: website_mass_mailing
 #: model_terms:ir.ui.view,arch_db:website_mass_mailing.newsletter_subscribe_options_common
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.snippets
+#, python-format
 msgid "Newsletter"
-msgstr "Potaknite pretplatu na mailing liste putem popup-a"
+msgstr "Newsletter"
 
 #. module: website_mass_mailing
 #: model_terms:ir.ui.view,arch_db:website_mass_mailing.snippets
@@ -157,50 +176,55 @@ msgstr "Newsletter popup"
 
 #. module: website_mass_mailing
 #. odoo-javascript
-#: code:addons/website_mass_mailing/static/src/js/website_mass_mailing.editor.js:0
+#: code:addons/website_mass_mailing/static/src/js/website_mass_mailing.editor.js
 #, python-format
 msgid ""
 "No mailing list found, do you want to create a new one? This will save all "
 "your changes, are you sure you want to proceed?"
 msgstr ""
+"Nijedna mailing lista nije pronađena, želite li kreirati novu? Ovo će "
+"sačuvati sve vaše promjene, jeste li sigurni da želite nastaviti?"
 
 #. module: website_mass_mailing
 #: model_terms:ir.ui.view,arch_db:website_mass_mailing.newsletter_subscribe_options_common
 msgid "Show reCaptcha Policy"
 msgstr "Prikaži reCaptcha politiku"
 
+# taken from hr.po
 #. module: website_mass_mailing
 #: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_block_form_template
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_subscribe_form
 msgid "Subscribe"
 msgstr "Pretplatite se"
 
 #. module: website_mass_mailing
 #. odoo-javascript
-#: code:addons/website_mass_mailing/static/src/js/mass_mailing_form_editor.js:0
+#: code:addons/website_mass_mailing/static/src/js/mass_mailing_form_editor.js
 #, python-format
 msgid "Subscribe to"
 msgstr "pretplati se to"
 
+# taken from hr.po
 #. module: website_mass_mailing
 #. odoo-javascript
-#: code:addons/website_mass_mailing/static/src/js/website_mass_mailing.js:0
+#: code:addons/website_mass_mailing/static/src/js/website_mass_mailing.js
 #, python-format
 msgid "Success"
 msgstr "Uspjeh"
 
 #. module: website_mass_mailing
 #. odoo-python
-#: code:addons/website_mass_mailing/controllers/main.py:0
+#: code:addons/website_mass_mailing/controllers/main.py
 #, python-format
 msgid "Suspicious activity detected by Google reCaptcha."
 msgstr "Sumnjiva aktivnost otkrivena od Google reCaptcha."
 
+# taken from hr.po
 #. module: website_mass_mailing
 #: model_terms:ir.ui.view,arch_db:website_mass_mailing.newsletter_subscribe_options
 msgid "Template"
 msgstr "Predložak"
 
+# taken from hr.po
 #. module: website_mass_mailing
 #: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_subscribe_form
 msgid "Thanks"
@@ -208,7 +232,7 @@ msgstr "Hvala"
 
 #. module: website_mass_mailing
 #. odoo-python
-#: code:addons/website_mass_mailing/controllers/main.py:0
+#: code:addons/website_mass_mailing/controllers/main.py
 #, python-format
 msgid "Thanks for subscribing!"
 msgstr "Sadržaj popup-a"
@@ -219,10 +243,12 @@ msgid ""
 "We send one weekly newsletter per list and always try to keep it "
 "interesting. You can unsubscribe at any time."
 msgstr ""
+"Šaljemo jedan sedmični bilten po listi i uvijek nastojimo da bude zanimljiv."
+" Možete se odjaviti u bilo kojem trenutku."
 
 #. module: website_mass_mailing
 #. odoo-python
-#: code:addons/website_mass_mailing/controllers/website_form.py:0
+#: code:addons/website_mass_mailing/controllers/website_form.py
 #, python-format
 msgid "You cannot subscribe to the following list anymore : %s"
 msgstr "You cannot pretplati se to the following lista anymore : %s"
@@ -232,20 +258,23 @@ msgstr "You cannot pretplati se to the following lista anymore : %s"
 msgid "You will now be informed about the latest news.<br/>"
 msgstr "You will now be informed o nama the latest news.<br/>"
 
+# taken from hr.po
 #. module: website_mass_mailing
 #. odoo-javascript
-#: code:addons/website_mass_mailing/static/src/js/mass_mailing_form_editor.js:0
+#: code:addons/website_mass_mailing/static/src/js/mass_mailing_form_editor.js
 #, python-format
 msgid "Your Email"
 msgstr "Vaš e-mail"
 
+# taken from hr.po
 #. module: website_mass_mailing
 #. odoo-javascript
-#: code:addons/website_mass_mailing/static/src/js/mass_mailing_form_editor.js:0
+#: code:addons/website_mass_mailing/static/src/js/mass_mailing_form_editor.js
 #, python-format
 msgid "Your Name"
 msgstr "Vaše ime ..."
 
+# taken from hr.po
 #. module: website_mass_mailing
 #: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_subscribe_form
 msgid "your email..."

@@ -22,7 +22,7 @@ msgstr "# Sesije"
 
 #. module: website_crm_livechat
 #. odoo-python
-#: code:addons/website_crm_livechat/models/chatbot_script_step.py:0
+#: code:addons/website_crm_livechat/models/chatbot_script_step.py
 #, python-format
 msgid "%s's New Lead"
 msgstr "%s-ov novi potencijal"
@@ -32,16 +32,19 @@ msgstr "%s-ov novi potencijal"
 msgid "Chatbot Script Step"
 msgstr "Korak chatbot skripte"
 
+# taken from hr.po
 #. module: website_crm_livechat
 #: model:ir.model,name:website_crm_livechat.model_mail_channel
 msgid "Discussion Channel"
 msgstr "Kanal rasprave"
 
+# taken from hr.po
 #. module: website_crm_livechat
 #: model:ir.model,name:website_crm_livechat.model_crm_lead
 msgid "Lead/Opportunity"
 msgstr "Potencijal/prilika"
 
+# taken from hr.po
 #. module: website_crm_livechat
 #: model_terms:ir.ui.view,arch_db:website_crm_livechat.crm_lead_view_form
 msgid "Sessions"

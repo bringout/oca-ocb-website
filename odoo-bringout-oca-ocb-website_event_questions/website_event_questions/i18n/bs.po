@@ -25,24 +25,20 @@ msgstr "Prijatelj"
 msgid "Allergies"
 msgstr "Alergije"
 
+# taken from hr.po
 #. module: website_event_questions
 #: model:ir.model.fields,field_description:website_event_questions.field_event_question_answer__name
 msgid "Answer"
-msgstr "Pitajte svakog učesnika"
+msgstr "Odgovor"
 
 #. module: website_event_questions
 #: model:ir.actions.act_window,name:website_event_questions.action_event_registration_report
-#: model_terms:ir.ui.view,arch_db:website_event_questions.event_event_view_form
-#: model_terms:ir.ui.view,arch_db:website_event_questions.event_registration_answer_view_graph
-#: model_terms:ir.ui.view,arch_db:website_event_questions.event_registration_answer_view_pivot
-#: model_terms:ir.ui.view,arch_db:website_event_questions.event_registration_answer_view_tree
 msgid "Answer Breakdown"
 msgstr "Analiza odgovora"
 
+# taken from hr.po
 #. module: website_event_questions
 #: model:ir.model.fields,field_description:website_event_questions.field_event_question__answer_ids
-#: model_terms:ir.ui.view,arch_db:website_event_questions.event_event_view_form
-#: model_terms:ir.ui.view,arch_db:website_event_questions.event_question_view_form
 msgid "Answers"
 msgstr "Odgovori"
 
@@ -56,6 +52,7 @@ msgstr "Pitaj jednom po narudžbi"
 msgid "Attendee Answers"
 msgstr "Odgovori polaznika"
 
+# taken from hr.po
 #. module: website_event_questions
 #: model:ir.model.fields,field_description:website_event_questions.field_event_registration_answer__partner_id
 msgid "Booked by"
@@ -71,31 +68,27 @@ msgstr "Reklame"
 msgid "Consumers"
 msgstr "Potrošači"
 
+# taken from hr.po
 #. module: website_event_questions
 #: model:ir.model.fields,field_description:website_event_questions.field_event_question__create_uid
-#: model:ir.model.fields,field_description:website_event_questions.field_event_question_answer__create_uid
-#: model:ir.model.fields,field_description:website_event_questions.field_event_registration_answer__create_uid
 msgid "Created by"
 msgstr "Kreirao"
 
+# taken from hr.po
 #. module: website_event_questions
 #: model:ir.model.fields,field_description:website_event_questions.field_event_question__create_date
-#: model:ir.model.fields,field_description:website_event_questions.field_event_question_answer__create_date
-#: model:ir.model.fields,field_description:website_event_questions.field_event_registration_answer__create_date
 msgid "Created on"
 msgstr "Kreirano"
 
+# taken from hr.po
 #. module: website_event_questions
 #: model:ir.model.fields,field_description:website_event_questions.field_event_question__display_name
-#: model:ir.model.fields,field_description:website_event_questions.field_event_question_answer__display_name
-#: model:ir.model.fields,field_description:website_event_questions.field_event_registration_answer__display_name
 msgid "Display Name"
 msgstr "Prikazani naziv"
 
+# taken from hr.po
 #. module: website_event_questions
 #: model:ir.model,name:website_event_questions.model_event_event
-#: model:ir.model.fields,field_description:website_event_questions.field_event_question__event_id
-#: model:ir.model.fields,field_description:website_event_questions.field_event_registration_answer__event_id
 msgid "Event"
 msgstr "Dogadaj"
 
@@ -109,6 +102,7 @@ msgstr "Pitanje događaja"
 msgid "Event Question Answer"
 msgstr "Odgovor na pitanje događaja"
 
+# taken from hr.po
 #. module: website_event_questions
 #: model:ir.model,name:website_event_questions.model_event_registration
 msgid "Event Registration"
@@ -124,11 +118,13 @@ msgstr "Analiza pitanja"
 msgid "Event Template"
 msgstr "Odgovor događaja"
 
+# taken from hr.po
 #. module: website_event_questions
 #: model:ir.model.fields,field_description:website_event_questions.field_event_question__event_type_id
 msgid "Event Type"
 msgstr "Tip događaja"
 
+# taken from hr.po
 #. module: website_event_questions
 #: model:ir.model.fields,field_description:website_event_questions.field_event_event__general_question_ids
 msgid "General Questions"
@@ -146,8 +142,6 @@ msgstr "Kako ste saznali za ovaj događaj?"
 
 #. module: website_event_questions
 #: model:ir.model.fields,field_description:website_event_questions.field_event_question__id
-#: model:ir.model.fields,field_description:website_event_questions.field_event_question_answer__id
-#: model:ir.model.fields,field_description:website_event_questions.field_event_registration_answer__id
 msgid "ID"
 msgstr "ID"
 
@@ -158,28 +152,29 @@ msgid ""
 "propagated to every attendees.If not it will be asked for every attendee of "
 "a reservation."
 msgstr ""
+"Ako je tačno, ovo pitanje će biti postavljeno samo jednom i njegova "
+"vrijednost će biti prosleđena svim polaznicima. Inače će biti postavljeno za"
+" svakog polaznika rezervacije."
 
+# taken from hr.po
 #. module: website_event_questions
 #: model:ir.model.fields,field_description:website_event_questions.field_event_question____last_update
-#: model:ir.model.fields,field_description:website_event_questions.field_event_question_answer____last_update
-#: model:ir.model.fields,field_description:website_event_questions.field_event_registration_answer____last_update
 msgid "Last Modified on"
 msgstr "Zadnje mijenjano"
 
+# taken from hr.po
 #. module: website_event_questions
 #: model:ir.model.fields,field_description:website_event_questions.field_event_question__write_uid
-#: model:ir.model.fields,field_description:website_event_questions.field_event_question_answer__write_uid
-#: model:ir.model.fields,field_description:website_event_questions.field_event_registration_answer__write_uid
 msgid "Last Updated by"
 msgstr "Zadnji ažurirao"
 
+# taken from hr.po
 #. module: website_event_questions
 #: model:ir.model.fields,field_description:website_event_questions.field_event_question__write_date
-#: model:ir.model.fields,field_description:website_event_questions.field_event_question_answer__write_date
-#: model:ir.model.fields,field_description:website_event_questions.field_event_registration_answer__write_date
 msgid "Last Updated on"
 msgstr "Zadnje ažurirano"
 
+# taken from hr.po
 #. module: website_event_questions
 #: model:ir.model.fields,field_description:website_event_questions.field_event_question__is_mandatory_answer
 msgid "Mandatory Answer"
@@ -195,6 +190,7 @@ msgstr "Pitanje ne može pripadati i kategoriji događaja i sebi."
 msgid "Mixed"
 msgstr "Mješovito"
 
+# taken from hr.po
 #. module: website_event_questions
 #: model:event.question.answer,name:website_event_questions.event_type_data_conference_question_0_answer_1
 msgid "No"
@@ -215,36 +211,31 @@ msgstr "Učešće u socijalnom događaju"
 msgid "Pastafarian"
 msgstr "Pastarijanska"
 
+# taken from hr.po
 #. module: website_event_questions
 #: model:ir.model.fields,field_description:website_event_questions.field_event_question_answer__question_id
-#: model:ir.model.fields,field_description:website_event_questions.field_event_registration_answer__question_id
-#: model_terms:ir.ui.view,arch_db:website_event_questions.event_event_view_form
-#: model_terms:ir.ui.view,arch_db:website_event_questions.event_question_view_form
 msgid "Question"
 msgstr "Pitanje"
 
 #. module: website_event_questions
 #: model:ir.model.fields,field_description:website_event_questions.field_event_question__question_type
-#: model:ir.model.fields,field_description:website_event_questions.field_event_registration_answer__question_type
 msgid "Question Type"
 msgstr "Tip pitanja"
 
 #. module: website_event_questions
 #. odoo-python
-#: code:addons/website_event_questions/models/event_question.py:0
+#: code:addons/website_event_questions/models/event_question.py
 #, python-format
 msgid "Question cannot be linked to both an Event and an Event Type."
 msgstr "Pitanje ne može biti povezano i sa događajem i sa tipom događaja."
 
+# taken from hr.po
 #. module: website_event_questions
 #: model:ir.model.fields,field_description:website_event_questions.field_event_event__question_ids
-#: model:ir.model.fields,field_description:website_event_questions.field_event_type__question_ids
-#: model_terms:ir.ui.view,arch_db:website_event_questions.event_event_view_form
-#: model_terms:ir.ui.view,arch_db:website_event_questions.event_registration_view_form_inherit_question
-#: model_terms:ir.ui.view,arch_db:website_event_questions.event_type_view_form_inherit_question
 msgid "Questions"
 msgstr "Pitanja"
 
+# taken from hr.po
 #. module: website_event_questions
 #: model:ir.model.fields,field_description:website_event_questions.field_event_registration_answer__registration_id
 msgid "Registration"
@@ -255,6 +246,7 @@ msgstr "Registracija"
 msgid "Research"
 msgstr "Istraživanje"
 
+# taken from hr.po
 #. module: website_event_questions
 #: model:event.question.answer,name:website_event_questions.event_7_question_0_answer_1
 msgid "Sales"
@@ -270,22 +262,25 @@ msgstr "Odabrani odgovori"
 msgid "Selected answer"
 msgstr "Odabrani odgovor"
 
+# taken from hr.po
 #. module: website_event_questions
 #: model:ir.model.fields.selection,name:website_event_questions.selection__event_question__question_type__simple_choice
 msgid "Selection"
 msgstr "Odabir"
 
+# taken from hr.po
 #. module: website_event_questions
 #: model:ir.model.fields,field_description:website_event_questions.field_event_question__sequence
-#: model:ir.model.fields,field_description:website_event_questions.field_event_question_answer__sequence
 msgid "Sequence"
 msgstr "Sekvenca"
 
+# taken from hr.po
 #. module: website_event_questions
 #: model:ir.model.fields,field_description:website_event_questions.field_event_event__specific_question_ids
 msgid "Specific Questions"
 msgstr "Izvještaj pitanja događaja"
 
+# taken from hr.po
 #. module: website_event_questions
 #: model:ir.model.fields,field_description:website_event_questions.field_event_registration_answer__value_answer_id
 msgid "Suggested answer"
@@ -296,6 +291,7 @@ msgstr "Predloženi odgovor"
 msgid "Text Input"
 msgstr "Tekstualni unos"
 
+# taken from hr.po
 #. module: website_event_questions
 #: model:ir.model.fields,field_description:website_event_questions.field_event_registration_answer__value_text_box
 msgid "Text answer"
@@ -306,14 +302,15 @@ msgstr "Tekstualni odgovor"
 msgid "There must be a suggested value or a text value."
 msgstr "Mora postojati predložena vrijednost ili tekstualna vrijednost."
 
+# taken from hr.po
 #. module: website_event_questions
 #: model:ir.model.fields,field_description:website_event_questions.field_event_question__title
 msgid "Title"
 msgstr "Naslov"
 
+# taken from hr.po
 #. module: website_event_questions
 #: model_terms:ir.ui.view,arch_db:website_event_questions.event_event_view_form
-#: model_terms:ir.ui.view,arch_db:website_event_questions.event_registration_view_form_inherit_question
 msgid "Type"
 msgstr "Vrsta"
 
@@ -327,6 +324,7 @@ msgstr "Vegetarijanska"
 msgid "Which field are you working in"
 msgstr "U kojem polju radite"
 
+# taken from hr.po
 #. module: website_event_questions
 #: model:event.question.answer,name:website_event_questions.event_type_data_conference_question_0_answer_0
 msgid "Yes"
@@ -334,30 +332,29 @@ msgstr "Da"
 
 #. module: website_event_questions
 #. odoo-python
-#: code:addons/website_event_questions/models/event_question.py:0
+#: code:addons/website_event_questions/models/event_question.py
 #, python-format
 msgid ""
 "You cannot change the question type of a question that already has answers!"
-msgstr ""
+msgstr "Ne možete promijeniti tip pitanja koje već ima odgovore!"
 
 #. module: website_event_questions
 #. odoo-python
-#: code:addons/website_event_questions/models/event_question.py:0
+#: code:addons/website_event_questions/models/event_question.py
 #, python-format
 msgid ""
 "You cannot delete a question that has already been answered by attendees."
-msgstr ""
+msgstr "Ne možete obrisati pitanje na koje su već odgovorili polaznici."
 
 #. module: website_event_questions
 #. odoo-python
-#: code:addons/website_event_questions/models/event_question.py:0
+#: code:addons/website_event_questions/models/event_question.py
 #, python-format
 msgid ""
 "You cannot delete an answer that has already been selected by attendees."
-msgstr ""
+msgstr "Ne možete obrisati odgovor koji su već odabrali polaznici."
 
 #. module: website_event_questions
 #: model_terms:ir.ui.view,arch_db:website_event_questions.event_event_view_form
-#: model_terms:ir.ui.view,arch_db:website_event_questions.event_question_view_form
 msgid "e.g. \"Do you have any diet restrictions?\""
 msgstr "npr. \"Imate li bilo kakvih dijetetskih ograničenja?\""

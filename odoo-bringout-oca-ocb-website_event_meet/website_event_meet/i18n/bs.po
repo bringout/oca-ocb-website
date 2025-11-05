@@ -31,6 +31,8 @@ msgid ""
 "<i class=\"fa fa-spin fa-circle-o-notch me-3\"/>\n"
 "                        <span>Loading your room...</span>"
 msgstr ""
+"<i class=\"fa fa-spin fa-circle-o-notch me-3\"/>\n"
+"                        <span>Učitava se vaša soba...</span>"
 
 #. module: website_event_meet
 #: model_terms:ir.ui.view,arch_db:website_event_meet.meeting_room_card
@@ -58,6 +60,8 @@ msgid ""
 "<span>Oops! This room is full !</span><br/>Come back later to have a chat "
 "with us!"
 msgstr ""
+"<span>Ups! Ova soba je puna !</span><br/>Vratite se kasnije da porazgovarate"
+" sa nama!"
 
 #. module: website_event_meet
 #: model_terms:ir.ui.view,arch_db:website_event_meet.meeting_room_card
@@ -65,17 +69,21 @@ msgid ""
 "<span>This room is not open right now!</span><br/>\n"
 "                        Join us here on the"
 msgstr ""
+"<span>Ova soba trenutno nije otvorena!</span><br/>\n"
+"                        Pridružite nam se ovdje"
 
 #. module: website_event_meet
 #: model_terms:ir.ui.view,arch_db:website_event_meet.meeting_room_main
 msgid "A chat among"
 msgstr "Razgovor između"
 
+# taken from hr.po
 #. module: website_event_meet
 #: model:ir.model.fields,field_description:website_event_meet.field_event_meeting_room__active
 msgid "Active"
 msgstr "Aktivan"
 
+# taken from hr.po
 #. module: website_event_meet
 #: model_terms:ir.ui.view,arch_db:website_event_meet.community_main
 msgid "All Languages"
@@ -83,38 +91,38 @@ msgstr "Svi jezici"
 
 #. module: website_event_meet
 #: model:ir.model.fields,field_description:website_event_meet.field_event_event__meeting_room_allow_creation
-#: model:ir.model.fields,field_description:website_event_meet.field_event_type__meeting_room_allow_creation
 msgid "Allow Room Creation"
 msgstr "Dozvoli kreiranje soba"
 
 #. module: website_event_meet
 #. odoo-javascript
-#: code:addons/website_event_meet/static/src/js/website_event_meeting_room.js:0
+#: code:addons/website_event_meet/static/src/js/website_event_meeting_room.js
 #, python-format
 msgid "Are you sure you want to close this room ?"
 msgstr "Da li ste sigurni da želite zatvoriti ovu sobu ?"
 
 #. module: website_event_meet
 #. odoo-javascript
-#: code:addons/website_event_meet/static/src/js/website_event_meeting_room.js:0
+#: code:addons/website_event_meet/static/src/js/website_event_meeting_room.js
 #, python-format
 msgid "Are you sure you want to duplicate this room ?"
 msgstr "Da li ste sigurni da želite duplicirati ovu sobu ?"
 
 #. module: website_event_meet
 #: model:ir.model.fields,field_description:website_event_meet.field_event_meeting_room__target_audience
-#: model_terms:ir.ui.view,arch_db:website_event_meet.event_meeting_room_view_search
 msgid "Audience"
 msgstr "Publika"
 
 #. module: website_event_meet
 #. odoo-javascript
-#: code:addons/website_event_meet/static/src/xml/website_event_meeting_room.xml:0
+#: code:addons/website_event_meet/static/src/xml/website_event_meeting_room.xml
 #, python-format
 msgid ""
 "Be sure you are ready to spend at least 10 minutes in the room if you want "
 "to initiate a new topic."
 msgstr ""
+"Budite sigurni da ste spremni provesti najmanje 10 minuta u sobi ako želite "
+"pokrenuti novu temu."
 
 #. module: website_event_meet
 #: model:event.meeting.room,name:website_event_meet.event_meeting_room_0
@@ -126,9 +134,10 @@ msgstr "Najbolje drvo za namještaj"
 msgid "Can Publish"
 msgstr "Može objaviti"
 
+# taken from hr.po
 #. module: website_event_meet
 #. odoo-javascript
-#: code:addons/website_event_meet/static/src/xml/website_event_meeting_room.xml:0
+#: code:addons/website_event_meet/static/src/xml/website_event_meeting_room.xml
 #, python-format
 msgid "Capacity"
 msgstr "Kapacitet"
@@ -144,23 +153,25 @@ msgid ""
 "Choose a topic that interests you and start talking with the community. "
 "<br/> Don't forget to setup your camera and microphone."
 msgstr ""
+"Odaberite temu koja vas zanima i počnite razgovor sa zajednicom. <br/> Ne "
+"zaboravite podesiti kameru i mikrofon."
 
+# taken from hr.po
 #. module: website_event_meet
 #: model_terms:ir.ui.view,arch_db:website_event_meet.meeting_room_card
 msgid "Close"
 msgstr "Zatvori"
 
+# taken from hr.po
 #. module: website_event_meet
 #. odoo-javascript
-#: code:addons/website_event_meet/static/src/xml/website_event_meeting_room.xml:0
+#: code:addons/website_event_meet/static/src/xml/website_event_meeting_room.xml
 #, python-format
 msgid "Create"
 msgstr "Kreiraj"
 
 #. module: website_event_meet
 #: model_terms:ir.actions.act_window,help:website_event_meet.action_meeting_room_from_event
-#: model_terms:ir.actions.act_window,help:website_event_meet.event_meeting_room_action
-#: model_terms:ir.ui.view,arch_db:website_event_meet.community_aside
 msgid "Create a Room"
 msgstr "Kreiraj sobu"
 
@@ -169,43 +180,47 @@ msgstr "Kreiraj sobu"
 msgid "Create one to get conversations going"
 msgstr "Kreirajte jednu da pokrenete razgovore"
 
+# taken from hr.po
 #. module: website_event_meet
 #: model:ir.model.fields,field_description:website_event_meet.field_event_meeting_room__create_uid
 msgid "Created by"
 msgstr "Kreirao"
 
+# taken from hr.po
 #. module: website_event_meet
 #: model:ir.model.fields,field_description:website_event_meet.field_event_meeting_room__create_date
 msgid "Created on"
 msgstr "Kreirano"
 
+# taken from hr.po
 #. module: website_event_meet
 #. odoo-javascript
-#: code:addons/website_event_meet/static/src/xml/website_event_meeting_room.xml:0
+#: code:addons/website_event_meet/static/src/xml/website_event_meeting_room.xml
 #, python-format
 msgid "Discard"
 msgstr "Odbaci"
 
+# taken from hr.po
 #. module: website_event_meet
 #: model:ir.model.fields,field_description:website_event_meet.field_event_meeting_room__display_name
 msgid "Display Name"
 msgstr "Naziv"
 
+# taken from hr.po
 #. module: website_event_meet
 #: model_terms:ir.ui.view,arch_db:website_event_meet.community_main
 msgid "Dropdown menu"
 msgstr "Padajući izbornik"
 
+# taken from hr.po
 #. module: website_event_meet
 #: model_terms:ir.ui.view,arch_db:website_event_meet.meeting_room_card
 msgid "Duplicate"
 msgstr "Dupliciraj"
 
+# taken from hr.po
 #. module: website_event_meet
 #: model:ir.model,name:website_event_meet.model_event_event
-#: model:ir.model.fields,field_description:website_event_meet.field_event_meeting_room__event_id
-#: model_terms:ir.ui.view,arch_db:website_event_meet.event_meeting_room_view_search
-#: model_terms:ir.ui.view,arch_db:website_event_meet.meeting_room_card
 msgid "Event"
 msgstr "Događaj"
 
@@ -239,6 +254,7 @@ msgstr "Predložak događaja"
 msgid "Full"
 msgstr "Puna"
 
+# taken from hr.po
 #. module: website_event_meet
 #: model_terms:ir.ui.view,arch_db:website_event_meet.event_meeting_room_view_search
 msgid "Group By"
@@ -254,6 +270,7 @@ msgstr "ID"
 msgid "Is Pinned"
 msgstr "Je zakačena"
 
+# taken from hr.po
 #. module: website_event_meet
 #: model:ir.model.fields,field_description:website_event_meet.field_event_meeting_room__is_published
 msgid "Is Published"
@@ -261,7 +278,6 @@ msgstr "je objavljeno"
 
 #. module: website_event_meet
 #: model_terms:ir.ui.view,arch_db:website_event_meet.meeting_room_card
-#: model_terms:ir.ui.view,arch_db:website_event_meet.meeting_room_main
 msgid "Join us next time to chat about"
 msgstr "Pridružite nam se sljedeći put za razgovor o"
 
@@ -270,29 +286,33 @@ msgstr "Pridružite nam se sljedeći put za razgovor o"
 msgid "Join us there to chat about"
 msgstr "Pridružite nam se tamo za razgovor o"
 
+# taken from hr.po
 #. module: website_event_meet
 #. odoo-javascript
-#: code:addons/website_event_meet/static/src/xml/website_event_meeting_room.xml:0
-#: model:ir.model.fields,field_description:website_event_meet.field_event_meeting_room__room_lang_id
+#: code:addons/website_event_meet/static/src/xml/website_event_meeting_room.xml
 #, python-format
 msgid "Language"
 msgstr "Jezik"
 
+# taken from hr.po
 #. module: website_event_meet
 #: model_terms:ir.ui.view,arch_db:website_event_meet.community_main
 msgid "Languages Menu"
 msgstr "Jezični izbornik"
 
+# taken from hr.po
 #. module: website_event_meet
 #: model:ir.model.fields,field_description:website_event_meet.field_event_meeting_room____last_update
 msgid "Last Modified on"
 msgstr "Zadnja promjena"
 
+# taken from hr.po
 #. module: website_event_meet
 #: model:ir.model.fields,field_description:website_event_meet.field_event_meeting_room__write_uid
 msgid "Last Updated by"
 msgstr "Promijenio"
 
+# taken from hr.po
 #. module: website_event_meet
 #: model:ir.model.fields,field_description:website_event_meet.field_event_meeting_room__write_date
 msgid "Last Updated on"
@@ -305,14 +325,13 @@ msgstr "Poslednja aktivnost"
 
 #. module: website_event_meet
 #. odoo-javascript
-#: code:addons/website_event_meet/static/src/xml/website_event_meeting_room.xml:0
+#: code:addons/website_event_meet/static/src/xml/website_event_meeting_room.xml
 #, python-format
 msgid "Launch a new topic"
 msgstr "Pokrenite novu temu"
 
 #. module: website_event_meet
 #: model:ir.model.fields,help:website_event_meet.field_event_event__meeting_room_allow_creation
-#: model:ir.model.fields,help:website_event_meet.field_event_type__meeting_room_allow_creation
 msgid "Let Visitors Create Rooms"
 msgstr "Dozvoliti posjetiteljima kreiranje soba"
 
@@ -333,8 +352,6 @@ msgstr "Maksimalni broj učesnika dosegnut u sobi u isto vrijeme"
 
 #. module: website_event_meet
 #: model:ir.actions.act_window,name:website_event_meet.event_meeting_room_action
-#: model_terms:ir.ui.view,arch_db:website_event_meet.event_meeting_room_view_form
-#: model_terms:ir.ui.view,arch_db:website_event_meet.event_meeting_room_view_tree
 msgid "Meeting Room"
 msgstr "Sala za sastanke"
 
@@ -368,6 +385,7 @@ msgstr "Vršni broj učesnika"
 msgid "Reducing the ecological footprint with wood ?"
 msgstr "Smanjivanje ekološkog otiska sa drvom ?"
 
+# taken from hr.po
 #. module: website_event_meet
 #: model_terms:ir.ui.view,arch_db:website_event_meet.event_meeting_room_view_form
 msgid "Reporting"
@@ -390,7 +408,7 @@ msgstr "Naziv sobe"
 
 #. module: website_event_meet
 #. odoo-javascript
-#: code:addons/website_event_meet/static/src/xml/website_event_meeting_room.xml:0
+#: code:addons/website_event_meet/static/src/xml/website_event_meeting_room.xml
 #, python-format
 msgid "Room Topic"
 msgstr "Tema sobe"
@@ -412,19 +430,21 @@ msgstr "Sobe"
 
 #. module: website_event_meet
 #: model_terms:ir.actions.act_window,help:website_event_meet.action_meeting_room_from_event
-#: model_terms:ir.actions.act_window,help:website_event_meet.event_meeting_room_action
 msgid ""
 "Rooms allow your event attendees to meet up and chat on different topics."
 msgstr ""
+"Sobe omogućavaju polaznicima vašeg događaja da se sastanu i razgovaraju o "
+"različitim temama."
 
 #. module: website_event_meet
 #: model:event.meeting.room,summary:website_event_meet.event_meeting_room_1
 msgid "Share your tips to reduce your ecological footprint using wood."
 msgstr "Podijelite savjete za smanjivanje ekološkog otiska korištenjem drva."
 
+# taken from hr.po
 #. module: website_event_meet
 #. odoo-javascript
-#: code:addons/website_event_meet/static/src/xml/website_event_meeting_room.xml:0
+#: code:addons/website_event_meet/static/src/xml/website_event_meeting_room.xml
 #, python-format
 msgid "Short Summary"
 msgstr "Kratki sažetak"
@@ -434,15 +454,15 @@ msgstr "Kratki sažetak"
 msgid "Start a topic"
 msgstr "Započnite temu"
 
+# taken from hr.po
 #. module: website_event_meet
 #: model:ir.model.fields,field_description:website_event_meet.field_event_meeting_room__summary
-#: model_terms:ir.ui.view,arch_db:website_event_meet.event_meeting_room_view_search
 msgid "Summary"
 msgstr "Sažetak"
 
 #. module: website_event_meet
 #. odoo-javascript
-#: code:addons/website_event_meet/static/src/xml/website_event_meeting_room.xml:0
+#: code:addons/website_event_meet/static/src/xml/website_event_meeting_room.xml
 #, python-format
 msgid "Target People"
 msgstr "Ciljani ljudi"
@@ -454,13 +474,16 @@ msgstr "Događaj"
 
 #. module: website_event_meet
 #. odoo-python
-#: code:addons/website_event_meet/controllers/website_event_main.py:0
+#: code:addons/website_event_meet/controllers/website_event_main.py
 #, python-format
 msgid ""
 "The event %s starts on %s (%s). \n"
 "Join us there to chat about \"%s\" !"
 msgstr ""
+"Događaj %s počinje %s (%s). \n"
+"Pridružite nam se tamo za razgovor o \"%s\" !"
 
+# taken from hr.po
 #. module: website_event_meet
 #: model:ir.model.fields,help:website_event_meet.field_event_meeting_room__website_url
 msgid "The full URL to access the document through the website."
@@ -468,7 +491,6 @@ msgstr "Puni URL za pristup dokumentu putem web stranice."
 
 #. module: website_event_meet
 #: model:ir.model.fields,field_description:website_event_meet.field_event_meeting_room__name
-#: model_terms:ir.ui.view,arch_db:website_event_meet.event_meeting_room_view_search
 msgid "Topic"
 msgstr "Tema"
 
@@ -477,6 +499,7 @@ msgstr "Tema"
 msgid "Total Participant Count"
 msgstr "Ukupan broj učesnika"
 
+# taken from hr.po
 #. module: website_event_meet
 #: model_terms:ir.ui.view,arch_db:website_event_meet.event_meeting_room_view_search
 msgid "Unpublished"
@@ -486,8 +509,9 @@ msgstr "Neobjavljeno"
 #: model:event.meeting.room,summary:website_event_meet.event_meeting_room_2
 msgid ""
 "Venez partager vos meubles préférés et l'utilisation que vous en faites."
-msgstr ""
+msgstr "Dođite podijeliti vaš omiljeni namještaj i način korišćenja."
 
+# taken from hr.po
 #. module: website_event_meet
 #: model:ir.model.fields,field_description:website_event_meet.field_event_meeting_room__website_published
 msgid "Visible on current website"
@@ -508,6 +532,7 @@ msgstr "Želite li kreirati vlastitu sobu za diskusiju ?"
 msgid "Website Event Menu"
 msgstr "Meni web stranice događaja"
 
+# taken from hr.po
 #. module: website_event_meet
 #: model:ir.model.fields,field_description:website_event_meet.field_event_meeting_room__website_url
 msgid "Website URL"
@@ -525,24 +550,21 @@ msgstr "klijent(i)"
 
 #. module: website_event_meet
 #. odoo-javascript
-#: code:addons/website_event_meet/static/src/xml/website_event_meeting_room.xml:0
-#: model_terms:ir.ui.view,arch_db:website_event_meet.event_meeting_room_view_form
+#: code:addons/website_event_meet/static/src/xml/website_event_meeting_room.xml
 #, python-format
 msgid "e.g. Accountants"
 msgstr "npr. Računovođe"
 
 #. module: website_event_meet
 #. odoo-javascript
-#: code:addons/website_event_meet/static/src/xml/website_event_meeting_room.xml:0
-#: model_terms:ir.ui.view,arch_db:website_event_meet.event_meeting_room_view_form
+#: code:addons/website_event_meet/static/src/xml/website_event_meeting_room.xml
 #, python-format
 msgid "e.g. Finance"
 msgstr "npr. Finansije"
 
 #. module: website_event_meet
 #. odoo-javascript
-#: code:addons/website_event_meet/static/src/xml/website_event_meeting_room.xml:0
-#: model_terms:ir.ui.view,arch_db:website_event_meet.event_meeting_room_view_form
+#: code:addons/website_event_meet/static/src/xml/website_event_meeting_room.xml
 #, python-format
 msgid "e.g. Let's talk about Corporate Finance"
 msgstr "npr. Razgovarajmo o korporativnim finansijama"
@@ -558,6 +580,8 @@ msgid ""
 "is over.\n"
 "                        <br/>"
 msgstr ""
+"is over.\n"
+"                        <br/>"
 
 #. module: website_event_meet
 #: model_terms:ir.ui.view,arch_db:website_event_meet.meeting_room_main
@@ -565,6 +589,8 @@ msgid ""
 "is over.\n"
 "                <br/>"
 msgstr ""
+"je završen.\n"
+"                <br/>"
 
 #. module: website_event_meet
 #: model_terms:ir.ui.view,arch_db:website_event_meet.meeting_room_card

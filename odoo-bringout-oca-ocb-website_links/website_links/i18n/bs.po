@@ -17,55 +17,62 @@ msgstr ""
 
 #. module: website_links
 #. odoo-javascript
-#: code:addons/website_links/static/src/js/website_links_charts.js:0
+#: code:addons/website_links/static/src/js/website_links_charts.js
 #, python-format
 msgid " clicks"
 msgstr " klikovi"
 
 #. module: website_links
 #. odoo-javascript
-#: code:addons/website_links/static/src/js/website_links_charts.js:0
+#: code:addons/website_links/static/src/js/website_links_charts.js
 #, python-format
 msgid " countries"
 msgstr " zemlje"
 
 #. module: website_links
 #. odoo-javascript
-#: code:addons/website_links/static/src/js/website_links_charts.js:0
+#: code:addons/website_links/static/src/js/website_links_charts.js
 #, python-format
 msgid "# of clicks"
 msgstr "# klikova"
 
+# taken from hr.po
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.graphs
 msgid "<strong>Campaign</strong>"
 msgstr "<strong>Kampanja</strong>"
 
+# taken from hr.po
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.graphs
 msgid "<strong>Medium</strong>"
 msgstr "<strong>Srednja</strong>"
 
+# taken from hr.po
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.graphs
 msgid "<strong>Original URL</strong>"
 msgstr "<strong>Originalan URL</strong>"
 
+# taken from hr.po
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.graphs
 msgid "<strong>Redirected URL</strong>"
 msgstr "<strong>Preusmjereni URL</strong>"
 
+# taken from hr.po
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.graphs
 msgid "<strong>Source</strong>"
 msgstr "<strong>Izvor</strong>"
 
+# taken from hr.po
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.graphs
 msgid "<strong>Tracked Link</strong>"
 msgstr "<strong>Praćena poveznica</strong>"
 
+# taken from hr.po
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.graphs
 msgid "All Time"
@@ -79,34 +86,38 @@ msgid ""
 "the context of your link. It might be an event you want to promote or a "
 "special promotion.\"/>"
 msgstr ""
+"Kampanja <i class=\"fa fa-info-circle\" data-bs-toggle=\"tooltip\" data-bs-"
+"placement=\"top\" role=\"img\" aria-label=\"Tooltip info\" title=\"Definiše "
+"kontekst vašeg linka. To može biti događaj koji želite promovirati ili "
+"specijalna promocija.\"/>"
 
+# taken from hr.po
 #. module: website_links
 #. odoo-javascript
-#: code:addons/website_links/static/src/js/website_links.js:0
+#: code:addons/website_links/static/src/js/website_links.js
 #, python-format
 msgid "Copied"
 msgstr "Kopirano"
 
+# taken from hr.po
 #. module: website_links
 #. odoo-javascript
-#: code:addons/website_links/static/src/js/website_links.js:0
-#: code:addons/website_links/static/src/xml/recent_link.xml:0
+#: code:addons/website_links/static/src/js/website_links.js
 #, python-format
 msgid "Copy"
 msgstr "Kopija"
 
 #. module: website_links
 #. odoo-javascript
-#: code:addons/website_links/static/src/xml/recent_link.xml:0
-#: code:addons/website_links/static/src/xml/recent_link.xml:0
-#: model_terms:ir.ui.view,arch_db:website_links.graphs
+#: code:addons/website_links/static/src/xml/recent_link.xml
 #, python-format
 msgid "Edit code"
 msgstr "Uredi kod"
 
+# taken from hr.po
 #. module: website_links
 #. odoo-javascript
-#: code:addons/website_links/static/src/js/website_links.js:0
+#: code:addons/website_links/static/src/js/website_links.js
 #, python-format
 msgid "Generating link..."
 msgstr "Generiram link..."
@@ -116,28 +127,29 @@ msgstr "Generiram link..."
 msgid "Get tracked link"
 msgstr "Dobij praćeni link"
 
+# taken from hr.po
 #. module: website_links
 #. odoo-javascript
-#: code:addons/website_links/static/src/xml/recent_link.xml:0
+#: code:addons/website_links/static/src/xml/recent_link.xml
 #, python-format
 msgid "Icon"
 msgstr "Znak"
 
+# taken from hr.po
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.graphs
 msgid "Last Month"
 msgstr "Zadnji mjesec"
 
+# taken from hr.po
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.graphs
 msgid "Last Week"
-msgstr "Kampanja <i class=\"fa fa-info-circle\" data-toggle=\"tooltip\" data-placement=\"top\" role=\"img\" aria-label=\"Tooltip info\" title=\"Definiše kontekst vašeg linka. To može biti događaj koji želite promovirati ili posebnu promociju.\"/>"
+msgstr "Zadnja sedmica"
 
+# taken from hr.po
 #. module: website_links
 #: model:ir.model,name:website_links.model_link_tracker
-#: model:ir.ui.menu,name:website_links.menu_link_tracker
-#: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
-#: model_terms:ir.ui.view,arch_db:website_links.graphs
 msgid "Link Tracker"
 msgstr "Pratioc veza"
 
@@ -149,24 +161,32 @@ msgid ""
 "the medium used to share your link. It might be an email, or a Facebook Ads "
 "for instance.\"/>"
 msgstr ""
+"Medium <i class=\"fa fa-info-circle\" data-bs-toggle=\"tooltip\" data-bs-"
+"placement=\"top\" role=\"img\" aria-label=\"Tooltip info\" title=\"Definiše "
+"medium korišten za dijeljenje vašeg linka. To može biti email, ili Facebook "
+"Ads na primjer.\"/>"
 
+# taken from hr.po
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
 msgid "Most Clicked"
 msgstr "Najviše klikova"
 
+# taken from hr.po
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
 msgid "Newest"
 msgstr "Najnoviji"
 
+# taken from hr.po
 #. module: website_links
 #. odoo-javascript
-#: code:addons/website_links/static/src/js/website_links_charts.js:0
+#: code:addons/website_links/static/src/js/website_links_charts.js
 #, python-format
 msgid "No data"
 msgstr "Nema podataka"
 
+# taken from hr.po
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
 msgid "Recently Used"
@@ -178,6 +198,8 @@ msgid ""
 "Share this page with a <strong>short link</strong> that includes "
 "<strong>analytics trackers</strong>."
 msgstr ""
+"Podijelite ovu stranicu sa <strong>kratkim linkom</strong> koji uključuje "
+"<strong>analitičke pratioce</strong>."
 
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
@@ -187,41 +209,40 @@ msgid ""
 "the source from which your traffic will come from, Facebook or Twitter for "
 "instance.\"/>"
 msgstr ""
+"Izvor <i class=\"fa fa-info-circle\" data-bs-toggle=\"tooltip\" data-bs-"
+"placement=\"top\" role=\"img\" aria-label=\"Tooltip info\" title=\"Definiše "
+"izvor iz kojeg će vaš saobraćaj doći, Facebook ili Twitter na primjer.\"/>"
 
+# taken from hr.po
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.graphs
-#: model_terms:ir.ui.view,arch_db:website_links.link_tracker_view_tree
 msgid "Statistics"
-msgstr "Medij <i class=\"fa fa-info-circle\" data-toggle=\"tooltip\" data-placement=\"top\" role=\"img\" aria-label=\"Tooltip info\" title=\"Definiše medij korišten za dijeljenje vašeg linka. To može biti email ili Facebook Ads na primjer.\"/>"
+msgstr "Statistika"
 
 #. module: website_links
 #. odoo-javascript
-#: code:addons/website_links/static/src/xml/recent_link.xml:0
+#: code:addons/website_links/static/src/xml/recent_link.xml
 #, python-format
 msgid "Stats"
 msgstr "Statistike"
 
 #. module: website_links
 #. odoo-javascript
-#: code:addons/website_links/static/src/js/website_links.js:0
-#: code:addons/website_links/static/src/js/website_links_code_editor.js:0
+#: code:addons/website_links/static/src/js/website_links.js
 #, python-format
 msgid "The code cannot be left empty"
 msgstr "Kod ne može biti prazan"
 
 #. module: website_links
 #. odoo-javascript
-#: code:addons/website_links/static/src/js/website_links_charts.js:0
-#: code:addons/website_links/static/src/js/website_links_charts.js:0
-#: code:addons/website_links/static/src/js/website_links_charts.js:0
+#: code:addons/website_links/static/src/js/website_links_charts.js
 #, python-format
 msgid "There is no data to show"
 msgstr "Nema podataka za prikaz"
 
 #. module: website_links
 #. odoo-javascript
-#: code:addons/website_links/static/src/js/website_links.js:0
-#: code:addons/website_links/static/src/js/website_links_code_editor.js:0
+#: code:addons/website_links/static/src/js/website_links.js
 #, python-format
 msgid "This code is already taken"
 msgstr "Ovaj kod je već zauzet"
@@ -232,6 +253,9 @@ msgid ""
 "Those trackers can be used in Google Analytics to track clicks and visitors,"
 " or in Odoo reports to track opportunities and related revenues."
 msgstr ""
+"Ovi pratioci se mogu koristiti u Google Analytics za praćenje klikova i "
+"posjetetlaca, ili u Odoo izvještajima za praćenje mogućnosti i povezanih "
+"prihoda."
 
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
@@ -240,74 +264,85 @@ msgstr "URL"
 
 #. module: website_links
 #. odoo-javascript
-#: code:addons/website_links/static/src/js/website_links.js:0
+#: code:addons/website_links/static/src/js/website_links.js
 #, python-format
 msgid "Unable to get recent links"
-msgstr "Izvor <i class=\"fa fa-info-circle\" data-toggle=\"tooltip\" data-placement=\"top\" role=\"img\" aria-label=\"Tooltip info\" title=\"Definiše izvor iz kojeg će doći vaš saobraćaj, na primjer Facebook ili Twitter.\"/>"
+msgstr ""
+"Izvor <i class=\"fa fa-info-circle\" data-toggle=\"tooltip\" data-"
+"placement=\"top\" role=\"img\" aria-label=\"Tooltip info\" title=\"Definiše "
+"izvor iz kojeg će doći vaš saobraćaj, na primjer Facebook ili Twitter.\"/>"
 
+# taken from hr.po
 #. module: website_links
 #. odoo-javascript
-#: code:addons/website_links/static/src/js/website_links_charts.js:0
+#: code:addons/website_links/static/src/js/website_links_charts.js
 #, python-format
 msgid "Undefined"
 msgstr "Nedefinisano"
 
 #. module: website_links
 #. odoo-python
-#: code:addons/website_links/models/link_tracker.py:0
+#: code:addons/website_links/models/link_tracker.py
 #, python-format
 msgid "Visit Webpage Statistics"
 msgstr "Posjetite statistike web stranice"
 
+# taken from hr.po
 #. module: website_links
 #. odoo-javascript
-#: code:addons/website_links/static/src/js/website_links.js:0
+#: code:addons/website_links/static/src/js/website_links.js
 #, python-format
 msgid "You don't have any recent links."
 msgstr "Nemate nedavnih linkova."
 
+# taken from hr.po
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
 msgid "Your tracked links"
 msgstr "Vaše praćene poveznice"
 
+# taken from hr.po
 #. module: website_links
 #. odoo-javascript
-#: code:addons/website_links/static/src/xml/recent_link.xml:0
-#: model_terms:ir.ui.view,arch_db:website_links.graphs
+#: code:addons/website_links/static/src/xml/recent_link.xml
 #, python-format
 msgid "cancel"
 msgstr "odustani"
 
+# taken from hr.po
 #. module: website_links
 #. odoo-javascript
-#: code:addons/website_links/static/src/xml/recent_link.xml:0
+#: code:addons/website_links/static/src/xml/recent_link.xml
 #, python-format
 msgid "clicks"
 msgstr "klikova"
 
+# taken from hr.po
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.graphs
 msgid "copy"
 msgstr "kopija"
 
+# taken from hr.po
 #. module: website_links
 #. odoo-javascript
-#: code:addons/website_links/static/src/js/website_links.js:0
+#: code:addons/website_links/static/src/js/website_links.js
 #, python-format
 msgid "e.g. Newsletter, Social Network, .."
 msgstr "npr. Newsletter, Social Network, .."
 
+# taken from hr.po
 #. module: website_links
 #. odoo-javascript
-#: code:addons/website_links/static/src/js/website_links.js:0
+#: code:addons/website_links/static/src/js/website_links.js
 #, python-format
 msgid "e.g. Promotion of June, Winter Newsletter, .."
 msgstr "npr. Promotion of June, Winter Newsletter, .."
 
+# taken from hr.po
 #. module: website_links
 #. odoo-javascript
-#: code:addons/website_links/static/src/js/website_links.js:0
+#: code:addons/website_links/static/src/js/website_links.js
 #, python-format
 msgid "e.g. Search Engine, Website page, .."
 msgstr "npr. Search Engine, Website page, .."
@@ -319,16 +354,15 @@ msgstr "npr. https://www.odoo.com/contactus"
 
 #. module: website_links
 #. odoo-javascript
-#: code:addons/website_links/static/src/xml/recent_link.xml:0
-#: model_terms:ir.ui.view,arch_db:website_links.graphs
+#: code:addons/website_links/static/src/xml/recent_link.xml
 #, python-format
 msgid "ok"
 msgstr "ok"
 
+# taken from hr.po
 #. module: website_links
 #. odoo-javascript
-#: code:addons/website_links/static/src/xml/recent_link.xml:0
-#: model_terms:ir.ui.view,arch_db:website_links.graphs
+#: code:addons/website_links/static/src/xml/recent_link.xml
 #, python-format
 msgid "or"
 msgstr "ili"

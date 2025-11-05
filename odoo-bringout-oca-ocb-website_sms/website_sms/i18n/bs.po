@@ -17,30 +17,33 @@ msgstr ""
 
 #. module: website_sms
 #: model_terms:ir.ui.view,arch_db:website_sms.website_visitor_view_kanban
-#: model_terms:ir.ui.view,arch_db:website_sms.website_visitor_view_tree
 msgid "SMS"
 msgstr "SMS"
 
+# taken from hr.po
 #. module: website_sms
 #: model_terms:ir.ui.view,arch_db:website_sms.website_visitor_view_form
 msgid "Send SMS"
 msgstr "Pošalji SMS"
 
+# taken from hr.po
 #. module: website_sms
 #. odoo-python
-#: code:addons/website_sms/models/website_visitor.py:0
+#: code:addons/website_sms/models/website_visitor.py
 #, python-format
 msgid "Send SMS Text Message"
 msgstr "Pošalji SMS poruku"
 
 #. module: website_sms
 #. odoo-python
-#: code:addons/website_sms/models/website_visitor.py:0
+#: code:addons/website_sms/models/website_visitor.py
 #, python-format
 msgid ""
 "There are no contact and/or no phone or mobile numbers linked to this "
 "visitor."
 msgstr ""
+"Ne postoje kontakt i/ili telefon ili mobilni brojevi povezani s ovim "
+"posjetiocem."
 
 #. module: website_sms
 #: model:ir.model,name:website_sms.model_website_visitor

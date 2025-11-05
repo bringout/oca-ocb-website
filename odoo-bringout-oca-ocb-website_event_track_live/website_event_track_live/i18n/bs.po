@@ -21,11 +21,13 @@ msgid ""
 "<i class=\"fa fa-spin fa-circle-o-notch position-relative\"/>\n"
 "                <span class=\"ps-2\">Loading Video...</span>"
 msgstr ""
+"<i class=\"fa fa-spin fa-circle-o-notch position-relative\"/>\n"
+"                <span class=\"ps-2\">Učitavanje videa...</span>"
 
 #. module: website_event_track_live
 #: model_terms:ir.ui.view,arch_db:website_event_track_live.event_track_aside
 msgid "Chat"
-msgstr "Chat"
+msgstr "Razgovor"
 
 #. module: website_event_track_live
 #: model:ir.model.fields,help:website_event_track_live.field_event_track__is_youtube_replay
@@ -33,13 +35,18 @@ msgid ""
 "Check this option if the video is already available on YouTube to avoid "
 "showing 'Direct' options (Chat, ...)"
 msgstr ""
+"Označite ovu opciju ako je video već dostupan na YouTube-u da izbegnete "
+"prikazivanje 'Direktnih' opcija (Chat, ...)"
 
 #. module: website_event_track_live
 #: model:ir.model.fields,help:website_event_track_live.field_event_track__youtube_video_url
 msgid ""
 "Configure this URL so that event attendees can see your Track in video!"
 msgstr ""
+"Konfigurišite ovaj URL tako da učesnici događaja mogu da vide vaše praćenje "
+"u videu!"
 
+# taken from hr.po
 #. module: website_event_track_live
 #: model:ir.model,name:website_event_track_live.model_event_track
 msgid "Event Track"
@@ -51,6 +58,8 @@ msgid ""
 "Extracted from the video URL and used to infer various links "
 "(embed/thumbnail/...)"
 msgstr ""
+"Izvučeno iz URL-a videa i koristi se za zaključivanje različitih veza "
+"(ugradnja/sličica/...)"
 
 #. module: website_event_track_live
 #: model:ir.model.fields,field_description:website_event_track_live.field_event_track__is_youtube_chat_available
@@ -69,30 +78,28 @@ msgstr "Ponovi"
 
 #. module: website_event_track_live
 #. odoo-javascript
-#: code:addons/website_event_track_live/static/src/xml/website_event_track_live_templates.xml:0
-#: code:addons/website_event_track_live/static/src/xml/website_event_track_live_templates.xml:0
+#: code:addons/website_event_track_live/static/src/xml/website_event_track_live_templates.xml
 #, python-format
 msgid "Replay Video"
 msgstr "Ponovi video"
 
 #. module: website_event_track_live
 #. odoo-javascript
-#: code:addons/website_event_track_live/static/src/xml/website_event_track_live_templates.xml:0
+#: code:addons/website_event_track_live/static/src/xml/website_event_track_live_templates.xml
 #, python-format
 msgid "Starts in"
 msgstr "Počinje za"
 
 #. module: website_event_track_live
 #. odoo-javascript
-#: code:addons/website_event_track_live/static/src/xml/website_event_track_live_templates.xml:0
+#: code:addons/website_event_track_live/static/src/xml/website_event_track_live_templates.xml
 #, python-format
 msgid "Up Next:"
 msgstr "Sledeće:"
 
 #. module: website_event_track_live
 #. odoo-javascript
-#: code:addons/website_event_track_live/static/src/xml/website_event_track_live_templates.xml:0
-#: code:addons/website_event_track_live/static/src/xml/website_event_track_live_templates.xml:0
+#: code:addons/website_event_track_live/static/src/xml/website_event_track_live_templates.xml
 #, python-format
 msgid "You just watched:"
 msgstr "Upravo ste gledali:"

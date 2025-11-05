@@ -18,4 +18,5 @@ msgstr ""
 #. module: website_crm_sms
 #: model:ir.model,name:website_crm_sms.model_website_visitor
 msgid "Website Visitor"
-msgstr "Prihvatam pravne uslove, politiku privatnosti &amp; uslove ove web stranice."
+msgstr ""
+"Prihvatam pravne uslove, politiku privatnosti &amp; uslove ove web stranice."

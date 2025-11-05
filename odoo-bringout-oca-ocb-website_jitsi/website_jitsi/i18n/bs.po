@@ -32,10 +32,6 @@ msgstr "20"
 
 #. module: website_jitsi
 #: model:ir.model,name:website_jitsi.model_chat_room
-#: model:ir.model.fields,field_description:website_jitsi.field_chat_room_mixin__chat_room_id
-#: model_terms:ir.ui.view,arch_db:website_jitsi.chat_room_view_form
-#: model_terms:ir.ui.view,arch_db:website_jitsi.chat_room_view_search
-#: model_terms:ir.ui.view,arch_db:website_jitsi.chat_room_view_tree
 msgid "Chat Room"
 msgstr "Chat soba"
 
@@ -46,27 +42,30 @@ msgstr "Chat soba mixin"
 
 #. module: website_jitsi
 #: model:ir.actions.act_window,name:website_jitsi.chat_room_action
-#: model:ir.ui.menu,name:website_jitsi.chat_room_menu
 msgid "Chat Rooms"
 msgstr "Chat sobe"
 
+# taken from hr.po
 #. module: website_jitsi
 #. odoo-javascript
-#: code:addons/website_jitsi/static/src/xml/chat_room_modal.xml:0
+#: code:addons/website_jitsi/static/src/xml/chat_room_modal.xml
 #, python-format
 msgid "Close"
 msgstr "Zatvori"
 
+# taken from hr.po
 #. module: website_jitsi
 #: model:ir.model.fields,field_description:website_jitsi.field_chat_room__create_uid
 msgid "Created by"
 msgstr "Kreirao"
 
+# taken from hr.po
 #. module: website_jitsi
 #: model:ir.model.fields,field_description:website_jitsi.field_chat_room__create_date
 msgid "Created on"
 msgstr "Kreirano"
 
+# taken from hr.po
 #. module: website_jitsi
 #: model:ir.model.fields,field_description:website_jitsi.field_chat_room__display_name
 msgid "Display Name"
@@ -92,27 +91,31 @@ msgstr "Jitsi server domena"
 msgid "Join the room"
 msgstr "Pridruži se sobi"
 
+# taken from hr.po
 #. module: website_jitsi
 #: model:ir.model.fields,field_description:website_jitsi.field_chat_room__lang_id
-#: model:ir.model.fields,field_description:website_jitsi.field_chat_room_mixin__room_lang_id
 msgid "Language"
 msgstr "Jezik"
 
+# taken from hr.po
 #. module: website_jitsi
 #: model:ir.model.fields,field_description:website_jitsi.field_chat_room__last_activity
 msgid "Last Activity"
 msgstr "Posljednja aktivnost"
 
+# taken from hr.po
 #. module: website_jitsi
 #: model:ir.model.fields,field_description:website_jitsi.field_chat_room____last_update
 msgid "Last Modified on"
 msgstr "Zadnja promjena"
 
+# taken from hr.po
 #. module: website_jitsi
 #: model:ir.model.fields,field_description:website_jitsi.field_chat_room__write_uid
 msgid "Last Updated by"
 msgstr "Promijenio"
 
+# taken from hr.po
 #. module: website_jitsi
 #: model:ir.model.fields,field_description:website_jitsi.field_chat_room__write_date
 msgid "Last Updated on"
@@ -125,14 +128,13 @@ msgstr "Zadnja aktivnost"
 
 #. module: website_jitsi
 #. odoo-javascript
-#: code:addons/website_jitsi/static/src/xml/chat_room_modal.xml:0
+#: code:addons/website_jitsi/static/src/xml/chat_room_modal.xml
 #, python-format
 msgid "Loading your room..."
 msgstr "Učitava se vaša soba..."
 
 #. module: website_jitsi
 #: model:ir.model.fields,field_description:website_jitsi.field_chat_room__max_capacity
-#: model:ir.model.fields,field_description:website_jitsi.field_chat_room_mixin__room_max_capacity
 msgid "Max capacity"
 msgstr "Maksimalni kapacitet"
 
@@ -143,10 +145,10 @@ msgstr "Maksimum učesnika dosegnut"
 
 #. module: website_jitsi
 #: model:ir.model.fields,help:website_jitsi.field_chat_room__max_participant_reached
-#: model:ir.model.fields,help:website_jitsi.field_chat_room_mixin__room_max_participant_reached
 msgid "Maximum number of participant reached in the room at the same time"
 msgstr "Maksimalni broj učesnika dosegnut u sobi u isto vrijeme"
 
+# taken from hr.po
 #. module: website_jitsi
 #: model:ir.model.fields.selection,name:website_jitsi.selection__chat_room__max_capacity__no_limit
 msgid "No limit"
@@ -154,7 +156,6 @@ msgstr "Nema ograničenja"
 
 #. module: website_jitsi
 #: model:ir.model.fields,field_description:website_jitsi.field_chat_room__participant_count
-#: model:ir.model.fields,field_description:website_jitsi.field_chat_room_mixin__room_participant_count
 msgid "Participant count"
 msgstr "Broj učesnika"
 
@@ -163,6 +164,7 @@ msgstr "Broj učesnika"
 msgid "Peak participants"
 msgstr "Vrhunac učesnika"
 
+# taken from hr.po
 #. module: website_jitsi
 #: model_terms:ir.ui.view,arch_db:website_jitsi.chat_room_view_form
 msgid "Reporting"
@@ -175,7 +177,6 @@ msgstr "Soba je puna"
 
 #. module: website_jitsi
 #: model:ir.model.fields,field_description:website_jitsi.field_chat_room__name
-#: model:ir.model.fields,field_description:website_jitsi.field_chat_room_mixin__room_name
 msgid "Room Name"
 msgstr "Ime sobe"
 
@@ -185,3 +186,5 @@ msgid ""
 "The Jitsi server domain can be customized through the settings to use a "
 "different server than the default \"meet.jit.si\""
 msgstr ""
+"Domena Jitsi servera se može prilagoditi kroz postavke da koristi drugi "
+"server od zadanog \"meet.jit.si\""

@@ -20,6 +20,7 @@ msgstr ""
 msgid "# Quiz Questions"
 msgstr "# Pitanja kviza"
 
+# taken from hr.po
 #. module: website_event_track_quiz
 #: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_leaderboard
 msgid ". Try another search."
@@ -42,7 +43,7 @@ msgstr "Dodaj kviz"
 
 #. module: website_event_track_quiz
 #. odoo-javascript
-#: code:addons/website_event_track_quiz/static/src/js/event_quiz.js:0
+#: code:addons/website_event_track_quiz/static/src/js/event_quiz.js
 #, python-format
 msgid "All questions must be answered !"
 msgstr "Na sva pitanja mora se odgovoriti!"
@@ -52,27 +53,27 @@ msgstr "Na sva pitanja mora se odgovoriti!"
 msgid "Allow multiple tries"
 msgstr "Dozvoli više pokušaja"
 
+# taken from hr.po
 #. module: website_event_track_quiz
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_answer__text_value
-#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_question__answer_ids
 msgid "Answer"
 msgstr "Odgovor"
 
 #. module: website_event_track_quiz
 #. odoo-javascript
-#: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
+#: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml
 #, python-format
 msgid "Check answers"
 msgstr "Provjeri odgovore"
 
 #. module: website_event_track_quiz
 #. odoo-javascript
-#: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
+#: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml
 #, python-format
 msgid "Check your answers"
 msgstr "Provjerite svoje odgovore"
 
+# taken from hr.po
 #. module: website_event_track_quiz
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_track_visitor__quiz_completed
 msgid "Completed"
@@ -85,7 +86,7 @@ msgstr "Zid od betonskih blokova"
 
 #. module: website_event_track_quiz
 #. odoo-javascript
-#: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
+#: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml
 #, python-format
 msgid "Congratulations, you scored a total of"
 msgstr "Čestitamo, ostvarili ste ukupno"
@@ -95,6 +96,7 @@ msgstr "Čestitamo, ostvarili ste ukupno"
 msgid "Content Quiz Question"
 msgstr "Pitanje sadržaja kviza"
 
+# taken from hr.po
 #. module: website_event_track_quiz
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_answer__is_correct
 msgid "Correct"
@@ -107,29 +109,26 @@ msgstr "Tačan odgovor"
 
 #. module: website_event_track_quiz
 #. odoo-javascript
-#: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
+#: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml
 #, python-format
 msgid "Correct."
 msgstr "Tačno."
 
+# taken from hr.po
 #. module: website_event_track_quiz
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz__create_uid
-#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_answer__create_uid
-#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_question__create_uid
 msgid "Created by"
 msgstr "Kreirao"
 
+# taken from hr.po
 #. module: website_event_track_quiz
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz__create_date
-#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_answer__create_date
-#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_question__create_date
 msgid "Created on"
 msgstr "Kreirano"
 
+# taken from hr.po
 #. module: website_event_track_quiz
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz__display_name
-#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_answer__display_name
-#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_question__display_name
 msgid "Display Name"
 msgstr "Naziv"
 
@@ -141,12 +140,12 @@ msgstr "Čak i ako će ih biti."
 #. module: website_event_track_quiz
 #: model:event.quiz.answer,comment:website_event_track_quiz.event_7_track_5_question_0_1
 msgid "Even if you have a big trunk, some long products need to be secured."
-msgstr "Čak i ako imate veliki gepek, neki dugački proizvodi trebaju biti osigurani."
+msgstr ""
+"Čak i ako imate veliki gepek, neki dugački proizvodi trebaju biti osigurani."
 
+# taken from hr.po
 #. module: website_event_track_quiz
 #: model:ir.model,name:website_event_track_quiz.model_event_event
-#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz__event_id
-#: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_quiz_view_search
 msgid "Event"
 msgstr "Događaj"
 
@@ -160,9 +159,9 @@ msgstr "Pitanja kviza događaja"
 msgid "Event Quizzes"
 msgstr "Kvizovi događaja"
 
+# taken from hr.po
 #. module: website_event_track_quiz
 #: model:ir.model,name:website_event_track_quiz.model_event_track
-#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz__event_track_id
 msgid "Event Track"
 msgstr "Praćenje događaja"
 
@@ -177,22 +176,23 @@ msgid ""
 "From here you will be able to examine all quiz questions you have linked to "
 "Tracks."
 msgstr ""
+"Odavde možete pregledati sva pitanja kviza koja ste povezali sa praćenjima."
 
 #. module: website_event_track_quiz
 #: model_terms:ir.actions.act_window,help:website_event_track_quiz.event_quiz_action
 msgid ""
 "From here you will be able to overview all quizzes you have linked to "
 "Tracks."
-msgstr ""
+msgstr "Odavde možete pregledati sve kvizove koje ste povezali sa praćenjima."
 
 #. module: website_event_track_quiz
 #: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_track_view_form
 msgid "Go to Quiz"
 msgstr "Idite na kviz"
 
+# taken from hr.po
 #. module: website_event_track_quiz
 #: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_quiz_question_view_search
-#: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_quiz_view_search
 msgid "Group By"
 msgstr "Grupiraj po"
 
@@ -208,8 +208,6 @@ msgstr "Čekić neće biti od pomoći ovdje!"
 
 #. module: website_event_track_quiz
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz__id
-#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_answer__id
-#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_question__id
 msgid "ID"
 msgstr "ID"
 
@@ -219,10 +217,12 @@ msgid ""
 "In order to avoid accident, you need to secure any product of this kind "
 "during transportation!"
 msgstr ""
+"Da biste izbjegli nesreću, trebate osigurati bilo koji proizvod ove vrste "
+"tokom transporta!"
 
 #. module: website_event_track_quiz
 #. odoo-javascript
-#: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
+#: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml
 #, python-format
 msgid "Incorrect."
 msgstr "Netačno."
@@ -232,24 +232,21 @@ msgstr "Netačno."
 msgid "Is Quiz Done"
 msgstr "Je kviz urađen"
 
+# taken from hr.po
 #. module: website_event_track_quiz
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz____last_update
-#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_answer____last_update
-#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_question____last_update
 msgid "Last Modified on"
 msgstr "Zadnja promjena"
 
+# taken from hr.po
 #. module: website_event_track_quiz
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz__write_uid
-#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_answer__write_uid
-#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_question__write_uid
 msgid "Last Updated by"
 msgstr "Promijenio"
 
+# taken from hr.po
 #. module: website_event_track_quiz
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz__write_date
-#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_answer__write_date
-#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_question__write_date
 msgid "Last Updated on"
 msgstr "Vrijeme promjene"
 
@@ -278,11 +275,13 @@ msgstr "Blatan zid"
 msgid "Music"
 msgstr "Muzika"
 
+# taken from hr.po
 #. module: website_event_track_quiz
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz__name
 msgid "Name"
 msgstr "Naziv"
 
+# taken from hr.po
 #. module: website_event_track_quiz
 #: model:event.quiz.answer,text_value:website_event_track_quiz.event_7_track_5_question_0_1
 msgid "No"
@@ -310,7 +309,7 @@ msgstr "Broj poena"
 
 #. module: website_event_track_quiz
 #. odoo-javascript
-#: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
+#: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml
 #, python-format
 msgid "Oopsie, you did not score any point on this quiz."
 msgstr "Ups, niste ostvarili nijedan poen na ovom kvizu."
@@ -327,15 +326,15 @@ msgstr "OpenWood nije kongres otvorenog koda o aplikacijama."
 
 #. module: website_event_track_quiz
 #. odoo-javascript
-#: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
+#: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml
 #, python-format
 msgid "Point"
 msgstr "Poen"
 
+# taken from hr.po
 #. module: website_event_track_quiz
 #. odoo-javascript
-#: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_answer__awarded_points
+#: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml
 #, python-format
 msgid "Points"
 msgstr "Bodovi"
@@ -345,24 +344,26 @@ msgstr "Bodovi"
 msgid "Pretty. Ugly. Lovely."
 msgstr "Lijepo. Ružno. Divno."
 
+# taken from hr.po
 #. module: website_event_track_quiz
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_answer__question_id
-#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_question__name
 msgid "Question"
 msgstr "Pitanje"
 
 #. module: website_event_track_quiz
 #. odoo-python
-#: code:addons/website_event_track_quiz/models/event_quiz.py:0
+#: code:addons/website_event_track_quiz/models/event_quiz.py
 #, python-format
 msgid ""
 "Question \"%s\" must have 1 correct answer and at least 1 incorrect answer "
 "to be valid."
 msgstr ""
+"Pitanje \"%s\" mora imati 1 tačan odgovor i najmanje 1 netačan odgovor da bi"
+" bilo važeće."
 
 #. module: website_event_track_quiz
 #. odoo-python
-#: code:addons/website_event_track_quiz/models/event_quiz.py:0
+#: code:addons/website_event_track_quiz/models/event_quiz.py
 #, python-format
 msgid "Question \"%s\" must have 1 correct answer to be valid."
 msgstr "Pitanje \"%s\" mora imati 1 tačan odgovor da bi bilo važeće."
@@ -372,6 +373,7 @@ msgstr "Pitanje \"%s\" mora imati 1 tačan odgovor da bi bilo važeće."
 msgid "Question's Answer"
 msgstr "Odgovor pitanja"
 
+# taken from hr.po
 #. module: website_event_track_quiz
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz__question_ids
 msgid "Questions"
@@ -379,17 +381,11 @@ msgstr "Pitanja"
 
 #. module: website_event_track_quiz
 #: model:ir.model,name:website_event_track_quiz.model_event_quiz
-#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_question__quiz_id
-#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_track__quiz_id
-#: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_quiz_question_view_search
-#: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_quiz_view_form
-#: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_track_content
 msgid "Quiz"
 msgstr "Kviz"
 
 #. module: website_event_track_quiz
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_track__quiz_points
-#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_track_visitor__quiz_points
 msgid "Quiz Points"
 msgstr "Poeni kviza"
 
@@ -400,29 +396,25 @@ msgstr "Pitanje kviza"
 
 #. module: website_event_track_quiz
 #: model:ir.ui.menu,name:website_event_track_quiz.event_quiz_question_menu
-#: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_quiz_question_view_search
-#: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_quiz_question_view_tree
 msgid "Quiz Questions"
 msgstr "Pitanja kviza"
 
 #. module: website_event_track_quiz
 #. odoo-javascript
-#: code:addons/website_event_track_quiz/static/src/js/event_quiz.js:0
+#: code:addons/website_event_track_quiz/static/src/js/event_quiz.js
 #, python-format
 msgid "Quiz validation error"
 msgstr "Greška validacije kviza"
 
 #. module: website_event_track_quiz
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_track__quiz_ids
-#: model:ir.ui.menu,name:website_event_track_quiz.event_quiz_menu
-#: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_quiz_view_search
-#: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_quiz_view_tree
 msgid "Quizzes"
 msgstr "Kvizovi"
 
+# taken from hr.po
 #. module: website_event_track_quiz
 #. odoo-javascript
-#: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
+#: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml
 #, python-format
 msgid "Reset"
 msgstr "Poništi"
@@ -432,6 +424,7 @@ msgstr "Poništi"
 msgid "Scotch tape"
 msgstr "Selotejp"
 
+# taken from hr.po
 #. module: website_event_track_quiz
 #: model_terms:ir.ui.view,arch_db:website_event_track_quiz.leaderboard_search_bar
 msgid "Search"
@@ -442,6 +435,7 @@ msgstr "Traži"
 msgid "Search Attendees"
 msgstr "Pretražite učesnike"
 
+# taken from hr.po
 #. module: website_event_track_quiz
 #: model_terms:ir.ui.view,arch_db:website_event_track_quiz.leaderboard_search_bar
 msgid "Search users"
@@ -452,9 +446,9 @@ msgstr "Traži korisnike"
 msgid "Securing your Lumber during transport"
 msgstr "Osiguravanje drva tokom transporta"
 
+# taken from hr.po
 #. module: website_event_track_quiz
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_answer__sequence
-#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_question__sequence
 msgid "Sequence"
 msgstr "Sekvenca"
 
@@ -475,7 +469,7 @@ msgstr "Uradite kviz"
 
 #. module: website_event_track_quiz
 #. odoo-javascript
-#: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
+#: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml
 #, python-format
 msgid "The correct answer was:"
 msgstr "Tačan odgovor je bio:"
@@ -487,7 +481,7 @@ msgstr "Trenutno nije dostupna ljestvica rezultata"
 
 #. module: website_event_track_quiz
 #. odoo-javascript
-#: code:addons/website_event_track_quiz/static/src/js/event_quiz.js:0
+#: code:addons/website_event_track_quiz/static/src/js/event_quiz.js
 #, python-format
 msgid "There was an error validating this quiz."
 msgstr "Došlo je do greške prilikom validacije ovog kviza."
@@ -498,10 +492,12 @@ msgid ""
 "This comment will be displayed to the user if they select this answer, after submitting the quiz.\n"
 "                It is used as a small informational text helping to understand why this answer is correct / incorrect."
 msgstr ""
+"Ovaj komentar će biti prikazan korisniku ako izabere ovaj odgovor, nakon podnošenja kviza.\n"
+"                Koristi se kao mali informacijski tekst koji pomaže razumjeti zašto je ovaj odgovor tačan / netačan."
 
 #. module: website_event_track_quiz
 #. odoo-javascript
-#: code:addons/website_event_track_quiz/static/src/js/event_quiz.js:0
+#: code:addons/website_event_track_quiz/static/src/js/event_quiz.js
 #, python-format
 msgid "This quiz is already done. Retaking it is not possible."
 msgstr "Ovaj kviz je već urađen. Ponavljanje nije moguće."
@@ -511,6 +507,7 @@ msgstr "Ovaj kviz je već urađen. Ponavljanje nije moguće."
 msgid "Tie-down straps and other wooden blocks"
 msgstr "Vezice za učvršćavanje i ostali drveni blokovi"
 
+# taken from hr.po
 #. module: website_event_track_quiz
 #: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_quiz_view_search
 msgid "Track"
@@ -571,11 +568,13 @@ msgstr "O čemu ćemo govoriti tokom ovog događaja?"
 msgid "Where does lumber comes from ?"
 msgstr "Odakle dolazi drvo?"
 
+# taken from hr.po
 #. module: website_event_track_quiz
 #: model:event.quiz.answer,text_value:website_event_track_quiz.event_7_track_1_question_0_0
 msgid "Wood"
 msgstr "Drvo"
 
+# taken from hr.po
 #. module: website_event_track_quiz
 #: model:event.quiz.answer,text_value:website_event_track_quiz.event_7_track_5_question_0_0
 msgid "Yes"
@@ -583,7 +582,6 @@ msgstr "Da"
 
 #. module: website_event_track_quiz
 #: model_terms:ir.ui.view,arch_db:website_event_track_quiz.all_visitor_card
-#: model_terms:ir.ui.view,arch_db:website_event_track_quiz.top3_visitor_card
 msgid "You"
 msgstr "Vi"
 
@@ -604,14 +602,14 @@ msgstr "npr. Koji je Joeov omiljeni moto?"
 
 #. module: website_event_track_quiz
 #. odoo-javascript
-#: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
+#: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml
 #, python-format
 msgid "point!"
 msgstr "poen!"
 
 #. module: website_event_track_quiz
 #. odoo-javascript
-#: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
+#: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml
 #, python-format
 msgid "points!"
 msgstr "poena!"

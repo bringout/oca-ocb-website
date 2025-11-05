@@ -26,6 +26,8 @@ msgid ""
 "<span>Email</span>\n"
 "                        <span class=\"mandatory_mark\"> *</span>"
 msgstr ""
+"<span>Email</span>\n"
+"                        <span class=\"mandatory_mark\"> *</span>"
 
 #. module: website_event_booth_exhibitor
 #: model_terms:ir.ui.view,arch_db:website_event_booth_exhibitor.event_booth_registration_details
@@ -33,6 +35,8 @@ msgid ""
 "<span>Name</span>\n"
 "                        <span class=\"mandatory_mark\"> *</span>"
 msgstr ""
+"<span>Name</span>\n"
+"                        <span class=\"mandatory_mark\"> *</span>"
 
 #. module: website_event_booth_exhibitor
 #: model_terms:ir.ui.view,arch_db:website_event_booth_exhibitor.event_booth_registration_details
@@ -46,10 +50,10 @@ msgstr "kontakt me through a different email/telefon."
 
 #. module: website_event_booth_exhibitor
 #: model:ir.model.fields,field_description:website_event_booth_exhibitor.field_event_booth__use_sponsor
-#: model:ir.model.fields,field_description:website_event_booth_exhibitor.field_event_booth_category__use_sponsor
 msgid "Create Sponsor"
 msgstr "Kreiraj sponzora"
 
+# taken from hr.po
 #. module: website_event_booth_exhibitor
 #: model_terms:ir.ui.view,arch_db:website_event_booth_exhibitor.event_booth_registration_details
 msgid "Description"
@@ -70,6 +74,7 @@ msgstr "Kategorija štanda događaja"
 msgid "Exhibitor type"
 msgstr "Tip izlagača"
 
+# taken from hr.po
 #. module: website_event_booth_exhibitor
 #: model_terms:ir.ui.view,arch_db:website_event_booth_exhibitor.event_booth_category_view_search
 msgid "Group By"
@@ -77,15 +82,17 @@ msgstr "Grupiraj po"
 
 #. module: website_event_booth_exhibitor
 #: model:ir.model.fields,help:website_event_booth_exhibitor.field_event_booth__use_sponsor
-#: model:ir.model.fields,help:website_event_booth_exhibitor.field_event_booth_category__use_sponsor
 msgid "If set, when booking a booth a sponsor will be created for the user"
-msgstr "If set, when booking a štand a sponzor will be created for the korisnik"
+msgstr ""
+"If set, when booking a štand a sponzor will be created for the korisnik"
 
+# taken from hr.po
 #. module: website_event_booth_exhibitor
 #: model_terms:ir.ui.view,arch_db:website_event_booth_exhibitor.event_booth_registration_details
 msgid "Phone"
 msgstr "Telefon"
 
+# taken from hr.po
 #. module: website_event_booth_exhibitor
 #: model_terms:ir.ui.view,arch_db:website_event_booth_exhibitor.event_booth_registration_details
 msgid "Picture"
@@ -98,7 +105,6 @@ msgstr "Slogan"
 
 #. module: website_event_booth_exhibitor
 #: model:ir.model.fields,field_description:website_event_booth_exhibitor.field_event_booth__sponsor_id
-#: model_terms:ir.ui.view,arch_db:website_event_booth_exhibitor.event_booth_view_form_from_event
 msgid "Sponsor"
 msgstr "Sponzor"
 
@@ -114,7 +120,6 @@ msgstr "Email sponzora"
 
 #. module: website_event_booth_exhibitor
 #: model:ir.model.fields,field_description:website_event_booth_exhibitor.field_event_booth__sponsor_type_id
-#: model:ir.model.fields,field_description:website_event_booth_exhibitor.field_event_booth_category__sponsor_type_id
 msgid "Sponsor Level"
 msgstr "Nivo sponzora"
 
@@ -143,6 +148,7 @@ msgstr "Telefon sponzora"
 msgid "Sponsor Slogan"
 msgstr "Slogan sponzora"
 
+# taken from hr.po
 #. module: website_event_booth_exhibitor
 #: model:ir.model.fields,field_description:website_event_booth_exhibitor.field_event_booth_category__exhibitor_type
 msgid "Sponsor Type"
@@ -164,3 +170,5 @@ msgid ""
 "This booth type allows you to have visibility on the event website. Please "
 "fill in this form"
 msgstr ""
+"This booth type allows you to have visibility on the event website. Please "
+"fill in this form"

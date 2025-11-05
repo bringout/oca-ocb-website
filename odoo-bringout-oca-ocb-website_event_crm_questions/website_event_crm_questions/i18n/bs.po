@@ -22,7 +22,7 @@ msgstr "Registracija događaja"
 
 #. module: website_event_crm_questions
 #. odoo-python
-#: code:addons/website_event_crm_questions/models/event_registration.py:0
+#: code:addons/website_event_crm_questions/models/event_registration.py
 #, python-format
 msgid "Questions"
 msgstr "Pitanja"

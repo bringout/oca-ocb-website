@@ -24,17 +24,25 @@ msgid ""
 "                        <br/>\n"
 "                        Regards."
 msgstr ""
+".\n"
+"                        <br/>\n"
+"                        Cijenimo vašu podršku našoj organizaciji.\n"
+"                        <br/>\n"
+"                        Srdačan pozdrav."
 
+# taken from hr.po
 #. module: website_payment
 #: model_terms:ir.ui.view,arch_db:website_payment.donation_mail_body
 msgid "<b>Comment:</b>"
 msgstr "<b>Komentar:</b>"
 
+# taken from hr.po
 #. module: website_payment
 #: model_terms:ir.ui.view,arch_db:website_payment.donation_mail_body
 msgid "<b>Donation Date:</b>"
 msgstr "<b>Datum doniranja:</b>"
 
+# taken from hr.po
 #. module: website_payment
 #: model_terms:ir.ui.view,arch_db:website_payment.donation_mail_body
 msgid "<b>Donor Email:</b>"
@@ -50,11 +58,13 @@ msgstr "<b>Donor ime:</b>"
 msgid "<b>Payment ID:</b>"
 msgstr "<b>Payment ID:</b>"
 
+# taken from hr.po
 #. module: website_payment
 #: model_terms:ir.ui.view,arch_db:website_payment.donation_mail_body
 msgid "<b>Payment Method:</b>"
 msgstr "<b>Način plaćanja:</b>"
 
+# taken from hr.po
 #. module: website_payment
 #: model_terms:ir.ui.view,arch_db:website_payment.payment_checkout
 msgid "<option value=\"\">Country...</option>"
@@ -66,61 +76,71 @@ msgid ""
 "<strong>No suitable payment option could be found.</strong><br/>\n"
 "                                If you believe that it is an error, please contact the website administrator."
 msgstr ""
+"<strong>Nijedna pogodna opcija plaćanja nije mogla biti pronađena.</strong><br/>\n"
+"                                If you believe that it is an error, please contact the website administrator."
 
+# taken from hr.po
 #. module: website_payment
 #: model_terms:ir.ui.view,arch_db:website_payment.donation_pay
 msgid "<strong>Warning</strong> The currency is missing or incorrect."
 msgstr "<strong>Upozorenje</strong> Valuta nedostaje ili ne netočna."
 
+# taken from hr.po
 #. module: website_payment
 #. odoo-python
-#: code:addons/website_payment/models/payment_transaction.py:0
+#: code:addons/website_payment/models/payment_transaction.py
 #, python-format
 msgid "A donation has been made on your website"
 msgstr "Donacija je uplaćena na vašoj web stranici"
 
+# taken from hr.po
 #. module: website_payment
 #: model_terms:ir.ui.view,arch_db:website_payment.s_donation_button
 msgid "A year of cultural awakening."
 msgstr "Godina kulturnog buđenja."
 
+# taken from hr.po
 #. module: website_payment
 #: model_terms:ir.ui.view,arch_db:website_payment.res_config_settings_view_form
 msgid "Activate Payments"
 msgstr "Aktivirajte plaćanja"
 
+# taken from hr.po
 #. module: website_payment
 #: model_terms:ir.ui.view,arch_db:website_payment.res_config_settings_view_form
 msgid "Activate Stripe"
 msgstr "Aktivirajte Stripe"
 
+# taken from hr.po
 #. module: website_payment
 #. odoo-javascript
-#: code:addons/website_payment/static/src/snippets/s_donation/options.js:0
+#: code:addons/website_payment/static/src/snippets/s_donation/options.js
 #, python-format
 msgid "Add a description here"
 msgstr "Dodaj opis ovdje"
 
 #. module: website_payment
 #. odoo-javascript
-#: code:addons/website_payment/static/src/snippets/s_donation/options.js:0
+#: code:addons/website_payment/static/src/snippets/s_donation/options.js
 #, python-format
 msgid "Add new pre-filled option"
 msgstr "dodaj novo pre-filled option"
 
+# taken from hr.po
 #. module: website_payment
 #. odoo-javascript
-#: code:addons/website_payment/static/src/snippets/s_donation/options.xml:0
-#: code:addons/website_payment/static/src/snippets/s_donation/options.xml:0
+#: code:addons/website_payment/static/src/snippets/s_donation/options.xml
 #, python-format
 msgid "Amount"
 msgstr "Iznos"
 
+# taken from hr.po
 #. module: website_payment
 #: model_terms:ir.ui.view,arch_db:website_payment.payment_checkout
 msgid "Amount ("
 msgstr "Iznos ("
 
+# taken from hr.po
 #. module: website_payment
 #: model_terms:ir.ui.view,arch_db:website_payment.donation_mail_body
 msgid "Amount("
@@ -133,11 +153,12 @@ msgstr "Caring for a baby for 1 month."
 
 #. module: website_payment
 #. odoo-javascript
-#: code:addons/website_payment/static/src/snippets/s_donation/options.xml:0
+#: code:addons/website_payment/static/src/snippets/s_donation/options.xml
 #, python-format
 msgid "Choose Your Amount"
 msgstr "Choose Your Amount"
 
+# taken from hr.po
 #. module: website_payment
 #: model:ir.model,name:website_payment.model_res_config_settings
 msgid "Config Settings"
@@ -145,48 +166,51 @@ msgstr "Postavke"
 
 #. module: website_payment
 #. odoo-python
-#: code:addons/website_payment/models/res_config_settings.py:0
+#: code:addons/website_payment/models/res_config_settings.py
 #, python-format
 msgid "Configure %s"
 msgstr "Konfiguriši %s"
 
+# taken from hr.po
 #. module: website_payment
 #: model:ir.actions.server,name:website_payment.action_stripe_connect_account
 msgid "Connect to Stripe"
 msgstr "Povežite se na Stripe"
 
+# taken from hr.po
 #. module: website_payment
 #. odoo-javascript
-#: code:addons/website_payment/static/src/js/website_payment_form.js:0
-#: model:ir.model,name:website_payment.model_res_country
+#: code:addons/website_payment/static/src/js/website_payment_form.js
 #, python-format
 msgid "Country"
 msgstr "Država"
 
+# taken from hr.po
 #. module: website_payment
 #: model_terms:ir.ui.view,arch_db:website_payment.payment_checkout
 msgid ""
 "Country\n"
 "                            <span class=\"s_website_form_mark\"> *</span>"
 msgstr ""
+"Država\n"
+"                            <span class=\"s_website_form_mark\"> *</span>"
 
+# taken from hr.po
 #. module: website_payment
 #. odoo-python
-#: code:addons/website_payment/controllers/portal.py:0
+#: code:addons/website_payment/controllers/portal.py
 #, python-format
 msgid "Country is required."
 msgstr "Država je obavezna."
 
 #. module: website_payment
 #. odoo-javascript
-#: code:addons/website_payment/static/src/snippets/s_donation/options.xml:0
-#: code:addons/website_payment/static/src/snippets/s_donation/options.xml:0
-#: model_terms:ir.ui.view,arch_db:website_payment.donation_input
-#: model_terms:ir.ui.view,arch_db:website_payment.s_donation_options
+#: code:addons/website_payment/static/src/snippets/s_donation/options.xml
 #, python-format
 msgid "Custom Amount"
 msgstr "Custom Amount"
 
+# taken from hr.po
 #. module: website_payment
 #: model_terms:ir.ui.view,arch_db:website_payment.donation_mail_body
 msgid "Dear"
@@ -209,14 +233,12 @@ msgstr "Display Options"
 
 #. module: website_payment
 #: model_terms:ir.ui.view,arch_db:website_payment.payment_checkout
-#: model_terms:ir.ui.view,arch_db:website_payment.s_donation_button
 msgid "Donate Now"
 msgstr "Donate Now"
 
+# taken from hr.po
 #. module: website_payment
 #: model_terms:ir.ui.view,arch_db:website_payment.donation_mail_body
-#: model_terms:ir.ui.view,arch_db:website_payment.payment_checkout
-#: model_terms:ir.ui.view,arch_db:website_payment.snippets
 msgid "Donation"
 msgstr "Donacija"
 
@@ -227,54 +249,61 @@ msgstr "Dugme za donaciju"
 
 #. module: website_payment
 #. odoo-python
-#: code:addons/website_payment/controllers/portal.py:0
+#: code:addons/website_payment/controllers/portal.py
 #, python-format
 msgid "Donation amount must be at least %.2f."
 msgstr "Donation amount must be at least %.2f."
 
 #. module: website_payment
 #. odoo-python
-#: code:addons/website_payment/models/payment_transaction.py:0
+#: code:addons/website_payment/models/payment_transaction.py
 #, python-format
 msgid "Donation confirmation"
 msgstr "Donation confirmation"
 
+# taken from hr.po
 #. module: website_payment
 #: model_terms:ir.ui.view,arch_db:website_payment.donation_mail_body
 msgid "Donation notification"
 msgstr "Obavijest o donaciji"
 
+# taken from hr.po
 #. module: website_payment
 #. odoo-javascript
-#: code:addons/website_payment/static/src/js/website_payment_form.js:0
+#: code:addons/website_payment/static/src/js/website_payment_form.js
 #, python-format
 msgid "Email"
 msgstr "E-pošta"
 
+# taken from hr.po
 #. module: website_payment
 #: model_terms:ir.ui.view,arch_db:website_payment.payment_checkout
 msgid ""
 "Email\n"
 "                            <span class=\"s_website_form_mark\"> *</span>"
 msgstr ""
+"E-pošta\n"
+"                            <span class=\"s_website_form_mark\"> *</span>"
 
+# taken from hr.po
 #. module: website_payment
 #. odoo-javascript
-#: code:addons/website_payment/static/src/js/website_payment_form.js:0
+#: code:addons/website_payment/static/src/js/website_payment_form.js
 #, python-format
 msgid "Email is invalid"
 msgstr "E-mail je pogrešan"
 
+# taken from hr.po
 #. module: website_payment
 #. odoo-python
-#: code:addons/website_payment/controllers/portal.py:0
+#: code:addons/website_payment/controllers/portal.py
 #, python-format
 msgid "Email is required."
 msgstr "Email je obavezan."
 
 #. module: website_payment
 #. odoo-javascript
-#: code:addons/website_payment/static/src/js/website_payment_form.js:0
+#: code:addons/website_payment/static/src/js/website_payment_form.js
 #, python-format
 msgid "Field '%s' is mandatory"
 msgstr "Field '%s' is mandatory"
@@ -284,11 +313,13 @@ msgstr "Field '%s' is mandatory"
 msgid "First Provider Label"
 msgstr "First Provider Label"
 
+# taken from hr.po
 #. module: website_payment
 #: model_terms:ir.ui.view,arch_db:website_payment.s_donation_options
 msgid "Input"
 msgstr "Ulaz"
 
+# taken from hr.po
 #. module: website_payment
 #: model:ir.model.fields,field_description:website_payment.field_account_payment__is_donation
 msgid "Is Donation"
@@ -296,10 +327,10 @@ msgstr "Je donacija"
 
 #. module: website_payment
 #: model:ir.model.fields,field_description:website_payment.field_res_config_settings__is_stripe_supported_country
-#: model:ir.model.fields,field_description:website_payment.field_res_country__is_stripe_supported_country
 msgid "Is Stripe Supported Country"
 msgstr "Is Stripe Supported zemlja"
 
+# taken from hr.po
 #. module: website_payment
 #: model:ir.model.fields,field_description:website_payment.field_payment_transaction__is_donation
 msgid "Is donation"
@@ -310,6 +341,7 @@ msgstr "Je donacija"
 msgid "Make a Donation"
 msgstr "Make a Donation"
 
+# taken from hr.po
 #. module: website_payment
 #: model_terms:ir.ui.view,arch_db:website_payment.s_donation_options
 msgid "Maximum"
@@ -320,9 +352,10 @@ msgstr "Maksimum"
 msgid "Minimum"
 msgstr "Minimum"
 
+# taken from hr.po
 #. module: website_payment
 #. odoo-javascript
-#: code:addons/website_payment/static/src/js/website_payment_form.js:0
+#: code:addons/website_payment/static/src/js/website_payment_form.js
 #, python-format
 msgid "Name"
 msgstr "Naziv"
@@ -333,17 +366,20 @@ msgid ""
 "Name\n"
 "                            <span class=\"s_website_form_mark\"> *</span>"
 msgstr ""
+"Ime\n"
+"                            <span class=\"s_website_form_mark\"> *</span>"
 
+# taken from hr.po
 #. module: website_payment
 #. odoo-python
-#: code:addons/website_payment/controllers/portal.py:0
+#: code:addons/website_payment/controllers/portal.py
 #, python-format
 msgid "Name is required."
 msgstr "Ime je potrebno."
 
+# taken from hr.po
 #. module: website_payment
 #: model:ir.model.fields.selection,name:website_payment.selection__res_config_settings__providers_state__none
-#: model_terms:ir.ui.view,arch_db:website_payment.s_donation_options
 msgid "None"
 msgstr "Ništa"
 
@@ -352,6 +388,7 @@ msgstr "Ništa"
 msgid "One year in elementary school."
 msgstr "One year in elementary school."
 
+# taken from hr.po
 #. module: website_payment
 #: model_terms:ir.ui.view,arch_db:website_payment.s_donation_button
 msgid "One year in high school."
@@ -362,28 +399,33 @@ msgstr "Jedna godina u srednjoj školi."
 msgid "Other than Paypal"
 msgstr "ostalo than Paypal"
 
+# taken from hr.po
 #. module: website_payment
 #: model_terms:ir.ui.view,arch_db:website_payment.payment_checkout
 msgid "Payment Details"
 msgstr "Detalji plaćanja"
 
+# taken from hr.po
 #. module: website_payment
 #: model:ir.model,name:website_payment.model_payment_provider
 msgid "Payment Provider"
 msgstr "Pružatelj usluge naplate"
 
+# taken from hr.po
 #. module: website_payment
 #: model:ir.model,name:website_payment.model_payment_transaction
 msgid "Payment Transaction"
 msgstr "Transakcija plaćanja"
 
+# taken from hr.po
 #. module: website_payment
 #. odoo-python
-#: code:addons/website_payment/models/payment_transaction.py:0
+#: code:addons/website_payment/models/payment_transaction.py
 #, python-format
 msgid "Payment received from donation with following details:"
 msgstr "Uplata primljena iz donacije sa sljedećim podacima:"
 
+# taken from hr.po
 #. module: website_payment
 #: model:ir.model,name:website_payment.model_account_payment
 msgid "Payments"
@@ -401,7 +443,7 @@ msgstr "Paypal Only"
 
 #. module: website_payment
 #. odoo-javascript
-#: code:addons/website_payment/static/src/snippets/s_donation/000.js:0
+#: code:addons/website_payment/static/src/snippets/s_donation/000.js
 #, python-format
 msgid "Please select or enter an amount"
 msgstr "molimo select or enter an amount"
@@ -421,13 +463,15 @@ msgstr "Providers State"
 msgid "Recipient Email"
 msgstr "Email primaoca"
 
+# taken from hr.po
 #. module: website_payment
 #. odoo-javascript
-#: code:addons/website_payment/static/src/js/website_payment_form.js:0
+#: code:addons/website_payment/static/src/js/website_payment_form.js
 #, python-format
 msgid "Server Error"
 msgstr "Greška poslužitelja"
 
+# taken from hr.po
 #. module: website_payment
 #: model_terms:ir.ui.view,arch_db:website_payment.res_config_settings_view_form
 msgid "Shop - Payment"
@@ -445,11 +489,12 @@ msgstr "Small or large, your contribution is essential."
 
 #. module: website_payment
 #. odoo-javascript
-#: code:addons/website_payment/static/src/js/website_payment_form.js:0
+#: code:addons/website_payment/static/src/js/website_payment_form.js
 #, python-format
 msgid "Some information is missing to process your payment."
 msgstr "Some informacije is missing to process your payment."
 
+# taken from hr.po
 #. module: website_payment
 #: model_terms:ir.ui.view,arch_db:website_payment.s_donation_options
 msgid "Step"
@@ -461,13 +506,18 @@ msgid ""
 "Stripe Connect is not available in your country, please use another payment "
 "provider."
 msgstr ""
+"Stripe Connect is not available in your country, please use another payment "
+"provider."
 
+# taken from hr.po
 #. module: website_payment
 #: model_terms:ir.ui.view,arch_db:website_payment.res_config_settings_view_form
 msgid ""
 "Support most payment methods; Visa, Mastercard, Maestro, Google Pay, Apple "
 "Pay, etc. as well as recurring charges."
 msgstr ""
+"Podržava većinu načina plaćanja: Visa, Mastercard, Maestro, Google Pay, "
+"Apple Pay i druge, kao i ponavljajuće naplate."
 
 #. module: website_payment
 #: model_terms:ir.ui.view,arch_db:website_payment.donation_mail_body
@@ -476,7 +526,7 @@ msgstr "Thank you for your donation of"
 
 #. module: website_payment
 #. odoo-javascript
-#: code:addons/website_payment/static/src/snippets/s_donation/000.js:0
+#: code:addons/website_payment/static/src/snippets/s_donation/000.js
 #, python-format
 msgid "The minimum donation amount is %s%s%s"
 msgstr "The minimum donation amount is %s%s%s"
@@ -484,15 +534,17 @@ msgstr "The minimum donation amount is %s%s%s"
 #. module: website_payment
 #: model_terms:ir.ui.view,arch_db:website_payment.donation_pay
 msgid "There is nothing to pay."
-msgstr "There is nothing to pay."
+msgstr "Nema ničega za platiti."
 
+# taken from hr.po
 #. module: website_payment
 #. odoo-javascript
-#: code:addons/website_payment/static/src/js/website_payment_form.js:0
+#: code:addons/website_payment/static/src/js/website_payment_form.js
 #, python-format
 msgid "Validation Error"
 msgstr "Greška kod provjere"
 
+# taken from hr.po
 #. module: website_payment
 #: model_terms:ir.ui.view,arch_db:website_payment.res_config_settings_view_form
 msgid "View Alternatives"
@@ -505,26 +557,30 @@ msgstr "pregled ostalo providers"
 
 #. module: website_payment
 #. odoo-javascript
-#: code:addons/website_payment/static/src/js/website_payment_form.js:0
+#: code:addons/website_payment/static/src/js/website_payment_form.js
 #, python-format
 msgid "We could not obtain payment fees."
 msgstr "We could not obtain payment fees."
 
+# taken from hr.po
 #. module: website_payment
 #: model:ir.model.fields,field_description:website_payment.field_payment_provider__website_id
 msgid "Website"
 msgstr "Web stranica"
 
+# taken from hr.po
 #. module: website_payment
 #: model:mail.template,name:website_payment.mail_template_donation
 msgid "Website: Donation"
 msgstr "Web stranica: Donacija"
 
+# taken from hr.po
 #. module: website_payment
 #: model_terms:ir.ui.view,arch_db:website_payment.payment_checkout
 msgid "Write us a comment"
 msgstr "Napišite nam komentar"
 
+# taken from hr.po
 #. module: website_payment
 #: model_terms:ir.ui.view,arch_db:website_payment.payment_checkout
 msgid "Your comment"

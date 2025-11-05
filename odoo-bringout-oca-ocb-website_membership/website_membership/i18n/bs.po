@@ -21,51 +21,59 @@ msgid ""
 "<span class=\"fa fa-external-link\" role=\"img\" aria-label=\"External "
 "link\" title=\"External link\"/>"
 msgstr ""
+"<span class=\"fa fa-external-link\" role=\"img\" aria-label=\"Vanjski link\""
+" title=\"Vanjski link\"/>"
 
+# taken from hr.po
 #. module: website_membership
 #: model_terms:ir.ui.view,arch_db:website_membership.index
 msgid "All"
 msgstr "Sve"
 
+# taken from hr.po
 #. module: website_membership
 #. odoo-python
-#: code:addons/website_membership/controllers/main.py:0
+#: code:addons/website_membership/controllers/main.py
 #, python-format
 msgid "All Countries"
 msgstr "Sve zemlje"
 
+# taken from hr.po
 #. module: website_membership
 #: model_terms:ir.ui.view,arch_db:website_membership.index
 msgid "Associations"
 msgstr "Udruge"
 
+# taken from hr.po
 #. module: website_membership
 #: model_terms:ir.ui.view,arch_db:website_membership.opt_index_google_map
 msgid "Close"
 msgstr "Zatvori"
 
+# taken from hr.po
 #. module: website_membership
 #: model_terms:ir.ui.view,arch_db:website_membership.index
 msgid "Find a business partner"
 msgstr "Pronađi poslovnog partnera"
 
+# taken from hr.po
 #. module: website_membership
 #. odoo-python
-#: code:addons/website_membership/controllers/main.py:0
+#: code:addons/website_membership/controllers/main.py
 #, python-format
 msgid "Free Members"
 msgstr "Slobodni članovi"
 
+# taken from hr.po
 #. module: website_membership
 #: model_terms:ir.ui.view,arch_db:website_membership.opt_index_country
-#: model_terms:ir.ui.view,arch_db:website_membership.snippet_options
 msgid "Location"
 msgstr "Lokacija"
 
+# taken from hr.po
 #. module: website_membership
 #. odoo-python
-#: code:addons/website_membership/models/website.py:0
-#: model_terms:ir.ui.view,arch_db:website_membership.index
+#: code:addons/website_membership/models/website.py
 #, python-format
 msgid "Members"
 msgstr "Članovi"
@@ -75,28 +83,32 @@ msgstr "Članovi"
 msgid "Members Page"
 msgstr "Members stranica"
 
+# taken from hr.po
 #. module: website_membership
 #: model:ir.model,name:website_membership.model_membership_membership_line
 msgid "Membership Line"
 msgstr "Stavka članstva"
 
+# taken from hr.po
 #. module: website_membership
 #: model_terms:ir.ui.view,arch_db:website_membership.index
 msgid "No result found."
 msgstr "Nema pronađenog rezultata."
 
+# taken from hr.po
 #. module: website_membership
 #: model_terms:ir.ui.view,arch_db:website_membership.index
 msgid "Our Members Directory"
 msgstr "Imenik članova"
 
+# taken from hr.po
 #. module: website_membership
 #: model:ir.model,name:website_membership.model_website
 msgid "Website"
 msgstr "Web stranica"
 
+# taken from hr.po
 #. module: website_membership
 #: model_terms:ir.ui.view,arch_db:website_membership.opt_index_google_map
-#: model_terms:ir.ui.view,arch_db:website_membership.snippet_options
 msgid "World Map"
 msgstr "Svjetska mapa"

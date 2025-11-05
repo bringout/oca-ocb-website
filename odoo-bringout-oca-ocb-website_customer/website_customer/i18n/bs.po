@@ -15,6 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
+# taken from hr.po
 #. module: website_customer
 #: model_terms:ir.ui.view,arch_db:website_customer.opt_tag_list
 msgid "<span class=\"fa fa-1x fa-tags\"/> All"
@@ -26,31 +27,38 @@ msgid ""
 "<span class=\"fa fa-external-link\" role=\"img\" aria-label=\"External "
 "link\" title=\"External link\"/>"
 msgstr ""
+"<span class=\"fa fa-external-link\" role=\"img\" aria-label=\"Vanjski link\""
+" title=\"Vanjski link\"/>"
 
+# taken from hr.po
 #. module: website_customer
 #: model:ir.model.fields,field_description:website_customer.field_res_partner_tag__active
 msgid "Active"
 msgstr "Aktivan"
 
+# taken from hr.po
 #. module: website_customer
 #. odoo-python
-#: code:addons/website_customer/controllers/main.py:0
+#: code:addons/website_customer/controllers/main.py
 #, python-format
 msgid "All Countries"
 msgstr "Sve zemlje"
 
+# taken from hr.po
 #. module: website_customer
 #. odoo-python
-#: code:addons/website_customer/controllers/main.py:0
+#: code:addons/website_customer/controllers/main.py
 #, python-format
 msgid "All Industries"
 msgstr "Sve industrije"
 
+# taken from hr.po
 #. module: website_customer
 #: model_terms:ir.ui.view,arch_db:website_customer.res_partner_tag_view_search
 msgid "Archived"
 msgstr "Arhivirano"
 
+# taken from hr.po
 #. module: website_customer
 #: model:ir.model.fields,help:website_customer.field_res_partner_tag__classname
 msgid "Bootstrap class to customize the color"
@@ -61,21 +69,25 @@ msgstr "Bootstrap klasa za prilagodbu boje"
 msgid "Can Publish"
 msgstr "Može objaviti"
 
+# taken from hr.po
 #. module: website_customer
 #: model:ir.model.fields,field_description:website_customer.field_res_partner_tag__name
 msgid "Category Name"
 msgstr "Naziv kategorije"
 
+# taken from hr.po
 #. module: website_customer
 #: model:ir.model.fields,field_description:website_customer.field_res_partner_tag__classname
 msgid "Class"
 msgstr "Klasa"
 
+# taken from hr.po
 #. module: website_customer
 #: model_terms:ir.ui.view,arch_db:website_customer.opt_country
 msgid "Close"
 msgstr "Zatvori"
 
+# taken from hr.po
 #. module: website_customer
 #: model:ir.model,name:website_customer.model_res_partner
 msgid "Contact"
@@ -86,21 +98,25 @@ msgstr "Kontakt"
 msgid "Countries Filter"
 msgstr "Filter zemalja"
 
+# taken from hr.po
 #. module: website_customer
 #: model_terms:ir.actions.act_window,help:website_customer.action_partner_tag_form
 msgid "Create a new contact tag"
 msgstr "Kreiraj novu oznaku za kontakt"
 
+# taken from hr.po
 #. module: website_customer
 #: model:ir.model.fields,field_description:website_customer.field_res_partner_tag__create_uid
 msgid "Created by"
 msgstr "Kreirao"
 
+# taken from hr.po
 #. module: website_customer
 #: model:ir.model.fields,field_description:website_customer.field_res_partner_tag__create_date
 msgid "Created on"
 msgstr "Kreirano"
 
+# taken from hr.po
 #. module: website_customer
 #: model:ir.model.fields,field_description:website_customer.field_res_partner_tag__display_name
 msgid "Display Name"
@@ -111,6 +127,7 @@ msgstr "Prikazani naziv"
 msgid "ID"
 msgstr "ID"
 
+# taken from hr.po
 #. module: website_customer
 #: model_terms:ir.ui.view,arch_db:website_customer.implemented_by_block
 msgid "Implemented By"
@@ -121,21 +138,25 @@ msgstr "Implementirao"
 msgid "Industry Filter"
 msgstr "Filter industrije"
 
+# taken from hr.po
 #. module: website_customer
 #: model:ir.model.fields,field_description:website_customer.field_res_partner_tag__is_published
 msgid "Is Published"
 msgstr "je objavljeno"
 
+# taken from hr.po
 #. module: website_customer
 #: model:ir.model.fields,field_description:website_customer.field_res_partner_tag____last_update
 msgid "Last Modified on"
 msgstr "Zadnje mijenjano"
 
+# taken from hr.po
 #. module: website_customer
 #: model:ir.model.fields,field_description:website_customer.field_res_partner_tag__write_uid
 msgid "Last Updated by"
 msgstr "Zadnji ažurirao"
 
+# taken from hr.po
 #. module: website_customer
 #: model:ir.model.fields,field_description:website_customer.field_res_partner_tag__write_date
 msgid "Last Updated on"
@@ -147,18 +168,22 @@ msgid ""
 "Manage contact tags to better classify them for tracking and analysis "
 "purposes."
 msgstr ""
+"Manage contact tags to better classify them for tracking and analysis "
+"purposes."
 
+# taken from hr.po
 #. module: website_customer
 #: model_terms:ir.ui.view,arch_db:website_customer.index
 msgid "No result found"
-msgstr "Sve djelatnosti"
+msgstr "Nisu pronađeni rezultati"
 
+# taken from hr.po
 #. module: website_customer
 #: model_terms:ir.ui.view,arch_db:website_customer.details
-#: model_terms:ir.ui.view,arch_db:website_customer.index
 msgid "Our References"
 msgstr "Naše reference"
 
+# taken from hr.po
 #. module: website_customer
 #: model_terms:ir.ui.view,arch_db:website_customer.view_partner_tag_form
 msgid "Partner Tag"
@@ -170,16 +195,19 @@ msgid ""
 "Partner Tags - These tags can be used on website to find customers by "
 "sector, or ..."
 msgstr ""
+"Partner Tags - These tags can be used on website to find customers by "
+"sector, or ..."
 
+# taken from hr.po
 #. module: website_customer
 #: model:ir.model.fields,field_description:website_customer.field_res_partner_tag__partner_ids
 msgid "Partners"
 msgstr "Partneri"
 
+# taken from hr.po
 #. module: website_customer
 #. odoo-python
-#: code:addons/website_customer/models/website.py:0
-#: model_terms:ir.ui.view,arch_db:website_customer.references_block
+#: code:addons/website_customer/models/website.py
 #, python-format
 msgid "References"
 msgstr "Reference"
@@ -189,6 +217,7 @@ msgstr "Reference"
 msgid "References Page"
 msgstr "Stranica referenci"
 
+# taken from hr.po
 #. module: website_customer
 #: model_terms:ir.ui.view,arch_db:website_customer.opt_country_list
 msgid "References by Country"
@@ -199,11 +228,13 @@ msgstr "Reference po zemljama"
 msgid "References by Industries"
 msgstr "Reference po industrijama"
 
+# taken from hr.po
 #. module: website_customer
 #: model_terms:ir.ui.view,arch_db:website_customer.opt_tag_list
 msgid "References by Tag"
 msgstr "Referenca po oznaci"
 
+# taken from hr.po
 #. module: website_customer
 #: model_terms:ir.ui.view,arch_db:website_customer.index
 msgid "Search"
@@ -214,6 +245,7 @@ msgstr "Pretraži"
 msgid "Search Partner Tag"
 msgstr "Pretraži tag partnera"
 
+# taken from hr.po
 #. module: website_customer
 #: model_terms:ir.ui.view,arch_db:website_customer.snippet_options
 msgid "Show Map"
@@ -224,50 +256,55 @@ msgstr "Prikaži mapu"
 msgid "Tags Filter"
 msgstr "Filter tagova"
 
+# taken from hr.po
 #. module: website_customer
 #: model:ir.model.fields,help:website_customer.field_res_partner_tag__website_url
 msgid "The full URL to access the document through the website."
-msgstr "Je objavljeno"
+msgstr "Kompletan URL za pristup dokumentu putem website-a."
 
+# taken from hr.po
 #. module: website_customer
 #: model_terms:ir.ui.view,arch_db:website_customer.index
 msgid "Trusted by millions worldwide"
 msgstr "Milijuni diljem svijeta se pouzdaju"
 
+# taken from hr.po
 #. module: website_customer
 #: model:ir.model.fields,field_description:website_customer.field_res_partner_tag__website_published
 msgid "Visible on current website"
 msgstr "Vidljivo na trenutnoj web stranicama"
 
+# taken from hr.po
 #. module: website_customer
 #: model:ir.model,name:website_customer.model_website
 msgid "Website"
 msgstr "Web stranica"
 
+# taken from hr.po
 #. module: website_customer
 #: model:ir.actions.act_window,name:website_customer.action_partner_tag_form
-#: model:ir.ui.menu,name:website_customer.menu_partner_tag_form
-#: model_terms:ir.ui.view,arch_db:website_customer.view_partner_tag_list
-#: model_terms:ir.ui.view,arch_db:website_customer.view_partners_form_website
 msgid "Website Tags"
 msgstr "Tagovi web stranica"
 
+# taken from hr.po
 #. module: website_customer
 #: model:ir.model.fields,field_description:website_customer.field_res_partner_tag__website_url
 msgid "Website URL"
-msgstr "Website URL"
+msgstr "URL web stranice"
 
+# taken from hr.po
 #. module: website_customer
 #: model:ir.model.fields,field_description:website_customer.field_res_partner__website_tag_ids
-#: model:ir.model.fields,field_description:website_customer.field_res_users__website_tag_ids
 msgid "Website tags"
 msgstr "Tagovi web stranica"
 
+# taken from hr.po
 #. module: website_customer
 #: model_terms:ir.ui.view,arch_db:website_customer.opt_country
 msgid "World Map"
 msgstr "Svjetska mapa"
 
+# taken from hr.po
 #. module: website_customer
 #: model_terms:ir.ui.view,arch_db:website_customer.implemented_by_block
 msgid "reference(s))"
