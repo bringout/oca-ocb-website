@@ -2,6 +2,6 @@
 
 This addon depends on:
 
-- [website](https://github.com/bringout/oca-ocb-website/tree/33ba6b76d9cd1aa463f8ac53c8c5d7bc407487ed/odoo-bringout-oca-ocb-website)
-- [account_payment](https://github.com/bringout/oca-ocb-accounting/tree/ddf6c0d80189f2cd640968f14b2d1346fca52a9f/odoo-bringout-oca-ocb-account_payment)
-- [portal](https://github.com/bringout/oca-ocb-website/tree/33ba6b76d9cd1aa463f8ac53c8c5d7bc407487ed/odoo-bringout-oca-ocb-portal)
+- [website](https://github.com/bringout/oca-ocb-website/tree/94cd33d0b8cad01b542f0b8c0142bfc5d0240b1a/odoo-bringout-oca-ocb-website)
+- [account_payment](https://github.com/bringout/oca-ocb-accounting/tree/8e05e720e13ae384034b75f924ebae76866d47fe/odoo-bringout-oca-ocb-account_payment)
+- [portal](https://github.com/bringout/oca-ocb-website/tree/94cd33d0b8cad01b542f0b8c0142bfc5d0240b1a/odoo-bringout-oca-ocb-portal)
