@@ -135,7 +135,7 @@ msgstr "Praćenje podataka"
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,field_description:website_crm_iap_reveal.field_crm_reveal_rule__display_name
 msgid "Display Name"
-msgstr "Prikazani naziv"
+msgstr "Naziv"
 
 #. module: website_crm_iap_reveal
 #. odoo-python
@@ -208,19 +208,19 @@ msgstr "Industrije"
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,field_description:website_crm_iap_reveal.field_crm_reveal_rule____last_update
 msgid "Last Modified on"
-msgstr "Zadnja izmjena na"
+msgstr "Zadnja promjena"
 
 # taken from hr.po
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,field_description:website_crm_iap_reveal.field_crm_reveal_rule__write_uid
 msgid "Last Updated by"
-msgstr "Zadnje ažuriranje izvršio"
+msgstr "Promijenio"
 
 # taken from hr.po
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,field_description:website_crm_iap_reveal.field_crm_reveal_rule__write_date
 msgid "Last Updated on"
-msgstr "Zadnje ažuriranje na"
+msgstr "Vrijeme promjene"
 
 # taken from hr.po
 #. module: website_crm_iap_reveal

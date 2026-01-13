@@ -36,7 +36,7 @@ msgstr "Prosjek"
 #: code:addons/portal_rating/static/src/xml/portal_chatter.xml
 #, python-format
 msgid "Cancel"
-msgstr "Otkaži"
+msgstr "Odustani"
 
 # taken from hr.po
 #. module: portal_rating

@@ -162,7 +162,7 @@ msgstr "Choose Your Amount"
 #. module: website_payment
 #: model:ir.model,name:website_payment.model_res_config_settings
 msgid "Config Settings"
-msgstr "Postavke konfiguracije"
+msgstr "Postavke"
 
 #. module: website_payment
 #. odoo-python

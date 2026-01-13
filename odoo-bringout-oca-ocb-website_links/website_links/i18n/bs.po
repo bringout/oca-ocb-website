@@ -133,7 +133,7 @@ msgstr "Dobij praćeni link"
 #: code:addons/website_links/static/src/xml/recent_link.xml
 #, python-format
 msgid "Icon"
-msgstr "Ikona"
+msgstr "Znak"
 
 # taken from hr.po
 #. module: website_links

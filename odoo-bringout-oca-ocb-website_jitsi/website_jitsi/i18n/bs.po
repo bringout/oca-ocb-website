@@ -69,7 +69,7 @@ msgstr "Kreirano"
 #. module: website_jitsi
 #: model:ir.model.fields,field_description:website_jitsi.field_chat_room__display_name
 msgid "Display Name"
-msgstr "Prikazani naziv"
+msgstr "Naziv"
 
 #. module: website_jitsi
 #: model:ir.model.fields,field_description:website_jitsi.field_chat_room__is_full
@@ -107,19 +107,19 @@ msgstr "Posljednja aktivnost"
 #. module: website_jitsi
 #: model:ir.model.fields,field_description:website_jitsi.field_chat_room____last_update
 msgid "Last Modified on"
-msgstr "Zadnja izmjena na"
+msgstr "Zadnja promjena"
 
 # taken from hr.po
 #. module: website_jitsi
 #: model:ir.model.fields,field_description:website_jitsi.field_chat_room__write_uid
 msgid "Last Updated by"
-msgstr "Zadnje ažuriranje izvršio"
+msgstr "Promijenio"
 
 # taken from hr.po
 #. module: website_jitsi
 #: model:ir.model.fields,field_description:website_jitsi.field_chat_room__write_date
 msgid "Last Updated on"
-msgstr "Zadnje ažuriranje na"
+msgstr "Vrijeme promjene"
 
 #. module: website_jitsi
 #: model:ir.model.fields,field_description:website_jitsi.field_chat_room_mixin__room_last_activity

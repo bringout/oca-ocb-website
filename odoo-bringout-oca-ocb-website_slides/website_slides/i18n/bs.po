@@ -1138,7 +1138,7 @@ msgstr "Dostignuća"
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__message_needaction
 msgid "Action Needed"
-msgstr "Potrebna radnja"
+msgstr "Potrebna akcija"
 
 # taken from hr.po
 #. module: website_slides
@@ -1150,19 +1150,19 @@ msgstr "Aktivan"
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__activity_ids
 msgid "Activities"
-msgstr "Aktivnosti"
+msgstr "Broj infografika"
 
 # taken from hr.po
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__activity_exception_decoration
 msgid "Activity Exception Decoration"
-msgstr "Dekoracija izuzetka aktivnosti"
+msgstr "Dekoracija iznimke aktivnosti"
 
 # taken from hr.po
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__activity_state
 msgid "Activity State"
-msgstr "Status aktivnosti"
+msgstr "Broj prezentacija"
 
 # taken from hr.po
 #. module: website_slides
@@ -1450,7 +1450,7 @@ msgstr "Članci"
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__message_attachment_count
 msgid "Attachment Count"
-msgstr "Broj priloga"
+msgstr "Broj zakački"
 
 # taken from hr.po
 #. module: website_slides
@@ -1623,7 +1623,7 @@ msgstr "Ne može biti označeno kao nezavršeno"
 #: code:addons/website_slides/static/src/js/slides_category_delete.js
 #, python-format
 msgid "Cancel"
-msgstr "Otkaži"
+msgstr "Samo autentifikovani korisnici"
 
 #. module: website_slides
 #: model:slide.channel.tag,name:website_slides.slide_channel_tag_role_carpenter
@@ -1992,7 +1992,7 @@ msgstr "Kreiranje email-a"
 #. module: website_slides
 #: model:ir.model,name:website_slides.model_res_config_settings
 msgid "Config Settings"
-msgstr "Postavke konfiguracije"
+msgstr "Postavke"
 
 # taken from hr.po
 #. module: website_slides
@@ -2565,7 +2565,7 @@ msgstr "Nemate račun?"
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__completed
 msgid "Done"
-msgstr "Dovršeno"
+msgstr "Riješeno"
 
 #. module: website_slides
 #. odoo-javascript
@@ -2904,13 +2904,13 @@ msgstr "Praćeni tečajevi"
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__message_follower_ids
 msgid "Followers"
-msgstr "Pratitelji"
+msgstr "Pratioci"
 
 # taken from hr.po
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__message_partner_ids
 msgid "Followers (Partners)"
-msgstr "Pratitelji (partneri)"
+msgstr "Pratioci (Partneri)"
 
 # taken from hr.po
 #. module: website_slides
@@ -3057,7 +3057,7 @@ msgstr "Grupa"
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_channel_partner_view_search
 msgid "Group By"
-msgstr "Grupiši po..."
+msgstr "Grupiši po"
 
 # taken from hr.po
 #. module: website_slides
@@ -3096,7 +3096,7 @@ msgstr "Ima stavku menija"
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__has_message
 msgid "Has Message"
-msgstr "Ima poruku"
+msgstr "Slajd za promociju"
 
 #. module: website_slides
 #: model_terms:slide.slide,description:website_slides.slide_slide_demo_0_3
@@ -3446,7 +3446,7 @@ msgstr "Je urednik"
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__message_is_follower
 msgid "Is Follower"
-msgstr "Pratilac"
+msgstr "Je pratilac"
 
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__is_member
@@ -3591,7 +3591,7 @@ msgstr "Poslednja akcija dana"
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_answer____last_update
 msgid "Last Modified on"
-msgstr "Zadnja izmjena na"
+msgstr "Zadnje mijenjano"
 
 # taken from hr.po
 #. module: website_slides
@@ -3603,13 +3603,13 @@ msgstr "Zadnja promjena"
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_answer__write_uid
 msgid "Last Updated by"
-msgstr "Zadnje ažuriranje izvršio"
+msgstr "Zadnji ažurirao"
 
 # taken from hr.po
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_answer__write_date
 msgid "Last Updated on"
-msgstr "Zadnje ažuriranje na"
+msgstr "Zadnje ažurirano"
 
 #. module: website_slides
 #: model:ir.model.fields.selection,name:website_slides.selection__slide_channel__promote_strategy__latest
@@ -3831,7 +3831,7 @@ msgstr "Poruka koja objašnjava proces prijave"
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__message_ids
 msgid "Messages"
-msgstr "Nepročitane poruke"
+msgstr "Poruke"
 
 # taken from hr.po
 #. module: website_slides
@@ -3999,13 +3999,13 @@ msgstr "Događaj sljedećeg kalendara aktivnosti"
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__activity_date_deadline
 msgid "Next Activity Deadline"
-msgstr "Krajnji rok za sljedeću aktivnost"
+msgstr "Krajnji rok slijedeće aktivnosti"
 
 # taken from hr.po
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__activity_summary
 msgid "Next Activity Summary"
-msgstr "Pregled sljedeće aktivnosti"
+msgstr "Sažetak sljedeće aktivnosti"
 
 # taken from hr.po
 #. module: website_slides
@@ -4746,7 +4746,7 @@ msgstr "Odgovoran"
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__activity_user_id
 msgid "Responsible User"
-msgstr "Odgovorni korisnik"
+msgstr "Odgovorna osoba"
 
 #. module: website_slides
 #. odoo-javascript
@@ -6073,7 +6073,7 @@ msgstr "Web stranica / Slajdovi"
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__website_message_ids
 msgid "Website Messages"
-msgstr "Nepročitane poruke"
+msgstr "Poruke sa website-a"
 
 # taken from hr.po
 #. module: website_slides
@@ -6085,7 +6085,7 @@ msgstr "URL web stranice"
 #. module: website_slides
 #: model:ir.model.fields,help:website_slides.field_slide_channel__website_message_ids
 msgid "Website communication history"
-msgstr "Povijest komunikacije Web stranice"
+msgstr "Email template za slanje publikacije slajda putem email-a"
 
 # taken from hr.po
 #. module: website_slides

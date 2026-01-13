@@ -2928,7 +2928,7 @@ msgstr "Kompanije"
 #: code:addons/website/models/website.py
 #, python-format
 msgid "Company"
-msgstr "Kompanija"
+msgstr "Preduzeće"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.snippets
@@ -2967,7 +2967,7 @@ msgstr "Uvjetno"
 #. module: website
 #: model:ir.model,name:website.model_res_config_settings
 msgid "Config Settings"
-msgstr "Postavke konfiguracije"
+msgstr "Postavke"
 
 # taken from hr.po
 #. module: website
@@ -3282,7 +3282,7 @@ msgstr ""
 #. module: website
 #: model:ir.model.fields,field_description:website.field_theme_ir_asset__create_uid
 msgid "Created by"
-msgstr "Kreirao"
+msgstr "Web sajt registracije"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_mega_menu_cards
@@ -5032,7 +5032,7 @@ msgstr "Meža"
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.menu_search
 msgid "Group By"
-msgstr "Grupiši po..."
+msgstr "Grupiši po"
 
 # taken from hr.po
 #. module: website
@@ -5412,7 +5412,7 @@ msgstr "IAP kod stranice"
 #. module: website
 #: model:ir.model.fields,field_description:website.field_website_configurator_feature__icon
 msgid "Icon"
-msgstr "Ikona"
+msgstr "Znak"
 
 #. module: website
 #: model:ir.model.fields,help:website.field_website__specific_user_account
@@ -6166,7 +6166,7 @@ msgstr "Last Menu"
 #. module: website
 #: model:ir.model.fields,field_description:website.field_theme_ir_asset____last_update
 msgid "Last Modified on"
-msgstr "Zadnja izmjena na"
+msgstr "Zadnje mijenjano"
 
 # taken from hr.po
 #. module: website
@@ -6185,13 +6185,13 @@ msgstr "Last Page"
 #. module: website
 #: model:ir.model.fields,field_description:website.field_theme_ir_asset__write_uid
 msgid "Last Updated by"
-msgstr "Zadnje ažuriranje izvršio"
+msgstr "Zadnji ažurirao"
 
 # taken from hr.po
 #. module: website
 #: model:ir.model.fields,field_description:website.field_theme_ir_asset__write_date
 msgid "Last Updated on"
-msgstr "Zadnje ažuriranje na"
+msgstr "Zadnje ažurirano"
 
 # taken from hr.po
 #. module: website
@@ -6667,7 +6667,7 @@ msgstr "Čarobnjak za spajanje partnera"
 #: model_terms:ir.ui.view,arch_db:website.s_facebook_page_options
 #, python-format
 msgid "Messages"
-msgstr "Nepročitane poruke"
+msgstr "Poruke"
 
 # taken from hr.po
 #. module: website
