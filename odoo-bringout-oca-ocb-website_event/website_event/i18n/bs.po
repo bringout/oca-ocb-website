@@ -379,7 +379,7 @@ msgstr "Može objaviti"
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.registration_attendee_details
 msgid "Cancel"
-msgstr "Odustani"
+msgstr "Otkaži"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.snippet_options
@@ -409,9 +409,7 @@ msgstr "Meni zajednice"
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.s_speaker_bio
 msgid "Company"
-msgstr ""
-"Označite ovu opciju da bi imali menuje za vaš događaj na\n"
-"                                web stranici: registracije, raspored, mapa, ..."
+msgstr "Kompanija"
 
 #. module: website_event
 #. odoo-python
@@ -482,7 +480,7 @@ msgstr "Opis"
 #. module: website_event
 #: model:ir.model.fields,field_description:website_event.field_website_event_menu__display_name
 msgid "Display Name"
-msgstr "Naziv"
+msgstr "Prikazani naziv"
 
 #. module: website_event
 #: model:ir.model.fields,field_description:website_event.field_event_type__website_menu
@@ -758,19 +756,19 @@ msgstr "Marko PETROVIĆ"
 #. module: website_event
 #: model:ir.model.fields,field_description:website_event.field_website_event_menu____last_update
 msgid "Last Modified on"
-msgstr "Zadnja promjena"
+msgstr "Zadnja izmjena na"
 
 # taken from hr.po
 #. module: website_event
 #: model:ir.model.fields,field_description:website_event.field_website_event_menu__write_uid
 msgid "Last Updated by"
-msgstr "Promijenio"
+msgstr "Zadnje ažuriranje izvršio"
 
 # taken from hr.po
 #. module: website_event
 #: model:ir.model.fields,field_description:website_event.field_website_event_menu__write_date
 msgid "Last Updated on"
-msgstr "Vrijeme promjene"
+msgstr "Zadnje ažuriranje na"
 
 # taken from hr.po
 #. module: website_event
