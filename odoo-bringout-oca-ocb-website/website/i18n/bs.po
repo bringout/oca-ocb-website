@@ -197,7 +197,7 @@ msgstr ""
 #: code:addons/website/static/src/snippets/s_website_form/000.js
 #, python-format
 msgid "'%s' is not a correct date"
-msgstr "&lt;?xml version=\"1.0\" encoding=\"UTF-8\"?&gt;"
+msgstr "'%s' is not a correct date"
 
 # taken from hr.po
 #. module: website
@@ -326,7 +326,7 @@ msgstr "1000 km"
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_image_gallery_options
 msgid "12"
-msgstr "1/5"
+msgstr "12"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_map_options
@@ -623,11 +623,7 @@ msgstr "<b>Odaberite</b> paletu boja."
 #: code:addons/website/static/src/js/tours/tour_utils.js
 #, python-format
 msgid "<b>Slide</b> this button to change the %s padding"
-msgstr ""
-"<b>Odlične priče su za sve iako su napisane samo za jednu osobu.</b> Ako "
-"pokušavate pisati imajući na umu široku opću publiku, vaša priča će zvučati "
-"lažno i biti nezanimljiva. Nitko neće biti zainteresiran. Pišite za jednu "
-"osobu. Ako je istinito za jednu, istinito je i za ostale."
+msgstr "<b>Slide</b> this button to change the %s padding"
 
 #. module: website
 #. odoo-javascript
@@ -1170,7 +1166,7 @@ msgstr ""
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.res_config_settings_view_form
 msgid "<span class=\"o_form_label\">Email Marketing</span>"
-msgstr "<span class=\"o_form_label\">Email Marketing</span>"
+msgstr "<span class=\"o_form_label\">Email marketing</span>"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.res_config_settings_view_form
@@ -6032,9 +6028,7 @@ msgstr "Jeans"
 #: code:addons/website/static/src/systray_items/new_content.js
 #, python-format
 msgid "Job Position"
-msgstr ""
-"Možda je moguće urediti relevantne stavke ili riješiti problem u <a "
-"href=\"%s\">klasičnom Odoo interfejsu</a>"
+msgstr "Job Position"
 
 # taken from hr.po
 #. module: website
@@ -7615,7 +7609,7 @@ msgstr "Istorija pregleda stranica"
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.snippet_options
 msgid "Page Visibility"
-msgstr "Stranica <b>%s</b> sadrži link na ovu stranicu"
+msgstr "Page Visibility"
 
 #. module: website
 #: model:ir.model.fields,help:website.field_website_configurator_feature__iap_page_code
@@ -7641,7 +7635,7 @@ msgstr "Pages"
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.bs_debug_view
 msgid "Pagination"
-msgstr "Stranica <b>%s</b> poziva ovu datoteku"
+msgstr "Pagination"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_mega_menu_menus_logos
@@ -9479,12 +9473,12 @@ msgstr "Tekst"
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.snippets
 msgid "Text - Image"
-msgstr "Šablon <b>%s (id:%s)</b> sadrži link na ovu stranicu"
+msgstr "Text - Image"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.snippet_options
 msgid "Text Alignment"
-msgstr "Šablon <b>%s (id:%s)</b> poziva ovu datoteku"
+msgstr "Text Alignment"
 
 # taken from hr.po
 #. module: website
@@ -9799,7 +9793,7 @@ msgstr "Treći meni"
 #: code:addons/website/static/src/components/dialog/page_properties.xml
 #, python-format
 msgid "This URL is contained in the “%(field)s” of the following “%(model)s”"
-msgstr "Trenutno nema dostupnih podataka."
+msgstr "This URL is contained in the “%(field)s” of the following “%(model)s”"
 
 #. module: website
 #: model:ir.model.fields,help:website.field_res_config_settings__favicon
@@ -9963,7 +9957,7 @@ msgstr "Vrijeme od poslednjeg pregleda stranice. Npr.: prije 2 minuta"
 #: code:addons/website/static/src/snippets/s_countdown/000.xml
 #, python-format
 msgid "Time's up! You can now visit"
-msgstr "Ova stranica je u meniju <b>%s</b>"
+msgstr "Time's up! You can now visit"
 
 # taken from hr.po
 #. module: website

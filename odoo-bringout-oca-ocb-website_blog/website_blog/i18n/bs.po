@@ -690,7 +690,7 @@ msgstr "Lista blogova"
 #. module: website_blog
 #: model_terms:ir.ui.view,arch_db:website_blog.snippet_options
 msgid "Blogs Page"
-msgstr "Blog post <b>%s</b> izgleda da poziva ovu datoteku !"
+msgstr "Blogs Page"
 
 #. module: website_blog
 #: model_terms:ir.ui.view,arch_db:website_blog.snippet_options

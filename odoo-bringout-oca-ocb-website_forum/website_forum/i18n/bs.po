@@ -104,9 +104,7 @@ msgstr "%d karme potrebno za pretvaranje vašeg komentara u odgovor."
 #: code:addons/website_forum/models/forum.py
 #, python-format
 msgid "%d karma required to create a new Tag."
-msgstr ""
-"karma je potrebna da izvršite ovu radnju. Možete steći karmu tako što će "
-"zajednica glasati pozitivno za vaše odgovore."
+msgstr "%d karma required to create a new Tag."
 
 #. module: website_forum
 #. odoo-python
@@ -202,17 +200,17 @@ msgstr "%d karme potrebno za validaciju objave."
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.forum_index
 msgid "&amp;nbsp;and&amp;nbsp;"
-msgstr "%d karme potrebno za prekidanje veze komentara."
+msgstr "&amp;nbsp;and&amp;nbsp;"
 
 #. module: website_forum
 #: model_terms:forum.forum,faq:website_forum.forum_help
 msgid "(The above section was adapted from Stackoverflow’s FAQ.)"
-msgstr "%d karme potrebno za pozitivno glasanje."
+msgstr "(The above section was adapted from Stackoverflow’s FAQ.)"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.view_forum_forum_form
 msgid "(votes - 1) **"
-msgstr "%d karme potrebno za validaciju objave."
+msgstr "(votes - 1) **"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.display_post_question_block
@@ -1063,7 +1061,7 @@ msgstr "Autobiograf"
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.author_box
 msgid "Avatar"
-msgstr "Postavite pitanje u ovom forumu klikom na dugme."
+msgstr "Avatar"
 
 # taken from hr.po
 #. module: website_forum
@@ -3417,7 +3415,7 @@ msgstr "Naslov"
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.edit_post
 msgid "Title must not be empty"
-msgstr "Ovaj forum ne dozvoljava %s"
+msgstr "Title must not be empty"
 
 # taken from hr.po
 #. module: website_forum

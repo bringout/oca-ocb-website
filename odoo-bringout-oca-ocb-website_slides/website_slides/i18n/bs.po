@@ -417,7 +417,7 @@ msgid ""
 "title=\"Duration\"/>"
 msgstr ""
 "<i class=\"fa fa-clock-o me-2\" aria-label=\"Duration\" role=\"img\" "
-"title=\"Duration\"/>"
+"title=\"Trajanje\"/>"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.course_slides_cards
@@ -2227,16 +2227,12 @@ msgstr "Course tagovi"
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_channel_view_form_add
 msgid "Course Title"
-msgstr ""
-"Nije moguće dohvatiti podatke sa URL-a. Dokument ili pristupno pravo nije dostupno.\n"
-"Evo primljenog odgovora: %s"
+msgstr "Course Title"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_channel_view_tree
 msgid "Course Type"
-msgstr ""
-"Nije moguće dohvatiti podatke sa URL-a. Dokument ili pristupno pravo nije dostupno:\n"
-"%s"
+msgstr "Course Type"
 
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__karma_gen_channel_finish
@@ -4409,9 +4405,7 @@ msgstr "Molimo odaberite najmanje jednog primaoca."
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.view_slide_slide_form
 msgid "Points Rewards"
-msgstr ""
-"Molimo <a href=\"/web?redirect=%s\">prijavite se</a> da glasate za ovaj "
-"slajd"
+msgstr "Points Rewards"
 
 #. module: website_slides
 #: model:gamification.badge,name:website_slides.badge_data_course
@@ -4519,14 +4513,15 @@ msgstr "Pitanje"
 #: code:addons/website_slides/models/slide_question.py
 #, python-format
 msgid "Question \"%s\" must have 1 correct answer"
-msgstr "Promovišite ovaj #{slide.slide_type}"
+msgstr "Question \"%s\" must have 1 correct answer"
 
 #. module: website_slides
 #. odoo-python
 #: code:addons/website_slides/models/slide_question.py
 #, python-format
 msgid "Question \"%s\" must have 1 correct answer and at least 1 incorrect answer"
-msgstr "Promovisan slajd"
+msgstr ""
+"Question \"%s\" must have 1 correct answer and at least 1 incorrect answer"
 
 # taken from hr.po
 #. module: website_slides
@@ -5652,7 +5647,7 @@ msgstr "Ovaj slajd ne može biti označen kao nezavršen."
 #, python-format
 msgid "This video already exists in this channel on the following content: %s"
 msgstr ""
-"Ovaj kanal je privatan i njegov sadržaj je ograničen na neke korisnike."
+"This video already exists in this channel on the following content: %s"
 
 #. module: website_slides
 #. odoo-javascript
@@ -5714,9 +5709,7 @@ msgstr "Ukupno završeno"
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_channel_view_tree_report
 msgid "Total Duration"
-msgstr ""
-"Ovaj video već postoji u ovom kanalu <a target=\"_blank\" "
-"href=\"/slides/slide/%s\">kliknite ovdje da ga vidite </a>"
+msgstr "Total Duration"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_slide_view_tree_report
