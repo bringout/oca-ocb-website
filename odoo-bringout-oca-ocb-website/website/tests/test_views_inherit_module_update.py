@@ -1,18 +1,4 @@
-# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
-
-from odoo.tests import HttpCase, standalone, tagged
-
-
-@tagged('website_nightly', '-standard')
-class TestWebsiteNightlyRunbot(HttpCase):
-    def test_01_website_nightly_runbot(self):
-        """ This test is just here to avoid runbot to raise an error on the
-        ``website_nightly`` build. Indeed, if not a single test with this tag is
-        found, the build will be considered as failed.
-        In Odoo 16.4 a real test is using this tag.
-        """
-
 
 """ This test ensure `inherit_id` update is correctly replicated on cow views.
 The view receiving the `inherit_id` update is either:
@@ -25,6 +11,8 @@ The view receiving the `inherit_id` update is either:
    `test_module_new_inherit_view_on_parent_already_forked` and
    `test_specific_view_module_update_inherit_change` in `website` module.
 """
+
+from odoo.tests import standalone
 
 
 @standalone('cow_views_inherit', 'website_standalone')
@@ -54,8 +42,7 @@ def test_01_cow_views_inherit_on_module_update(env):
     # 3. Upgrade the module
     portal_module = env['ir.module.module'].search([('name', '=', 'portal')])
     portal_module.button_immediate_upgrade()
-    env.reset()     # clear the set of environments
-    env = env()     # get an environment that refers to the new registry
+    env.transaction.reset()     # clear the set of environments
 
     # 4. Ensure cow view also got its inherit_id updated
     expected_parent_view = env.ref('portal.frontend_layout')  # XML data
@@ -91,8 +78,7 @@ def test_02_cow_views_inherit_on_module_update(env):
     # 3. Upgrade the module
     portal_module = env['ir.module.module'].search([('name', '=', 'portal')])
     portal_module.button_immediate_upgrade()
-    env.reset()     # clear the set of environments
-    env = env()     # get an environment that refers to the new registry
+    env.transaction.reset()     # clear the set of environments
 
     # 4. Ensure cow view also got its inherit_id updated
     assert view_D.inherit_id == view_B, "Generic view security check."

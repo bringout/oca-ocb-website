@@ -5,7 +5,7 @@ from odoo import models
 from odoo.tools import is_html_empty, lazy
 
 
-class IrQWeb(models.AbstractModel):
+class IrQweb(models.AbstractModel):
     _inherit = "ir.qweb"
 
     def _prepare_frontend_environment(self, values):
@@ -15,9 +15,7 @@ class IrQWeb(models.AbstractModel):
         irQweb = super()._prepare_frontend_environment(values)
         values.update(
             is_html_empty=is_html_empty,
-            languages=lazy(lambda: [lang for
-                    lang in irQweb.env['res.lang'].get_available()
-                    if lang[0] in irQweb.env['ir.http']._get_frontend_langs()])
+            frontend_languages=lazy(lambda: irQweb.env['res.lang']._get_frontend())
         )
         for key in irQweb.env.context:
             if key not in values:

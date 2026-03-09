@@ -1,11 +1,13 @@
-# coding: utf-8
-
 import json
 
 from hashlib import sha256
 from lxml import html
+from unittest.mock import Mock, patch
+from werkzeug.urls import url_parse
 
+from odoo.addons.http_routing.tests.common import MockRequest
 from odoo.tests import common
+from odoo.exceptions import UserError
 
 
 class TestMenu(common.TransactionCase):
@@ -123,6 +125,191 @@ class TestMenu(common.TransactionCase):
         default_menu.child_id[0].unlink()
         self.assertEqual(total_menu_items - 1 - self.nb_website, Menu.search_count([]), "Deleting a default menu item should delete its 'copies' (same URL) from website's menu trees. In this case, the default child menu and its copies on website 1 and website 2")
 
+    def test_06_menu_active(self):
+        Menu = self.env['website.menu']
+        website_1 = self.env['website'].browse(1)
+        menu = Menu.create({
+            'name': 'Page Specific menu',
+            'url': '/contactus',
+            'website_id': website_1.id,
+        })
+
+        def url_parse_mock(s):
+            if isinstance(s, Mock):
+                # We end up in this case when `url_parse` is actually called on
+                # `request.httprequest.url`. This is simulating as if we were
+                # really calling the `_is_active()` method from this endpoint
+                # url.
+                return url_parse(self.request_url_mock)
+            return url_parse(s)
+
+        def test_full_case(a_menu):
+            """ This method is testing all the possible flows about URL
+            matching:
+            - Same domain:
+              - no qs & no anchor:
+                - Same path -> Active
+                - Not same path -> Not active
+              - qs:
+                - same qs
+                  - Same path -> Active
+                  - Not same path -> Not active
+                - not same qs -> Not active
+              - Anchor
+                - Same path -> Active
+                - Not same path -> Not active
+            - Not same domain: -> Not active
+            It should receives a URL with no query string and no anchor.
+            """
+            url = a_menu.url
+            self.request_url_mock = 'http://localhost:8069' + url
+            with MockRequest(self.env, website=website_1), \
+                 patch('odoo.addons.website.models.website_menu.url_parse', new=url_parse_mock):
+                self.assertTrue(a_menu._is_active(), "Same path, no domain, no qs, should match")
+                a_menu.url = f'{url}#anchor'
+                self.assertTrue(a_menu._is_active(), "Same path, no domain, no qs, should match (anchor should be ignored)")
+                a_menu.url = f'{url}?qs=1'
+                self.assertFalse(a_menu._is_active(), "Same path, no domain, qs mismatch, should not match")
+                self.request_url_mock = f'http://localhost:8069{url}?qs=2'
+                self.assertFalse(a_menu._is_active(), "Same path, no domain, qs mismatch (not the same val), should not match")
+                self.request_url_mock = f'http://localhost:8069{url}?qs=1'
+                self.assertTrue(a_menu._is_active(), "Same path, no domain, qs match, should match")
+                self.request_url_mock = f'http://localhost:8069{url}?qs=1&qs_extra=1'
+                self.assertTrue(a_menu._is_active(), "Same path, no domain, qs subset match, should match")
+                a_menu.url = f'http://localhost.com:8069{url}'
+                self.request_url_mock = f'http://example.com:8069{url}'
+                self.assertFalse(a_menu._is_active(), "Same path, domain mismatch, should not match")
+                self.request_url_mock = f'http://localhost.com:8069{url}'
+                self.assertTrue(a_menu._is_active(), "Same path, same domain, should match")
+
+        # First, test the full cases with a normal top menu (no child)
+        test_full_case(menu)
+
+        # Create the following menu structure:
+        # - 2 menus without children: `/` and `#`
+        # - 2 menus with children: `/` and `#`, both with a `/contactus` child
+        #
+        # menu (/)                  menu2 (/)     menu3 (#)                 menu4 (#)
+        # - submenu (/contactus)                  - submenu2 (/contactus)
+        menu.url = '/'
+        menu2 = menu.copy()
+        menu3 = menu.copy({'url': '#'})
+        menu4 = menu3.copy()
+        submenu = Menu.create({
+            'name': 'Page Specific menu',
+            'url': '/contactus',
+            'website_id': website_1.id,
+            'parent_id': menu.id
+        })
+        submenu2 = submenu.copy({'parent_id': menu3.id})
+
+        # Second, test a nested menu configuration (simple URL, no qs/anchor)
+        self.request_url_mock = 'http://localhost:8069/'
+        with MockRequest(self.env, website=website_1), \
+             patch('odoo.addons.website.models.website_menu.url_parse', new=url_parse_mock):
+            self.assertFalse(menu._is_active(), "Same path but it's a container menu, its URL shouldn't be considered")
+            self.assertTrue(menu2._is_active(), "Same path and no child -> Should be active")
+            self.assertFalse(menu3._is_active(), "Not same path + children")
+            # Anchor menus are a mistake (unless for container menu) (and
+            # shouldn't even be possible to create from frontend), the user
+            # forgot to add the path (the menu won't work on pages without the
+            # anchor) so the system will prefix it by `/` for the check. This
+            # will then become `/#` and since anchors are ignored for the check,
+            #  this will match.
+            self.assertTrue(menu4._is_active(), "Should match, see comment in code")
+            self.assertFalse(submenu._is_active(), "Not same path (2)")
+            self.assertFalse(submenu2._is_active(), "Not same path (3)")
+
+            self.request_url_mock = 'http://localhost:8069/contactus'
+            self.assertTrue(menu._is_active(), "A child is active (submenu)")
+            self.assertFalse(menu2._is_active(), "Not same path (4)")
+            self.assertTrue(menu3._is_active(), "A child is active (submenu2)")
+            self.assertFalse(menu4._is_active(), "Not same path (5)")
+            self.assertTrue(submenu._is_active(), "Same path")
+            self.assertTrue(submenu2._is_active(), "Same path (2)")
+
+        # Third, do the same test as the first one but with a child menu, to
+        # ensure the behavior remains the same regardless if it is a top menu or
+        # a child menu
+        test_full_case(submenu)
+        # Fourth, do the same test again with a slugified URL, to be sure the
+        # anchor and query string are not messing with the slug url compare
+        submenu.url = '/sub/slug-3'
+        test_full_case(submenu)
+
+        #  Do the same test with a menu that is linked to a page
+        result = website_1.new_page(
+            name='/sub/page-3',
+            add_menu=True,
+        )
+        menu = Menu.browse(result['menu_id'])
+        page = self.env['website.page'].browse(result['page_id'])
+        self.assertEqual(menu.url, page.url, "Menu url should be the same than the page url")
+
+        test_full_case(menu.copy())
+
+        with MockRequest(self.env, website=website_1), \
+             patch('odoo.addons.website.models.website_menu.url_parse', new=url_parse_mock):
+
+            self.request_url_mock = 'http://localhost:8069/sub/slug-3'
+            self.assertFalse(menu._is_active(), "Page linked, same unslug, should not match")
+
+    def test_menu_group_ids(self):
+        Menu = self.env['website.menu']
+        menu = Menu.create({
+            'name': 'Test',
+        })
+        self.assertEqual(menu.group_ids, self.env['res.groups'])
+        menu.group_ids = self.env.ref('base.group_user')
+        self.assertEqual(
+            menu.group_ids,
+            self.env.ref('base.group_user') +
+            self.env.ref('website.group_website_designer')
+        )
+
+    def test_07_menu_hierarchy_validation(self):
+        Menu = self.env['website.menu']
+
+        # Validation 1: Parent menu validation
+        self.main_menu = Menu.create({
+            'name': 'Main',
+        })
+        self.child_menu_1 = Menu.create({
+            'name': 'Child1',
+        })
+        self.child_menu_1.parent_id = self.main_menu.id
+
+        # Attempt to assign a second child menu as a child of the first child menu,
+        # which should raise a UserError due to hierarchy restrictions.
+        self.child_menu_2 = Menu.create({
+            'name': 'Child2',
+        })
+        with self.assertRaises(UserError):
+            self.child_menu_2.parent_id = self.child_menu_1.id
+
+        # Validation 2: Mega menu validation
+        self.mega_menu = Menu.create({
+            'name': 'Mega menu',
+            'is_mega_menu': True,
+        })
+        self.another_menu = Menu.create({
+            'name': 'Sample_menu',
+        })
+
+        # Attempt to assign a parent to the mega menu and a child to it,
+        # which should both raise UserErrors due to mega menu restrictions.
+        with self.assertRaises(UserError):
+            self.mega_menu.parent_id = self.another_menu.id
+
+        with self.assertRaises(UserError):
+            self.another_menu.parent_id = self.mega_menu.id
+
+        # Validation 3: Child menu condition validation
+        # Attempt to assign another_menu as a parent of main_menu chain having Child1,
+        # which should raise a UserError because a main_menu had child.
+        with self.assertRaises(UserError):
+            self.main_menu.parent_id = self.another_menu.id
+
 
 class TestMenuHttp(common.HttpCase):
     def setUp(self):
@@ -143,6 +330,7 @@ class TestMenuHttp(common.HttpCase):
             'url': self.page_url,
             'website_id': 1,
         })
+        self.headers = {"Content-Type": "application/json"}
 
     def simulate_rpc_save_menu(self, data, to_delete=None):
         self.authenticate("admin", "admin")
@@ -196,8 +384,26 @@ class TestMenuHttp(common.HttpCase):
         self.assertEqual(self.menu.url, self.page_url + '#anchor', "Page URL should have been properly prefixed with the referer url")
         self.assertEqual(self.page.url, self.page_url, "Page URL should not have changed")
 
+    def test_menu_special_anchors(self):
+        data = {
+            'id': self.menu.id,
+            'parent_id': self.menu.parent_id.id,
+            'name': self.menu.name,
+        }
+
+        data['url'] = '#top'
+        self.simulate_rpc_save_menu(data)
+        self.assertEqual(self.menu.url, '#top', "Menu #top anchor without a page prefix")
+        self.assertEqual(self.menu._clean_url(), '#top', "Clean URL should not have a prefix for #top anchor")
+
+        data['url'] = '#bottom'
+        self.simulate_rpc_save_menu(data)
+        self.assertEqual(self.menu.url, '#bottom', "Menu #bottom anchor without a page prefix")
+        self.assertEqual(self.menu._clean_url(), '#bottom', "Clean URL should not have a prefix for #bottom anchor")
+
     def test_03_mega_menu_translate(self):
         # Setup
+        self.authenticate('admin', 'admin')
         fr = self.env['res.lang']._activate_lang('fr_FR')
         Menu = self.env['website.menu']
         website = self.env['website'].browse(1)
@@ -218,7 +424,13 @@ class TestMenuHttp(common.HttpCase):
         root = html.fromstring(menu.mega_menu_content)
         to_translate = root.text_content()
         sha = sha256(to_translate.encode()).hexdigest()
-        menu.update_field_translations_sha('mega_menu_content', {fr.code: {sha: 'french_mega_menu_content'}})
+        payload = self.build_rpc_payload({
+            'model': menu._name,
+            'record_id': menu.id,
+            'field_name': 'mega_menu_content',
+            'translations': {fr.code: {sha: 'french_mega_menu_content'}},
+        })
+        self.url_open('/website/field/translation/update', data=json.dumps(payload), headers=self.headers)
         self.assertIn("french_mega_menu_content",
                       menu.with_context(lang=fr.code, website_id=website.id).mega_menu_content)
 
@@ -227,14 +439,3 @@ class TestMenuHttp(common.HttpCase):
         self.assertIn(b"french_mega_menu_content", page.content)
         page = self.url_open('/%s?edit_translations=1' % fr.url_code)
         self.assertIn(b"french_mega_menu_content", page.content)
-
-    def test_menu_empty_url(self):
-        website = self.env['website'].browse(1)
-        menu = self.env['website.menu'].create({
-            'name': 'Test Empty URL menu',
-            'parent_id': website.menu_id.id,
-            'website_id': website.id,
-        })
-        self.assertFalse(menu.url, "Menu URL should be empty")
-        # this should not crash
-        website.is_menu_cache_disabled()

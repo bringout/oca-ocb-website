@@ -1,101 +1,123 @@
-/** @odoo-module */
-import wTourUtils from "website.tour_utils";
+import { insertSnippet, registerWebsitePreviewTour } from "@website/js/tours/tour_utils";
 
-wTourUtils.registerWebsitePreviewTour(
+registerWebsitePreviewTour(
     "website_media_iframe_video",
     {
-        test: true,
         url: "/",
         edition: true,
     },
-    [
-        wTourUtils.dragNDrop({
+    () => [
+        ...insertSnippet({
             id: "s_text_image",
             name: "Text - Image",
+            groupName: "Content",
         }),
         {
             content: "Select the image",
-            trigger: "iframe #wrap .s_text_image img",
+            trigger:
+                ":iframe #wrap .s_text_image img, :iframe #wrap .s_text_image img:not(:visible)",
+            run: "click",
         },
         {
             content: "Open image link options",
-            trigger: "[data-name='media_link_opt']",
+            trigger: "[data-action-id='setLink']",
+            run: "click",
         },
         {
             content: "Enter the url",
             trigger: "input[placeholder='www.example.com']",
-            run: "text odoo.com",
+            run: "edit odoo.com",
         },
         {
             content: "Click on replace media",
-            trigger: "[data-replace-media='true']",
+            trigger: "[data-action-id='replaceMedia']",
+            run: "click",
         },
         {
             content: "Click on video button",
             trigger: "a:contains('Videos')",
+            run: "click",
+        },
+        {
+            content: "Enter text in video link input to enable add button",
+            trigger: "#o_video_text",
+            run: "edit https://youtu.be/nbso3NVz3p8",
+        },
+        {
+            content: "Wait for add button to be enabled",
+            trigger: ".modal-footer button:contains('Add'):not([disabled])",
+            run: () => {},
+        },
+        {
+            content: "Remove video link",
+            trigger: "#o_video_text",
+            run() {
+                const inputEl = this.anchor;
+                inputEl.value = "";
+                inputEl.dispatchEvent(new Event("input", { bubbles: true }));
+            },
+        },
+        {
+            content: "Video input field should not be in valid state",
+            trigger: "#o_video_text:not(.is-valid)",
+            run: () => {},
+        },
+        {
+            content: "Check that the preview is not shown",
+            trigger: ".media_iframe_video:not(:has(iframe))",
+            run: () => {},
+        },
+        {
+            content: "Check that the add button is disabled in footer",
+            trigger: ".modal-footer",
+            run: function () {
+                const addButtonEl = this.anchor.querySelector(".btn.btn-primary");
+                if (!addButtonEl.disabled) {
+                    console.error("Add button is not disabled.");
+                }
+            },
         },
         {
             content: "Enter video link",
             trigger: "#o_video_text",
-            run: "text https://youtu.be/nbso3NVz3p8",
+            run: "edit https://youtu.be/nbso3NVz3p8",
         },
         {
             content: "Check video is preview",
             trigger: ".o_video_dialog_iframe",
-            run: () => {}, // This is a check.
         },
         {
             content: "Click on 'add' button",
             trigger: ".modal-footer button:contains('Add')",
+            run: "click",
         },
         {
-            content: "Ensure that the parent of media_iframe_video is not an 'a' tag.",
-            trigger: "iframe .media_iframe_video",
-            run: function () {
-                if (this.$anchor[0].parentElement.tagName === "A") {
-                    console.error("Iframe video has link!!!");
+            content: "Click on replace media",
+            trigger: "[data-action-id='replaceMedia']",
+            run: "click",
+        },
+        {
+            content: "Check that video url has protocol",
+            trigger: "#o_video_text",
+            run() {
+                if (!this.anchor.value.startsWith("https")) {
+                    console.error("Video Url is missing protocol");
                 }
             },
         },
-    ]
-);
-
-wTourUtils.registerWebsitePreviewTour(
-    "website_snippet_background_video",
-    {
-        test: true,
-        url: "/",
-        edition: true,
-    },
-    [
-        wTourUtils.dragNDrop({
-            id: "s_text_block",
-            name: "Text",
-        }),
         {
-            content: "Click on the text block.",
-            trigger: "iframe #wrap section.s_text_block",
+            content: "Close the dialog",
+            trigger: "button.btn-close",
+            run: "click",
         },
         {
-            content: "Click on the 'Background Video' button option.",
-            trigger: "we-button[data-name='bg_video_toggler_opt']",
-        },
-        {
-            content: "Click on the first sample video in the modal.",
-            trigger: "#video-suggestion .o_sample_video",
-        },
-        {
-            content: "Check the video is select.",
-            trigger: "textarea.is-valid",
-            run: () => {}, // This is a check.
-        },
-        {
-            content: "Click on the 'Add' button to apply the selected video as the background.",
-            trigger: ".modal-footer button.btn-primary",
-        },
-        {
-            content: "Verify that the video is set as the background of the snippet.",
-            trigger: "iframe #wrap section.o_background_video",
+            content: "Ensure that the parent of media_iframe_video is not an 'a' tag.",
+            trigger: ":iframe .media_iframe_video",
+            run: function () {
+                if (this.anchor.parentElement.tagName === "A") {
+                    console.error("Iframe video has link!!!");
+                }
+            },
         },
     ]
 );

@@ -1,45 +1,22 @@
-# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 import re
-import logging
 
 from collections import OrderedDict
+from urllib.parse import urlsplit
 
 from odoo import models
 from odoo.http import request
 from odoo.tools import lazy
-from odoo.addons.base.models.assetsbundle import AssetsBundle
-from odoo.addons.http_routing.models.ir_http import url_for
-from odoo.osv import expression
 from odoo.addons.website.models import ir_http
+from odoo.addons.website.tools import add_form_signature
+from odoo.exceptions import AccessError
 
 
-_logger = logging.getLogger(__name__)
 re_background_image = re.compile(r"(background-image\s*:\s*url\(\s*['\"]?\s*)([^)'\"]+)")
 
 
-class AssetsBundleMultiWebsite(AssetsBundle):
-    def _get_asset_url_values(self, id, unique, extra, name, sep, extension):
-        website_id = self.env.context.get('website_id')
-        website_id_path = website_id and ('%s/' % website_id) or ''
-        extra = website_id_path + extra
-        res = super(AssetsBundleMultiWebsite, self)._get_asset_url_values(id, unique, extra, name, sep, extension)
-        return res
-
-    def _get_assets_domain_for_already_processed_css(self, assets):
-        res = super(AssetsBundleMultiWebsite, self)._get_assets_domain_for_already_processed_css(assets)
-        current_website = self.env['website'].get_current_website(fallback=False)
-        res = expression.AND([res, current_website.website_domain()])
-        return res
-
-    def get_debug_asset_url(self, extra='', name='%', extension='%'):
-        website_id = self.env.context.get('website_id')
-        website_id_path = website_id and ('%s/' % website_id) or ''
-        extra = website_id_path + extra
-        return super(AssetsBundleMultiWebsite, self).get_debug_asset_url(extra, name, extension)
-
-class IrQWeb(models.AbstractModel):
-    """ IrQWeb object for rendering stuff in the website context """
+class IrQweb(models.AbstractModel):
+    """ IrQweb object for rendering stuff in the website context """
 
     _inherit = 'ir.qweb'
 
@@ -51,10 +28,16 @@ class IrQWeb(models.AbstractModel):
         'img': 'src',
     }
 
+    def _get_template(self, template):
+        element, document, ref = super()._get_template(template)
+        if self.env.context.get('website_id'):
+            add_form_signature(element, self.sudo().env)
+        return element, document, ref
+
     # assume cache will be invalidated by third party on write to ir.ui.view
     def _get_template_cache_keys(self):
         """ Return the list of context keys to use for caching ``_compile``. """
-        return super()._get_template_cache_keys() + ['website_id']
+        return super()._get_template_cache_keys() + ['website_id', 'cookies_allowed']
 
     def _prepare_frontend_environment(self, values):
         """ Update the values and context with website specific value
@@ -63,11 +46,18 @@ class IrQWeb(models.AbstractModel):
         irQweb = super()._prepare_frontend_environment(values)
 
         current_website = request.website
-        editable = request.env.user.has_group('website.group_website_designer')
-        translatable = editable and irQweb.env.context.get('lang') != irQweb.env['ir.http']._get_default_lang().code
+        editable = irQweb.env.user.has_group('website.group_website_designer')
+        has_group_restricted_editor = irQweb.env.user.has_group('website.group_website_restricted_editor')
+        if not editable and has_group_restricted_editor and 'main_object' in values:
+            try:
+                main_object = values['main_object'].with_user(irQweb.env.user.id)
+                current_website._check_user_can_modify(main_object)
+                editable = True
+            except AccessError:
+                pass
+        translatable = has_group_restricted_editor and irQweb.env.context.get('lang') != irQweb.env['ir.http']._get_default_lang().code
         editable = editable and not translatable
 
-        has_group_restricted_editor = irQweb.env.user.has_group('website.group_website_restricted_editor')
         if has_group_restricted_editor and irQweb.env.user.has_group('website.group_multi_website'):
             values['multi_website_websites_current'] = lazy(lambda: current_website.name)
             values['multi_website_websites'] = lazy(lambda: [
@@ -105,21 +95,18 @@ class IrQWeb(models.AbstractModel):
             if editable:
                 # in edit mode add branding on ir.ui.view tag nodes
                 irQweb = irQweb.with_context(inherit_branding=True)
-            elif has_group_restricted_editor and not translatable:
+            elif has_group_restricted_editor:
                 # will add the branding on fields (into values)
                 irQweb = irQweb.with_context(inherit_branding_auto=True)
 
+        # Avoid cache inconsistencies: if the cookies have been accepted, the
+        # DOM structure should reflect it after a reload and not be stuck in its
+        # previous state (see the part related to cookies in
+        # `_post_processing_att`).
+        is_allowed_optional_cookies = request.env['ir.http']._is_allowed_cookie('optional')
+        irQweb = irQweb.with_context(cookies_allowed=is_allowed_optional_cookies)
+
         return irQweb
-
-    def _get_asset_bundle(self, xmlid, files, env=None, css=True, js=True):
-        return AssetsBundleMultiWebsite(xmlid, files, env=env)
-
-    def _get_asset_nodes(self, bundle, css=True, js=True, debug=False, async_load=False, defer_load=False, lazy_load=False, media=None):
-        website = self.env['website'].get_current_website(fallback=False)
-        self_website = self
-        if website:
-            self_website = self.with_context(website_id=website.id)
-        return super(IrQWeb, self_website)._get_asset_nodes(bundle, css=css, js=js, debug=debug, async_load=async_load, defer_load=defer_load, lazy_load=lazy_load, media=media)
 
     def _post_processing_att(self, tagName, atts):
         if atts.get('data-no-post-process'):
@@ -140,12 +127,54 @@ class IrQWeb(models.AbstractModel):
         if not website:
             return atts
 
+        if (
+            website.cookies_bar
+            and website.block_third_party_domains
+            and not self.env.context.get('cookies_allowed')
+            and not request.env.user.has_group('website.group_website_restricted_editor')
+        ):
+            # If the cookie banner is activated, 3rd-party embedded iframes and
+            # scripts should be controlled. As such:
+            # - 'domains' is a watchlist on the iframe/script's src itself,
+            # - 'classes' is a watchlist on container elements in which iframes
+            # are/could be built on the fly client-side for some reason.
+            cookies_watchlist = {
+                'domains': website.blocked_third_party_domains.split('\n'),
+                'classes': website._get_blocked_iframe_containers_classes(),
+            }
+            remove_src = False
+            if tagName in ('iframe', 'script'):
+                src_host = urlsplit((atts.get('src') or '').lower()).hostname
+                if src_host:
+                    remove_src = any(
+                        # "www.example.com" and "example.com" should block both.
+                        src_host == domain.removeprefix('www.')
+                        # "domain.com" should block "subdomain.domain.com", but
+                        # not "(subdomain.)mydomain.com".
+                        or src_host.endswith('.' + domain.removeprefix('www.'))
+                        for domain in cookies_watchlist['domains']
+                    )
+            if (
+                remove_src
+                or cookies_watchlist['classes'].intersection((atts.get('class') or '').split(' '))
+            ):
+                atts['data-need-cookies-approval'] = 'true'
+                # Case class in watchlist: we stop here. The element could
+                # contain an iframe created on the fly client-side. It is marked
+                # now so that the iframe can be marked later when created.
+                # Case iframe/script's src in watchlist: we adapt the src.
+                if 'src' in atts:
+                    atts['data-nocookie-src'] = atts['src']
+                    atts['src'] = 'about:blank'
+
         name = self.URL_ATTRS.get(tagName)
         if request:
-            if name and name in atts:
-                atts[name] = url_for(atts[name])
+            value = atts.get(name) if name else None
+            if value not in (None, False, ()):
+                atts[name] = self.env['ir.http']._url_for(str(value))
+
             # Adapt background-image URL in the same way as image src.
-            atts = self._adapt_style_background_image(atts, url_for)
+            atts = self._adapt_style_background_image(atts, self.env['ir.http']._url_for)
 
         if not website.cdn_activated:
             return atts
@@ -153,9 +182,9 @@ class IrQWeb(models.AbstractModel):
         data_name = f'data-{name}'
         if name and (name in atts or data_name in atts):
             atts = OrderedDict(atts)
-            if name in atts:
+            if name in atts and atts[name] not in (False, None, ()):
                 atts[name] = website.get_cdn_url(atts[name])
-            if data_name in atts:
+            if data_name in atts and atts[data_name] not in (False, None, ()):
                 atts[data_name] = website.get_cdn_url(atts[data_name])
         atts = self._adapt_style_background_image(atts, website.get_cdn_url)
 
@@ -163,49 +192,12 @@ class IrQWeb(models.AbstractModel):
 
     def _adapt_style_background_image(self, atts, url_adapter):
         if isinstance(atts.get('style'), str) and 'background-image' in atts['style']:
-            atts = OrderedDict(atts)
-            atts['style'] = re_background_image.sub(lambda m: '%s%s' % (m.group(1), url_adapter(m.group(2))), atts['style'])
+            atts['style'] = re_background_image.sub(lambda m: '%s%s' % (m[1], url_adapter(m[2])), atts['style'])
         return atts
 
-    def _pregenerate_assets_bundles(self):
-        # website is adding a website_id to the extra part of the attachement url (/1)
-
-        # /web/assets/2224-47bce88/1/web.assets_frontend.min.css
-        # /web/assets/2226-17d3428/1/web.assets_frontend_minimal.min.js
-        # /web/assets/2227-b9cd4ba/1/web.assets_tests.min.js
-        # /web/assets/2229-25b1d52/1/web.assets_frontend_lazy.min.js
-
-        # this means that the previously generated attachment wont be used on the website
-        # the main reason is to avoid invalidating other website attachement, but the
-        # version part combine with the initial extra (rtl) should be enough to ensure they are identical.
-        # we dont expect to have any pregenerated rtl/website attachment so we don't manage assets with extra
-
-        nodes = super()._pregenerate_assets_bundles()
-        website = self.env['website'].search([], order='id', limit=1)
-        if not website:
-            return nodes
-        nb_created = 0
-        for node in nodes:
-            bundle_info = node[1]
-            bundle_url = bundle_info.get('src', '') or bundle_info.get('href', '')
-            if bundle_url.startswith('/web/assets/'):
-                # example: "/web/assets/2152-ee56665/web.assets_frontend_lazy.min.js"
-                _, _, _, id_unique, name = bundle_url.split('/')
-                attachment_id, unique = id_unique.split('-')
-                url_pattern = f'/web/assets/%s-%s/{website.id}/{name}'
-                existing = self.env['ir.attachment'].search([('url', '=like', url_pattern % ('%', '%'))], limit=1)
-                if existing:
-                    if f'-{unique}/' in existing.url:
-                        continue
-                    _logger.runbot(f'Updating exiting assets {existing.url} for website {website.id}')
-                    # we assume that most of the time the first website bundles will be the same as the base one
-                    # if the unique changes, it is most likely because sources where update since install.
-                    # this is mainly for dev downloading a database from runbot and trying to execute tests locally
-                    existing.unlink()
-                new = self.env['ir.attachment'].browse(int(attachment_id)).copy()
-                new.url = url_pattern % (new.id, unique)
-                nb_created += 1
-        if nb_created:
-            _logger.runbot('%s bundle(s) were copied for website %s', nb_created, website.id)
-
-        return nodes
+    def _get_bundles_to_pregenarate(self):
+        js_assets, css_assets = super()._get_bundles_to_pregenarate()
+        assets = {
+            'website.assets_all_wysiwyg',
+        }
+        return (js_assets | assets, css_assets | assets)

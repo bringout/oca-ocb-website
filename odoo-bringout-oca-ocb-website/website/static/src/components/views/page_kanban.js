@@ -1,32 +1,30 @@
-/** @odoo-module **/
+import { usePageManager } from "./page_manager_hook";
+import { PageSearchModel } from "./page_search_model";
+import { registry } from "@web/core/registry";
+import { kanbanView } from "@web/views/kanban/kanban_view";
 
-import {PageControllerMixin, PageRendererMixin} from "./page_views_mixin";
-import {PageSearchModel} from "./page_search_model";
-import {registry} from '@web/core/registry';
-import {kanbanView} from "@web/views/kanban/kanban_view";
+export class PageKanbanController extends kanbanView.Controller {
+    static components = {
+        ...kanbanView.Controller.components,
+    };
 
-
-export class PageKanbanController extends PageControllerMixin(kanbanView.Controller) {
+    setup() {
+        super.setup();
+        this.pageManager = usePageManager({
+            resModel: this.props.resModel,
+            createAction: this.props.context.create_action,
+        });
+    }
     /**
      * @override
      */
     async createRecord() {
-        return this.createWebsiteContent();
+        return this.pageManager.createWebsiteContent();
     }
 }
-PageKanbanController.template = 'website.PageKanbanView';
-
-// TODO master: remove `PageRendererMixin` extend, props override and template
-export class PageKanbanRenderer extends PageRendererMixin(kanbanView.Renderer) {}
-PageKanbanRenderer.props = [
-    ...kanbanView.Renderer.props,
-    "activeWebsite",
-];
-PageKanbanRenderer.template = 'website.PageKanbanRenderer';
 
 export const PageKanbanView = {
     ...kanbanView,
-    Renderer: PageKanbanRenderer,
     Controller: PageKanbanController,
     SearchModel: PageSearchModel,
 };

@@ -1,24 +1,20 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # 	* website_event_booth_exhibitor
-# 
-# Translators:
-# ievaputnina <ievai.putninai@gmail.com>, 2022
-# Arnis Putniņš <arnis@allegro.lv>, 2022
-# 
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0beta\n"
+"Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-23 08:03+0000\n"
-"PO-Revision-Date: 2022-09-22 05:56+0000\n"
-"Last-Translator: Arnis Putniņš <arnis@allegro.lv>, 2022\n"
-"Language-Team: Latvian (https://app.transifex.com/odoo/teams/41243/lv/)\n"
+"POT-Creation-Date: 2026-01-25 18:37+0000\n"
+"PO-Revision-Date: 2025-10-08 18:39+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: lv\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2);\n"
+"Plural-Forms: \n"
 
 #. module: website_event_booth_exhibitor
 #: model_terms:ir.ui.view,arch_db:website_event_booth_exhibitor.event_booth_booked_template
@@ -28,14 +24,14 @@ msgstr ""
 #. module: website_event_booth_exhibitor
 #: model_terms:ir.ui.view,arch_db:website_event_booth_exhibitor.event_booth_registration_details
 msgid ""
-"<span>Email</span>\n"
+"<span>Company Name</span>\n"
 "                        <span class=\"mandatory_mark\"> *</span>"
 msgstr ""
 
 #. module: website_event_booth_exhibitor
 #: model_terms:ir.ui.view,arch_db:website_event_booth_exhibitor.event_booth_registration_details
 msgid ""
-"<span>Name</span>\n"
+"<span>Email</span>\n"
 "                        <span class=\"mandatory_mark\"> *</span>"
 msgstr ""
 
@@ -58,7 +54,13 @@ msgstr ""
 #. module: website_event_booth_exhibitor
 #: model_terms:ir.ui.view,arch_db:website_event_booth_exhibitor.event_booth_registration_details
 msgid "Description"
-msgstr "Apraksts"
+msgstr ""
+
+#. module: website_event_booth_exhibitor
+#: model:ir.model.fields,field_description:website_event_booth_exhibitor.field_event_booth__display_name
+#: model:ir.model.fields,field_description:website_event_booth_exhibitor.field_event_booth_category__display_name
+msgid "Display Name"
+msgstr ""
 
 #. module: website_event_booth_exhibitor
 #: model:ir.model,name:website_event_booth_exhibitor.model_event_booth
@@ -76,9 +78,15 @@ msgid "Exhibitor type"
 msgstr ""
 
 #. module: website_event_booth_exhibitor
-#: model_terms:ir.ui.view,arch_db:website_event_booth_exhibitor.event_booth_category_view_search
-msgid "Group By"
-msgstr "Grupēt pēc"
+#: model_terms:ir.ui.view,arch_db:website_event_booth_exhibitor.event_booth_registration_details
+msgid "How can we showcase your company ?"
+msgstr ""
+
+#. module: website_event_booth_exhibitor
+#: model:ir.model.fields,field_description:website_event_booth_exhibitor.field_event_booth__id
+#: model:ir.model.fields,field_description:website_event_booth_exhibitor.field_event_booth_category__id
+msgid "ID"
+msgstr ""
 
 #. module: website_event_booth_exhibitor
 #: model:ir.model.fields,help:website_event_booth_exhibitor.field_event_booth__use_sponsor
@@ -89,7 +97,7 @@ msgstr ""
 #. module: website_event_booth_exhibitor
 #: model_terms:ir.ui.view,arch_db:website_event_booth_exhibitor.event_booth_registration_details
 msgid "Phone"
-msgstr "Telefons"
+msgstr ""
 
 #. module: website_event_booth_exhibitor
 #: model_terms:ir.ui.view,arch_db:website_event_booth_exhibitor.event_booth_registration_details
@@ -129,11 +137,6 @@ msgid "Sponsor Logo"
 msgstr ""
 
 #. module: website_event_booth_exhibitor
-#: model:ir.model.fields,field_description:website_event_booth_exhibitor.field_event_booth__sponsor_mobile
-msgid "Sponsor Mobile"
-msgstr ""
-
-#. module: website_event_booth_exhibitor
 #: model:ir.model.fields,field_description:website_event_booth_exhibitor.field_event_booth__sponsor_name
 msgid "Sponsor Name"
 msgstr ""
@@ -161,11 +164,4 @@ msgstr ""
 #. module: website_event_booth_exhibitor
 #: model_terms:ir.ui.view,arch_db:website_event_booth_exhibitor.event_booth_category_view_form
 msgid "Sponsorship"
-msgstr ""
-
-#. module: website_event_booth_exhibitor
-#: model_terms:ir.ui.view,arch_db:website_event_booth_exhibitor.event_booth_registration_details
-msgid ""
-"This booth type allows you to have visibility on the event website. Please "
-"fill in this form"
 msgstr ""

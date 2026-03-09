@@ -1,66 +1,76 @@
-/** @odoo-module **/
+import {
+    insertSnippet,
+    goBackToBlocks,
+    goToTheme,
+    registerWebsitePreviewTour,
+    clickToolbarButton,
+} from "@website/js/tours/tour_utils";
+import { rgbToHex } from "@web/core/utils/colors";
 
-import wTourUtils from 'website.tour_utils';
+const WEBSITE_MAIN_COLOR = "#ABCDEF";
 
-const WEBSITE_MAIN_COLOR = '#ABCDEF';
-
-wTourUtils.registerWebsitePreviewTour('website_text_edition', {
-    test: true,
-    url: '/',
-    edition: true,
-}, [
+registerWebsitePreviewTour(
+    "website_text_edition",
     {
-        content: "Go to theme options",
-        trigger: '.o_we_customize_theme_btn',
+        url: "/",
+        edition: true,
     },
-    {
-        content: "Open colorpicker to change website main color",
-        trigger: 'we-select[data-color="o-color-1"] .o_we_color_preview',
-    },
-    {
-        content: "Input the value for the new website main color (also make sure it is independent from the backend)",
-        trigger: '.o_hex_input',
-        run: `text_blur ${WEBSITE_MAIN_COLOR}`,
-    },
-    {
-        content: "Go to the blocks tab",
-        trigger: '.o_we_add_snippet_btn',
-    },
-    wTourUtils.dragNDrop({id: 's_text_block', name: 'Text'}),
-    {
-        content: "Click on the text block first paragraph (to auto select)",
-        trigger: 'iframe .s_text_block p',
-    },
-    {
-        content: "Open the foreground colorpicker",
-        trigger: '#oe-text-color',
-    },
-    {
-        content: "Go to the 'solid' tab",
-        trigger: '.o_we_colorpicker_switch_pane_btn[data-target="custom-colors"]',
-    },
-    {
-        content: "Input the website main color explicitly",
-        trigger: '.o_hex_input',
-        run: `text_blur ${WEBSITE_MAIN_COLOR}`,
-    },
-    {
-        content: "Check that paragraph now uses the main color *class*",
-        trigger: 'iframe .s_text_block p',
-        run: function (actions) {
-            const fontEl = this.$anchor[0].querySelector('font');
-            if (!fontEl) {
-                console.error("A background color should have been applied");
-                return;
-            }
-            if (fontEl.style.backgroundColor) {
-                console.error("The paragraph should not have an inline style background color");
-                return;
-            }
-            if (!fontEl.classList.contains('text-o-color-1')) {
-                console.error("The paragraph should have the right background color class");
-                return;
-            }
+    () => [
+        ...goToTheme(),
+        {
+            content: "Open colorpicker to change website main color",
+            trigger: ".we-bg-options-container .o_we_color_preview",
+            run: "click",
         },
-    }
-]);
+        {
+            content: "Open colorpicker to change website main color",
+            trigger: ".o_font_color_selector button:contains('Custom')",
+            run: "click",
+        },
+        {
+            content:
+                "Input the value for the new website main color (also make sure it is independent from the backend)",
+            trigger: ".o_hex_input",
+            run: `edit ${WEBSITE_MAIN_COLOR} && click body`,
+        },
+        goBackToBlocks(),
+        ...insertSnippet({ id: "s_text_block", name: "Text", groupName: "Text" }),
+        ...clickToolbarButton(
+            "text block first paragraph",
+            ".s_text_block p",
+            "Apply Font Color",
+            true
+        ),
+        {
+            content: "Open solid section in color picker",
+            trigger: ".o_font_color_selector button:contains('Custom')",
+            run: "click",
+        },
+        {
+            content: "Select main color",
+            trigger: ".o_colorpicker_widget .o_color_picker_inputs .o_hex_input",
+            run: `edit ${WEBSITE_MAIN_COLOR} && click body`,
+        },
+        {
+            content: "Check that paragraph now uses the main color *class*",
+            trigger: ":iframe .s_text_block p",
+            run: function (actions) {
+                const fontEl = this.anchor.querySelector("font");
+                if (!fontEl) {
+                    console.error("A background color should have been applied");
+                    return;
+                }
+                if (fontEl.style.backgroundColor) {
+                    console.error("The paragraph should not have an inline style background color");
+                    return;
+                }
+                const rgbColor = fontEl.style.getPropertyValue("color");
+                const hexColor = rgbToHex(rgbColor);
+                if (hexColor.toUpperCase() !== WEBSITE_MAIN_COLOR) {
+                    console.error("The paragraph should have the right background color class");
+                    return;
+                }
+            },
+        },
+    ]
+);

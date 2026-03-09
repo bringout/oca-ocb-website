@@ -1,15 +1,17 @@
 [project]
 name = "odoo-bringout-oca-ocb-website_crm_iap_reveal"
 version = "16.0.0"
-description = "Lead Generation From Website Visits - Generate Leads/Opportunities from your website's traffic"
+description = "Lead Generation From Website Visits - 
+        Generate Leads/Opportunities from your website's traffic
+        "
 authors = [
     { name = "Ernad Husremovic", email = "hernad@bring.out.ba" }
 ]
 dependencies = [
-    "odoo-bringout-oca-ocb-iap_crm>=16.0.0",
-    "odoo-bringout-oca-ocb-iap_mail>=16.0.0",
-    "odoo-bringout-oca-ocb-crm_iap_mine>=16.0.0",
-    "odoo-bringout-oca-ocb-website_crm>=16.0.0",
+    "odoo-bringout-oca-ocb-iap_crm>=19.0.0",
+    "odoo-bringout-oca-ocb-iap_mail>=19.0.0",
+    "odoo-bringout-oca-ocb-crm_iap_mine>=19.0.0",
+    "odoo-bringout-oca-ocb-website_crm>=19.0.0",
     "requests>=2.25.1"
 ]
 readme = "README.md"
@@ -19,7 +21,7 @@ classifiers = [
     "Intended Audience :: Developers",
     "License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.11", 
+    "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Topic :: Office/Business",
 ]

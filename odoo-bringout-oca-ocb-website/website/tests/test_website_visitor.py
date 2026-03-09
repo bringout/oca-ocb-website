@@ -1,4 +1,3 @@
-# coding: utf-8
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 import random
@@ -27,10 +26,10 @@ class MockVisitor(common.BaseCase):
 
 
 @tagged('-at_install', 'post_install', 'website_visitor', 'is_query_count')
-class WebsiteVisitorTests(MockVisitor, HttpCaseWithUserDemo):
+class WebsiteVisitorTestsCommon(MockVisitor, HttpCaseWithUserDemo):
 
     def setUp(self):
-        super(WebsiteVisitorTests, self).setUp()
+        super().setUp()
 
         self.website = self.env['website'].search([
             ('company_id', '=', self.env.user.company_id.id)
@@ -39,34 +38,34 @@ class WebsiteVisitorTests(MockVisitor, HttpCaseWithUserDemo):
         untracked_view = self.env['ir.ui.view'].create({
             'name': 'UntackedView',
             'type': 'qweb',
-            'arch': '''<t name="Homepage" t-name="website.base_view">
+            'arch': '''<t name="Homepage" t-name="test.untracked_page">
                         <t t-call="website.layout">
                             I am a generic page²
                         </t>
                     </t>''',
-            'key': 'test.base_view',
+            'key': 'test.untracked_page',
             'track': False,
         })
         tracked_view = self.env['ir.ui.view'].create({
             'name': 'TrackedView',
             'type': 'qweb',
-            'arch': '''<t name="Homepage" t-name="website.base_view">
+            'arch': '''<t name="Homepage" t-name="test.tracked_page">
                         <t t-call="website.layout">
                             I am a generic page
                         </t>
                     </t>''',
-            'key': 'test.base_view',
+            'key': 'test.tracked_page',
             'track': True,
         })
         tracked_view_2 = self.env['ir.ui.view'].create({
             'name': 'TrackedView2',
             'type': 'qweb',
-            'arch': '''<t name="OtherPage" t-name="website.base_view">
+            'arch': '''<t name="OtherPage" t-name="test.tracked_page_2">
                         <t t-call="website.layout">
                             I am a generic second page
                         </t>
                     </t>''',
-            'key': 'test.base_view',
+            'key': 'test.tracked_page_2',
             'track': True,
         })
         [self.untracked_page, self.tracked_page, self.tracked_page_2] = self.env['website.page'].create([
@@ -99,8 +98,10 @@ class WebsiteVisitorTests(MockVisitor, HttpCaseWithUserDemo):
                 'login': 'portal',
                 'password': 'portal',
                 'partner_id': self.partner_portal.id,
-                'groups_id': [(6, 0, [self.env.ref('base.group_portal').id])],
+                'group_ids': [(6, 0, [self.env.ref('base.group_portal').id])],
             })
+        # Partner with no user associated, to test partner merge that forbids merging partners with more than 1 user
+        self.partner_admin_duplicate = self.env['res.partner'].create({'name': 'Mitchell'})
 
     def _get_last_visitor(self):
         return self.env['website.visitor'].search([], limit=1, order="id DESC")
@@ -126,23 +127,86 @@ class WebsiteVisitorTests(MockVisitor, HttpCaseWithUserDemo):
         self.assertFalse(visitor.exists(), "The anonymous visitor should be deleted")
         self.assertTrue(visitor.website_track_ids < main_visitor.website_track_ids)
 
+    def _test_unlink_old_visitors(self, inactive_visitors, active_visitors):
+        """ This method will test that the visitors are correctly deleted when inactive.
+
+        - inactive_visitors: all visitors that should be unlinked by the CRON
+          '_cron_unlink_old_visitors'
+        - active_visitors: all visitors that should NOT be cleaned because they are either active
+          or have some important data linked to them (partner, ...) and we want to keep them.
+
+        We use this method as a private tool so that sub-module can also test the cleaning of visitors
+        based on their own sets of conditions. """
+
+        WebsiteVisitor = self.env['website.visitor']
+
+        self.env['ir.config_parameter'].sudo().set_param('website.visitor.live.days', 7)
+
+        # ensure we keep a single query by correct usage of "not in"
+        # (+1 query to fetch the 'ir.config_parameter')
+        with self.assertQueryCount(2):
+            WebsiteVisitor.search(WebsiteVisitor._inactive_visitors_domain())
+
+        inactive_visitor_ids = inactive_visitors.ids
+        active_visitor_ids = active_visitors.ids
+
+        self.env.ref('website.website_visitor_cron').method_direct_trigger()
+        if inactive_visitor_ids:
+            # all inactive visitors should be deleted
+            self.assertFalse(bool(WebsiteVisitor.search([('id', 'in', inactive_visitor_ids)])))
+        if active_visitor_ids:
+            # all active visitors should be kept
+            self.assertEqual(active_visitors, WebsiteVisitor.search([('id', 'in', active_visitor_ids)]))
+
+    def _prepare_main_visitor_data(self):
+        return {
+            'lang_id': self.env.ref('base.lang_en').id,
+            'country_id': self.env.ref('base.be').id,
+            'website_id': 1,
+            'access_token': self.partner_admin.id,
+            'website_track_ids': [(0, 0, {
+                'page_id': self.tracked_page.id,
+                'url': self.tracked_page.url
+            })]
+        }
+
+    def _prepare_linked_visitor_data(self):
+        return {
+            'lang_id': self.env.ref('base.lang_en').id,
+            'country_id': self.env.ref('base.be').id,
+            'website_id': 1,
+            'access_token': '%032x' % random.randrange(16**32),
+            'website_track_ids': [(0, 0, {
+                'page_id': self.tracked_page_2.id,
+                'url': self.tracked_page_2.url
+            })]
+        }
+
+    def _authenticate_via_web(self, login, pwd):
+        # We can't call `self.authenticate` because that tour util is
+        # regenerating a new session.id before calling the real
+        # `authenticate` method.
+        # But we need the session id in the `authenticate` method because
+        # we need to retrieve the visitor before the authentication, which
+        # require the session id.
+        res = self.url_open('/web/login')
+        csrf_anchor = '<input type="hidden" name="csrf_token" value="'
+        self.url_open('/web/login', timeout=200, data={
+            'login': login,
+            'password': pwd,
+            'csrf_token': res.text.partition(csrf_anchor)[2].partition('"')[0],
+        })
+
+
+class WebsiteVisitorTests(WebsiteVisitorTestsCommon):
+
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.set_registry_readonly_mode(False)
+
     def test_visitor_creation_on_tracked_page(self):
         """ Test various flows involving visitor creation and update. """
-
-        def authenticate(login, pwd):
-            # We can't call `self.authenticate` because that tour util is
-            # regenerating a new session.id before calling the real
-            # `authenticate` method.
-            # But we need the session id in the `authenticate` method because
-            # we need to retrieve the visitor before the authentication, which
-            # require the session id.
-            res = self.url_open('/web/login')
-            csrf_anchor = '<input type="hidden" name="csrf_token" value="'
-            self.url_open('/web/login', timeout=200, data={
-                'login': login,
-                'password': pwd,
-                'csrf_token': res.text.partition(csrf_anchor)[2].partition('"')[0],
-            })
 
         existing_visitors = self.env['website.visitor'].search([])
         existing_tracks = self.env['website.track'].search([])
@@ -162,7 +226,7 @@ class WebsiteVisitorTests(MockVisitor, HttpCaseWithUserDemo):
         # Admin connects
         # ------------------------------------------------------------
 
-        authenticate(self.user_admin.login, 'admin')
+        self._authenticate_via_web(self.user_admin.login, 'admin')
 
         visitor_admin = new_visitor
         # visit a page
@@ -180,7 +244,7 @@ class WebsiteVisitorTests(MockVisitor, HttpCaseWithUserDemo):
         # ------------------------------------------------------------
 
         self.url_open('/web/session/logout')
-        authenticate(self.user_portal.login, 'portal')
+        self._authenticate_via_web(self.user_portal.login, 'portal')
 
         self.assertFalse(
             self.env['website.visitor'].search([('id', 'not in', (existing_visitors | visitor_admin).ids)]),
@@ -224,7 +288,7 @@ class WebsiteVisitorTests(MockVisitor, HttpCaseWithUserDemo):
         # Admin connects again
         # ------------------------------------------------------------
 
-        authenticate(self.user_admin.login, 'admin')
+        self._authenticate_via_web(self.user_admin.login, 'admin')
 
         new_visitors = self.env['website.visitor'].search([('id', 'not in', existing_visitors.ids)])
         self.assertEqual(new_visitors, visitor_admin | visitor_portal)
@@ -257,7 +321,7 @@ class WebsiteVisitorTests(MockVisitor, HttpCaseWithUserDemo):
         # ------------------------------------------------------------
         # Portal connects again
         # ------------------------------------------------------------
-        authenticate(self.user_portal.login, 'portal')
+        self._authenticate_via_web(self.user_portal.login, 'portal')
 
         # one visitor is deleted
         new_visitors = self.env['website.visitor'].search([('id', 'not in', existing_visitors.ids)])
@@ -315,37 +379,6 @@ class WebsiteVisitorTests(MockVisitor, HttpCaseWithUserDemo):
 
         self._test_unlink_old_visitors(inactive_visitors, active_visitors)
 
-    def _test_unlink_old_visitors(self, inactive_visitors, active_visitors):
-        """ This method will test that the visitors are correctly deleted when inactive.
-
-        - inactive_visitors: all visitors that should be unlinked by the CRON
-          '_cron_unlink_old_visitors'
-        - active_visitors: all visitors that should NOT be cleaned because they are either active
-          or have some important data linked to them (partner, ...) and we want to keep them.
-
-        We use this method as a private tool so that sub-module can also test the cleaning of visitors
-        based on their own sets of conditions. """
-
-        WebsiteVisitor = self.env['website.visitor']
-
-        self.env['ir.config_parameter'].sudo().set_param('website.visitor.live.days', 7)
-
-        # ensure we keep a single query by correct usage of "not inselect"
-        # (+1 query to fetch the 'ir.config_parameter')
-        with self.assertQueryCount(2):
-            WebsiteVisitor.search(WebsiteVisitor._inactive_visitors_domain())
-
-        inactive_visitor_ids = inactive_visitors.ids
-        active_visitor_ids = active_visitors.ids
-
-        WebsiteVisitor._cron_unlink_old_visitors()
-        if inactive_visitor_ids:
-            # all inactive visitors should be deleted
-            self.assertFalse(bool(WebsiteVisitor.search([('id', 'in', inactive_visitor_ids)])))
-        if active_visitor_ids:
-            # all active visitors should be kept
-            self.assertEqual(active_visitors, WebsiteVisitor.search([('id', 'in', active_visitor_ids)]))
-
     def test_link_to_visitor(self):
         """ Visitors are 'linked' together when the user, previously not connected, authenticates
         and the system detects it already had a website.visitor for that partner_id.
@@ -367,64 +400,42 @@ class WebsiteVisitorTests(MockVisitor, HttpCaseWithUserDemo):
 
         self.assertVisitorDeactivated(linked_visitor, main_visitor)
 
-    def _prepare_main_visitor_data(self):
-        return {
-            'lang_id': self.env.ref('base.lang_en').id,
-            'country_id': self.env.ref('base.be').id,
-            'website_id': 1,
-            'access_token': self.partner_admin.id,
-            'website_track_ids': [(0, 0, {
-                'page_id': self.tracked_page.id,
-                'url': self.tracked_page.url
-            })]
-        }
-
-    def _prepare_linked_visitor_data(self):
-        return {
-            'lang_id': self.env.ref('base.lang_en').id,
-            'country_id': self.env.ref('base.be').id,
-            'website_id': 1,
-            'access_token': '%032x' % random.randrange(16**32),
-            'website_track_ids': [(0, 0, {
-                'page_id': self.tracked_page_2.id,
-                'url': self.tracked_page_2.url
-            })]
-        }
-
     def test_merge_partner_with_visitor_both(self):
         """ See :meth:`test_merge_partner_with_visitor_single` """
-        # Setup a visitor for demo and none for admin
+        # Setup a visitor for admin_duplicate and none for admin
         Visitor = self.env['website.visitor']
-        (self.partner_demo + self.partner_admin).visitor_ids.unlink()
-        [visitor_demo, visitor_admin] = Visitor.create([{
-            'partner_id': self.partner_demo.id,
-            'access_token': self.partner_demo.id,
+        (self.partner_admin_duplicate + self.partner_admin).visitor_ids.unlink()
+        [visitor_admin_duplicate, visitor_admin] = Visitor.create([{
+            'partner_id': self.partner_admin_duplicate.id,
+            'access_token': self.partner_admin_duplicate.id,
         }, {
             'partner_id': self.partner_admin.id,
             'access_token': self.partner_admin.id,
         }])
-        # | id | access_token | partner_id |
-        # | -- | ------------ | ---------- |
-        # |  1 |      demo_id |    demo_id |
-        # |    |      1062141 |    1062141 |
-        # |  2 |     admin_id |   admin_id |
-        # |    |      5013266 |    5013266 |
-        self.assertTrue(visitor_demo.partner_id.id == int(visitor_demo.access_token) == self.partner_demo.id)
+        # | id | access_token           | partner_id            |
+        # | -- | ---------------------- | --------------------- |
+        # |  1 |     admin_duplicate_id |   admin_duplicate_id  |
+        # |    |      1062141           |    1062141            |
+        # |  2 |     admin_id           |   admin_id            |
+        # |    |      5013266           |    5013266            |
+        self.assertTrue(visitor_admin_duplicate.partner_id.id ==
+                        int(visitor_admin_duplicate.access_token) ==
+                        self.partner_admin_duplicate.id)
         self.assertTrue(visitor_admin.partner_id.id == int(visitor_admin.access_token) == self.partner_admin.id)
 
         self.env['website.track'].create([{
-            'visitor_id': visitor_demo.id,
-            'url': '/demo'
+            'visitor_id': visitor_admin_duplicate.id,
+            'url': '/admin/about-duplicate'
         }, {
             'visitor_id': visitor_admin.id,
             'url': '/admin'
         }])
-        self.assertEqual(visitor_demo.website_track_ids.url, '/demo')
+        self.assertEqual(visitor_admin_duplicate.website_track_ids.url, '/admin/about-duplicate')
         self.assertEqual(visitor_admin.website_track_ids.url, '/admin')
 
-        # Merge demo partner in admin partner
+        # Merge admin_duplicate partner (no user associated) in admin partner
         self.env['base.partner.merge.automatic.wizard']._merge(
-            (self.partner_admin + self.partner_demo).ids,
+            (self.partner_admin + self.partner_admin_duplicate).ids,
             self.partner_admin
         )
         # Should be
@@ -433,11 +444,12 @@ class WebsiteVisitorTests(MockVisitor, HttpCaseWithUserDemo):
         # |  2 |     admin_id |   admin_id |
         # |    |      5013266 |    5013266 |
         self.assertTrue(visitor_admin.exists())
-        self.assertFalse(visitor_demo.exists())
-        self.assertFalse(Visitor.search_count([('partner_id', '=', self.partner_demo.id)]),
-                         "The demo visitor should've been merged (and deleted) with the admin one.")
+        self.assertFalse(visitor_admin_duplicate.exists())
+        self.assertFalse(Visitor.search_count([('partner_id', '=', self.partner_admin_duplicate.id)]),
+                         "The admin_duplicate visitor should've been merged (and deleted) with the admin one.")
         # Track check
-        self.assertEqual(visitor_admin.website_track_ids.sorted('url').mapped('url'), ['/admin', '/demo'])
+        self.assertEqual(visitor_admin.website_track_ids.sorted('url').mapped('url'),
+                         ['/admin', '/admin/about-duplicate'])
 
     def test_merge_partner_with_visitor_single(self):
         """ The partner merge feature of Odoo is auto discovering relations to
@@ -464,38 +476,42 @@ class WebsiteVisitorTests(MockVisitor, HttpCaseWithUserDemo):
         Case 1 is tested here.
         Cade 2 is tested in :meth:`test_merge_partner_with_visitor_both`.
         """
-        # Setup a visitor for demo and none for admin
+        # Setup a visitor for admin_duplicate and none for admin
         Visitor = self.env['website.visitor']
-        (self.partner_demo + self.partner_admin).visitor_ids.unlink()
-        visitor_demo = Visitor.create({
-            'partner_id': self.partner_demo.id,
-            'access_token': self.partner_demo.id,
+        (self.partner_admin_duplicate + self.partner_admin).visitor_ids.unlink()
+        visitor_admin_duplicate = Visitor.create({
+            'partner_id': self.partner_admin_duplicate.id,
+            'access_token': self.partner_admin_duplicate.id,
         })
-        # | id | access_token | partner_id |
-        # | -- | ------------ | ---------- |
-        # |  1 |      demo_id |    demo_id |
-        # |    |      1062141 |    1062141 |
-        self.assertTrue(visitor_demo.partner_id.id == int(visitor_demo.access_token) == self.partner_demo.id)
+        # | id | access_token           | partner_id            |
+        # | -- | ---------------------- | --------------------- |
+        # |  1 |     admin_duplicate_id |   admin_duplicate_id  |
+        # |    |      1062141           |    1062141            |
+        self.assertTrue(visitor_admin_duplicate.partner_id.id ==
+                        int(visitor_admin_duplicate.access_token) ==
+                        self.partner_admin_duplicate.id)
 
-        # Merge demo partner in admin partner
+        # Merge admin_duplicate partner (no user associated) in admin partner
         self.env['base.partner.merge.automatic.wizard']._merge(
-            (self.partner_admin + self.partner_demo).ids,
+            (self.partner_admin + self.partner_admin_duplicate).ids,
             self.partner_admin
         )
         # This should not happen..
-        # | id | access_token | partner_id |
-        # | -- | ------------ | ---------- |
-        # |  1 |      demo_id |   admin_id | <-- Mismatch
-        # |    |      1062141 |    5013266 |
+        # | id | access_token           | partner_id |
+        # | -- | ---------------------- | ---------- |
+        # |  1 |     admin_duplicate_id |   admin_id | <-- Mismatch
+        # |    |      1062141           |    5013266 |
         # .. it should be:
         # | id | access_token | partner_id |
         # | -- | ------------ | ---------- |
         # |  1 |     admin_id |   admin_id | <-- No mismatch, became admin_id
         # |    |      5013266 |    5013266 |
-        self.assertTrue(visitor_demo.partner_id.id == int(visitor_demo.access_token) == self.partner_admin.id,
-                        "The demo visitor should now be linked to the admin partner.")
-        self.assertFalse(Visitor.search_count([('partner_id', '=', self.partner_demo.id)]),
-                         "The demo visitor should've been merged (and deleted) with the admin one.")
+        self.assertTrue(visitor_admin_duplicate.partner_id.id ==
+                        int(visitor_admin_duplicate.access_token) ==
+                        self.partner_admin.id,
+                        "The admin_duplicate visitor should now be linked to the admin partner.")
+        self.assertFalse(Visitor.search_count([('partner_id', '=', self.partner_admin_duplicate.id)]),
+                         "The admin_duplicate visitor should've been merged (and deleted) with the admin one.")
 
 
 @tagged('-at_install', 'post_install')

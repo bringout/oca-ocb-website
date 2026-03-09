@@ -5,13 +5,13 @@ from datetime import datetime
 import random
 
 from odoo import api, models, fields, _
-from odoo.addons.http_routing.models.ir_http import slug, unslug
 from odoo.addons.website.tools import text_from_html
 from odoo.tools.json import scriptsafe as json_scriptsafe
 from odoo.tools.translate import html_translate
+from odoo.tools import html_escape
 
 
-class Blog(models.Model):
+class BlogBlog(models.Model):
     _name = 'blog.blog'
     _description = 'Blog'
     _inherit = [
@@ -23,6 +23,12 @@ class Blog(models.Model):
     ]
     _order = 'name'
 
+    _CUSTOMER_HEADERS_LIMIT_COUNT = 0  # never use X-Msg-To headers
+
+    def _default_sequence(self):
+        return (self.search([], order="sequence desc", limit=1).sequence or 0) + 1
+
+    sequence = fields.Integer("Sequence", default=_default_sequence)
     name = fields.Char('Blog Name', required=True, translate=True)
     subtitle = fields.Char('Blog Subtitle', translate=True)
     active = fields.Boolean('Active', default=True)
@@ -36,7 +42,7 @@ class Blog(models.Model):
             record.blog_post_count = len(record.blog_post_ids)
 
     def write(self, vals):
-        res = super(Blog, self).write(vals)
+        res = super().write(vals)
         if 'active' in vals:
             # archiving/unarchiving a blog does it on its posts, too
             post_ids = self.env['blog.post'].with_context(active_test=False).search([
@@ -46,7 +52,6 @@ class Blog(models.Model):
                 blog_post.active = vals['active']
         return res
 
-    @api.returns('mail.message', lambda value: value.id)
     def message_post(self, *, parent_id=False, subtype_id=False, **kwargs):
         """ Temporary workaround to avoid spam. If someone replies on a channel
         through the 'Presentation Published' email, it should be considered as a
@@ -56,7 +61,7 @@ class Blog(models.Model):
             parent_message = self.env['mail.message'].sudo().browse(parent_id)
             if parent_message.subtype_id and parent_message.subtype_id == self.env.ref('website_blog.mt_blog_blog_published'):
                 subtype_id = self.env.ref('mail.mt_note').id
-        return super(Blog, self).message_post(parent_id=parent_id, subtype_id=subtype_id, **kwargs)
+        return super().message_post(parent_id=parent_id, subtype_id=subtype_id, **kwargs)
 
     def all_tags(self, join=False, min_limit=1):
         BlogTag = self.env['blog.tag']
@@ -74,10 +79,10 @@ class Blog(models.Model):
             ORDER BY
                 count(*) DESC
         """
-        self._cr.execute(req, [tuple(self.ids)])
+        self.env.cr.execute(req, [tuple(self.ids)])
         tag_by_blog = {i.id: [] for i in self}
         all_tags = set()
-        for blog_id, freq, tag_id in self._cr.fetchall():
+        for blog_id, freq, tag_id in self.env.cr.fetchall():
             if freq >= min_limit:
                 if join:
                     all_tags.add(tag_id)
@@ -121,6 +126,7 @@ class Blog(models.Model):
             data['url'] = '/blog/%s' % data['id']
         return results_data
 
+
 class BlogTagCategory(models.Model):
     _name = 'blog.tag.category'
     _description = 'Blog Tag Category'
@@ -129,9 +135,10 @@ class BlogTagCategory(models.Model):
     name = fields.Char('Name', required=True, translate=True)
     tag_ids = fields.One2many('blog.tag', 'category_id', string='Tags')
 
-    _sql_constraints = [
-        ('name_uniq', 'unique (name)', "Tag category already exists !"),
-    ]
+    _name_uniq = models.Constraint(
+        'unique (name)',
+        'Tag category already exists!',
+    )
 
 
 class BlogTag(models.Model):
@@ -142,17 +149,20 @@ class BlogTag(models.Model):
 
     name = fields.Char('Name', required=True, translate=True)
     category_id = fields.Many2one('blog.tag.category', 'Category', index=True)
+    color = fields.Integer('Color')
     post_ids = fields.Many2many('blog.post', string='Posts')
 
-    _sql_constraints = [
-        ('name_uniq', 'unique (name)', "Tag name already exists !"),
-    ]
+    _name_uniq = models.Constraint(
+        'unique (name)',
+        'Tag name already exists!',
+    )
 
 
 class BlogPost(models.Model):
-    _name = "blog.post"
+    _name = 'blog.post'
     _description = "Blog Post"
     _inherit = ['mail.thread', 'website.seo.metadata', 'website.published.multi.mixin',
+        'website.page_visibility_options.mixin',
         'website.cover_properties.mixin', 'website.searchable.mixin']
     _order = 'id DESC'
     _mail_post_access = 'read'
@@ -160,23 +170,25 @@ class BlogPost(models.Model):
     def _compute_website_url(self):
         super(BlogPost, self)._compute_website_url()
         for blog_post in self:
-            blog_post.website_url = "/blog/%s/%s" % (slug(blog_post.blog_id), slug(blog_post))
+            if blog_post.id:
+                blog_post.website_url = "/blog/%s/%s" % (self.env['ir.http']._slug(blog_post.blog_id), self.env['ir.http']._slug(blog_post))
 
     def _default_content(self):
-        return '''
-            <p class="o_default_snippet_text">''' + _("Start writing here...") + '''</p>
-        '''
+        text = html_escape(_("Start writing here..."))
+        return """
+            <p>%(text)s</p>
+        """ % {"text": text}
     name = fields.Char('Title', required=True, translate=True, default='')
     subtitle = fields.Char('Sub Title', translate=True)
-    author_id = fields.Many2one('res.partner', 'Author', default=lambda self: self.env.user.partner_id)
+    author_id = fields.Many2one('res.partner', 'Author', default=lambda self: self.env.user.partner_id, index='btree_not_null')
     author_avatar = fields.Binary(related='author_id.image_128', string="Avatar", readonly=False)
     author_name = fields.Char(related='author_id.display_name', string="Author Name", readonly=False, store=True)
     active = fields.Boolean('Active', default=True)
-    blog_id = fields.Many2one('blog.blog', 'Blog', required=True, ondelete='cascade', default=lambda self: self.env['blog.blog'].search([], limit=1))
+    blog_id = fields.Many2one('blog.blog', 'Blog', required=True, index=True, ondelete='cascade', default=lambda self: self.env['blog.blog'].search([], limit=1))
     tag_ids = fields.Many2many('blog.tag', string='Tags')
     content = fields.Html('Content', default=_default_content, translate=html_translate, sanitize=False)
-    teaser = fields.Text('Teaser', compute='_compute_teaser', inverse='_set_teaser')
-    teaser_manual = fields.Text(string='Teaser Content')
+    teaser = fields.Text('Teaser', compute='_compute_teaser', inverse='_set_teaser', translate=True)
+    teaser_manual = fields.Text(string='Teaser Content', translate=True)
 
     website_message_ids = fields.One2many(domain=lambda self: [('model', '=', self._name), ('message_type', '=', 'comment')])
 
@@ -202,6 +214,14 @@ class BlogPost(models.Model):
 
     def _set_teaser(self):
         for blog_post in self:
+            if not blog_post.with_context(lang='en_US').teaser_manual:
+                # By default, if no teaser is set in english, it will use the
+                # first 200 characters of the content. We don't want to break
+                # that when adding a manual teaser in a translation.
+                # That's how the ORM work: when setting a translation value, if
+                # there is no source value, the source will also receive the
+                # translation value
+                blog_post.update_field_translations('teaser_manual', {'en_US': ''})
             blog_post.teaser_manual = blog_post.teaser
 
     @api.depends('create_date', 'published_date')
@@ -221,11 +241,12 @@ class BlogPost(models.Model):
     def _check_for_publication(self, vals):
         if vals.get('is_published'):
             for post in self.filtered(lambda p: p.active):
-                post.blog_id.message_post_with_view(
+                post.blog_id.message_post_with_source(
                     'website_blog.blog_post_template_new_post',
                     subject=post.name,
-                    values={'post': post},
-                    subtype_id=self.env['ir.model.data']._xmlid_to_res_id('website_blog.mt_blog_blog_published'))
+                    render_values={'post': post},
+                    subtype_xmlid='website_blog.mt_blog_blog_published',
+                )
             return True
         return False
 
@@ -251,12 +272,9 @@ class BlogPost(models.Model):
         self._check_for_publication(vals)
         return result
 
-    @api.returns('self', lambda value: value.id)
     def copy_data(self, default=None):
-        self.ensure_one()
-        name = _("%s (copy)", self.name)
-        default = dict(default or {}, name=name)
-        return super(BlogPost, self).copy_data(default)
+        vals_list = super().copy_data(default=default)
+        return [dict(vals, name=self.env._("%s (copy)", blog.name)) for blog, vals in zip(self, vals_list)]
 
     def _get_access_action(self, access_uid=None, force_website=False):
         """ Instead of the classic form view, redirect to the post on website
@@ -273,9 +291,10 @@ class BlogPost(models.Model):
             'res_id': self.id,
         }
 
-    def _notify_get_recipients_groups(self, msg_vals=None):
-        """ Add access button to everyone if the document is published. """
-        groups = super(BlogPost, self)._notify_get_recipients_groups(msg_vals=msg_vals)
+    def _notify_get_recipients_groups(self, message, model_description, msg_vals=False):
+        groups = super()._notify_get_recipients_groups(
+            message, model_description, msg_vals=msg_vals
+        )
         if not self:
             return groups
 
@@ -287,11 +306,10 @@ class BlogPost(models.Model):
         return groups
 
     def _notify_thread_by_inbox(self, message, recipients_data, msg_vals=False, **kwargs):
-        """ Override to avoid keeping all notified recipients of a comment.
-        We avoid tracking needaction on post comments. Only emails should be
-        sufficient. """
-        if msg_vals is None:
-            msg_vals = {}
+        # Override to avoid keeping all notified recipients of a comment.
+        # We avoid tracking needaction on post comments. Only emails should be
+        # sufficient.
+        msg_vals = msg_vals or {}
         if msg_vals.get('message_type', message.message_type) == 'comment':
             return
         return super(BlogPost, self)._notify_thread_by_inbox(message, recipients_data, msg_vals=msg_vals, **kwargs)
@@ -320,9 +338,9 @@ class BlogPost(models.Model):
         state = options.get('state')
         domain = [website.website_domain()]
         if blog:
-            domain.append([('blog_id', '=', unslug(blog)[1])])
+            domain.append([('blog_id', '=', self.env['ir.http']._unslug(blog)[1])])
         if tags:
-            active_tag_ids = [unslug(tag)[1] for tag in tags.split(',')] or []
+            active_tag_ids = [self.env['ir.http']._unslug(tag)[1] for tag in tags.split(',')] or []
             if active_tag_ids:
                 domain.append([('tag_ids', 'in', active_tag_ids)])
         if date_begin and date_end:

@@ -1,5 +1,3 @@
-/** @odoo-module **/
-
 import {NewContentFormController, NewContentFormView} from '@website/js/new_content_form';
 import {registry} from "@web/core/registry";
 
@@ -8,7 +6,7 @@ export class AddForumFormController extends NewContentFormController {
      * @override
      */
     computePath() {
-        return `/forum/${encodeURIComponent(this.model.root.data.id)}`;
+        return `/forum/${encodeURIComponent(this.model.root.resId)}`;
     }
 }
 

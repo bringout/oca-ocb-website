@@ -23,6 +23,7 @@ class TestWEventBoothExhibitorCommon(HttpCaseWithUserDemo, HttpCaseWithUserPorta
 
         self.env.ref('base.user_admin').write({
             'name': 'Mitchell Admin',
+            'email': 'mitchell.admin@example.com',
             'street': '215 Vine St',
             'phone': '+1 555-555-5555',
             'city': 'Scranton',
@@ -37,7 +38,6 @@ class TestWEventBoothExhibitorCommon(HttpCaseWithUserDemo, HttpCaseWithUserPorta
             'stage_id': self.env.ref('event.event_stage_booked').id,
             'date_begin': now + relativedelta(days=1, hour=5, minute=0, second=0),
             'date_end': now + relativedelta(days=1, hour=5, minute=0, second=0),
-            'auto_confirm': True,
             'is_published': True,
             'website_menu': True,
             'booth_menu': True,
@@ -50,9 +50,4 @@ class TestWEventBoothExhibitorCommon(HttpCaseWithUserDemo, HttpCaseWithUserPorta
                 'booth_category_id': self.env.ref('event_booth.event_booth_category_premium').id,
             })]
         })
-        self.browser_js(
-            '/event',
-            'odoo.__DEBUG__.services["web_tour.tour"].run("webooth_exhibitor_register")',
-            'odoo.__DEBUG__.services["web_tour.tour"].tours.webooth_exhibitor_register.ready',
-            login='admin'
-        )
+        self.start_tour('/event', 'webooth_exhibitor_register', login='admin')

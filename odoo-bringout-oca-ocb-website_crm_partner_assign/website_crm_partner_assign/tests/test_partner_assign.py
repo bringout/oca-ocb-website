@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
+from datetime import date, timedelta
 from unittest.mock import patch
 
 from odoo.exceptions import AccessError
@@ -10,7 +11,13 @@ from odoo.tools import mute_logger
 
 from odoo.addons.base.tests.common import HttpCase
 from odoo.addons.crm.tests.common import TestCrmCommon
+from odoo.addons.mail.controllers.thread import ThreadController
 from odoo.addons.mail.tests.common import mail_new_test_user
+from odoo.addons.http_routing.tests.common import MockRequest
+from odoo.addons.website_crm_partner_assign.controllers.main import (
+    WebsiteAccount,
+    WebsiteCrmPartnerAssign,
+)
 
 
 class TestPartnerAssign(TransactionCase):
@@ -37,68 +44,8 @@ class TestPartnerAssign(TransactionCase):
                 'Cannon Hill Park, B46 3AG Birmingham, United Kingdom': (52.45216, -1.898578),
             }.get(addr)
 
-        patcher = patch('odoo.addons.base_geolocalize.models.base_geocoder.GeoCoder.geo_find', wraps=geo_find)
+        patcher = patch('odoo.addons.base_geolocalize.models.base_geocoder.BaseGeocoder.geo_find', wraps=geo_find)
         self.startPatcher(patcher)
-
-    def test_opportunity_count(self):
-        self.customer_uk.write({
-            'is_company': True,
-            'child_ids': [
-                (0, 0, {'name': 'Uk Children 1',
-                       }),
-                (0, 0, {'name': 'Uk Children 2',
-                       }),
-            ],
-        })
-        lead_uk_assigned = self.env['crm.lead'].create({
-            'name': 'Office Design and Architecture',
-            'partner_assigned_id': self.customer_uk.id,
-            'type': 'opportunity',
-        })
-        children_leads = self.env['crm.lead'].create([
-            {'name': 'Children 1 Lead 1',
-             'partner_id': self.customer_uk.child_ids[0].id,
-             'type': 'lead'},
-            {'name': 'Children 1 Lead 2',
-             'partner_id': self.customer_uk.child_ids[0].id,
-             'type': 'lead'},
-            {'name': 'Children 2 Lead 1',
-             'partner_id': self.customer_uk.child_ids[1].id,
-             'type': 'lead'},
-            {'name': 'Children 2 Lead 2',
-             'partner_id': self.customer_uk.child_ids[1].id,
-             'type': 'lead'},
-        ])
-        children_leads_assigned = self.env['crm.lead'].create([
-            {'name': 'Children 1 Lead 1',
-             'partner_assigned_id': self.customer_uk.child_ids[0].id,
-             'type': 'lead'},
-            {'name': 'Children 1 Lead 2',
-             'partner_assigned_id': self.customer_uk.child_ids[0].id,
-             'type': 'lead'},
-            {'name': 'Children 2 Lead 1',
-             'partner_assigned_id': self.customer_uk.child_ids[1].id,
-             'type': 'lead'},
-            {'name': 'Children 2 Lead 2',
-             'partner_assigned_id': self.customer_uk.child_ids[1].id,
-             'type': 'lead'},
-        ])
-
-        self.assertEqual(
-            repr(self.customer_uk.action_view_opportunity()['domain']),
-            repr([('id', 'in', sorted(self.lead_uk.ids + lead_uk_assigned.ids + children_leads.ids))]),
-            'Parent: own + children leads + assigned'
-        )
-        self.assertEqual(
-            repr(self.customer_uk.child_ids[0].action_view_opportunity()['domain']),
-            repr([('id', 'in', sorted(children_leads[0:2].ids + children_leads_assigned[0:2].ids))]),
-            'Children: own leads + assigned'
-        )
-        self.assertEqual(
-            repr(self.customer_uk.child_ids[1].action_view_opportunity()['domain']),
-            repr([('id', 'in', sorted(children_leads[2:].ids + children_leads_assigned[2:].ids))]),
-            'Children: own leads + assigned'
-        )
 
     def test_partner_assign(self):
         """ Test the automatic assignation using geolocalisation """
@@ -149,7 +96,8 @@ class TestPartnerAssign(TransactionCase):
             pass
 
 
-class TestPartnerLeadPortal(TestCrmCommon):
+@tagged('lead_portal')
+class TestPartnerLeadPortal(TestCrmCommon, HttpCase):
 
     def setUp(self):
         super(TestPartnerLeadPortal, self).setUp()
@@ -187,10 +135,25 @@ class TestPartnerLeadPortal(TestCrmCommon):
 
     def test_partner_lead_decline(self):
         """ Test an integrating partner decline the lead """
+        # Add a child for the commercial partner of portal user
+        # because it will affect the message unsubscribe process.
+        self.env['res.partner'].create({
+            'name': 'Child Contact Name',
+            'parent_id': self.user_portal.partner_id.id,
+        })
         self.lead_portal.with_user(self.user_portal).partner_desinterested(comment="No thanks, I have enough leads !", contacted=True, spam=False)
 
         self.assertFalse(self.lead_portal.partner_assigned_id.id, 'The partner_assigned_id of the declined lead should be False.')
         self.assertTrue(self.user_portal.partner_id in self.lead_portal.sudo().partner_declined_ids, 'Partner who has declined the lead should be in the declined_partner_ids.')
+
+    def test_partner_lead_decline_spam(self):
+        """ Test an integrating partner decline the lead by mentioning that it is spam """
+        self.lead_portal.invalidate_recordset()
+        self.lead_portal.with_user(self.user_portal).partner_desinterested(comment="It is a spam !", contacted=True, spam=True)
+
+        self.assertFalse(self.lead_portal.partner_assigned_id.id, 'The partner_assigned_id of the declined lead should be False.')
+        self.assertTrue(self.user_portal.partner_id in self.lead_portal.sudo().partner_declined_ids, 'Partner who has declined the lead should be in the declined_partner_ids.')
+        self.assertIn(self.env.ref('website_crm_partner_assign.tag_portal_lead_is_spam'), self.lead_portal.tag_ids, 'The lead must be tagged as spam.')
 
     def test_lead_access_right(self):
         """ Test another portal user can not write on every leads """
@@ -199,7 +162,7 @@ class TestPartnerLeadPortal(TestCrmCommon):
             'name': 'Poor Partner (not integrating one)',
             'email': 'poor.partner@ododo.com',
             'login': 'poorpartner',
-            'groups_id': [(6, 0, [self.env.ref('base.group_portal').id])],
+            'group_ids': [(6, 0, [self.env.ref('base.group_portal').id])],
         })
         # try to accept a lead that is not mine
         with self.assertRaises(AccessError):
@@ -218,10 +181,166 @@ class TestPartnerLeadPortal(TestCrmCommon):
         self.assertEqual(opportunity.team_id, salesmanteam, 'The created opportunity should have the same team as the salesman default team of the opportunity creator.')
         self.assertEqual(opportunity.partner_assigned_id, self.user_portal.partner_id, 'Assigned Partner of created opportunity is the (portal) creator.')
 
+    def test_lead_update(self):
+        data = self.env['crm.lead'].with_user(self.user_portal).create_opp_portal({
+            'title': 'Test lead',
+            'description': 'A lead',
+            'contact_name': 'Test contact',
+        })
+        opportunity = self.env['crm.lead'].browse(data['id'])
+
+        email_1 = 'test_partner@test.com'
+        test_user = self.env['res.users'].create({
+            'name': 'test user',
+            'login': 'user',
+            'email': email_1,
+        })
+        test_partner = test_user.partner_id
+        test_partner.user_id = test_user
+
+        with self.assertRaises(AccessError):
+            opportunity.with_user(self.user_portal).write({
+                'partner_id': test_partner.id,
+            })
+        opportunity.write({
+            'partner_id': test_partner.id,
+        })
+
+        update_values = {
+            'expected_revenue': 9999.0,
+            'probability': 50.0,
+            'priority': '2',
+            'date_deadline': False,
+            'activity_date_deadline': False,
+            'activity_type_id': False,
+            'activity_summary': False,
+        }
+        opportunity.with_user(self.user_portal).update_lead_portal(update_values)
+        self.assertEqual(opportunity.expected_revenue, 9999.0, "Portal user should be able to update revenue or other details via portal method")
+
+        email_2 = 'test_partner_updated@test.com'
+        opportunity.with_user(self.user_portal).update_contact_details_from_portal({
+            'email_from': email_2,
+        })
+        self.assertEqual(opportunity.email_from, email_2, 'Address email on the opportunity must be updated')
+        self.assertEqual(test_partner.email, email_1, 'Adress email on the partner should not be updated')
+
+        test_user.unlink()
+        opportunity.with_user(self.user_portal).update_contact_details_from_portal({
+            'email_from': email_2,
+        })
+        self.assertEqual(test_partner.email, email_2, 'Adress email on the partner must be updated')
+
+        # Portal user must be able to write to the thread
+        old_message_ids = opportunity.message_ids
+        with MockRequest(self.env(user=self.user_portal)):
+            res = ThreadController().mail_message_post(
+                "crm.lead",
+                opportunity.id,
+                {"body": "Test message"},
+            )
+        new_message_ids = opportunity.message_ids - old_message_ids
+        self.assertEqual(res['message_id'], new_message_ids.id)
+
     def test_portal_mixin_url(self):
         record_action = self.lead_portal._get_access_action(access_uid=self.user_portal.id)
         self.assertEqual(record_action['url'], '/my/opportunity/%s' % self.lead_portal.id)
         self.assertEqual(record_action['type'], 'ir.actions.act_url')
+
+    def test_portal_post(self):
+        self.authenticate(self.user_portal.login, self.user_portal.login)
+        self.make_jsonrpc_request(
+            route="/mail/message/post",
+            params={
+                'thread_model': self.lead_portal._name,
+                'thread_id': self.lead_portal.id,
+                'pid': self.user_portal.partner_id.id,
+                'post_data': {
+                    'body': "Test",
+                },
+            },
+        )
+        message = self.lead_portal.message_ids[0]
+        self.assertMessageFields(
+            message, {
+                'author_id': self.user_portal.partner_id,
+                'body': '<p>Test</p>',
+                'message_type': 'comment',
+            }
+        )
+
+    def test_route_portal_my_opportunities_as_portal(self):
+        """Test that the portal user can access its own opportunities even if
+        does not have access to the 'activity_date_deadline' field (needed
+        if using filter 'Today Activities' or 'Overdue Activities')."""
+
+        lead_today = self.lead_portal
+        lead_yesterday = self.lead_portal.sudo().copy()
+
+        (lead_today | lead_yesterday).type = "opportunity"
+
+        lead_today.activity_schedule(
+            "crm.lead_test_activity_1",
+            date.today(),
+            user_id=self.env.uid,
+        )
+        lead_yesterday.activity_schedule(
+            "crm.lead_test_activity_1",
+            date.today() - timedelta(days=1),
+            user_id=self.env.uid,
+        )
+
+        def render_function(_, values, *args, **kwargs):
+            self.assertIn(
+                lead_today,
+                values["opportunities"],
+                "Lead with today scheduled activity should be in filtered opportunities.",
+            )
+            self.assertNotIn(
+                lead_yesterday,
+                values["opportunities"],
+                "Lead with yesterday scheduled activity should not be in filtered opportunities.",
+            )
+
+        with self.with_user(self.user_portal.login), MockRequest(
+            self.env, website=self.env["website"].browse(1)
+        ) as mock_request:
+            mock_request.render = render_function
+            WebsiteAccount().portal_my_opportunities(filterby="today")
+
+    @patch('odoo.http.GeoIP')
+    def test_03_crm_partner_assign_geolocalization(self, GeoIpMock):
+        """
+            This test checks situation when "{OdooURL}/partners" is visited from foreign country without resellers.
+            It uses Mexico as an example.
+
+            Why patching of GeoIP is used?
+            Tested function (WebsiteCrmPartnerAssign.partners) uses GeoIp.country_code which is read_only, because
+            of the property decorator https://docs.python.org/3/library/functions.html#property
+            Patching is allowing to modify normally read_only value.
+        """
+        # Patch GeoIp so it acts, as if Odoo client is located in Mexico
+        GeoIpMock.return_value.country_code = 'MX'
+
+        # Create a partner outside of Mexico
+        non_mexican_partner = self.env['res.partner'].create({
+            'name': 'Non_Mexican_Partner',
+            'is_company': True,
+            'grade_id': self.env['res.partner.grade'].search([], limit=1).id,
+            'website_published': True,
+            'country_id': self.env['res.country'].search([('code', '!=', 'mx')], limit=1).id
+        })
+
+        def render_function(_, values, *args, **kwargs):
+            """ Tests values at the end of WebsiteCrmPartnerAssign.partners method."""
+            self.assertIn("partners", values, "Partner key is not present in the values, can't perform subsequent checks.")
+            self.assertIn(non_mexican_partner, values['partners'], "Non-Mexican Partner is not present when rendering partners from Mexico; fallback protection (protecting from no results) didn't work.")
+            return 'rendered'
+
+        with MockRequest(self.env, website=self.env['website'].browse(1)) as mock_request:
+            mock_request.render = render_function
+            res = WebsiteCrmPartnerAssign().partners()
+            self.assertEqual([b'rendered'], res.response, "render_function wasn't called")
 
 
 @tagged('post_install', '-at_install')
@@ -261,7 +380,7 @@ class TestPublish(HttpCase):
 
     @mute_logger('odoo.addons.http_routing.models.ir_http', 'odoo.http')
     def test_02_reditor_salesman(self):
-        self.user_test.groups_id = [
+        self.user_test.group_ids = [
             Command.link(self.group_restricted_editor.id),
             Command.link(self.group_sale_salesman.id),
         ]
@@ -270,33 +389,33 @@ class TestPublish(HttpCase):
 
     @mute_logger('odoo.addons.http_routing.models.ir_http', 'odoo.http')
     def test_03_reditor_not_salesman(self):
-        self.user_test.groups_id = [
+        self.user_test.group_ids = [
             Command.link(self.group_restricted_editor.id),
             Command.unlink(self.group_sale_salesman.id),
             Command.unlink(self.group_partner_manager.id)
         ]
-        self.assertNotIn(self.group_sale_salesman.id, self.user_test.groups_id.ids, "User should not be a group_sale_salesman")
-        self.assertNotIn(self.group_partner_manager.id, self.user_test.groups_id.ids, "User should not be a group_partner_manager")
+        self.assertNotIn(self.group_sale_salesman.id, self.user_test.group_ids.ids, "User should not be a group_sale_salesman")
+        self.assertNotIn(self.group_partner_manager.id, self.user_test.group_ids.ids, "User should not be a group_partner_manager")
         self.start_tour(self.env['website'].get_client_action_url('/partners'), 'test_cannot_publish_partner', login="testtest")
 
     @mute_logger('odoo.addons.http_routing.models.ir_http', 'odoo.http')
     def test_04_not_reditor_salesman(self):
-        self.user_test.groups_id = [
+        self.user_test.group_ids = [
             Command.unlink(self.group_restricted_editor.id),
             Command.link(self.group_sale_salesman.id),
         ]
-        self.assertNotIn(self.group_restricted_editor.id, self.user_test.groups_id.ids, "User should not be a group_restricted_editor")
+        self.assertNotIn(self.group_restricted_editor.id, self.user_test.group_ids.ids, "User should not be a group_restricted_editor")
         self.start_tour(self.env['website'].get_client_action_url('/partners'), 'test_can_publish_partner', login="testtest")
         self.assertTrue(self.partner.website_published, "Partner should have been published")
 
     @mute_logger('odoo.addons.http_routing.models.ir_http', 'odoo.http')
     def test_05_not_reditor_not_salesman(self):
-        self.user_test.groups_id = [
+        self.user_test.group_ids = [
             Command.unlink(self.group_restricted_editor.id),
             Command.unlink(self.group_sale_salesman.id),
             Command.unlink(self.group_partner_manager.id)
         ]
-        self.assertNotIn(self.group_sale_salesman.id, self.user_test.groups_id.ids, "User should not be a group_sale_salesman")
-        self.assertNotIn(self.group_partner_manager.id, self.user_test.groups_id.ids, "User should not be a group_partner_manager")
-        self.assertNotIn(self.group_restricted_editor.id, self.user_test.groups_id.ids, "User should not be a group_restricted_editor")
+        self.assertNotIn(self.group_sale_salesman.id, self.user_test.group_ids.ids, "User should not be a group_sale_salesman")
+        self.assertNotIn(self.group_partner_manager.id, self.user_test.group_ids.ids, "User should not be a group_partner_manager")
+        self.assertNotIn(self.group_restricted_editor.id, self.user_test.group_ids.ids, "User should not be a group_restricted_editor")
         self.start_tour(self.env['website'].get_client_action_url('/partners'), 'test_cannot_publish_partner', login="testtest")

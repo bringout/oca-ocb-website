@@ -2,11 +2,11 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 from odoo.addons.website_slides.tests import common as slides_common
 from odoo.exceptions import UserError
-from odoo.tests.common import users
+from odoo.tests.common import HttpCase, users
 from unittest.mock import patch
 
 
-class TestSlidesManagement(slides_common.SlidesCase):
+class TestSlidesManagement(slides_common.SlidesCase, HttpCase):
 
     @users('user_officer')
     def test_get_categorized_slides(self):
@@ -36,16 +36,16 @@ class TestSlidesManagement(slides_common.SlidesCase):
 
         self.assertTrue(self.channel.active)
         self.assertTrue(self.channel.is_published)
-        self.assertFalse(channel_partner.completed)
+        self.assertFalse(channel_partner.member_status == 'completed')
         for slide in self.channel.slide_ids:
             self.assertTrue(slide.active, "All slide should be archived when a channel is archived")
             self.assertTrue(slide.is_published, "All slide should be unpublished when a channel is archived")
 
-        self.channel.toggle_active()
+        self.channel.action_archive()
         self.assertFalse(self.channel.active)
         self.assertFalse(self.channel.is_published)
         # channel_partner should still NOT be marked as completed
-        self.assertFalse(channel_partner.completed)
+        self.assertFalse(channel_partner.member_status == 'completed')
 
         for slide in self.channel.slide_ids:
             self.assertFalse(slide.active, "All slides should be archived when a channel is archived")
@@ -53,6 +53,79 @@ class TestSlidesManagement(slides_common.SlidesCase):
                 self.assertFalse(slide.is_published, "All slides should be unpublished when a channel is archived, except categories")
             else:
                 self.assertTrue(slide.is_published, "All slides should be unpublished when a channel is archived, except categories")
+
+    @users('user_manager')
+    def test_channel_partner_next_slide(self):
+        """ Test the mechanic of the 'next_slide' field for memberships.
+         Next slide should be equal to the next slide in order (sequence, id) based on completion. """
+
+        channel = self.env['slide.channel'].create({
+            'name': 'Channel1',
+            'channel_type': 'documentation',
+            'enroll': 'public',
+            'visibility': 'public',
+            'is_published': True,
+        })
+
+        # test the behavior on both employees and portal users
+        users = self.user_emp | self.user_portal
+        channel.sudo()._action_add_members(users.partner_id)
+        memberships = self.env['slide.channel.partner'].sudo().search([('partner_id', 'in', users.partner_id.ids)])
+
+        # with no slides, next_slide_id is False for all memberships
+        self.assertFalse(memberships.next_slide_id)
+
+        category_1, category_2 = self.env['slide.slide'].create([{
+            'name': 'Category %s' % i,
+            'channel_id': channel.id,
+            'is_category': True,
+            'is_published': True,
+        } for i in [1, 2]])
+
+        # create 2 slides within the first category
+        slide_1, slide_2 = self.env['slide.slide'].create([{
+            'name': 'slide %s' % i,
+            'channel_id': channel.id,
+            'category_id': category_1.id,
+            'slide_category': 'document',
+            'is_published': True,
+        } for i in [1, 2]])
+
+        # create 2 slides within the second category
+        slide_3, slide_4 = self.env['slide.slide'].create([{
+            'name': 'slide %s' % i,
+            'channel_id': channel.id,
+            'category_id': category_2.id,
+            'slide_category': 'document',
+            'is_published': True,
+        } for i in [3, 4]])
+
+        self.assertEqual(channel.slide_content_ids, slide_1 | slide_2 | slide_3 | slide_4)
+        # force recompute next slide based on added slides
+        memberships.invalidate_recordset(fnames=['next_slide_id'])
+
+        for membership in memberships:
+            for slide in channel.slide_content_ids:
+                self.assertEqual(
+                    membership.next_slide_id,
+                    slide,
+                    'Expected %(expected_slide)s but got %(actual_slide)s' % {
+                        'expected_slide': slide.name,
+                        'actual_slide': membership.next_slide_id.name,
+                    }
+                )
+
+                self.env['slide.slide.partner'].create({
+                    'slide_id': slide.id,
+                    'channel_id': channel.id,
+                    'partner_id': membership.partner_id.id,
+                    'completed': True
+                })
+
+                membership.invalidate_recordset(fnames=['next_slide_id'])
+
+            # we have gone through all the content, next slide should be False
+            self.assertFalse(membership.next_slide_id)
 
     def test_mail_completed(self):
         """ When the slide.channel is completed, an email is supposed to be sent to people that completed it. """
@@ -83,7 +156,7 @@ class TestSlidesManagement(slides_common.SlidesCase):
                 any(mail.model == 'slide.channel.partner' and user.partner_id in mail.recipient_ids
                     for mail in created_mails)
             )
-        # user_portal has not finished the course, it should not receive anything
+        # user_portal has not completed the course, they should not receive anything
         self.assertFalse(
             any(mail.model == 'slide.channel.partner' and self.user_portal.partner_id in mail.recipient_ids
                 for mail in created_mails)
@@ -102,11 +175,13 @@ class TestSlidesManagement(slides_common.SlidesCase):
         channel_2 = self.env['slide.channel'].create({
             'name': 'Test Course 2',
             'slide_ids': [(0, 0, {
-                'name': 'Test Slide 2'
+                'name': 'Test Slide 2',
+                'is_published': True
             })],
             'completed_template_id': mail_template.id
         })
-        self.channel.completed_template_id.body_html = '<p>TestBodyTemplate</p>'
+        # sudo because creator has no rights to modify templates
+        self.channel.sudo().completed_template_id.body_html = '<p>TestBodyTemplate</p>'
 
         all_channels = self.channel | channel_2
         all_channels.sudo()._action_add_members(self.user_officer.partner_id)
@@ -165,6 +240,45 @@ class TestSlidesManagement(slides_common.SlidesCase):
             f'Impossible to send emails. Select a "Share Template" for courses {channel_without_template.name} first'
         )
 
+    @users('user_manager')
+    def test_slides_prepare_preview(self):
+        """Ensure archived slides are not used during slide preview.
+
+            1) Create a channel and category for it
+            2) Go to website > courses > Open the channel
+            3) Add content > video > Add video link > Save and publish > delete
+            4) Repeat above step
+            5) Add content > video > Add any text in video link > Save and publish
+        """
+        self.authenticate("admin", "admin")
+
+        for _ in range(2):
+            self.make_jsonrpc_request('/slides/add_slide',
+                {
+                    "channel_id": self.channel.id,
+                    "name": "Test name",
+                    "slide_category": "video",
+                    "source_type": "external",
+                    "video_url": "test",
+                    "category_id": [self.category.id],
+                }, headers={'Content-Type': 'application/json'})
+
+            self.make_jsonrpc_request('/slides/slide/archive',
+                {"slide_id": self.channel.slide_ids[-1].id}, headers={'Content-Type': 'application/json'})
+
+        self.make_jsonrpc_request(
+            '/slides/prepare_preview',
+            {
+                'channel_id': self.channel.id,
+                'slide_category': 'video',
+                'url': 'test',
+            },
+            headers={'Content-Type': 'application/json'},
+        )
+
+        slide = self.channel.slide_ids.filtered(lambda slide: slide.name == 'memory_record_for_computed_fields')
+        self.assertFalse(slide)
+
     def test_unlink_slide_channel(self):
         self.assertTrue(self.channel.slide_content_ids.mapped('question_ids').exists(),
             "Has question(s) linked to the slides")
@@ -182,7 +296,7 @@ class TestSlidesManagement(slides_common.SlidesCase):
             return 13.37
 
         with patch(
-            'odoo.addons.website_slides.models.slide_slide.Slide._get_completion_time_pdf',
+            'odoo.addons.website_slides.models.slide_slide.SlideSlide._get_completion_time_pdf',
             new=_get_completion_time_pdf
         ):
             slides_1 = self.env['slide.slide'].create({
@@ -204,8 +318,40 @@ class TestSlidesManagement(slides_common.SlidesCase):
                 'completion_time': 123,
             })
 
-        self.assertEqual(13.37, slides_1.completion_time)
+        self.assertEqual(13.37, round(slides_1.completion_time, 2))
         self.assertEqual(123.0, slides_2.completion_time)
+
+    @users('user_manager')
+    def test_mail_completed_not_on_unpublishing_or_unlinking_slides(self):
+        """Check that participants do not receive a course completion email when slides are deleted/unpublished."""
+        def were_emails_sent():
+            new_mails = self._new_mails.filtered(lambda m: m.model == 'slide.channel.partner')
+            return len(new_mails) > 0
+
+        # Setup
+        self.assertGreater(len(self.channel.channel_partner_ids), self.channel.members_completed_count,
+            "Channel shall have at least one participant not yet completer")
+        slides_initially_published = self.channel.slide_ids.filtered('is_published')
+        self.assertGreaterEqual(len(slides_initially_published), 2, "The test requires at least two published slides.")
+
+        # Unpublishing slides
+        with self.mock_mail_gateway():
+            slides_initially_published[:1].is_published = False
+        self.assertFalse(were_emails_sent(), "Participants should not receive emails when a slide is unpublished.")
+
+        with self.mock_mail_gateway():
+            slides_initially_published.is_published = False
+        self.assertFalse(were_emails_sent(), "Participants should not receive emails when all remaining slides are unpublished.")
+
+        # Unlinking slides
+        with self.mock_mail_gateway():
+            self.channel.slide_ids[:1].with_user(self.user_manager).unlink()
+        self.assertFalse(were_emails_sent(), "Participants should not receive emails when a slide is deleted.")
+
+        with self.mock_mail_gateway():
+            self.channel.slide_ids.with_user(self.user_manager).unlink()
+        self.assertFalse(were_emails_sent(), "Participants should not receive emails when all remaining slides are deleted.")
+
 
 class TestSequencing(slides_common.SlidesCase):
 
@@ -283,3 +429,53 @@ class TestSequencing(slides_common.SlidesCase):
         self.assertEqual(self.category.sequence, 4)
         self.assertEqual(self.slide_2.sequence, 5)
         self.assertEqual([s.id for s in self.channel.slide_ids], [self.slide.id, new_category.id, self.slide_3.id, self.category.id, self.slide_2.id])
+
+    @users('user_officer')
+    def test_channel_enroll_policy(self):
+        channel = self.env['slide.channel'].create({
+            'name': 'Test Course 2',
+            'slide_ids': [(0, 0, {
+                'name': 'Test Slide 1'
+            })],
+        })
+
+        self.assertEqual(channel.visibility, 'public')
+        self.assertEqual(channel.enroll, 'public')
+
+        channel.write({'visibility': 'members'})
+
+        self.assertEqual(channel.visibility, 'members')
+        self.assertEqual(channel.enroll, 'invite')
+
+        copied_channel = channel.copy()
+        self.assertEqual(copied_channel.enroll, 'invite', "Copied channel should have the same enroll field value")
+
+    @users('user_officer')
+    def test_duplicate_courses(self):
+        channel1 = self.env['slide.channel'].create({
+            'name': 'Test Course 1',
+        })
+        channel2 = self.env['slide.channel'].create({
+            'name': 'Test Course 2',
+        })
+
+        copied_value = (channel1 + channel2).copy()
+        self.assertEqual(copied_value[0].name, 'Test Course 1 (copy)')
+        self.assertEqual(copied_value[1].name, 'Test Course 2 (copy)')
+
+    @users('user_officer')
+    def test_duplicate_course_preserves_slides_sequence(self):
+        self.slide_3.sequence = 0
+        self.slide.sequence = 5
+
+        self.assertEqual(
+            self.channel.copy().slide_ids.mapped('sequence'),
+            self.channel.slide_ids.mapped('sequence'),
+            "Sequence preserved when copying channel"
+        )
+
+    @users('user_officer')
+    def test_duplicate_slide_sets_sequence_to_zero(self):
+        self.assertEqual(self.slide.sequence, 1)
+        copied_slide = self.slide.copy()
+        self.assertEqual(copied_slide.sequence, 0, "When copying a single slide its sequence should be set to 0")

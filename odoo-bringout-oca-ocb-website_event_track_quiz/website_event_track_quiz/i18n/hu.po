@@ -1,29 +1,24 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* website_event_track_quiz
-# 
-# Translators:
-# Ákos Nagy <akos.nagy@oregional.hu>, 2022
-# Krisztián Juhász <juhasz.krisztian@josafar.hu>, 2022
-# krnkris, 2022
-# Tamás Németh <ntomasz81@gmail.com>, 2022
-# Martin Trigaux, 2022
-# Valics Lehel, 2025
-# gezza <geza.nagy@oregional.hu>, 2025
-# 
+# * website_event_track_quiz
+#
+# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
+# Weblate <noreply-mt-weblate@weblate.org>, 2025.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-06 13:32+0000\n"
-"PO-Revision-Date: 2022-09-22 05:56+0000\n"
-"Last-Translator: gezza <geza.nagy@oregional.hu>, 2025\n"
-"Language-Team: Hungarian (https://app.transifex.com/odoo/teams/41243/hu/)\n"
+"POT-Creation-Date: 2026-01-25 18:37+0000\n"
+"PO-Revision-Date: 2025-11-08 22:01+0000\n"
+"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
+"Language-Team: Hungarian <https://translate.odoo.com/projects/odoo-19/"
+"website_event_track_quiz/hu/>\n"
+"Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: hu\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.12.2\n"
 
 #. module: website_event_track_quiz
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_track__quiz_questions_count
@@ -51,10 +46,14 @@ msgid "Add Quiz"
 msgstr ""
 
 #. module: website_event_track_quiz
+#: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_quiz_view_form
+msgid "All Events"
+msgstr "Minden esemény"
+
+#. module: website_event_track_quiz
 #. odoo-javascript
-#: code:addons/website_event_track_quiz/static/src/js/event_quiz.js:0
-#, python-format
-msgid "All questions must be answered !"
+#: code:addons/website_event_track_quiz/static/src/interactions/quiz.js:0
+msgid "All questions must be answered!"
 msgstr ""
 
 #. module: website_event_track_quiz
@@ -71,15 +70,12 @@ msgstr "Válasz"
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "Check answers"
 msgstr ""
 
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "Check your answers"
 msgstr ""
 
@@ -96,7 +92,6 @@ msgstr ""
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "Congratulations, you scored a total of"
 msgstr ""
 
@@ -118,7 +113,6 @@ msgstr ""
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "Correct."
 msgstr ""
 
@@ -137,9 +131,12 @@ msgid "Created on"
 msgstr "Létrehozva"
 
 #. module: website_event_track_quiz
+#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_event__display_name
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz__display_name
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_answer__display_name
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_question__display_name
+#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_track__display_name
+#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_track_visitor__display_name
 msgid "Display Name"
 msgstr "Megjelenített név"
 
@@ -191,20 +188,13 @@ msgstr ""
 #. module: website_event_track_quiz
 #: model_terms:ir.actions.act_window,help:website_event_track_quiz.event_quiz_action
 msgid ""
-"From here you will be able to overview all quizzes you have linked to "
-"Tracks."
+"From here you will be able to overview all quizzes you have linked to Tracks."
 msgstr ""
 
 #. module: website_event_track_quiz
 #: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_track_view_form
 msgid "Go to Quiz"
 msgstr ""
-
-#. module: website_event_track_quiz
-#: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_quiz_question_view_search
-#: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_quiz_view_search
-msgid "Group By"
-msgstr "Csoportosítás"
 
 #. module: website_event_track_quiz
 #: model:event.quiz.answer,text_value:website_event_track_quiz.event_7_track_5_question_1_0
@@ -217,11 +207,14 @@ msgid "Hammer won't be of any help here!"
 msgstr ""
 
 #. module: website_event_track_quiz
+#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_event__id
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz__id
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_answer__id
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_question__id
+#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_track__id
+#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_track_visitor__id
 msgid "ID"
-msgstr "Azonosító"
+msgstr "ID"
 
 #. module: website_event_track_quiz
 #: model:event.quiz.answer,comment:website_event_track_quiz.event_7_track_5_question_0_0
@@ -233,7 +226,6 @@ msgstr ""
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "Incorrect."
 msgstr ""
 
@@ -241,13 +233,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_track__is_quiz_completed
 msgid "Is Quiz Done"
 msgstr ""
-
-#. module: website_event_track_quiz
-#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz____last_update
-#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_answer____last_update
-#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_question____last_update
-msgid "Last Modified on"
-msgstr "Legutóbb frissítve"
 
 #. module: website_event_track_quiz
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz__write_uid
@@ -261,7 +246,7 @@ msgstr "Frissítette"
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_answer__write_date
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_question__write_date
 msgid "Last Updated on"
-msgstr "Frissítve ekkor"
+msgstr "Frissítve"
 
 #. module: website_event_track_quiz
 #: model:ir.model.fields,help:website_event_track_quiz.field_event_quiz__repeatable
@@ -321,7 +306,6 @@ msgstr ""
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "Oopsie, you did not score any point on this quiz."
 msgstr ""
 
@@ -338,7 +322,6 @@ msgstr ""
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "Point"
 msgstr ""
 
@@ -346,7 +329,6 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_answer__awarded_points
-#, python-format
 msgid "Points"
 msgstr "Pontok"
 
@@ -364,7 +346,6 @@ msgstr "Kérdés"
 #. module: website_event_track_quiz
 #. odoo-python
 #: code:addons/website_event_track_quiz/models/event_quiz.py:0
-#, python-format
 msgid ""
 "Question \"%s\" must have 1 correct answer and at least 1 incorrect answer "
 "to be valid."
@@ -373,7 +354,6 @@ msgstr ""
 #. module: website_event_track_quiz
 #. odoo-python
 #: code:addons/website_event_track_quiz/models/event_quiz.py:0
-#, python-format
 msgid "Question \"%s\" must have 1 correct answer to be valid."
 msgstr ""
 
@@ -417,8 +397,7 @@ msgstr ""
 
 #. module: website_event_track_quiz
 #. odoo-javascript
-#: code:addons/website_event_track_quiz/static/src/js/event_quiz.js:0
-#, python-format
+#: code:addons/website_event_track_quiz/static/src/interactions/quiz.js:0
 msgid "Quiz validation error"
 msgstr ""
 
@@ -433,7 +412,6 @@ msgstr ""
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "Reset"
 msgstr "Visszaállítás"
 
@@ -475,7 +453,7 @@ msgstr ""
 
 #. module: website_event_track_quiz
 #: model:event.quiz.answer,text_value:website_event_track_quiz.event_7_track_1_question_1_1
-msgid "Stores !"
+msgid "Stores!"
 msgstr ""
 
 #. module: website_event_track_quiz
@@ -486,7 +464,6 @@ msgstr ""
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "The correct answer was:"
 msgstr ""
 
@@ -497,22 +474,22 @@ msgstr ""
 
 #. module: website_event_track_quiz
 #. odoo-javascript
-#: code:addons/website_event_track_quiz/static/src/js/event_quiz.js:0
-#, python-format
+#: code:addons/website_event_track_quiz/static/src/interactions/quiz.js:0
 msgid "There was an error validating this quiz."
 msgstr ""
 
 #. module: website_event_track_quiz
 #: model:ir.model.fields,help:website_event_track_quiz.field_event_quiz_answer__comment
 msgid ""
-"This comment will be displayed to the user if they select this answer, after submitting the quiz.\n"
-"                It is used as a small informational text helping to understand why this answer is correct / incorrect."
+"This comment will be displayed to the user if they select this answer, after "
+"submitting the quiz.\n"
+"                It is used as a small informational text helping to "
+"understand why this answer is correct / incorrect."
 msgstr ""
 
 #. module: website_event_track_quiz
 #. odoo-javascript
-#: code:addons/website_event_track_quiz/static/src/js/event_quiz.js:0
-#, python-format
+#: code:addons/website_event_track_quiz/static/src/interactions/quiz.js:0
 msgid "This quiz is already done. Retaking it is not possible."
 msgstr ""
 
@@ -538,7 +515,7 @@ msgstr ""
 
 #. module: website_event_track_quiz
 #: model:event.quiz.answer,text_value:website_event_track_quiz.event_7_track_1_question_1_0
-msgid "Trees !"
+msgid "Trees!"
 msgstr ""
 
 #. module: website_event_track_quiz
@@ -563,22 +540,22 @@ msgstr ""
 
 #. module: website_event_track_quiz
 #: model:event.quiz.question,name:website_event_track_quiz.event_7_track_5_question_1
-msgid "What kind of tool are needed to secure your lumber ?"
+msgid "What kind of tool are needed to secure your lumber?"
 msgstr ""
 
 #. module: website_event_track_quiz
 #: model:event.quiz.question,name:website_event_track_quiz.event_7_track_13_question_0
-msgid "What kind of wall is transformed here ?"
+msgid "What kind of wall is transformed here?"
 msgstr ""
 
 #. module: website_event_track_quiz
 #: model:event.quiz.question,name:website_event_track_quiz.event_7_track_1_question_0
-msgid "What will we talk about during this event ?"
+msgid "What will we talk about during this event?"
 msgstr ""
 
 #. module: website_event_track_quiz
 #: model:event.quiz.question,name:website_event_track_quiz.event_7_track_1_question_1
-msgid "Where does lumber comes from ?"
+msgid "Where does lumber comes from?"
 msgstr ""
 
 #. module: website_event_track_quiz
@@ -599,7 +576,7 @@ msgstr ""
 
 #. module: website_event_track_quiz
 #: model:event.quiz.answer,comment:website_event_track_quiz.event_7_track_1_question_0_0
-msgid "You're really smart !"
+msgid "You're really smart!"
 msgstr ""
 
 #. module: website_event_track_quiz
@@ -615,13 +592,11 @@ msgstr ""
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "point!"
 msgstr ""
 
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "points!"
 msgstr ""

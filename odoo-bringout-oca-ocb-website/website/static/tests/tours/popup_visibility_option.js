@@ -1,26 +1,34 @@
-/** @odoo-module */
+import { insertSnippet, registerWebsitePreviewTour } from "@website/js/tours/tour_utils";
 
-import wTourUtils from "website.tour_utils";
-
-wTourUtils.registerWebsitePreviewTour("website_popup_visibility_option", {
-    test: true,
-    edition: true,
-    url: "/",
-}, [
-    wTourUtils.dragNDrop({
-        id: "s_popup",
-        name: "Popup",
-    }),
+registerWebsitePreviewTour(
+    "website_popup_visibility_option",
     {
-        content: "Click on the column within the popup snippet.",
-        trigger: "iframe #wrap .s_popup .o_cc1",
+        url: "/",
+        edition: true,
     },
-    {
-        content: "Click the 'No Desktop' visibility option.",
-        trigger: ".snippet-option-DeviceVisibility we-button[data-toggle-device-visibility='no_desktop']",
-    },
-    {
-        content: "Verify that the popup is visible and the column is invisible.",
-        trigger: ".o_we_invisible_root_parent i.fa-eye, ul .o_we_invisible_entry i.fa-eye-slash",
-    },
-]);
+    () => [
+        ...insertSnippet({
+            id: "s_popup",
+            name: "Popup",
+            groupName: "Content",
+        }),
+        {
+            content: "Click on the column within the popup snippet.",
+            trigger: ":iframe #wrap .s_popup .o_cc1",
+            run: "click",
+        },
+        {
+            content: "Click the 'No Desktop' visibility option to hide the banner.",
+            trigger: `.options-container [data-label="Visibility"] button[data-action-param="no_desktop"]`,
+            run: "click",
+        },
+        {
+            content: "Check that the popup is visible.",
+            trigger: ".o_we_invisible_root_parent i.fa-eye",
+        },
+        {
+            content: "Check that the banner is invisible.",
+            trigger: "ul .o_we_invisible_entry i.fa-eye-slash",
+        },
+    ]
+);

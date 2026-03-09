@@ -1,34 +1,43 @@
-/** @odoo-module */
-
-import wTourUtils from "website.tour_utils";
+import {
+    clickOnSnippet,
+    insertSnippet,
+    registerWebsitePreviewTour,
+} from "@website/js/tours/tour_utils";
 
 const snippets = [
-    { id: "s_popup", name: "Popup" },
-    { id: "s_popup", name: "Custom Popup" },
+    { id: "s_popup", name: "Popup", groupName: "Content" },
+    { id: "s_banner", name: "Banner", groupName: "Into" },
+    { customID: "s_popup", name: "Custom Popup", groupName: "Custom" },
 ];
-wTourUtils.registerWebsitePreviewTour(
+
+registerWebsitePreviewTour(
     "custom_popup_snippet",
     {
-        test: true,
         url: "/",
         edition: true,
     },
-    [
-        wTourUtils.dragNDrop(snippets[0]),
-        wTourUtils.clickOnSnippet(snippets[0]),
+    () => [
+        ...insertSnippet(snippets[0]),
+        ...clickOnSnippet(snippets[1]),
         {
             content: "save this snippet to save later",
-            trigger: ".o_we_user_value_widget.fa-save",
+            trigger: ".options-container[data-container-title='Popup'] .oe_snippet_save",
+            run: "click",
         },
         {
             content: "confirm and reload custom snippet",
             trigger: ".modal-footer > .btn.btn-primary",
+            run: "click",
         },
-        wTourUtils.dragNDrop(snippets[1]),
+        {
+            content: "Hide the popup",
+            trigger: ".o_we_invisible_entry i",
+            run: "click",
+        },
+        ...insertSnippet(snippets[2]),
         {
             content: "check whether new custom popup is visible or not.",
-            trigger: "iframe #wrap.o_editable [data-name='Custom Popup']",
-            run: () => {}, // This is a check
+            trigger: ":iframe section[data-snippet='s_banner']",
         },
     ]
 );

@@ -5,29 +5,23 @@ import json
 import werkzeug
 from werkzeug.exceptions import Forbidden, NotFound
 
-from odoo import exceptions, http, tools
+from odoo import http, tools
 from odoo.http import request
 from odoo.addons.website_event.controllers.main import WebsiteEventController
 
 
 class WebsiteEventBoothController(WebsiteEventController):
 
-    @http.route('/event/<model("event.event"):event>/booth', type='http', auth='public', website=True, sitemap=True)
-    def event_booth_main(self, event):
-        try:
-            event.check_access_rights('read')
-            event.check_access_rule('read')
-        except exceptions.AccessError:
+    @http.route('/event/<model("event.event"):event>/booth', type='http', auth='public', website=True, sitemap=False)
+    def event_booth_main(self, event, booth_category_id=False, booth_ids=False):
+        if not event.has_access('read'):
             raise Forbidden()
 
-        event_sudo = event.sudo()
-        values = {
-            'event': event_sudo,
-            'event_booths': event_sudo.event_booth_ids,
-            'available_booth_category_ids': event_sudo.event_booth_category_available_ids,
-            'main_object': event,
-        }
-        return request.render('website_event_booth.event_booth_registration', values)
+        booth_category_id = int(booth_category_id) if booth_category_id else False
+        return request.render(
+            'website_event_booth.event_booth_registration',
+            self._prepare_booth_main_values(event, booth_category_id=booth_category_id, booth_ids=booth_ids) | {'seo_object': event.booth_menu_ids}
+        )
 
     @http.route('/event/<model("event.event"):event>/booth/register',
                 type='http', auth='public', methods=['POST'], website=True, sitemap=False)
@@ -47,15 +41,21 @@ class WebsiteEventBoothController(WebsiteEventController):
         if not booth_ids or not booth_category_id:
             raise NotFound()
 
+        return request.render(
+            'website_event_booth.event_booth_registration_details',
+            self._prepare_booth_contact_form_values(event, booth_ids, booth_category_id)
+        )
+
+    def _prepare_booth_contact_form_values(self, event, booth_ids, booth_category_id):
         booth_category = request.env['event.booth.category'].sudo().browse(int(booth_category_id))
         event_booths = request.env['event.booth'].sudo().browse([int(booth_id) for booth_id in booth_ids.split(',')])
         default_contact = {}
+
         if not request.env.user._is_public():
             default_contact = {
                 'name': request.env.user.partner_id.name,
                 'email': request.env.user.partner_id.email,
                 'phone': request.env.user.partner_id.phone,
-                'mobile': request.env.user.partner_id.mobile,
             }
         else:
             visitor = request.env['website.visitor']._get_visitor_from_request()
@@ -65,26 +65,16 @@ class WebsiteEventBoothController(WebsiteEventController):
                     'email': visitor.email,
                     'mobile': visitor.mobile,
                 }
-        return request.render(
-            'website_event_booth.event_booth_registration_details',
-            {'event': event.sudo(),
-             'default_contact': default_contact,
-             'booth_category': booth_category,
-             'event_booths': event_booths,
-             'redirect_url': werkzeug.urls.url_quote(request.httprequest.full_path),
-            }
-        )
 
-    def _get_requested_booths(self, event, event_booth_ids):
-        booth_ids = json.loads(event_booth_ids)
-        booths = request.env['event.booth'].sudo().search([
-            ('event_id', '=', event.id),
-            ('state', '=', 'available'),
-            ('id', 'in', booth_ids)
-        ])
-        if booth_ids != booths.ids or len(booths.booth_category_id) != 1:
-            return request.env['event.booth']
-        return booths
+        return {
+            'booth_category': booth_category,
+            'default_contact': default_contact,
+            'event': event.sudo(),
+            'event_booths': event_booths,
+            'hide_sponsors': True,
+            'redirect_url': werkzeug.urls.url_quote(request.httprequest.full_path),
+            'slots': event.event_slot_ids._filter_open_slots().grouped('date'),
+        }
 
     @http.route('/event/<model("event.event"):event>/booth/confirm',
                 type='http', auth='public', methods=['POST'], website=True, sitemap=False)
@@ -99,6 +89,17 @@ class WebsiteEventBoothController(WebsiteEventController):
         booths.action_confirm(booth_values)
 
         return self._prepare_booth_registration_success_values(event.name, booth_values)
+
+    def _get_requested_booths(self, event, event_booth_ids):
+        booth_ids = json.loads(event_booth_ids)
+        booths = request.env['event.booth'].sudo().search([
+            ('event_id', '=', event.id),
+            ('state', '=', 'available'),
+            ('id', 'in', booth_ids)
+        ])
+        if booth_ids != booths.ids or len(booths.booth_category_id) != 1:
+            return request.env['event.booth']
+        return booths
 
     def _check_booth_registration_values(self, booths, contact_email, booth_category=False):
         if not booths:
@@ -117,27 +118,44 @@ class WebsiteEventBoothController(WebsiteEventController):
 
         return False
 
+    def _prepare_booth_main_values(self, event, booth_category_id=False, booth_ids=False):
+        event_sudo = event.sudo()
+        available_booth_categories = event_sudo.event_booth_category_available_ids
+        chosen_booth_category = available_booth_categories.filtered(lambda cat: cat.id == booth_category_id)
+        default_booth_category = available_booth_categories[0] if available_booth_categories else request.env['event.booth.category']
+        return {
+            'available_booth_category_ids': available_booth_categories,
+            'event': event_sudo,
+            'event_booths': event_sudo.event_booth_ids,
+            'hide_sponsors': True,
+            'main_object': event_sudo,
+            'selected_booth_category_id': (chosen_booth_category or default_booth_category).id,
+            'selected_booth_ids': booth_ids if booth_category_id == chosen_booth_category.id and booth_ids else False,
+            'slots': event.event_slot_ids._filter_open_slots().grouped('date'),
+        }
+
     def _prepare_booth_registration_values(self, event, kwargs):
         return self._prepare_booth_registration_partner_values(event, kwargs)
 
     def _prepare_booth_registration_partner_values(self, event, kwargs):
         if request.env.user._is_public():
-            conctact_email_normalized = tools.email_normalize(kwargs['contact_email'])
-            contact_name_email = tools.formataddr((kwargs['contact_name'], conctact_email_normalized))
-            partner = request.env['res.partner'].sudo().find_or_create(contact_name_email)
-            if not partner.name and kwargs.get('contact_name'):
-                partner.name = kwargs['contact_name']
-            if not partner.phone and kwargs.get('contact_phone'):
-                partner.phone = kwargs['contact_phone']
-            if not partner.mobile and kwargs.get('contact_mobile'):
-                partner.mobile = kwargs['contact_mobile']
+            contact_email_normalized = tools.email_normalize(kwargs['contact_email'])
+            if contact_email_normalized:
+                partner = event.sudo()._partner_find_from_emails_single(
+                    [contact_email_normalized],
+                    additional_values={contact_email_normalized: {
+                        'phone': kwargs.get('contact_phone'),
+                        'name': kwargs.get('contact_name'),
+                    }},
+                )
+            else:
+                partner = request.env['res.partner']
         else:
             partner = request.env.user.partner_id
         return {
             'partner_id': partner.id,
             'contact_name': kwargs.get('contact_name') or partner.name,
             'contact_email': kwargs.get('contact_email') or partner.email,
-            'contact_mobile': kwargs.get('contact_mobile') or partner.mobile,
             'contact_phone': kwargs.get('contact_phone') or partner.phone,
         }
 
@@ -149,11 +167,10 @@ class WebsiteEventBoothController(WebsiteEventController):
                 'name': booth_values.get('contact_name'),
                 'email': booth_values.get('contact_email'),
                 'phone': booth_values.get('contact_phone'),
-                'mobile': booth_values.get('contact_mobile'),
             },
         })
 
-    @http.route('/event/booth/check_availability', type='json', auth='public', methods=['POST'])
+    @http.route('/event/booth/check_availability', type='jsonrpc', auth='public', methods=['POST'])
     def check_booths_availability(self, event_booth_ids=None):
         if not event_booth_ids:
             return {}
@@ -162,7 +179,7 @@ class WebsiteEventBoothController(WebsiteEventController):
             'unavailable_booths': booths.filtered(lambda booth: not booth.is_available).ids
         }
 
-    @http.route(['/event/booth_category/get_available_booths'], type='json', auth='public')
+    @http.route(['/event/booth_category/get_available_booths'], type='jsonrpc', auth='public')
     def get_booth_category_available_booths(self, event_id, booth_category_id):
         booth_ids = request.env['event.booth'].sudo().search([
             ('event_id', '=', int(event_id)),

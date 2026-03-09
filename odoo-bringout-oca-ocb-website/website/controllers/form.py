@@ -1,31 +1,34 @@
-# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 import base64
 import json
-import re
+import psycopg2
 
-from markupsafe import escape
+from markupsafe import Markup
 from psycopg2 import IntegrityError
+import re
 from werkzeug.exceptions import BadRequest
 
-from odoo import http, SUPERUSER_ID, _, _lt
+from odoo import http, SUPERUSER_ID
+from odoo.addons.base.models.ir_qweb_fields import nl2br, nl2br_enclose
 from odoo.http import request
 from odoo.tools import plaintext2html
-from odoo.addons.base.models.ir_qweb_fields import nl2br
 from odoo.exceptions import AccessDenied, ValidationError, UserError
 from odoo.tools.misc import hmac, consteq
+from odoo.tools.translate import _, LazyTranslate
+
+_lt = LazyTranslate(__name__)
 
 
 class WebsiteForm(http.Controller):
 
-    @http.route('/website/form', type='http', auth="public", methods=['POST'], multilang=False)
+    @http.route('/website/form', type='http', auth="public", methods=['POST'], multilang=False, readonly=True)
     def website_form_empty(self, **kwargs):
         # This is a workaround to don't add language prefix to <form action="/website/form/" ...>
         return ""
 
     # Check and insert values from the form on the model <model>
-    @http.route('/website/form/<string:model_name>', type='http', auth="public", methods=['POST'], website=True, csrf=False)
+    @http.route('/website/form/<string:model_name>', type='http', auth="public", methods=['POST'], website=True, csrf=False, captcha='website_form')
     def website_form(self, model_name, **kwargs):
         # Partial CSRF check, only performed when session is authenticated, as there
         # is no real risk for unauthenticated sessions here. It's a common case for
@@ -40,18 +43,21 @@ class WebsiteForm(http.Controller):
             # here be committed. It should not either roll back everything in
             # this controller method. Instead, we use a savepoint to roll back
             # what has been done inside the try clause.
-            with request.env.cr.savepoint():
-                if request.env['ir.http']._verify_request_recaptcha_token('website_form'):
-                    # request.params was modified, update kwargs to reflect the changes
-                    kwargs = dict(request.params)
-                    kwargs.pop('model_name')
-                    return self._handle_website_form(model_name, **kwargs)
-            error = _("Suspicious activity detected by Google reCaptcha.")
+            with request.env.cr.savepoint() as sp:
+                # request.params was modified, update kwargs to reflect the changes
+                kwargs = dict(request.params)
+                kwargs.pop('model_name')
+                res = self._handle_website_form(model_name, **kwargs)
+                # ignore savepoint closing error if the transaction was committed
+                try:
+                    sp.close(rollback=False)
+                except psycopg2.errors.InvalidSavepointSpecification:
+                    sp.closed = True
+                return res
         except (ValidationError, UserError) as e:
-            error = e.args[0]
-        return json.dumps({
-            'error': error,
-        })
+            return json.dumps({
+                'error': e.args[0],
+            })
 
     def _handle_website_form(self, model_name, **kwargs):
         model_record = request.env['ir.model'].sudo().search([('model', '=', model_name), ('website_form_access', '=', True)])
@@ -73,6 +79,7 @@ class WebsiteForm(http.Controller):
                 self.insert_attachment(model_record, id_record, data['attachments'])
                 # in case of an email, we want to send it immediately instead of waiting
                 # for the email queue to process
+
                 if model_name == 'mail.mail':
                     form_has_email_cc = {'email_cc', 'email_bcc'} & kwargs.keys() or \
                         'email_cc' in kwargs["website_form_signature"]
@@ -82,7 +89,7 @@ class WebsiteForm(http.Controller):
                         value = kwargs['email_to'] + (':email_cc' if form_has_email_cc else '')
                         hash_value = hmac(model_record.env, 'website_form_signature', value)
                         if not consteq(kwargs["website_form_signature"], hash_value):
-                            raise AccessDenied('invalid website_form_signature')
+                            raise AccessDenied(self.env._('invalid website_form_signature'))
                     request.env[model_name].sudo().browse(id_record).send()
 
         # Some fields have additional SQL constraints that we can't check generically
@@ -127,6 +134,13 @@ class WebsiteForm(http.Controller):
     def many2many(self, field_label, field_input, *args):
         return [(args[0] if args else (6, 0)) + (self.one2many(field_label, field_input),)]
 
+    def tags(self, field_label, field_input):
+        # Unescape ',' and '\'
+        return [
+            tag.replace('\\,', ',').replace('\\/', '\\')
+            for tag in re.split(r'(?<!\\),', field_input)
+        ]
+
     _input_filters = {
         'char': identity,
         'text': identity,
@@ -142,11 +156,15 @@ class WebsiteForm(http.Controller):
         'float': floating,
         'binary': binary,
         'monetary': floating,
+        # Properties
+        'tags': tags,
     }
 
     # Extract all data sent by the form and sort its on several properties
-    def extract_data(self, model, values):
-        dest_model = request.env[model.sudo().model]
+    def extract_data(self, model_sudo, values):
+        if not model_sudo.env.su:
+            raise ValueError("model_sudo should get passed with sudo")
+        dest_model = request.env[model_sudo.model]
 
         data = {
             'record': {},        # Values to create record
@@ -155,20 +173,13 @@ class WebsiteForm(http.Controller):
             'meta': '',         # Add metadata if enabled
         }
 
-        authorized_fields = model.with_user(SUPERUSER_ID)._get_form_writable_fields()
+        authorized_fields = model_sudo.with_user(SUPERUSER_ID)._get_form_writable_fields(values)
         error_fields = []
         custom_fields = []
 
         for field_name, field_value in values.items():
             # First decode the field_name encoded at the client side.
-            html_entities = {
-                '&quot;': '"',
-                '&apos;': "'",
-                '&lsquo;': '`',
-                '&bsol;': '\\',
-            }
-            pattern = '|'.join(html_entities.keys())
-            field_name = re.sub(pattern, lambda match: html_entities[match.group(0)], field_name)
+            field_name = re.sub('&quot;', '"', field_name)
 
             # If the value of the field if a file
             if hasattr(field_value, 'filename'):
@@ -189,8 +200,23 @@ class WebsiteForm(http.Controller):
             # If it's a known field
             elif field_name in authorized_fields:
                 try:
-                    input_filter = self._input_filters[authorized_fields[field_name]['type']]
-                    data['record'][field_name] = input_filter(self, field_name, field_value)
+                    if '_property' in authorized_fields[field_name]:
+                        # Collect all properties for a given property field in
+                        # a list.
+                        field_data = authorized_fields[field_name]
+                        properties_field_name = field_data['_property']['field']
+                        del field_data['_property']
+                        properties = data['record'].setdefault(properties_field_name, [])
+                        property_type = authorized_fields[field_name]['type']
+                        # For properties, many2many is stored as an array of
+                        # integers like one2many
+                        filter_type = 'one2many' if property_type == 'many2many' else property_type
+                        input_filter = self._input_filters[filter_type]
+                        field_data['value'] = input_filter(self, field_name, field_value)
+                        properties.append(field_data)
+                    else:
+                        input_filter = self._input_filters[authorized_fields[field_name]['type']]
+                        data['record'][field_name] = input_filter(self, field_name, field_value)
                 except ValueError:
                     error_fields.append(field_name)
 
@@ -234,20 +260,22 @@ class WebsiteForm(http.Controller):
 
         return data
 
-    def insert_record(self, request, model, values, custom, meta=None):
-        model_name = model.sudo().model
+    def insert_record(self, request, model_sudo, values, custom, meta=None):
+        if not model_sudo.env.su:
+            raise ValueError("model_sudo should get passed with sudo")
+        model_name = model_sudo.model
         if model_name == 'mail.mail':
-            email_from = _('"%s form submission" <%s>') % (request.env.company.name, request.env.company.email)
+            email_from = _('"%(company)s form submission" <%(email)s>', company=request.env.company.name, email=request.env.company.email)
             values.update({'reply_to': values.get('email_from'), 'email_from': email_from})
         record = request.env[model_name].with_user(SUPERUSER_ID).with_context(
             mail_create_nosubscribe=True,
-            commit_assetsbundle=False,
         ).create(values)
+
         if custom or meta:
             _custom_label = "%s\n___________\n\n" % _("Other Information:")  # Title for custom fields
             if model_name == 'mail.mail':
                 _custom_label = "%s\n___________\n\n" % _("This message has been posted on your website!")
-            default_field = model.website_form_default_field_id
+            default_field = model_sudo.website_form_default_field_id
             default_field_data = values.get(default_field.name, '')
             custom_content = (default_field_data + "\n\n" if default_field_data else '') \
                 + (_custom_label + custom + "\n\n" if custom else '') \
@@ -257,25 +285,24 @@ class WebsiteForm(http.Controller):
             # If there isn't, put the custom data in a message instead
             if default_field.name:
                 if default_field.ttype == 'html' or model_name == 'mail.mail':
-                    custom_content = nl2br(escape(custom_content))
+                    custom_content = nl2br(custom_content)
                 record.update({default_field.name: custom_content})
-            else:
-                values = {
-                    'body': nl2br(escape(custom_content)),
-                    'model': model_name,
-                    'message_type': 'comment',
-                    'res_id': record.id,
-                }
-                request.env['mail.message'].with_user(SUPERUSER_ID).create(values)
+            elif hasattr(record, '_message_log'):
+                record._message_log(
+                    body=nl2br_enclose(custom_content, 'p'),
+                    message_type='comment',
+                )
 
         return record.id
 
     # Link all files attached on the form
-    def insert_attachment(self, model, id_record, files):
+    def insert_attachment(self, model_sudo, id_record, files):
+        if not model_sudo.env.su:
+            raise ValueError("model_sudo should get passed with sudo")
+        model_name = model_sudo.model
         orphan_attachment_ids = []
-        model_name = model.sudo().model
-        record = model.env[model_name].browse(id_record)
-        authorized_fields = model.with_user(SUPERUSER_ID)._get_form_writable_fields()
+        record = model_sudo.env[model_name].browse(id_record)
+        authorized_fields = model_sudo.with_user(SUPERUSER_ID)._get_form_writable_fields()
         for file in files:
             custom_field = file.field_name not in authorized_fields
             attachment_value = {
@@ -294,20 +321,15 @@ class WebsiteForm(http.Controller):
             else:
                 orphan_attachment_ids.append(attachment_id.id)
 
-        if model_name != 'mail.mail':
+        if model_name != 'mail.mail' and hasattr(record, '_message_log') and orphan_attachment_ids:
             # If some attachments didn't match a field on the model,
             # we create a mail.message to link them to the record
-            if orphan_attachment_ids:
-                values = {
-                    'body': _('<p>Attached files : </p>'),
-                    'model': model_name,
-                    'message_type': 'comment',
-                    'res_id': id_record,
-                    'attachment_ids': [(6, 0, orphan_attachment_ids)],
-                    'subtype_id': request.env['ir.model.data']._xmlid_to_res_id('mail.mt_comment'),
-                }
-                request.env['mail.message'].with_user(SUPERUSER_ID).create(values)
-        else:
+            record._message_log(
+                attachment_ids=[(6, 0, orphan_attachment_ids)],
+                body=Markup(_('<p>Attached files: </p>')),
+                message_type='comment',
+            )
+        elif model_name == 'mail.mail' and orphan_attachment_ids:
             # If the model is mail.mail then we have no other choice but to
             # attach the custom binary field files on the attachment_ids field.
             for attachment_id_id in orphan_attachment_ids:

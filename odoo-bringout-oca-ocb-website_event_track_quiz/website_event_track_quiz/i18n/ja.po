@@ -1,27 +1,23 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* website_event_track_quiz
-# 
-# Translators:
-# Yoshi Tashiro (Quartile) <tashiro@roomsfor.hk>, 2022
-# Ryoko Tsuda <ryoko@quartile.co>, 2022
-# Martin Trigaux, 2022
-# Noma Yuki, 2022
-# Junko Augias, 2023
-# 
+# * website_event_track_quiz
+#
+# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-06 13:32+0000\n"
-"PO-Revision-Date: 2022-09-22 05:56+0000\n"
-"Last-Translator: Junko Augias, 2023\n"
-"Language-Team: Japanese (https://app.transifex.com/odoo/teams/41243/ja/)\n"
+"POT-Creation-Date: 2026-01-25 18:37+0000\n"
+"PO-Revision-Date: 2025-09-14 21:10+0000\n"
+"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@odoo.com>\n"
+"Language-Team: Japanese <https://translate.odoo.com/projects/odoo-19/"
+"website_event_track_quiz/ja/>\n"
+"Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.12.2\n"
 
 #. module: website_event_track_quiz
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_track__quiz_questions_count
@@ -49,11 +45,15 @@ msgid "Add Quiz"
 msgstr "クイズを追加"
 
 #. module: website_event_track_quiz
+#: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_quiz_view_form
+msgid "All Events"
+msgstr "イベント一覧"
+
+#. module: website_event_track_quiz
 #. odoo-javascript
-#: code:addons/website_event_track_quiz/static/src/js/event_quiz.js:0
-#, python-format
-msgid "All questions must be answered !"
-msgstr ""
+#: code:addons/website_event_track_quiz/static/src/interactions/quiz.js:0
+msgid "All questions must be answered!"
+msgstr "全ての質問に回答する必要があります。"
 
 #. module: website_event_track_quiz
 #: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_quiz_view_form
@@ -69,15 +69,12 @@ msgstr "回答"
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "Check answers"
 msgstr "回答を確認"
 
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "Check your answers"
 msgstr "自分の回答を確認"
 
@@ -89,12 +86,11 @@ msgstr "完了"
 #. module: website_event_track_quiz
 #: model:event.quiz.answer,text_value:website_event_track_quiz.event_7_track_13_question_0_0
 msgid "Concrete Blocks Wall"
-msgstr "コンクリートブロック壁"
+msgstr "コンクリートブロック塀"
 
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "Congratulations, you scored a total of"
 msgstr "おめでとうございます。あなたの合計スコアは以下です:"
 
@@ -116,7 +112,6 @@ msgstr "正解"
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "Correct."
 msgstr "正解。"
 
@@ -135,9 +130,12 @@ msgid "Created on"
 msgstr "作成日"
 
 #. module: website_event_track_quiz
+#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_event__display_name
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz__display_name
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_answer__display_name
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_question__display_name
+#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_track__display_name
+#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_track_visitor__display_name
 msgid "Display Name"
 msgstr "表示名"
 
@@ -149,7 +147,9 @@ msgstr "たとえいくつかあるとしても。"
 #. module: website_event_track_quiz
 #: model:event.quiz.answer,comment:website_event_track_quiz.event_7_track_5_question_0_1
 msgid "Even if you have a big trunk, some long products need to be secured."
-msgstr "トランクが大きくても、一部の長い製品はしっかりと固定する必要があります。"
+msgstr ""
+"トランクが大きくても、一部の長いプロダクトはしっかりと固定する必要がありま"
+"す。"
 
 #. module: website_event_track_quiz
 #: model:ir.model,name:website_event_track_quiz.model_event_event
@@ -172,7 +172,7 @@ msgstr "イベントクイズ"
 #: model:ir.model,name:website_event_track_quiz.model_event_track
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz__event_track_id
 msgid "Event Track"
-msgstr "イベントトラック"
+msgstr "イベントセッション"
 
 #. module: website_event_track_quiz
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_answer__comment
@@ -189,20 +189,14 @@ msgstr "ここから、セッションにリンク済の全てのクイズ問題
 #. module: website_event_track_quiz
 #: model_terms:ir.actions.act_window,help:website_event_track_quiz.event_quiz_action
 msgid ""
-"From here you will be able to overview all quizzes you have linked to "
-"Tracks."
-msgstr "ここから、セッションにリンク済の全てのクイズの概要を見ることができます。"
+"From here you will be able to overview all quizzes you have linked to Tracks."
+msgstr ""
+"ここから、セッションにリンク済の全てのクイズの概要を見ることができます。"
 
 #. module: website_event_track_quiz
 #: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_track_view_form
 msgid "Go to Quiz"
 msgstr "クイズへ移動"
-
-#. module: website_event_track_quiz
-#: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_quiz_question_view_search
-#: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_quiz_view_search
-msgid "Group By"
-msgstr "グループ化"
 
 #. module: website_event_track_quiz
 #: model:event.quiz.answer,text_value:website_event_track_quiz.event_7_track_5_question_1_0
@@ -215,9 +209,12 @@ msgid "Hammer won't be of any help here!"
 msgstr "ハンマーはここでは役に立ちません！"
 
 #. module: website_event_track_quiz
+#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_event__id
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz__id
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_answer__id
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_question__id
+#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_track__id
+#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_track_visitor__id
 msgid "ID"
 msgstr "ID"
 
@@ -231,21 +228,13 @@ msgstr "事故を防ぐため、この種のプロダクトは輸送中に固定
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "Incorrect."
 msgstr "不正解。"
 
 #. module: website_event_track_quiz
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_track__is_quiz_completed
 msgid "Is Quiz Done"
-msgstr "クイズ完了か"
-
-#. module: website_event_track_quiz
-#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz____last_update
-#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_answer____last_update
-#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_question____last_update
-msgid "Last Modified on"
-msgstr "最終更新日"
+msgstr "クイズ完了"
 
 #. module: website_event_track_quiz
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz__write_uid
@@ -319,7 +308,6 @@ msgstr "ポイントの数"
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "Oopsie, you did not score any point on this quiz."
 msgstr "おっと、このクイズは得点になりませんでした。"
 
@@ -336,7 +324,6 @@ msgstr "OpenWoodはアプリについてのオープンソースの集まりで�
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "Point"
 msgstr "ポイント"
 
@@ -344,7 +331,6 @@ msgstr "ポイント"
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_answer__awarded_points
-#, python-format
 msgid "Points"
 msgstr "ポイント"
 
@@ -362,16 +348,16 @@ msgstr "質問"
 #. module: website_event_track_quiz
 #. odoo-python
 #: code:addons/website_event_track_quiz/models/event_quiz.py:0
-#, python-format
 msgid ""
 "Question \"%s\" must have 1 correct answer and at least 1 incorrect answer "
 "to be valid."
-msgstr "質問  \"%s\"は有効であるために、1つ正解と少なくとも1つの不正解を持つ必要があります。"
+msgstr ""
+"質問  \"%s\"は有効であるために、1つ正解と少なくとも1つの不正解を持つ必要があ"
+"ります。"
 
 #. module: website_event_track_quiz
 #. odoo-python
 #: code:addons/website_event_track_quiz/models/event_quiz.py:0
-#, python-format
 msgid "Question \"%s\" must have 1 correct answer to be valid."
 msgstr "質問 \"%s\"は有効であるために1つ正解を持つ必要があります。"
 
@@ -415,8 +401,7 @@ msgstr "クイズ問題"
 
 #. module: website_event_track_quiz
 #. odoo-javascript
-#: code:addons/website_event_track_quiz/static/src/js/event_quiz.js:0
-#, python-format
+#: code:addons/website_event_track_quiz/static/src/interactions/quiz.js:0
 msgid "Quiz validation error"
 msgstr "クイズ検証エラー"
 
@@ -431,7 +416,6 @@ msgstr "クイズ"
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "Reset"
 msgstr "リセット"
 
@@ -464,7 +448,7 @@ msgstr "輸送中の木材の保護"
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_answer__sequence
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_question__sequence
 msgid "Sequence"
-msgstr "付番"
+msgstr "シーケンス"
 
 #. module: website_event_track_quiz
 #: model:event.quiz.answer,text_value:website_event_track_quiz.event_7_track_13_question_0_1
@@ -473,8 +457,8 @@ msgstr "鋼鉄壁"
 
 #. module: website_event_track_quiz
 #: model:event.quiz.answer,text_value:website_event_track_quiz.event_7_track_1_question_1_1
-msgid "Stores !"
-msgstr ""
+msgid "Stores!"
+msgstr "店舗！"
 
 #. module: website_event_track_quiz
 #: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_track_content
@@ -484,7 +468,6 @@ msgstr "クイズに答える"
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "The correct answer was:"
 msgstr "正解は:"
 
@@ -495,24 +478,25 @@ msgstr "現在有効なリーダボードはありません。"
 
 #. module: website_event_track_quiz
 #. odoo-javascript
-#: code:addons/website_event_track_quiz/static/src/js/event_quiz.js:0
-#, python-format
+#: code:addons/website_event_track_quiz/static/src/interactions/quiz.js:0
 msgid "There was an error validating this quiz."
 msgstr "このクイズの検証中にエラーが発生しました。"
 
 #. module: website_event_track_quiz
 #: model:ir.model.fields,help:website_event_track_quiz.field_event_quiz_answer__comment
 msgid ""
-"This comment will be displayed to the user if they select this answer, after submitting the quiz.\n"
-"                It is used as a small informational text helping to understand why this answer is correct / incorrect."
+"This comment will be displayed to the user if they select this answer, after "
+"submitting the quiz.\n"
+"                It is used as a small informational text helping to "
+"understand why this answer is correct / incorrect."
 msgstr ""
 "このコメントはクイズを提出し後、この回答を選択したユーザに表示されます。\n"
-"　　　　　このコメントは回答が正解/不正解である理由を説明する短い情報テキストとして使用されます。"
+"　　　　　このコメントは回答が正解/不正解である理由を説明する短い情報テキスト"
+"として使用されます。"
 
 #. module: website_event_track_quiz
 #. odoo-javascript
-#: code:addons/website_event_track_quiz/static/src/js/event_quiz.js:0
-#, python-format
+#: code:addons/website_event_track_quiz/static/src/interactions/quiz.js:0
 msgid "This quiz is already done. Retaking it is not possible."
 msgstr "このクイズは完了済です。再度行うことはできません。"
 
@@ -529,17 +513,17 @@ msgstr "追跡"
 #. module: website_event_track_quiz
 #: model:ir.model,name:website_event_track_quiz.model_event_track_visitor
 msgid "Track / Visitor Link"
-msgstr "トラック/ビジターリンク"
+msgstr "セッション / 訪問者リンク"
 
 #. module: website_event_track_quiz
 #: model:event.quiz.question,name:website_event_track_quiz.event_7_track_5_question_0
 msgid "Transporting lumber from stores to your house is safe."
-msgstr "店舗からご自宅までの木材の運搬は安全です。"
+msgstr "店舗からご自宅までの木材の運搬は安全に行われます。"
 
 #. module: website_event_track_quiz
 #: model:event.quiz.answer,text_value:website_event_track_quiz.event_7_track_1_question_1_0
-msgid "Trees !"
-msgstr ""
+msgid "Trees!"
+msgstr "樹木！"
 
 #. module: website_event_track_quiz
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz__repeatable
@@ -563,23 +547,23 @@ msgstr "このイベントとは"
 
 #. module: website_event_track_quiz
 #: model:event.quiz.question,name:website_event_track_quiz.event_7_track_5_question_1
-msgid "What kind of tool are needed to secure your lumber ?"
-msgstr ""
+msgid "What kind of tool are needed to secure your lumber?"
+msgstr "木材を固定するにはどんな道具が必要ですか？"
 
 #. module: website_event_track_quiz
 #: model:event.quiz.question,name:website_event_track_quiz.event_7_track_13_question_0
-msgid "What kind of wall is transformed here ?"
-msgstr ""
+msgid "What kind of wall is transformed here?"
+msgstr "ここではどんな壁が変形していますか？"
 
 #. module: website_event_track_quiz
 #: model:event.quiz.question,name:website_event_track_quiz.event_7_track_1_question_0
-msgid "What will we talk about during this event ?"
-msgstr ""
+msgid "What will we talk about during this event?"
+msgstr "このイベントで私たちは何をお話するのでしょうか？"
 
 #. module: website_event_track_quiz
 #: model:event.quiz.question,name:website_event_track_quiz.event_7_track_1_question_1
-msgid "Where does lumber comes from ?"
-msgstr ""
+msgid "Where does lumber comes from?"
+msgstr "木材はどこから来ましたか？"
 
 #. module: website_event_track_quiz
 #: model:event.quiz.answer,text_value:website_event_track_quiz.event_7_track_1_question_0_0
@@ -595,12 +579,12 @@ msgstr "はい"
 #: model_terms:ir.ui.view,arch_db:website_event_track_quiz.all_visitor_card
 #: model_terms:ir.ui.view,arch_db:website_event_track_quiz.top3_visitor_card
 msgid "You"
-msgstr "お客様"
+msgstr "あなた"
 
 #. module: website_event_track_quiz
 #: model:event.quiz.answer,comment:website_event_track_quiz.event_7_track_1_question_0_0
-msgid "You're really smart !"
-msgstr ""
+msgid "You're really smart!"
+msgstr "頭がいい！"
 
 #. module: website_event_track_quiz
 #: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_quiz_view_form
@@ -615,13 +599,11 @@ msgstr "例: ジョーのお気に入りのモットーは？"
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "point!"
 msgstr "ポイント！"
 
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "points!"
 msgstr "ポイント！"

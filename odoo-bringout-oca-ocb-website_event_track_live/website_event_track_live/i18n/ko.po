@@ -1,24 +1,23 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* website_event_track_live
-# 
-# Translators:
-# Martin Trigaux, 2022
-# Daye Jeong, 2023
-# 
+# * website_event_track_live
+#
+# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-06 13:32+0000\n"
-"PO-Revision-Date: 2022-09-22 05:56+0000\n"
-"Last-Translator: Daye Jeong, 2023\n"
-"Language-Team: Korean (https://app.transifex.com/odoo/teams/41243/ko/)\n"
+"POT-Creation-Date: 2026-01-25 18:37+0000\n"
+"PO-Revision-Date: 2025-09-16 04:47+0000\n"
+"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@odoo.com>\n"
+"Language-Team: Korean <https://translate.odoo.com/projects/odoo-19/"
+"website_event_track_live/ko/>\n"
+"Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: ko\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.12.2\n"
 
 #. module: website_event_track_live
 #: model_terms:ir.ui.view,arch_db:website_event_track_live.event_track_content
@@ -40,13 +39,13 @@ msgid ""
 "Check this option if the video is already available on YouTube to avoid "
 "showing 'Direct' options (Chat, ...)"
 msgstr ""
-"유튜브에 동영상이 이미 업로드된 경우 이 옵션을 선택하면 '다이렉트' 옵션 (채팅, ...)을 보이지 않도록 설정할 수 있습니다."
+"유튜브에 동영상이 이미 업로드된 경우 이 옵션을 선택하면 '다이렉트' 옵션 (채"
+"팅, ...)을 보이지 않도록 설정할 수 있습니다."
 
 #. module: website_event_track_live
-#: model:ir.model.fields,help:website_event_track_live.field_event_track__youtube_video_url
-msgid ""
-"Configure this URL so that event attendees can see your Track in video!"
-msgstr ""
+#: model:ir.model.fields,field_description:website_event_track_live.field_event_track__display_name
+msgid "Display Name"
+msgstr "표시명"
 
 #. module: website_event_track_live
 #: model:ir.model,name:website_event_track_live.model_event_track
@@ -56,9 +55,16 @@ msgstr "행사 과정"
 #. module: website_event_track_live
 #: model:ir.model.fields,help:website_event_track_live.field_event_track__youtube_video_id
 msgid ""
-"Extracted from the video URL and used to infer various links "
-"(embed/thumbnail/...)"
-msgstr "동영상 URL에서 추출하여 다양한 링크(임베드/썸네일/...)를 유추하는 데 사용됩니다."
+"Extracted from the video URL and used to infer various links (embed/"
+"thumbnail/...)"
+msgstr ""
+"동영상 URL에서 추출하여 다양한 링크(임베드/썸네일/...)를 유추하는 데 사용됩니"
+"다."
+
+#. module: website_event_track_live
+#: model:ir.model.fields,field_description:website_event_track_live.field_event_track__id
+msgid "ID"
+msgstr "ID"
 
 #. module: website_event_track_live
 #: model:ir.model.fields,field_description:website_event_track_live.field_event_track__is_youtube_chat_available
@@ -68,40 +74,34 @@ msgstr "채팅 사용 가능"
 #. module: website_event_track_live
 #: model:ir.model.fields,field_description:website_event_track_live.field_event_track__is_youtube_replay
 msgid "Is YouTube Replay"
-msgstr "유튜브 다시보기"
+msgstr "유튜브 재생"
 
 #. module: website_event_track_live
-#: model_terms:ir.ui.view,arch_db:website_event_track_live.tracks_display_list
+#: model_terms:ir.ui.view,arch_db:website_event_track_live.track_list_item
 msgid "Replay"
-msgstr "다시보기"
+msgstr "재생"
 
 #. module: website_event_track_live
 #. odoo-javascript
 #: code:addons/website_event_track_live/static/src/xml/website_event_track_live_templates.xml:0
-#: code:addons/website_event_track_live/static/src/xml/website_event_track_live_templates.xml:0
-#, python-format
 msgid "Replay Video"
 msgstr "동영상 재생"
 
 #. module: website_event_track_live
 #. odoo-javascript
 #: code:addons/website_event_track_live/static/src/xml/website_event_track_live_templates.xml:0
-#, python-format
 msgid "Starts in"
 msgstr "에서 시작"
 
 #. module: website_event_track_live
 #. odoo-javascript
 #: code:addons/website_event_track_live/static/src/xml/website_event_track_live_templates.xml:0
-#, python-format
 msgid "Up Next:"
 msgstr "다음:"
 
 #. module: website_event_track_live
 #. odoo-javascript
 #: code:addons/website_event_track_live/static/src/xml/website_event_track_live_templates.xml:0
-#: code:addons/website_event_track_live/static/src/xml/website_event_track_live_templates.xml:0
-#, python-format
 msgid "You just watched:"
 msgstr "방금 시청한 동영상:"
 

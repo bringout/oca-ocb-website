@@ -1,59 +1,72 @@
 /** @odoo-module **/
 
-import wTourUtils from 'website.tour_utils';
+import { registerWebsitePreviewTour } from '@website/js/tours/tour_utils';
 
+import { stepUtils } from "@web_tour/tour_utils";
 /**
  * The purpose of these tours is to check whether Publish can or cannot be
  * used by the given current user.
  */
 
-wTourUtils.registerWebsitePreviewTour('test_can_publish_partner', {
+registerWebsitePreviewTour('test_can_publish_partner', {
     edition: false,
-    test: true,
     url: '/partners',
-}, [{
+}, () => [
+    stepUtils.waitIframeIsReady(),
+{
+    content: 'Open grade filter',
+    trigger: ':iframe .dropdown:has(.dropdown-item:contains("Grade Test")) button.dropdown-toggle:contains("All Categories")',
+    run: "click",
+}, {
     content: 'Filter on Grade Test', // needed if there are demo data
-    trigger: 'iframe a:contains("Grade Test")',
+    trigger: ':iframe .dropdown a.dropdown-item:contains("Grade Test")',
+    run: "click",
 }, {
     content: 'Go to partner',
-    trigger: 'iframe a:contains("Agrolait")',
+    trigger: ':iframe a:contains("Agrolait")',
+    run: "click",
 }, {
     content: 'Unpublish',
-    trigger: '.o_menu_systray .o_menu_systray_item.o_publish_container:contains("Published")',
+    trigger: '.o_menu_systray .o_menu_systray_item.o_website_publish_container:contains("Published")',
+    run: "click",
 }, {
-    content: 'Wait for Unpublish',
-    trigger: '.o_menu_systray .o_menu_systray_item.o_publish_container:contains("Unpublished"):not([data-processing])',
-    run: () => {}, // This is a check.
+    content: "Wait for Unpublish",
+    trigger: '.o_menu_systray .o_menu_systray_item.o_website_publish_container:contains("Unpublished"):not([data-processing])',
 }, {
-    content: 'Publish',
-    trigger: '.o_menu_systray .o_menu_systray_item.o_publish_container:contains("Unpublished")',
+    content: "Publish",
+    trigger: '.o_menu_systray .o_menu_systray_item.o_website_publish_container:contains("Unpublished")',
+    run: "click",
 }, {
-    content: 'Wait for Publish',
-    trigger: '.o_menu_systray .o_menu_systray_item.o_publish_container:contains("Published"):not([data-processing])',
-    run: () => {}, // This is a check.
+    content: "Wait for Publish",
+    trigger: '.o_menu_systray .o_menu_systray_item.o_website_publish_container:contains("Published"):not([data-processing])',
 }]);
 
-wTourUtils.registerWebsitePreviewTour('test_cannot_publish_partner', {
+registerWebsitePreviewTour('test_cannot_publish_partner', {
     edition: false,
-    test: true,
     url: '/partners',
-}, [{
+}, () => [
+    stepUtils.waitIframeIsReady(),
+{
+    content: 'Open grade filter',
+    trigger: ':iframe .dropdown:has(.dropdown-item:contains("Grade Test")) button.dropdown-toggle:contains("All Categories")',
+    run: "click",
+}, {
     content: 'Filter on Grade Test', // needed if there are demo data
-    trigger: 'iframe a:contains("Grade Test")',
+    trigger: ':iframe .dropdown a.dropdown-item:contains("Grade Test")',
+    run: "click",
 }, {
     content: 'Go to partner',
-    trigger: 'iframe a:contains("Agrolait")',
+    trigger: ':iframe a:contains("Agrolait")',
+    run: "click",
 }, {
     content: 'Wait for the "edit in backend" button to appear before checking the publish button',
     trigger: '.o_menu_systray .o_website_edit_in_backend > a',
-    run: () => {
-        // Seems enough to just wait for that button presence before checking
-        // the following step but a bit of delay seems a bit more robust. At
-        // least if the rendering flow changes or the tour system changes, this
-        // should be enough to have a race condition in this test.
-        setTimeout(() => document.body.classList.add('ready-for-check'), 100);
-    },
+    // Seems enough to just wait for that button presence before checking the
+    // following step but a bit of delay seems a bit more robust to potential
+    // code changes. At least if the rendering flow changes or the tour system
+    // changes, this should be enough to trigger a race condition in this test.
+    run: () => new Promise(resolve => setTimeout(resolve, 100)),
 }, {
     content: 'Check there is no Publish/Unpublish',
-    trigger: '.ready-for-check .o_menu_systray:has(.o_website_edit_in_backend > a):not(:has(.o_menu_systray_item.o_publish_container))',
+    trigger: '.o_menu_systray:has(.o_website_edit_in_backend > a):not(:has(.o_menu_systray_item.o_website_publish_container))',
 }]);

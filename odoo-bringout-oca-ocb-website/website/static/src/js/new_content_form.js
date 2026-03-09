@@ -1,16 +1,12 @@
-/** @odoo-module **/
-
-import {formView} from "@web/views/form/form_view";
-import {registry} from "@web/core/registry";
+import { formView } from "@web/views/form/form_view";
+import { registry } from "@web/core/registry";
 
 export class NewContentFormController extends formView.Controller {
     /**
      * @override
      */
-    async saveButtonClicked(params) {
-        await super.saveButtonClicked(
-            Object.assign({ computePath: () => this.computePath() }, params)
-        );
+    async save() {
+        return super.save({ computePath: () => this.computePath(), ...arguments });
     }
 
     /**
@@ -28,7 +24,7 @@ export class NewContentFormController extends formView.Controller {
 
 export const NewContentFormView = {
     ...formView,
-    display: {controlPanel: false},
+    display: { controlPanel: false },
     Controller: NewContentFormController,
 };
 

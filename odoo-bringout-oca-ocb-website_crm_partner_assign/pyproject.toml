@@ -1,17 +1,20 @@
 [project]
 name = "odoo-bringout-oca-ocb-website_crm_partner_assign"
 version = "16.0.0"
-description = "Resellers - Publish your resellers/partners and forward leads to them"
+description = "Resellers - 
+        Publish your resellers/partners and forward leads to them
+        "
 authors = [
     { name = "Ernad Husremovic", email = "hernad@bring.out.ba" }
 ]
 dependencies = [
-    "odoo-bringout-oca-ocb-base_geolocalize>=16.0.0",
-    "odoo-bringout-oca-ocb-crm>=16.0.0",
-    "odoo-bringout-oca-ocb-account>=16.0.0",
-    "odoo-bringout-oca-ocb-website_partner>=16.0.0",
-    "odoo-bringout-oca-ocb-website_google_map>=16.0.0",
-    "odoo-bringout-oca-ocb-portal>=16.0.0",
+    "odoo-bringout-oca-ocb-base_geolocalize>=19.0.0",
+    "odoo-bringout-oca-ocb-crm>=19.0.0",
+    "odoo-bringout-oca-ocb-account>=19.0.0",
+    "TODO_MAP-partnership>=19.0.0",
+    "odoo-bringout-oca-ocb-website_partner>=19.0.0",
+    "odoo-bringout-oca-ocb-website_google_map>=19.0.0",
+    "odoo-bringout-oca-ocb-portal>=19.0.0",
     "requests>=2.25.1"
 ]
 readme = "README.md"
@@ -21,7 +24,7 @@ classifiers = [
     "Intended Audience :: Developers",
     "License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.11", 
+    "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Topic :: Office/Business",
 ]

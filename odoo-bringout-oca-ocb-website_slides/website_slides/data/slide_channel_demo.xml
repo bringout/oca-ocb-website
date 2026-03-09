@@ -13,10 +13,10 @@
         <field name="tag_ids" eval="[(5, 0),
                                      (4, ref('website_slides.slide_channel_tag_level_basic')),
                                      (4, ref('website_slides.slide_channel_tag_role_gardener')),
-                                     (4, ref('website_slides.slide_channel_tag_other_0')),
-                                     (4, ref('website_slides.slide_channel_tag_other_2'))]"/>
+                                     (4, ref('website_slides.slide_channel_tag_quiz')),
+                                     (4, ref('website_slides.slide_channel_tag_dog_friendly'))]"/>
         <field name="image_1920" type="base64" file="website_slides/static/src/img/channel_demo_gardening.jpg"/>
-        <field name="description">Learn the basics of gardening !</field>
+        <field name="description">Learn the basics of gardening!</field>
         <field name="create_date" eval="DateTime.now() - relativedelta(days=8)"/>
     </record>
 
@@ -32,7 +32,7 @@
         <field name="tag_ids" eval="[(5, 0),
                                      (4, ref('website_slides.slide_channel_tag_level_intermediate')),
                                      (4, ref('website_slides.slide_channel_tag_role_gardener')),
-                                     (4, ref('website_slides.slide_channel_tag_other_0'))]"/>
+                                     (4, ref('website_slides.slide_channel_tag_quiz'))]"/>
         <field name="image_1920" type="base64" file="website_slides/static/src/img/channel_demo_gardening_2.jpg"/>
         <field name="description">Learn how to take care of your favorite trees. Learn when to plant, how to manage potted trees, ...</field>
         <field name="create_date" eval="DateTime.now() - relativedelta(days=7)"/>
@@ -42,6 +42,9 @@
     <record id="slide_channel_demo_2_gard2" model="slide.channel">
         <field name="name">Trees, Wood and Gardens</field>
         <field name="user_id" ref="base.user_demo"/>
+        <field name="prerequisite_channel_ids" eval="[(5, 0),
+                                                      (4, ref('website_slides.slide_channel_demo_0_gard_0')),
+                                                      (4, ref('website_slides.slide_channel_demo_1_gard1'))]"/>
         <field name="enroll">public</field>
         <field name="channel_type">documentation</field>
         <field name="allow_comment" eval="True"/>
@@ -51,17 +54,18 @@
                                      (4, ref('website_slides.slide_channel_tag_level_intermediate')),
                                      (4, ref('website_slides.slide_channel_tag_role_gardener')),
                                      (4, ref('website_slides.slide_channel_tag_role_carpenter')),
-                                     (4, ref('website_slides.slide_channel_tag_other_0')),
-                                     (4, ref('website_slides.slide_channel_tag_other_2'))]"/>
+                                     (4, ref('website_slides.slide_channel_tag_quiz')),
+                                     (4, ref('website_slides.slide_channel_tag_dog_friendly'))]"/>
         <field name="image_1920" type="base64" file="website_slides/static/src/img/channel_demo_gardening_3.jpg"/>
         <field name="description">A lot of nice documentation: trees, wood, gardens. A gold mine for references.</field>
         <field name="create_date" eval="DateTime.now() - relativedelta(days=6)"/>
     </record>
 
     <record id="slide_channel_demo_3_furn0" model="slide.channel">
-        <field name="name">Choose your wood !</field>
+        <field name="name">Choose your wood!</field>
         <field name="user_id" ref="base.user_admin"/>
-        <field name="enroll">public</field>
+        <field name="enroll">invite</field>
+        <field name="visibility">members</field>
         <field name="channel_type">training</field>
         <field name="allow_comment" eval="True"/>
         <field name="promote_strategy">latest</field>
@@ -71,7 +75,7 @@
                                      (4, ref('website_slides.slide_channel_tag_role_gardener')),
                                      (4, ref('website_slides.slide_channel_tag_role_carpenter')),
                                      (4, ref('website_slides.slide_channel_tag_role_furniture')),
-                                     (4, ref('website_slides.slide_channel_tag_other_2'))]"/>
+                                     (4, ref('website_slides.slide_channel_tag_dog_friendly'))]"/>
         <field name="image_1920" type="base64" file="website_slides/static/src/img/channel_demo_tree_1.jpg"/>
         <field name="description">Knowing which kind of wood to use depending on your application is important. In this course you
 will learn the basics of wood characteristics.</field>
@@ -99,6 +103,7 @@ will learn the basics of wood characteristics.</field>
         <field name="name">Basics of Furniture Creation</field>
         <field name="user_id" ref="base.user_admin"/>
         <field name="enroll">invite</field>
+        <field name="visibility">connected</field>
         <field name="channel_type">training</field>
         <field name="allow_comment" eval="True"/>
         <field name="promote_strategy">latest</field>
@@ -106,8 +111,7 @@ will learn the basics of wood characteristics.</field>
         <field name="tag_ids" eval="[(5, 0),
                                      (4, ref('website_slides.slide_channel_tag_level_intermediate')),
                                      (4, ref('website_slides.slide_channel_tag_role_furniture')),
-                                     (4, ref('website_slides.slide_channel_tag_other_0')),
-                                     (4, ref('website_slides.slide_channel_tag_other_1'))]"/>
+                                     (4, ref('website_slides.slide_channel_tag_quiz'))]"/>
         <field name="image_1920" type="base64" file="website_slides/static/src/img/channel_demo_furniture_2.jpg"/>
         <field name="description">All you need to know about furniture creation.</field>
         <field name="create_date" eval="DateTime.now() - relativedelta(days=3)"/>
@@ -126,8 +130,7 @@ will learn the basics of wood characteristics.</field>
         <field name="tag_ids" eval="[(5, 0),
                                  (4, ref('website_slides.slide_channel_tag_level_advanced')),
                                  (4, ref('website_slides.slide_channel_tag_role_carpenter')),
-                                 (4, ref('website_slides.slide_channel_tag_role_furniture')),
-                                 (4, ref('website_slides.slide_channel_tag_other_1'))]"/>
+                                 (4, ref('website_slides.slide_channel_tag_role_furniture'))]"/>
         <field name="image_1920" type="base64" file="website_slides/static/src/img/channel_demo_furniture_3.jpg"/>
         <field name="description">So much amazing certification.</field>
         <field name="create_date" eval="DateTime.now() - relativedelta(days=2)"/>

@@ -1,98 +1,38 @@
-/* @odoo-module */
+import { registry } from "@web/core/registry";
 
-import tour from "web_tour.tour";
-
-tour.register(
-    "website_livechat_login_after_chat_start",
-    {
-        test: true,
-    },
-    [
+registry.category("web_tour.tours").add("website_livechat_logout_after_chat_start", {
+    url: "/",
+    steps: () => [
         {
-            trigger: ".o_livechat_button",
+            trigger: ".o-livechat-root:shadow .o-livechat-LivechatButton",
             run: "click",
         },
         {
-            trigger: ".o_composer_text_field",
-            run: "text Hello",
+            trigger: ".o-livechat-root:shadow .o-mail-Composer-input",
+            run: "edit Hello!",
         },
         {
-            trigger: "input.o_composer_text_field",
-            run: function () {
-                $("input.o_composer_text_field").trigger(
-                    $.Event("keydown", { which: $.ui.keyCode.ENTER })
-                );
-            },
+            trigger: ".o-livechat-root:shadow .o-mail-Composer-input",
+            run: "press Enter",
         },
         {
-            trigger: "div.o_thread_message_content > p:contains('Hello')",
-        },
-        {
-            trigger: "a:contains(Sign in)",
+            trigger:
+                ".o-livechat-root:shadow .o-mail-Thread:not([data-transient]) .o-mail-Message-content:contains('Hello!')",
             run: "click",
         },
         {
-            trigger: "input[name='login']",
-            run: "text admin",
-        },
-        {
-            trigger: "input[name='password']",
-            run: "text admin",
-        },
-        {
-            trigger: "button:contains(Log in)",
-            run: "click",
-        },
-        {
-            trigger: ".o_main_navbar",
-            run() {
-                window.location = "/";
-            },
-        },
-        {
-            content:
-                "Livechat button is present since the old livechat session was linked to the public user, not the current user.",
-            trigger: ".o_livechat_button",
-        },
-    ]
-);
-
-tour.register(
-    "website_livechat_logout_after_chat_start",
-    {
-        test: true,
-    },
-    [
-        {
-            trigger: ".o_livechat_button",
-            run: "click",
-        },
-        {
-            trigger: ".o_composer_text_field",
-            run: "text Hello",
-        },
-        {
-            trigger: "input.o_composer_text_field",
-            run: function () {
-                $("input.o_composer_text_field").trigger(
-                    $.Event("keydown", { which: $.ui.keyCode.ENTER })
-                );
-            },
-        },
-        {
-            trigger: "div.o_thread_message_content > p:contains('Hello')",
-        },
-        {
-            trigger: "#top_menu a:contains(Mitchell Admin)",
+            trigger: "header#top a:contains(Mitchell Admin)",
             run: "click",
         },
         {
             trigger: "a:contains(Logout)",
+            run: "click",
+            expectUnloadPage: true,
         },
         {
             content:
                 "Livechat button is present since the old livechat session was linked to the logged user, not the public one.",
-            trigger: ".o_livechat_button",
+            trigger: ".o-livechat-root:shadow .o-livechat-LivechatButton",
         },
-    ]
-);
+    ],
+});

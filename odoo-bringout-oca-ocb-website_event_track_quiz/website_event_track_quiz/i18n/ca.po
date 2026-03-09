@@ -1,36 +1,24 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* website_event_track_quiz
-# 
-# Translators:
-# eriiikgt, 2022
-# Arnau Ros, 2022
-# oscaryuu, 2022
-# Quim - eccit <quim@eccit.com>, 2022
-# Sandra Franch <sandra.franch@upc.edu>, 2022
-# Marc Tormo i Bochaca <mtbochaca@gmail.com>, 2022
-# Martin Trigaux, 2022
-# RGB Consulting <odoo@rgbconsulting.com>, 2022
-# Manel Fernandez Ramirez <manelfera@outlook.com>, 2022
-# Josep Anton Belchi, 2022
-# Óscar Fonseca <tecnico@pyming.com>, 2022
-# jabiri7, 2022
-# Ivan Espinola, 2022
-# marcescu, 2023
-# 
+# * website_event_track_quiz
+#
+# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
+# Weblate <noreply-mt-weblate@weblate.org>, 2025.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-06 13:32+0000\n"
-"PO-Revision-Date: 2022-09-22 05:56+0000\n"
-"Last-Translator: marcescu, 2023\n"
-"Language-Team: Catalan (https://app.transifex.com/odoo/teams/41243/ca/)\n"
+"POT-Creation-Date: 2026-01-25 18:37+0000\n"
+"PO-Revision-Date: 2025-11-08 22:01+0000\n"
+"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
+"Language-Team: Catalan <https://translate.odoo.com/projects/odoo-19/"
+"website_event_track_quiz/ca/>\n"
+"Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: ca\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.12.2\n"
 
 #. module: website_event_track_quiz
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_track__quiz_questions_count
@@ -58,11 +46,15 @@ msgid "Add Quiz"
 msgstr "Afegeix un qüestionari"
 
 #. module: website_event_track_quiz
+#: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_quiz_view_form
+msgid "All Events"
+msgstr "Tots els esdeveniments"
+
+#. module: website_event_track_quiz
 #. odoo-javascript
-#: code:addons/website_event_track_quiz/static/src/js/event_quiz.js:0
-#, python-format
-msgid "All questions must be answered !"
-msgstr "Cal respondre a totes les preguntes."
+#: code:addons/website_event_track_quiz/static/src/interactions/quiz.js:0
+msgid "All questions must be answered!"
+msgstr "S'han de respondre totes les preguntes."
 
 #. module: website_event_track_quiz
 #: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_quiz_view_form
@@ -78,15 +70,12 @@ msgstr "Resposta"
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "Check answers"
 msgstr "Comprova les respostes"
 
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "Check your answers"
 msgstr "Comprova les teves respostes"
 
@@ -103,7 +92,6 @@ msgstr "Mur de blocs concrets"
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "Congratulations, you scored a total of"
 msgstr "Enhorabona, heu anotat un total de"
 
@@ -125,7 +113,6 @@ msgstr "Resposta correcta"
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "Correct."
 msgstr "Correcte."
 
@@ -144,11 +131,14 @@ msgid "Created on"
 msgstr "Creat el"
 
 #. module: website_event_track_quiz
+#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_event__display_name
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz__display_name
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_answer__display_name
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_question__display_name
+#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_track__display_name
+#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_track_visitor__display_name
 msgid "Display Name"
-msgstr "Nom a mostrar"
+msgstr "Nom mostrat"
 
 #. module: website_event_track_quiz
 #: model:event.quiz.answer,comment:website_event_track_quiz.event_7_track_1_question_0_1
@@ -201,8 +191,7 @@ msgstr ""
 #. module: website_event_track_quiz
 #: model_terms:ir.actions.act_window,help:website_event_track_quiz.event_quiz_action
 msgid ""
-"From here you will be able to overview all quizzes you have linked to "
-"Tracks."
+"From here you will be able to overview all quizzes you have linked to Tracks."
 msgstr ""
 "Des d'aquí podreu visualitzar tots els qüestionaris que heu enllaçat a "
 "Pistes."
@@ -211,12 +200,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_track_view_form
 msgid "Go to Quiz"
 msgstr "Ves al qüestionari"
-
-#. module: website_event_track_quiz
-#: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_quiz_question_view_search
-#: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_quiz_view_search
-msgid "Group By"
-msgstr "Agrupar per"
 
 #. module: website_event_track_quiz
 #: model:event.quiz.answer,text_value:website_event_track_quiz.event_7_track_5_question_1_0
@@ -229,9 +212,12 @@ msgid "Hammer won't be of any help here!"
 msgstr "En Hammer no servirà de res aquí!"
 
 #. module: website_event_track_quiz
+#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_event__id
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz__id
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_answer__id
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_question__id
+#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_track__id
+#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_track_visitor__id
 msgid "ID"
 msgstr "ID"
 
@@ -247,7 +233,6 @@ msgstr ""
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "Incorrect."
 msgstr "Incorrecte."
 
@@ -255,13 +240,6 @@ msgstr "Incorrecte."
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_track__is_quiz_completed
 msgid "Is Quiz Done"
 msgstr "S'ha fet el qüestionari"
-
-#. module: website_event_track_quiz
-#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz____last_update
-#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_answer____last_update
-#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_question____last_update
-msgid "Last Modified on"
-msgstr "Última modificació el "
 
 #. module: website_event_track_quiz
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz__write_uid
@@ -336,7 +314,6 @@ msgstr "Nombre de punts"
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "Oopsie, you did not score any point on this quiz."
 msgstr "Oopsie, no has puntuat en aquest qüestionari."
 
@@ -353,7 +330,6 @@ msgstr "OpenWood no és un congres de codi obert sobre les aplicacions."
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "Point"
 msgstr "Punt"
 
@@ -361,9 +337,8 @@ msgstr "Punt"
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_answer__awarded_points
-#, python-format
 msgid "Points"
-msgstr "Punts "
+msgstr "Punts"
 
 #. module: website_event_track_quiz
 #: model:event.quiz,name:website_event_track_quiz.event_7_track_13_quiz
@@ -379,7 +354,6 @@ msgstr "Qüestió"
 #. module: website_event_track_quiz
 #. odoo-python
 #: code:addons/website_event_track_quiz/models/event_quiz.py:0
-#, python-format
 msgid ""
 "Question \"%s\" must have 1 correct answer and at least 1 incorrect answer "
 "to be valid."
@@ -390,7 +364,6 @@ msgstr ""
 #. module: website_event_track_quiz
 #. odoo-python
 #: code:addons/website_event_track_quiz/models/event_quiz.py:0
-#, python-format
 msgid "Question \"%s\" must have 1 correct answer to be valid."
 msgstr "La pregunta «%s» ha de tenir 1 resposta correcta per ser vàlida."
 
@@ -434,8 +407,7 @@ msgstr "Preguntes del qüestionari"
 
 #. module: website_event_track_quiz
 #. odoo-javascript
-#: code:addons/website_event_track_quiz/static/src/js/event_quiz.js:0
-#, python-format
+#: code:addons/website_event_track_quiz/static/src/interactions/quiz.js:0
 msgid "Quiz validation error"
 msgstr "Error de validació del qüestionari"
 
@@ -450,7 +422,6 @@ msgstr "Qüestionaris"
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "Reset"
 msgstr "Reinicia"
 
@@ -492,8 +463,8 @@ msgstr "Paret d'acer"
 
 #. module: website_event_track_quiz
 #: model:event.quiz.answer,text_value:website_event_track_quiz.event_7_track_1_question_1_1
-msgid "Stores !"
-msgstr "Botigues!"
+msgid "Stores!"
+msgstr ""
 
 #. module: website_event_track_quiz
 #: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_track_content
@@ -503,7 +474,6 @@ msgstr "Agafa el qüestionari"
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "The correct answer was:"
 msgstr "La resposta correcta ha estat:"
 
@@ -514,24 +484,26 @@ msgstr "Actualment no hi ha disponible cap marcador"
 
 #. module: website_event_track_quiz
 #. odoo-javascript
-#: code:addons/website_event_track_quiz/static/src/js/event_quiz.js:0
-#, python-format
+#: code:addons/website_event_track_quiz/static/src/interactions/quiz.js:0
 msgid "There was an error validating this quiz."
 msgstr "S'ha produït un error en validar aquest qüestionari."
 
 #. module: website_event_track_quiz
 #: model:ir.model.fields,help:website_event_track_quiz.field_event_quiz_answer__comment
 msgid ""
-"This comment will be displayed to the user if they select this answer, after submitting the quiz.\n"
-"                It is used as a small informational text helping to understand why this answer is correct / incorrect."
+"This comment will be displayed to the user if they select this answer, after "
+"submitting the quiz.\n"
+"                It is used as a small informational text helping to "
+"understand why this answer is correct / incorrect."
 msgstr ""
-"Aquest comentari es mostrarà a l'usuari si selecciona aquesta resposta, després d'enviar el qüestionari.\n"
-"                S'utilitza com un petit text informatiu que ajuda a entendre per què aquesta resposta és correcta / incorrecta."
+"Aquest comentari es mostrarà a l'usuari si selecciona aquesta resposta, "
+"després d'enviar el qüestionari.\n"
+"                S'utilitza com un petit text informatiu que ajuda a entendre "
+"per què aquesta resposta és correcta / incorrecta."
 
 #. module: website_event_track_quiz
 #. odoo-javascript
-#: code:addons/website_event_track_quiz/static/src/js/event_quiz.js:0
-#, python-format
+#: code:addons/website_event_track_quiz/static/src/interactions/quiz.js:0
 msgid "This quiz is already done. Retaking it is not possible."
 msgstr "Aquest qüestionari ja està fet. Reprendre-ho no és possible."
 
@@ -557,8 +529,8 @@ msgstr "Transportar fusta de botigues a casa teva és segur."
 
 #. module: website_event_track_quiz
 #: model:event.quiz.answer,text_value:website_event_track_quiz.event_7_track_1_question_1_0
-msgid "Trees !"
-msgstr "Arbres!"
+msgid "Trees!"
+msgstr ""
 
 #. module: website_event_track_quiz
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz__repeatable
@@ -582,23 +554,23 @@ msgstr "Sobre què tracta aquest esdeveniment"
 
 #. module: website_event_track_quiz
 #: model:event.quiz.question,name:website_event_track_quiz.event_7_track_5_question_1
-msgid "What kind of tool are needed to secure your lumber ?"
-msgstr "Quin tipus d'eina es necessita per a assegurar la vostra fusta?"
+msgid "What kind of tool are needed to secure your lumber?"
+msgstr ""
 
 #. module: website_event_track_quiz
 #: model:event.quiz.question,name:website_event_track_quiz.event_7_track_13_question_0
-msgid "What kind of wall is transformed here ?"
-msgstr "Quina mena de mur es transforma aquí?"
+msgid "What kind of wall is transformed here?"
+msgstr ""
 
 #. module: website_event_track_quiz
 #: model:event.quiz.question,name:website_event_track_quiz.event_7_track_1_question_0
-msgid "What will we talk about during this event ?"
-msgstr "De què parlarem durant aquest esdeveniment?"
+msgid "What will we talk about during this event?"
+msgstr ""
 
 #. module: website_event_track_quiz
 #: model:event.quiz.question,name:website_event_track_quiz.event_7_track_1_question_1
-msgid "Where does lumber comes from ?"
-msgstr "D'on prové la fusta?"
+msgid "Where does lumber comes from?"
+msgstr ""
 
 #. module: website_event_track_quiz
 #: model:event.quiz.answer,text_value:website_event_track_quiz.event_7_track_1_question_0_0
@@ -618,8 +590,8 @@ msgstr "Tu"
 
 #. module: website_event_track_quiz
 #: model:event.quiz.answer,comment:website_event_track_quiz.event_7_track_1_question_0_0
-msgid "You're really smart !"
-msgstr "Ets molt llest!"
+msgid "You're really smart!"
+msgstr ""
 
 #. module: website_event_track_quiz
 #: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_quiz_view_form
@@ -634,13 +606,11 @@ msgstr "Per exemple, quin és el lema preferit d'en Joe?"
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "point!"
 msgstr "punt!"
 
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "points!"
 msgstr "punts!"

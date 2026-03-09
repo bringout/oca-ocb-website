@@ -1,22 +1,44 @@
-# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 from datetime import timedelta
-from pytz import utc
+import logging
+
+from markupsafe import Markup
 from random import randint
+from textwrap import shorten
+
+from pytz import timezone, utc
+import werkzeug.urls
 
 from odoo import api, fields, models, tools
-from odoo.addons.http_routing.models.ir_http import slug
-from odoo.osv import expression
-from odoo.tools.mail import is_html_empty
+from odoo.exceptions import UserError
+from odoo.fields import Domain
+from odoo.tools.mail import email_normalize, html_to_inner_content, is_html_empty
 from odoo.tools.translate import _, html_translate
 
+_logger = logging.getLogger(__name__)
 
-class Track(models.Model):
-    _name = "event.track"
+try:
+    import vobject
+except ImportError:
+    _logger.warning("`vobject` Python module not found, iCal file generation disabled. Consider installing this module if you want to generate iCal files")
+    vobject = None
+
+GOOGLE_CALENDAR_URL = 'https://www.google.com/calendar/render?'
+
+
+class EventTrack(models.Model):
+    _name = 'event.track'
     _description = 'Event Track'
-    _order = 'priority, date'
-    _inherit = ['mail.thread', 'mail.activity.mixin', 'website.seo.metadata', 'website.published.mixin']
+    _order = 'priority desc, date'
+    _inherit = [
+        'mail.thread',
+        'mail.activity.mixin',
+        'website.seo.metadata',
+        'website.published.mixin',
+        'website.searchable.mixin'
+    ]
+    _primary_email = 'contact_email'
 
     @api.model
     def _get_default_stage_id(self):
@@ -24,13 +46,13 @@ class Track(models.Model):
 
     # description
     name = fields.Char('Title', required=True, translate=True)
-    event_id = fields.Many2one('event.event', 'Event', required=True)
+    event_id = fields.Many2one('event.event', 'Event', required=True, index=True)
     active = fields.Boolean(default=True)
     user_id = fields.Many2one('res.users', 'Responsible', tracking=True, default=lambda self: self.env.user)
     company_id = fields.Many2one('res.company', related='event_id.company_id')
     tag_ids = fields.Many2many('event.track.tag', string='Tags')
     description = fields.Html(translate=html_translate, sanitize_attributes=False, sanitize_form=False)
-    color = fields.Integer('Color')
+    color = fields.Integer('Agenda Color')
     priority = fields.Selection([
         ('0', 'Low'), ('1', 'Medium'),
         ('2', 'High'), ('3', 'Highest')],
@@ -39,7 +61,7 @@ class Track(models.Model):
     stage_id = fields.Many2one(
         'event.track.stage', string='Stage', ondelete='restrict',
         index=True, copy=False, default=_get_default_stage_id,
-        group_expand='_read_group_stage_ids',
+        group_expand='_read_group_expand_full',  # Always display all stages
         required=True, tracking=True)
     legend_blocked = fields.Char(related='stage_id.legend_blocked',
         string='Kanban Blocked Explanation', readonly=True)
@@ -59,20 +81,17 @@ class Track(models.Model):
     kanban_state_label = fields.Char(
         string='Kanban State Label', compute='_compute_kanban_state_label', store=True,
         tracking=True)
-    partner_id = fields.Many2one('res.partner', 'Contact', help="Contact of the track, may be different from speaker.")
+    partner_id = fields.Many2one('res.partner', 'Contact')
     # speaker information
     partner_name = fields.Char(
         string='Name', compute='_compute_partner_name',
-        readonly=False, store=True, tracking=10,
-        help='Speaker name is used for public display and may vary from contact name')
+        readonly=False, store=True, tracking=10)
     partner_email = fields.Char(
         string='Email', compute='_compute_partner_email',
-        readonly=False, store=True, tracking=20,
-        help='Speaker email is used for public display and may vary from contact email')
+        readonly=False, store=True, tracking=20)
     partner_phone = fields.Char(
         string='Phone', compute='_compute_partner_phone',
-        readonly=False, store=True, tracking=30,
-        help='Speaker phone is used for public display and may vary from contact phone')
+        readonly=False, store=True, tracking=30)
     partner_biography = fields.Html(
         string='Biography', compute='_compute_partner_biography',
         sanitize_attributes=False,
@@ -93,17 +112,15 @@ class Track(models.Model):
     # contact information
     contact_email = fields.Char(
         string='Contact Email', compute='_compute_contact_email',
-        readonly=False, store=True, tracking=20,
-        help="Contact email is private and used internally")
+        readonly=False, store=True, tracking=20)
     contact_phone = fields.Char(
         string='Contact Phone', compute='_compute_contact_phone',
-        readonly=False, store=True, tracking=30,
-        help="Contact phone is private and used internally")
+        readonly=False, store=True, tracking=30)
     location_id = fields.Many2one('event.track.location', 'Location')
     # time information
-    date = fields.Datetime('Track Date')
-    date_end = fields.Datetime('Track End Date', compute='_compute_end_date', store=True)
-    duration = fields.Float('Duration', default=0.5, help="Track duration in hours.")
+    date = fields.Datetime('Track Date', compute='_compute_date', inverse="_inverse_date", store=True)
+    date_end = fields.Datetime('Track End Date', compute='_compute_end_date', inverse="_inverse_end_date", store=True)
+    duration = fields.Float('Duration', default=0.5)
     is_track_live = fields.Boolean(
         'Is Track Live', compute='_compute_track_time_data')
     is_track_soon = fields.Boolean(
@@ -114,6 +131,7 @@ class Track(models.Model):
         'Is Track Upcoming', compute='_compute_track_time_data')
     is_track_done = fields.Boolean(
         'Is Track Done', compute='_compute_track_time_data')
+    is_one_day = fields.Boolean(compute='_compute_field_is_one_day')
     track_start_remaining = fields.Integer(
         'Minutes before track starts', compute='_compute_track_time_data',
         help="Remaining time before track starts (seconds)")
@@ -125,6 +143,8 @@ class Track(models.Model):
     website_image_url = fields.Char(
         string='Image URL', compute='_compute_website_image_url',
         compute_sudo=True, store=False)
+    header_visible = fields.Boolean(related='event_id.header_visible', readonly=False)
+    footer_visible = fields.Boolean(related='event_id.footer_visible', readonly=False)
     # wishlist / visitors management
     event_track_visitor_ids = fields.One2many(
         'event.track.visitor', 'track_id', string="Track Visitors",
@@ -147,7 +167,7 @@ class Track(models.Model):
                                  help="Display a Call to Action button to your Attendees while they watch your Track.")
     website_cta_title = fields.Char('Button Title')
     website_cta_url = fields.Char('Button Target URL')
-    website_cta_delay = fields.Integer('Button appears')
+    website_cta_delay = fields.Integer('Show Button')
     # time information for CTA
     is_website_cta_live = fields.Boolean(
         'Is CTA Live', compute='_compute_cta_time_data',
@@ -158,10 +178,10 @@ class Track(models.Model):
 
     @api.depends('name')
     def _compute_website_url(self):
-        super(Track, self)._compute_website_url()
+        super()._compute_website_url()
         for track in self:
             if track.id:
-                track.website_url = '/event/%s/track/%s' % (slug(track.event_id), slug(track))
+                track.website_url = '/event/%s/track/%s' % (self.env['ir.http']._slug(track.event_id), self.env['ir.http']._slug(track))
 
     # STAGES
 
@@ -264,6 +284,20 @@ class Track(models.Model):
 
     # TIME
 
+    @api.depends('date_end', 'duration')
+    def _compute_date(self):
+        for track in self:
+            if track.date_end:
+                delta = timedelta(minutes=60 * track.duration)
+                track.date = track.date_end - delta
+            else:
+                track.date = False
+
+    def _inverse_date(self):
+        for track in self:
+            if track.date and track.date_end:
+                track.duration = (track.date_end - track.date).total_seconds() / 3600
+
     @api.depends('date', 'duration')
     def _compute_end_date(self):
         for track in self:
@@ -273,6 +307,10 @@ class Track(models.Model):
             else:
                 track.date_end = False
 
+    def _inverse_end_date(self):
+        for track in self:
+            if track.date and track.date_end:
+                track.duration = (track.date_end - track.date).total_seconds() / 3600
 
     # FRONTEND DESCRIPTION
 
@@ -291,7 +329,7 @@ class Track(models.Model):
                  'event_track_visitor_ids.is_blacklisted')
     @api.depends_context('uid')
     def _compute_is_reminder_on(self):
-        current_visitor = self.env['website.visitor']._get_visitor_from_request(force_create=False)
+        current_visitor = self.env['website.visitor']._get_visitor_from_request()
         if self.env.user._is_public() and not current_visitor:
             for track in self:
                 track.is_reminder_on = track.wishlisted_by_default
@@ -308,7 +346,7 @@ class Track(models.Model):
                 domain = [('partner_id', '=', self.env.user.partner_id.id)]
 
             event_track_visitors = self.env['event.track.visitor'].sudo().search_read(
-                expression.AND([
+                Domain.AND([
                     domain,
                     [('track_id', 'in', self.ids)]
                 ]), fields=['track_id', 'is_wishlisted', 'is_blacklisted']
@@ -330,23 +368,23 @@ class Track(models.Model):
     def _compute_wishlist_visitor_ids(self):
         results = self.env['event.track.visitor']._read_group(
             [('track_id', 'in', self.ids), ('is_wishlisted', '=', True)],
-            ['track_id', 'visitor_id:array_agg'],
-            ['track_id']
+            ['track_id'],
+            ['visitor_id:array_agg'],
         )
-        visitor_ids_map = {result['track_id'][0]: result['visitor_id'] for result in results}
+        visitor_ids_map = {track.id: visitor_ids for track, visitor_ids in results}
         for track in self:
             track.wishlist_visitor_ids = visitor_ids_map.get(track.id, [])
             track.wishlist_visitor_count = len(visitor_ids_map.get(track.id, []))
 
     def _search_wishlist_visitor_ids(self, operator, operand):
-        if operator == "not in":
-            raise NotImplementedError(_("Unsupported 'Not In' operation on track wishlist visitors"))
+        if operator in ('not in', 'not any'):
+            raise UserError(self.env._("Unsupported 'Not In' operation on track wishlist visitors"))
 
-        track_visitors = self.env['event.track.visitor'].sudo().search([
+        subquery = self.env['event.track.visitor'].sudo()._search([
             ('visitor_id', operator, operand),
             ('is_wishlisted', '=', True)
         ])
-        return [('id', 'in', track_visitors.track_id.ids)]
+        return [('id', 'in', subquery.subselect('track_id'))]
 
     # TIME
 
@@ -356,7 +394,7 @@ class Track(models.Model):
         UTC as we compute only time deltas here. """
         now_utc = utc.localize(fields.Datetime.now().replace(microsecond=0))
         for track in self:
-            if not track.date:
+            if not (track.date or track.date_end):
                 track.is_track_live = track.is_track_soon = track.is_track_today = track.is_track_upcoming = track.is_track_done = False
                 track.track_start_relative = track.track_start_remaining = 0
                 continue
@@ -393,6 +431,19 @@ class Track(models.Model):
             else:
                 track.website_cta_start_remaining = 0
 
+    @api.depends('date', 'date_end', 'event_id')
+    def _compute_field_is_one_day(self):
+        for track in self:
+            # Need to localize because it could begin late and finish early in
+            # another timezone
+            if not (track.date or track.date_end):
+                track.is_one_day = False
+                continue
+            track = track.with_context(tz=track.event_id.date_tz or 'UTC')
+            begin_tz = fields.Datetime.context_timestamp(track, track.date)
+            end_tz = fields.Datetime.context_timestamp(track, track.date_end)
+            track.is_one_day = (begin_tz.date() == end_tz.date())
+
     # ------------------------------------------------------------
     # CRUD
     # ------------------------------------------------------------
@@ -403,18 +454,18 @@ class Track(models.Model):
             if values.get('website_cta_url'):
                 values['website_cta_url'] = self.env['res.partner']._clean_website(values['website_cta_url'])
 
-        tracks = super(Track, self).create(vals_list)
+        tracks = super().create(vals_list)
 
+        post_values = {} if self.env.user.email else {'email_from': self.env.company.catchall_formatted}
         for track in tracks:
-            email_values = {} if self.env.user.email else {'email_from': self.env.company.catchall_formatted}
-            track.event_id.message_post_with_view(
+            track.event_id.message_post_with_source(
                 'website_event_track.event_track_template_new',
-                values={
+                render_values={
                     'track': track,
                     'is_html_empty': is_html_empty,
                 },
-                subtype_id=self.env.ref('website_event_track.mt_event_track').id,
-                **email_values,
+                subtype_xmlid='website_event_track.mt_event_track',
+                **post_values,
             )
             track._synchronize_with_stage(track.stage_id)
 
@@ -428,13 +479,8 @@ class Track(models.Model):
         if vals.get('stage_id'):
             stage = self.env['event.track.stage'].browse(vals['stage_id'])
             self._synchronize_with_stage(stage)
-        res = super(Track, self).write(vals)
+        res = super().write(vals)
         return res
-
-    @api.model
-    def _read_group_stage_ids(self, stages, domain, order):
-        """ Always display all stages """
-        return stages.search([], order=order)
 
     def _synchronize_with_stage(self, stage):
         if stage.is_fully_accessible:
@@ -443,30 +489,47 @@ class Track(models.Model):
             self.is_published = False
 
     # ------------------------------------------------------------
+    # MIXINS
+    # ------------------------------------------------------------
+
+    @api.model
+    def _search_get_detail(self, website, order, options):
+        event_id = self.env['ir.http']._unslug(options['event'])[1]
+        domain = [
+            '&',
+            ('event_id', '=', event_id),
+            '|',
+            ('is_published', '=', True),
+            ('stage_id.is_visible_in_agenda', '=', True),
+        ]
+        mapping = {
+            'description': {'name': 'description', 'type': 'text', 'truncate': True, 'html': True},
+            'name': {'name': 'name', 'type': 'text', 'match': True},
+            'partner_name': {'name': 'partner_name', 'type': 'text', 'match': True, 'html': True},
+            'website_url': {'name': 'website_url', 'type': 'text', 'truncate': False},
+        }
+        return {
+            'model': 'event.track',
+            'base_domain': [domain],
+            'search_fields': ['name', 'partner_name'],
+            'fetch_fields': ['name', 'website_url', 'partner_name', 'description'],
+            'mapping': mapping,
+            'icon': 'fa-microphone',
+            'order': order,
+        }
+
+    # ------------------------------------------------------------
     # MESSAGING
     # ------------------------------------------------------------
 
-    def _message_get_default_recipients(self):
-        return {
-            track.id: {
-                'partner_ids': [],
-                'email_to': ','.join(tools.email_normalize_all(track.contact_email or track.partner_email)) or track.contact_email or track.partner_email,
-                'email_cc': False
-            } for track in self
-        }
+    def _mail_get_timezone(self):
+        return self.event_id._mail_get_timezone() or super()._mail_get_timezone()
 
-    def _message_get_suggested_recipients(self):
-        recipients = super(Track, self)._message_get_suggested_recipients()
-        for track in self:
-            if track.partner_id:
-                if track.partner_id not in recipients:
-                    track._message_add_suggested_recipient(recipients, partner=track.partner_id, reason=_('Contact'))
-            else:
-                #  Priority: contact information then speaker information
-                if track.contact_email and track.contact_email != track.partner_id.email:
-                    track._message_add_suggested_recipient(recipients, email=track.contact_email, reason=_('Contact Email'))
-                if not track.contact_email and track.partner_email and track.partner_email != track.partner_id.email:
-                    track._message_add_suggested_recipient(recipients, email=track.partner_email, reason=_('Speaker Email'))
+    def _message_add_default_recipients(self):
+        recipients = super()._message_add_default_recipients()
+        for track in self.filtered(lambda t: not t.partner_id.email_normalized and not email_normalize(t.contact_email) and t.partner_email):
+            info = recipients[track.id]
+            info['email_to_lst'] = tools.mail.email_split_and_format_normalize(track.partner_email) or [track.partner_email]
         return recipients
 
     def _message_post_after_hook(self, message, msg_vals):
@@ -490,17 +553,17 @@ class Track(models.Model):
                 self.search([
                     ('partner_id', '=', False), email_domain, ('stage_id.is_cancel', '=', False),
                 ]).write({'partner_id': new_partner[0].id})
-        return super(Track, self)._message_post_after_hook(message, msg_vals)
+        return super()._message_post_after_hook(message, msg_vals)
 
     def _track_template(self, changes):
-        res = super(Track, self)._track_template(changes)
+        res = super()._track_template(changes)
         track = self[0]
         if 'stage_id' in changes and track.stage_id.mail_template_id:
             res['stage_id'] = (track.stage_id.mail_template_id, {
+                'auto_delete_keep_log': False,
                 'composition_mode': 'comment',
-                'auto_delete_message': True,
+                'email_layout_xmlid': 'mail.mail_notification_light',
                 'subtype_id': self.env['ir.model.data']._xmlid_to_res_id('mail.mt_note'),
-                'email_layout_xmlid': 'mail.mail_notification_light'
             })
         return res
 
@@ -510,7 +573,7 @@ class Track(models.Model):
             return self.env.ref('website_event_track.mt_track_blocked')
         elif 'kanban_state' in init_values and self.kanban_state == 'done':
             return self.env.ref('website_event_track.mt_track_ready')
-        return super(Track, self)._track_subtype(init_values)
+        return super()._track_subtype(init_values)
 
     # ------------------------------------------------------------
     # ACTION
@@ -553,7 +616,7 @@ class Track(models.Model):
             domain = [('partner_id', '=', self.env.user.partner_id.id)]
 
         track_visitors = self.env['event.track.visitor'].sudo().search(
-            expression.AND([domain, [('track_id', 'in', self.ids)]])
+            Domain.AND([domain, [('track_id', 'in', self.ids)]])
         )
         missing = self - track_visitors.track_id
         if missing and force_create:
@@ -564,6 +627,30 @@ class Track(models.Model):
             } for track in missing])
 
         return track_visitors
+
+    def _get_ics_file(self):
+        """ Return iCalendar file for the event track.
+            :return: a dict of .ics file content for each event track """
+        result = dict.fromkeys(self.ids, False)
+        if not vobject:
+            return result
+
+        for track in self:
+            cal = vobject.iCalendar()
+            cal_track = cal.add('vevent')
+
+            date_tz = track.event_id.date_tz
+            reminder_dates = track._get_track_calendar_reminder_dates()
+            cal_track.add('created').value = fields.Datetime.now().replace(tzinfo=timezone('UTC'))
+            cal_track.add('dtstart').value = reminder_dates['date_begin'].astimezone(timezone(date_tz))
+            cal_track.add('dtend').value = reminder_dates['date_end'].astimezone(timezone(date_tz))
+            cal_track.add('summary').value = track.name
+            cal_track.add('description').value = track._get_track_calendar_description()
+            if track.event_id.address_inline or track.location_id:
+                cal_track.add('location').value = ', '.join([track.event_id.address_inline, track.location_id.sudo().name or ''])
+
+            result[track.id] = cal.serialize().encode('utf-8')
+        return result
 
     def _get_track_suggestions(self, restrict_domain=None, limit=None):
         """ Returns the next tracks suggested after going to the current one
@@ -589,7 +676,7 @@ class Track(models.Model):
             ('id', '!=', self.id),
         ]
         if restrict_domain:
-            base_domain = expression.AND([
+            base_domain = Domain.AND([
                 base_domain,
                 restrict_domain
             ])
@@ -615,3 +702,58 @@ class Track(models.Model):
         )
 
         return track_candidates[:limit]
+
+    def _get_track_calendar_description(self):
+        self.ensure_one()
+        return Markup("<a href='%(event_track_url)s'>%(name)s</a>\n%(short_description)s\n\n%(reminder_times_warning)s") % {
+            'event_track_url': tools.urls.urljoin(self.get_base_url(), self.website_url),
+            'name': self.name,
+            'short_description': shorten(html_to_inner_content(self.description), 1900),
+            'reminder_times_warning': self._get_track_calendar_reminder_times_warning(),
+        }
+
+    def _get_track_calendar_reminder_dates(self):
+        """ Get dates of the event if the track does not have any. A warning is
+        added in elements that display times of the event instead of those of
+        the track. This way, visitors can add a reminder and check later if the
+        track has been updated since the sending of the mail. """
+        return {
+            'date_begin': self.date or self.event_id.date_begin,
+            'date_end': self.date_end or self.event_id.date_end,
+        }
+
+    def _get_track_calendar_reminder_times_warning(self):
+        """ Generate a warning indicating that the times displayed correspond to those of
+        the event because the track does not have any, to avoid misunderstanding from visitors. """
+        return Markup('<strong><u>%(warning_title)s</u></strong>: %(warning_content)s') % {
+            'warning_title': _('Note'),
+            'warning_content': _(
+                'The start and end times of the talk were not specified when you asked to add them to your calendar, '
+                'therefore the times indicated in this reminder correspond to those of the event.'
+            )
+        } if not self.date else ''
+
+    def _get_track_calendar_urls(self):
+        date_tz = self.event_id.date_tz
+        reminder_dates = self._get_track_calendar_reminder_dates()
+        url_date_begin = reminder_dates['date_begin'].astimezone(timezone(date_tz)).strftime('%Y%m%dT%H%M%S')
+        url_date_end = reminder_dates['date_end'].astimezone(timezone(date_tz)).strftime('%Y%m%dT%H%M%S')
+
+        if self.event_id.address_inline or self.location_id:
+            location = ', '.join([self.event_id.sudo().address_inline, self.location_id.sudo().name or ''])
+        else:
+            location = ''
+
+        google_params = {
+            'action': 'TEMPLATE',
+            'text': f'{self.event_id.name}: {self.name}',
+            'dates': f'{url_date_begin}/{url_date_end}',
+            'ctz': self.event_id.date_tz,
+            'details': self._get_track_calendar_description(),
+            'location': location,
+        }
+
+        return {
+            'google_url': GOOGLE_CALENDAR_URL + werkzeug.urls.url_encode(google_params),
+            'iCal_url': f'{self.get_base_url()}/event/{self.event_id.id}/track/{self.id}/ics',
+        }

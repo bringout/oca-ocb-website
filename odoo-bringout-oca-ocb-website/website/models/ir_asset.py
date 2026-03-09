@@ -1,7 +1,7 @@
-# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 from odoo import fields, models
+from odoo.fields import Domain
 
 
 class IrAsset(models.Model):
@@ -10,54 +10,69 @@ class IrAsset(models.Model):
     key = fields.Char(copy=False) # used to resolve multiple assets in a multi-website environment
     website_id = fields.Many2one('website', ondelete='cascade')
 
-    def _get_related_assets(self, domain):
-        website = self.env['website'].get_current_website(fallback=False)
-        if website:
-            domain += website.website_domain()
-        assets = super()._get_related_assets(domain)
-        return assets.filter_duplicate()
+    def _get_asset_params(self):
+        params = super()._get_asset_params()
+        params['website_id'] = self.env['website'].get_current_website(fallback=False).id
+        return params
 
-    def _get_active_addons_list(self):
+    def _get_asset_bundle_url(self, filename, unique, assets_params, ignore_params=False):
+        route_prefix = '/web/assets'
+        if ignore_params: # we dont care about website id, match both
+            route_prefix = '/web/assets%'
+        elif website_id := assets_params.get('website_id', None):
+            route_prefix = f'/web/assets/{website_id}'
+        return f'{route_prefix}/{unique}/{filename}'
+
+    def _get_related_assets(self, domain, *, website_id=None, **params):
+        if website_id:
+            domain = Domain(domain) & self.env['website'].browse(website_id).website_domain()
+        assets = super()._get_related_assets(domain, **params)
+        return assets.filter_duplicate(website_id)
+
+    def _get_active_addons_list(self, *, website_id=None, **params):
         """Overridden to discard inactive themes."""
-        addons_list = super()._get_active_addons_list()
-        website = self.env['website'].get_current_website(fallback=False)
+        addons_list = super()._get_active_addons_list(**params)
 
-        if not website:
+        if not website_id:
             return addons_list
 
         IrModule = self.env['ir.module.module'].sudo()
         # discard all theme modules except website.theme_id
-        themes = IrModule.search(IrModule.get_themes_domain()) - website.theme_id
+        themes = IrModule.search(IrModule.get_themes_domain()) - self.env["website"].browse(website_id).theme_id
         to_remove = set(themes.mapped('name'))
 
         return [name for name in addons_list if name not in to_remove]
 
-    def filter_duplicate(self):
+    def filter_duplicate(self, website_id=None):
         """ Filter current recordset only keeping the most suitable asset per distinct name.
             Every non-accessible asset will be removed from the set:
+
               * In non website context, every asset with a website will be removed
               * In a website context, every asset from another website
         """
-        current_website = self.env['website'].get_current_website(fallback=False)
-        if not current_website:
+        if website_id is None:
+            website_id = self.env['website'].get_current_website(fallback=False).id
+        if not website_id:
             return self.filtered(lambda asset: not asset.website_id)
 
-        most_specific_assets = self.env['ir.asset']
+        specific_asset_keys = {asset.key for asset in self if asset.website_id.id == website_id and asset.key}
+        most_specific_assets = []
         for asset in self:
-            if asset.website_id == current_website:
+            if asset.website_id:
                 # specific asset: add it if it's for the current website and ignore
                 # it if it's for another website
-                most_specific_assets += asset
-            elif not asset.website_id:
+                if asset.website_id.id == website_id:
+                    most_specific_assets.append(asset)
+                continue
+            elif not asset.key:
                 # no key: added either way
-                if not asset.key:
-                    most_specific_assets += asset
+                most_specific_assets.append(asset)
+            elif asset.key not in specific_asset_keys:
                 # generic asset: add it iff for the current website, there is no
                 # specific asset for this asset (based on the same `key` attribute)
-                elif not any(asset.key == asset2.key and asset2.website_id == current_website for asset2 in self):
-                    most_specific_assets += asset
+                most_specific_assets.append(asset)
 
-        return most_specific_assets
+        return self.browse().union(*most_specific_assets)
 
     def write(self, vals):
         """COW for ir.asset. This way editing websites does not impact other

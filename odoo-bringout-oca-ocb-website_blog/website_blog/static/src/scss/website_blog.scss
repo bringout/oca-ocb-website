@@ -45,37 +45,6 @@ $o-wblog-loader-size: 50px;
 // Website Blog
 //------------------------------------------------------------------------------
 .website_blog {
-    .o_website_blog_nav_container {
-        // Overrides the value from portal, useless in >=17
-        &::before, &::after {
-            display: none !important;
-        }
-    }
-
-    > nav > .container {
-        > ul.navbar-nav {
-            flex-wrap: wrap;
-            flex-shrink: 2;
-        }
-        // If the navbar contains at least 10 items (random choice), the search
-        // input is placed at the top to avoid being centered in a multi-line
-        // navbar, which wouldn’t look good.
-        &:has(> ul.navbar-nav .nav-item:nth-child(10)) .o_searchbar_form {
-            align-self: start;
-        }
-    }
-
-    .css_website_mail {
-        .o_has_error {
-            border-color: red;
-        }
-        .css_nav_month {
-            display: none;
-            &:first-of-type {
-                display: block;
-            }
-        }
-    }
 
     .o_wblog_page_cards_bg {
         // To be applied to the main container when 'card design' option is
@@ -94,23 +63,8 @@ $o-wblog-loader-size: 50px;
     // menu. The aim is to be able to write simple articles on the fly,
     // achieving a good design without being forced to use snippets.
     .o_wblog_read_text {
-        font-size: 18px;
-        line-height: 28px;
+        @include font-size(18px);
         font-weight: 300;
-
-        p, ul, ol {
-            margin-bottom: 1.55em;
-        }
-
-        li {
-            margin-bottom: 1em;
-        }
-
-        .lead {
-            font-size: 26px;
-            line-height: 34px;
-            margin-bottom: 40px;
-        }
     }
 
     .o_wblog_author_avatar {
@@ -133,7 +87,7 @@ $o-wblog-loader-size: 50px;
         width: 3em;
         height: 3em;
         > i {
-            font-size: 1.3em;
+            @include font-size(1.3em);
         }
     }
 
@@ -151,16 +105,14 @@ $o-wblog-loader-size: 50px;
     }
 
     #o_wblog_post_content, .blog_header {
-        > nav.breadcrumb {
-            .breadcrumb-item:not(.active) {
-                flex-shrink: 0;
-            }
-            @include media-breakpoint-down(md) {
-                flex-wrap: wrap !important;
+        // Remove the '/' separators from breadcrumbs on small devices, as only
+        // the blog category is displayed on small screens.
+        @include media-breakpoint-down(lg) {
+            > nav.breadcrumb .breadcrumb-item {
+                padding-left: 0;
 
-                .breadcrumb-item {
-                    flex-shrink: 1 !important;
-                    @include text-truncate();
+                &::before {
+                    content: "";
                 }
             }
         }
@@ -231,14 +183,14 @@ $o-wblog-loader-size: 50px;
     // Blog Post Specific
     // ==============================================
     .o_wblog_post_title {
-        #o_wblog_post_name {
+        .o_wblog_post_name {
             font-weight: $display-font-weight;
             line-height: $display-line-height;
             // Default font-size.
             @include font-size(map-get($display-font-sizes, 4));
         }
 
-        #o_wblog_post_subtitle {
+        .o_wblog_post_subtitle {
             font-weight: $lead-font-weight;
             // Default font-size.
             @include font-size($lead-font-size);
@@ -246,7 +198,7 @@ $o-wblog-loader-size: 50px;
     }
 
     // Refine multi-lines titles when using 'regular' cover
-    .o_wblog_regular_cover_container #o_wblog_post_name {
+    .o_wblog_regular_cover_container .o_wblog_post_name {
         line-height: 1;
         padding-bottom: 0.5rem;
     }
@@ -260,6 +212,10 @@ $o-wblog-loader-size: 50px;
     #o_wblog_next_container {
         background-color: $body-bg;
         cursor: pointer;
+
+        .o_wblog_next_button:focus-visible {
+            outline: revert;
+        }
 
         .o_wblog_next_loader {
             transform: translateZ(1px);
@@ -281,11 +237,6 @@ $o-wblog-loader-size: 50px;
         animation: o-wblog-fade-In 1s cubic-bezier(.02, .01, .47, 1);
     }
 
-    // "Read next article" (with "Regular Cover")
-    #o_wblog_post_footer a.w-25 {
-        flex: 0 0 auto;
-    }
-
     // Blog Index Pages
     // ==============================================
     #o_wblog_posts_loop {
@@ -294,7 +245,7 @@ $o-wblog-loader-size: 50px;
 
             padding-top: 33%;
             height: auto!important;
-            // This is mandatory as we do not want the CoverProperties 
+            // This is mandatory as we do not want the CoverProperties
             // sizing classes to be applied here
             min-height: auto!important;
 
@@ -305,7 +256,7 @@ $o-wblog-loader-size: 50px;
 
         .o_wblog_normalize_font {
             // normalize fonts
-            font-size: 13px;
+            @include font-size(13px);
             line-height: 1.45;
         }
 
@@ -329,6 +280,15 @@ $o-wblog-loader-size: 50px;
             }
         }
 
+    }
+
+    > nav > .container {
+        // If the navbar contains at least 10 items (random choice), the search
+        // input is placed at the top to avoid being centered in a multi-line
+        // navbar, which wouldn’t look good.
+        &:has(> ul.navbar-nav .nav-item:nth-child(10)) .o_searchbar_form {
+            align-self: start;
+        }
     }
 
     //  Editor Helpers
@@ -361,16 +321,4 @@ $o-wblog-loader-size: 50px;
     &:hover {
         background-color: rgba(black, 0.7);
     }
-}
-
-// TODO: remove me in master. Since bootstrap 5, all direct children of ".row"
-// element have a width of 100%. This rule has been added to fix the case where
-// the "List" layout is used in the "Blog" page and the sidebar is displayed.
-// In this disposition, a ".border-end" element is followed by the sidebar,
-// both being direct children of a ".row" element. Without this fix, the width
-// of the ".border-end" element would be 100%, leading the sidebar to be
-// displayed at the bottom of the page and not at the right. Note that in
-// master, this ".border-end" element has to be removed.
-#o_wblog_index_content > .container > .row > .border-end {
-    width: auto;
 }

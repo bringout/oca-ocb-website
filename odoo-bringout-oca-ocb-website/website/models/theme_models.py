@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 import logging
-import threading
-from odoo import api, fields, models
+from odoo import api, fields, models, modules
 from odoo.tools.translate import xml_translate
 from odoo.modules.module import get_resource_from_path
 
@@ -12,7 +10,7 @@ from odoo.addons.base.models.ir_asset import AFTER_DIRECTIVE, APPEND_DIRECTIVE, 
 _logger = logging.getLogger(__name__)
 
 
-class ThemeAsset(models.Model):
+class ThemeIrAsset(models.Model):
     _name = 'theme.ir.asset'
     _description = 'Theme Asset'
 
@@ -50,14 +48,14 @@ class ThemeAsset(models.Model):
         return new_asset
 
 
-class ThemeView(models.Model):
+class ThemeIrUiView(models.Model):
     _name = 'theme.ir.ui.view'
     _description = 'Theme UI View'
 
     def compute_arch_fs(self):
-        if 'install_filename' not in self._context:
+        if 'install_filename' not in self.env.context:
             return ''
-        path_info = get_resource_from_path(self._context['install_filename'])
+        path_info = get_resource_from_path(self.env.context['install_filename'])
         if path_info:
             return '/'.join(path_info[0:2])
 
@@ -110,7 +108,7 @@ class ThemeView(models.Model):
         return new_view
 
 
-class ThemeAttachment(models.Model):
+class ThemeIrAttachment(models.Model):
     _name = 'theme.ir.attachment'
     _description = 'Theme Attachments'
 
@@ -134,13 +132,13 @@ class ThemeAttachment(models.Model):
         return new_attach
 
 
-class ThemeMenu(models.Model):
+class ThemeWebsiteMenu(models.Model):
     _name = 'theme.website.menu'
     _description = 'Website Theme Menu'
 
     name = fields.Char(required=True, translate=True)
     url = fields.Char(default='')
-    page_id = fields.Many2one('theme.website.page', ondelete='cascade')
+    page_id = fields.Many2one('theme.website.page', ondelete='cascade', index='btree_not_null')
     new_window = fields.Boolean('New Window')
     sequence = fields.Integer()
     parent_id = fields.Many2one('theme.website.menu', index=True, ondelete="cascade")
@@ -175,20 +173,18 @@ class ThemeMenu(models.Model):
         return new_menu
 
 
-class ThemePage(models.Model):
+class ThemeWebsitePage(models.Model):
     _name = 'theme.website.page'
     _description = 'Website Theme Page'
+    _inherit = [
+        'website.page_options.mixin',
+    ]
 
     url = fields.Char()
-    view_id = fields.Many2one('theme.ir.ui.view', required=True, ondelete="cascade")
+    view_id = fields.Many2one('theme.ir.ui.view', required=True, index=True, ondelete="cascade")
     website_indexed = fields.Boolean('Page Indexed', default=True)
     is_published = fields.Boolean()
-
-    # Page options
-    header_overlay = fields.Boolean()
-    header_color = fields.Char()
-    header_visible = fields.Boolean(default=True)
-    footer_visible = fields.Boolean(default=True)
+    is_new_page_template = fields.Boolean(string="New Page Template")
 
     copy_ids = fields.One2many('website.page', 'theme_template_id', 'Page using a copy of me', copy=False, readonly=True)
 
@@ -204,8 +200,10 @@ class ThemePage(models.Model):
             'view_id': view_id.id,
             'website_indexed': self.website_indexed,
             'is_published': self.is_published,
+            'is_new_page_template': self.is_new_page_template,
             'header_overlay': self.header_overlay,
             'header_color': self.header_color,
+            'header_text_color': self.header_text_color,
             'header_visible': self.header_visible,
             'footer_visible': self.footer_visible,
             'theme_template_id': self.id,
@@ -213,7 +211,7 @@ class ThemePage(models.Model):
         return new_page
 
 
-class Theme(models.AbstractModel):
+class ThemeUtils(models.AbstractModel):
     _name = 'theme.utils'
     _description = 'Theme Utils'
     _auto = False
@@ -222,13 +220,13 @@ class Theme(models.AbstractModel):
         'website.template_header_hamburger',
         'website.template_header_vertical',
         'website.template_header_sidebar',
-        'website.template_header_slogan',
-        'website.template_header_contact',
         'website.template_header_boxed',
-        'website.template_header_centered_logo',
-        'website.template_header_image',
-        'website.template_header_hamburger_full',
-        'website.template_header_magazine',
+        'website.template_header_stretch',
+        'website.template_header_search',
+        'website.template_header_sales_one',
+        'website.template_header_sales_two',
+        'website.template_header_sales_three',
+        'website.template_header_sales_four',
         # Default one, keep it last
         'website.template_header_default',
     ]
@@ -240,6 +238,10 @@ class Theme(models.AbstractModel):
         'website.template_footer_contact',
         'website.template_footer_call_to_action',
         'website.template_footer_headline',
+        'website.template_footer_mega',
+        'website.template_footer_mega_columns',
+        'website.template_footer_mega_links',
+        'website.template_footer_mega_cards',
         # Default one, keep it last
         'website.footer_custom',
     ]
@@ -256,7 +258,7 @@ class Theme(models.AbstractModel):
     @api.model
     def _reset_default_config(self):
         # Reinitialize some css customizations
-        self.env['web_editor.assets'].make_scss_customization(
+        self.env['website.assets'].make_scss_customization(
             '/website/static/src/scss/options/user_values.scss',
             {
                 'font': 'null',
@@ -291,8 +293,8 @@ class Theme(models.AbstractModel):
 
     @api.model
     def _toggle_asset(self, key, active):
-        ThemeAsset = self.env['theme.ir.asset'].sudo().with_context(active_test=False)
-        obj = ThemeAsset.search([('key', '=', key)])
+        ThemeIrAsset = self.env['theme.ir.asset'].sudo().with_context(active_test=False)
+        obj = ThemeIrAsset.search([('key', '=', key)])
         website = self.env['website'].get_current_website()
         if obj:
             obj = obj.copy_ids.filtered(lambda x: x.website_id == website)
@@ -351,27 +353,17 @@ class Theme(models.AbstractModel):
     def disable_view(self, xml_id):
         self._toggle_view(xml_id, False)
 
-    @api.model
-    def enable_header_off_canvas(self):
-        """ Enabling off canvas require to enable quite a lot of template so
-            this shortcut was made to make it easier.
-        """
-        self.enable_view("website.option_header_off_canvas")
-        self.enable_view("website.option_header_off_canvas_template_header_hamburger")
-        self.enable_view("website.option_header_off_canvas_template_header_sidebar")
-        self.enable_view("website.option_header_off_canvas_template_header_hamburger_full")
-
 
 class IrUiView(models.Model):
     _inherit = 'ir.ui.view'
 
-    theme_template_id = fields.Many2one('theme.ir.ui.view', copy=False)
+    theme_template_id = fields.Many2one('theme.ir.ui.view', copy=False, index='btree_not_null')
 
     def write(self, vals):
         # During a theme module update, theme views' copies receiving an arch
         # update should not be considered as `arch_updated`, as this is not a
         # user made change.
-        test_mode = getattr(threading.current_thread(), 'testing', False)
+        test_mode = modules.module.current_test
         if not (test_mode or self.pool._init):
             return super().write(vals)
         no_arch_updated_views = other_views = self.env['ir.ui.view']
@@ -392,23 +384,23 @@ class IrUiView(models.Model):
 class IrAsset(models.Model):
     _inherit = 'ir.asset'
 
-    theme_template_id = fields.Many2one('theme.ir.asset', copy=False)
+    theme_template_id = fields.Many2one('theme.ir.asset', copy=False, index='btree_not_null')
 
 
 class IrAttachment(models.Model):
     _inherit = 'ir.attachment'
 
     key = fields.Char(copy=False)
-    theme_template_id = fields.Many2one('theme.ir.attachment', copy=False)
+    theme_template_id = fields.Many2one('theme.ir.attachment', copy=False, index='btree_not_null')
 
 
 class WebsiteMenu(models.Model):
     _inherit = 'website.menu'
 
-    theme_template_id = fields.Many2one('theme.website.menu', copy=False)
+    theme_template_id = fields.Many2one('theme.website.menu', copy=False, index='btree_not_null')
 
 
 class WebsitePage(models.Model):
     _inherit = 'website.page'
 
-    theme_template_id = fields.Many2one('theme.website.page', copy=False)
+    theme_template_id = fields.Many2one('theme.website.page', copy=False, index='btree_not_null')

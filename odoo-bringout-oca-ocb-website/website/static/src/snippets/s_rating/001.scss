@@ -1,5 +1,6 @@
 
 .s_rating[data-vcss="001"] {
+    user-select: none;
     &.s_rating_inline {
         display: flex;
         align-items: center;
@@ -10,6 +11,11 @@
         }
         .s_rating_icons {
             margin-left: auto;
+        }
+    }
+    &.s_rating_no_title {
+        .s_rating_title {
+            display: none;
         }
     }
 }

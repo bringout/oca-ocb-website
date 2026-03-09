@@ -1,79 +1,115 @@
-/** @odoo-module **/
+import {
+    changeOption,
+    clickOnSave,
+    clickOnSnippet,
+    insertSnippet,
+    registerWebsitePreviewTour,
+} from "@website/js/tours/tour_utils";
 
-import wTourUtils from 'website.tour_utils';
+const snippet = {
+    id: "s_text_image",
+    name: "Text - Image",
+    groupName: "Content",
+};
 
-wTourUtils.registerWebsitePreviewTour('website_replace_grid_image', {
-    test: true,
-    url: '/',
-    edition: true,
-}, [
-    wTourUtils.dragNDrop({
-        id: 's_text_image',
-        name: 'Text - Image',
-    }),
-    wTourUtils.clickOnSnippet({
-        id: 's_text_image',
-        name: 'Text - Image',
-    }),
+registerWebsitePreviewTour(
+    "website_replace_grid_image",
     {
-        content: "Toggle to grid mode",
-        trigger: '.o_we_user_value_widget[data-name="grid_mode"]',
+        url: "/",
+        edition: true,
     },
-    {
-        content: "Replace image",
-        trigger: 'iframe .s_text_image img',
-        run: 'dblclick',
-    },
-    {
-        content: "Pick new image",
-        trigger: '.o_select_media_dialog img[title="s_banner_default_image.jpg"]',
-    },
-    {
-        content: "Add new image column",
-        trigger: '.o_we_user_value_widget[data-add-element="image"]',
-    },
-    {
-        content: "Replace new image",
-        trigger: 'iframe .s_text_image img[src="/web/image/website.s_text_image_default_image"]',
-        run: 'dblclick',
-    },
-    {
-        content: "Pick new image",
-        trigger: '.o_select_media_dialog img[title="s_banner_default_image.jpg"]',
-    },
-    ...wTourUtils.clickOnSave()
-]);
+    () => [
+        ...insertSnippet(snippet),
+        {
+            // TODO: should check if o_loading_screen is not present (TO check with PIPU)
+            // Await step in the history
+            trigger: `:iframe:has(#wrap[contenteditable='true'])`,
+        },
+        ...clickOnSnippet(snippet),
+        {
+            content: "Toggle to grid mode",
+            trigger: "[data-action-id='setGridLayout']",
+            run: "click",
+        },
+        {
+            content: "Replace image",
+            trigger: ":iframe .s_text_image img",
+            run: "dblclick",
+        },
+        {
+            content: "Pick new image",
+            trigger:
+                '.o_select_media_dialog .o_button_area[aria-label="s_banner_default_image.jpg"]',
+            run: "click",
+        },
+        {
+            content: "Add new image column",
+            trigger: "[data-action-id='addGridElement'][data-action-param='image']",
+            run: "click",
+        },
+        {
+            content: "Pick new image",
+            trigger:
+                '.o_select_media_dialog .o_button_area[aria-label="s_banner_default_image2.webp"]',
+            run: "click",
+        },
+        {
+            content: "Replace new image",
+            trigger: ':iframe .s_text_image img[src*="s_banner_default_image2.webp"]',
+            run: "dblclick",
+        },
+        {
+            content: "Pick new image",
+            trigger:
+                '.o_select_media_dialog .o_button_area[aria-label="s_banner_default_image.jpg"]',
+            run: "click",
+        },
+        ...clickOnSave(),
+    ]
+);
 
-wTourUtils.registerWebsitePreviewTour("scroll_to_new_grid_item", {
-    test: true,
-    url: "/",
-    edition: true,
-}, [
-    // Drop enough snippets to scroll.
-    wTourUtils.dragNDrop({id: "s_text_image", name: "Text - Image"}),
-    wTourUtils.dragNDrop({id: "s_image_text", name: "Image - Text"}),
-    wTourUtils.dragNDrop({id: "s_image_text", name: "Image - Text"}),
-    // Toggle the first snippet to grid mode.
-    wTourUtils.clickOnSnippet({id: "s_text_image", name: "Text - Image"}),
-    wTourUtils.changeOption("layout_column", 'we-button[data-name="grid_mode"]'),
-    // Add a new grid item.
-    wTourUtils.changeOption("layout_column", 'we-button[data-add-element="image"]'),
+registerWebsitePreviewTour(
+    "scroll_to_new_grid_item",
     {
-        content: "Check that the page scrolled to the new grid item",
-        trigger: "iframe .s_text_image .o_grid_item:nth-child(3)",
-        run: function () {
-            // Leave some time to the page to scroll.
-            setTimeout(() => {
-                const newItemPosition = this.$anchor[0].getBoundingClientRect();
+        url: "/",
+        edition: true,
+    },
+    () => [
+        // Drop enough snippets to scroll.
+        ...insertSnippet({ id: "s_text_image", name: "Text - Image", groupName: "Content" }),
+        ...insertSnippet({ id: "s_image_text", name: "Image - Text", groupName: "Content" }),
+        ...insertSnippet({ id: "s_image_text", name: "Image - Text", groupName: "Content" }),
+        // Toggle the first snippet to grid mode.
+        ...clickOnSnippet({ id: "s_text_image", name: "Text - Image" }),
+        changeOption("Text - Image", "setGridLayout"),
+        // Add a new grid item.
+        changeOption(
+            "Text - Image",
+            "[data-action-id='addGridElement'][data-action-param='image']"
+        ),
+        {
+            content: "Select the new image in the media dialog",
+            trigger:
+                '.o_select_media_dialog .o_button_area[aria-label="s_banner_default_image.jpg"]',
+            run: "click",
+        },
+        {
+            content: "Check that the page scrolled to the new grid item",
+            trigger: ":iframe .s_text_image .o_grid_item:nth-child(3)",
+            async run() {
+                // Leave some time to the page to scroll.
+                await new Promise((r) => setTimeout(r, 500));
+                const newItemPosition = this.anchor.getBoundingClientRect();
                 if (newItemPosition.top < 0) {
-                    console.error("The page did not scroll to the new grid item.");
+                    throw new Error("The page did not scroll to the new grid item.");
                 }
                 document.body.classList.add("o_scrolled_to_grid_item");
-            }, 500);
+            },
         },
-    }, {
-        content: "Make sure the scroll check is done",
-        trigger: ".o_scrolled_to_grid_item",
-        run: () => {}, // This is a check.
-    },
-]);
+        {
+            content: "Make sure the scroll check is done",
+            trigger: ".o_scrolled_to_grid_item",
+        },
+        ...clickOnSave(),
+    ]
+);

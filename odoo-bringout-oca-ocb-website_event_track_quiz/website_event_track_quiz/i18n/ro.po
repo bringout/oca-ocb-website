@@ -1,28 +1,24 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* website_event_track_quiz
-# 
-# Translators:
-# Fekete Mihai <mihai.fekete@forestandbiomass.ro>, 2022
-# Foldi Robert <foldirobert@nexterp.ro>, 2022
-# Martin Trigaux, 2022
-# Dorin Hongu <dhongu@gmail.com>, 2023
-# Hongu Cosmin <cosmin513@gmail.com>, 2023
-# Maria Muntean, 2024
-# 
+# * website_event_track_quiz
+#
+# Weblate <noreply-mt-weblate@weblate.org>, 2025.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-06 13:32+0000\n"
-"PO-Revision-Date: 2022-09-22 05:56+0000\n"
-"Last-Translator: Maria Muntean, 2024\n"
-"Language-Team: Romanian (https://app.transifex.com/odoo/teams/41243/ro/)\n"
+"POT-Creation-Date: 2026-01-25 18:37+0000\n"
+"PO-Revision-Date: 2025-11-08 19:10+0000\n"
+"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
+"Language-Team: Romanian <https://translate.odoo.com/projects/odoo-19/"
+"website_event_track_quiz/ro/>\n"
+"Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: ro\n"
-"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
+"20)) ? 1 : 2;\n"
+"X-Generator: Weblate 5.12.2\n"
 
 #. module: website_event_track_quiz
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_track__quiz_questions_count
@@ -50,11 +46,15 @@ msgid "Add Quiz"
 msgstr "Adăugați chestionar"
 
 #. module: website_event_track_quiz
+#: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_quiz_view_form
+msgid "All Events"
+msgstr "Toate evenimentele"
+
+#. module: website_event_track_quiz
 #. odoo-javascript
-#: code:addons/website_event_track_quiz/static/src/js/event_quiz.js:0
-#, python-format
-msgid "All questions must be answered !"
-msgstr "Trebuie să răspundeți la toate întrebările !"
+#: code:addons/website_event_track_quiz/static/src/interactions/quiz.js:0
+msgid "All questions must be answered!"
+msgstr "Trebuie să răspundeți la toate întrebările!"
 
 #. module: website_event_track_quiz
 #: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_quiz_view_form
@@ -70,15 +70,12 @@ msgstr "Raspuns"
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "Check answers"
 msgstr "Verificați răspunsurile"
 
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "Check your answers"
 msgstr "Verifică-ți răspunsurile"
 
@@ -90,12 +87,11 @@ msgstr "Finalizat"
 #. module: website_event_track_quiz
 #: model:event.quiz.answer,text_value:website_event_track_quiz.event_7_track_13_question_0_0
 msgid "Concrete Blocks Wall"
-msgstr "Concrete Blocks Wall"
+msgstr "Perete din blocuri de beton"
 
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "Congratulations, you scored a total of"
 msgstr "Felicitări, ați obținut un punctaj total de"
 
@@ -117,7 +113,6 @@ msgstr "Răspuns Corect"
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "Correct."
 msgstr "Corect."
 
@@ -133,12 +128,15 @@ msgstr "Creat de"
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_answer__create_date
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_question__create_date
 msgid "Created on"
-msgstr "Creat în"
+msgstr "Creat la"
 
 #. module: website_event_track_quiz
+#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_event__display_name
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz__display_name
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_answer__display_name
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_question__display_name
+#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_track__display_name
+#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_track_visitor__display_name
 msgid "Display Name"
 msgstr "Nume afișat"
 
@@ -194,8 +192,7 @@ msgstr ""
 #. module: website_event_track_quiz
 #: model_terms:ir.actions.act_window,help:website_event_track_quiz.event_quiz_action
 msgid ""
-"From here you will be able to overview all quizzes you have linked to "
-"Tracks."
+"From here you will be able to overview all quizzes you have linked to Tracks."
 msgstr ""
 "De aici veți putea să vedeți toate testele pe care le-ați legat la Tracks."
 
@@ -203,12 +200,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_track_view_form
 msgid "Go to Quiz"
 msgstr "Mergeți la chestionar"
-
-#. module: website_event_track_quiz
-#: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_quiz_question_view_search
-#: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_quiz_view_search
-msgid "Group By"
-msgstr "Grupează după"
 
 #. module: website_event_track_quiz
 #: model:event.quiz.answer,text_value:website_event_track_quiz.event_7_track_5_question_1_0
@@ -221,9 +212,12 @@ msgid "Hammer won't be of any help here!"
 msgstr "Ciocanul nu va fi de niciun ajutor aici!"
 
 #. module: website_event_track_quiz
+#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_event__id
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz__id
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_answer__id
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_question__id
+#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_track__id
+#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_track_visitor__id
 msgid "ID"
 msgstr "ID"
 
@@ -239,7 +233,6 @@ msgstr ""
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "Incorrect."
 msgstr "Incorect."
 
@@ -249,25 +242,18 @@ msgid "Is Quiz Done"
 msgstr "Chestionarul este finalizat"
 
 #. module: website_event_track_quiz
-#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz____last_update
-#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_answer____last_update
-#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_question____last_update
-msgid "Last Modified on"
-msgstr "Ultima modificare la"
-
-#. module: website_event_track_quiz
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz__write_uid
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_answer__write_uid
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_question__write_uid
 msgid "Last Updated by"
-msgstr "Ultima actualizare făcută de"
+msgstr "Ultima actualizare de"
 
 #. module: website_event_track_quiz
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz__write_date
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_answer__write_date
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_question__write_date
 msgid "Last Updated on"
-msgstr "Ultima actualizare pe"
+msgstr "Ultima actualizare la"
 
 #. module: website_event_track_quiz
 #: model:ir.model.fields,help:website_event_track_quiz.field_event_quiz__repeatable
@@ -327,7 +313,6 @@ msgstr "Numărul de puncte"
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "Oopsie, you did not score any point on this quiz."
 msgstr "Oopsie, nu ați obținut niciun punct la acest test."
 
@@ -344,7 +329,6 @@ msgstr "OpenWood nu este un congres open source despre aplicații."
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "Point"
 msgstr "Punct"
 
@@ -352,7 +336,6 @@ msgstr "Punct"
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_answer__awarded_points
-#, python-format
 msgid "Points"
 msgstr "Puncte"
 
@@ -370,7 +353,6 @@ msgstr "Întrebare"
 #. module: website_event_track_quiz
 #. odoo-python
 #: code:addons/website_event_track_quiz/models/event_quiz.py:0
-#, python-format
 msgid ""
 "Question \"%s\" must have 1 correct answer and at least 1 incorrect answer "
 "to be valid."
@@ -381,7 +363,6 @@ msgstr ""
 #. module: website_event_track_quiz
 #. odoo-python
 #: code:addons/website_event_track_quiz/models/event_quiz.py:0
-#, python-format
 msgid "Question \"%s\" must have 1 correct answer to be valid."
 msgstr "Întrebarea \"%s\" trebuie să aibă 1 răspuns corect pentru a fi valid."
 
@@ -425,8 +406,7 @@ msgstr "Întrebări test"
 
 #. module: website_event_track_quiz
 #. odoo-javascript
-#: code:addons/website_event_track_quiz/static/src/js/event_quiz.js:0
-#, python-format
+#: code:addons/website_event_track_quiz/static/src/interactions/quiz.js:0
 msgid "Quiz validation error"
 msgstr "Eroare de validare a testului"
 
@@ -441,7 +421,6 @@ msgstr "Teste"
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "Reset"
 msgstr "Resetează"
 
@@ -453,7 +432,7 @@ msgstr "Bandă scotch"
 #. module: website_event_track_quiz
 #: model_terms:ir.ui.view,arch_db:website_event_track_quiz.leaderboard_search_bar
 msgid "Search"
-msgstr "Caută"
+msgstr "Căutare"
 
 #. module: website_event_track_quiz
 #: model_terms:ir.ui.view,arch_db:website_event_track_quiz.leaderboard_search_bar
@@ -483,8 +462,8 @@ msgstr "Perete din oțel"
 
 #. module: website_event_track_quiz
 #: model:event.quiz.answer,text_value:website_event_track_quiz.event_7_track_1_question_1_1
-msgid "Stores !"
-msgstr ""
+msgid "Stores!"
+msgstr "Magazine!"
 
 #. module: website_event_track_quiz
 #: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_track_content
@@ -494,7 +473,6 @@ msgstr "Luați testul"
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "The correct answer was:"
 msgstr "Răspunsul corect a fost:"
 
@@ -505,24 +483,26 @@ msgstr "În prezent nu există niciun clasament disponibil"
 
 #. module: website_event_track_quiz
 #. odoo-javascript
-#: code:addons/website_event_track_quiz/static/src/js/event_quiz.js:0
-#, python-format
+#: code:addons/website_event_track_quiz/static/src/interactions/quiz.js:0
 msgid "There was an error validating this quiz."
 msgstr "A apărut o eroare la validarea acestui test."
 
 #. module: website_event_track_quiz
 #: model:ir.model.fields,help:website_event_track_quiz.field_event_quiz_answer__comment
 msgid ""
-"This comment will be displayed to the user if they select this answer, after submitting the quiz.\n"
-"                It is used as a small informational text helping to understand why this answer is correct / incorrect."
+"This comment will be displayed to the user if they select this answer, after "
+"submitting the quiz.\n"
+"                It is used as a small informational text helping to "
+"understand why this answer is correct / incorrect."
 msgstr ""
-"Acest comentariu va fi afișat utilizatorului dacă selectează acest răspuns, după trimiterea testului.\n"
-"                Este folosit ca un mic text informațional care ajută la înțelegerea motivului pentru care acest răspuns este corect/incorect."
+"Acest comentariu va fi afișat utilizatorului dacă selectează acest răspuns, "
+"după trimiterea testului.\n"
+"                Este folosit ca un mic text informațional care ajută la "
+"înțelegerea motivului pentru care acest răspuns este corect/incorect."
 
 #. module: website_event_track_quiz
 #. odoo-javascript
-#: code:addons/website_event_track_quiz/static/src/js/event_quiz.js:0
-#, python-format
+#: code:addons/website_event_track_quiz/static/src/interactions/quiz.js:0
 msgid "This quiz is already done. Retaking it is not possible."
 msgstr "Acest test a fost deja făcut. Reluarea nu este posibilă."
 
@@ -548,8 +528,8 @@ msgstr "Transportul cherestelei de la magazine la casa dvs. este sigur."
 
 #. module: website_event_track_quiz
 #: model:event.quiz.answer,text_value:website_event_track_quiz.event_7_track_1_question_1_0
-msgid "Trees !"
-msgstr ""
+msgid "Trees!"
+msgstr "Arbori!"
 
 #. module: website_event_track_quiz
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz__repeatable
@@ -575,23 +555,23 @@ msgstr "Despre ce este vorba la acest eveniment"
 
 #. module: website_event_track_quiz
 #: model:event.quiz.question,name:website_event_track_quiz.event_7_track_5_question_1
-msgid "What kind of tool are needed to secure your lumber ?"
-msgstr ""
+msgid "What kind of tool are needed to secure your lumber?"
+msgstr "Ce fel de unelte sunt necesare pentru a vă fixa cheresteaua?"
 
 #. module: website_event_track_quiz
 #: model:event.quiz.question,name:website_event_track_quiz.event_7_track_13_question_0
-msgid "What kind of wall is transformed here ?"
-msgstr ""
+msgid "What kind of wall is transformed here?"
+msgstr "Ce fel de perete este transformat aici?"
 
 #. module: website_event_track_quiz
 #: model:event.quiz.question,name:website_event_track_quiz.event_7_track_1_question_0
-msgid "What will we talk about during this event ?"
-msgstr ""
+msgid "What will we talk about during this event?"
+msgstr "Despre ce vom vorbi în timpul acestui eveniment?"
 
 #. module: website_event_track_quiz
 #: model:event.quiz.question,name:website_event_track_quiz.event_7_track_1_question_1
-msgid "Where does lumber comes from ?"
-msgstr ""
+msgid "Where does lumber comes from?"
+msgstr "De unde provine cheresteaua?"
 
 #. module: website_event_track_quiz
 #: model:event.quiz.answer,text_value:website_event_track_quiz.event_7_track_1_question_0_0
@@ -611,8 +591,8 @@ msgstr "Dumneavoastră"
 
 #. module: website_event_track_quiz
 #: model:event.quiz.answer,comment:website_event_track_quiz.event_7_track_1_question_0_0
-msgid "You're really smart !"
-msgstr ""
+msgid "You're really smart!"
+msgstr "Ești foarte inteligent!"
 
 #. module: website_event_track_quiz
 #: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_quiz_view_form
@@ -627,13 +607,11 @@ msgstr "e.x. Care este motto-ul preferat al lui Joe?"
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "point!"
 msgstr "punct!"
 
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "points!"
 msgstr "puncte!"

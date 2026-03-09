@@ -2,12 +2,11 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 from odoo import http
-from odoo.exceptions import AccessError
 from odoo.http import request
 
 
 class WebsiteMailGroup(http.Controller):
-    @http.route('/group/is_member', type='json', auth='public', website=True)
+    @http.route('/group/is_member', type='jsonrpc', auth='public', website=True)
     def group_is_member(self, group_id=0, email=None, **kw):
         """Return the email of the member if found, otherwise None."""
         group = request.env['mail.group'].browse(int(group_id)).exists()
@@ -22,10 +21,7 @@ class WebsiteMailGroup(http.Controller):
         if token:
             group = group.sudo()
 
-        try:
-            group.check_access_rights('read')
-            group.check_access_rule('read')
-        except AccessError:
+        if not group.has_access('read'):
             return
 
         if not request.env.user._is_public():

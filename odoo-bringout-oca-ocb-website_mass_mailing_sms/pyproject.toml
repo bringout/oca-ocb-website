@@ -1,13 +1,15 @@
 [project]
 name = "odoo-bringout-oca-ocb-website_mass_mailing_sms"
 version = "16.0.0"
-description = "Newsletter Subscribe SMS Template - Attract visitors to subscribe to mailing lists"
+description = "Newsletter Subscribe SMS Template - 
+        Attract visitors to subscribe to mailing lists
+        "
 authors = [
     { name = "Ernad Husremovic", email = "hernad@bring.out.ba" }
 ]
 dependencies = [
-    "odoo-bringout-oca-ocb-website_mass_mailing>=16.0.0",
-    "odoo-bringout-oca-ocb-mass_mailing_sms>=16.0.0",
+    "odoo-bringout-oca-ocb-website_mass_mailing>=19.0.0",
+    "odoo-bringout-oca-ocb-mass_mailing_sms>=19.0.0",
     "requests>=2.25.1"
 ]
 readme = "README.md"
@@ -17,7 +19,7 @@ classifiers = [
     "Intended Audience :: Developers",
     "License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.11", 
+    "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Topic :: Office/Business",
 ]

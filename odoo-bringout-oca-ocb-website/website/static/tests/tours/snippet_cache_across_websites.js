@@ -1,25 +1,46 @@
-/** @odoo-module **/
+import {
+    clickOnEditAndWaitEditMode,
+    clickOnSave,
+    registerWebsitePreviewTour,
+    testSwitchWebsite,
+} from "@website/js/tours/tour_utils";
 
-import wTourUtils from 'website.tour_utils';
-
-wTourUtils.registerWebsitePreviewTour('snippet_cache_across_websites', {
-    edition: true,
-    test: true,
-    url: '/@/'
-}, [
+registerWebsitePreviewTour(
+    "snippet_cache_across_websites",
     {
-        content: "Check that the custom snippet is displayed",
-        trigger: '#snippet_custom_body span:contains("custom_snippet_test")',
-        run: () => null,
+        edition: true,
+        url: "/@/",
     },
-    // There's no need to save, but canceling might or might not show a popup...
-    ...wTourUtils.clickOnSave(),
-    ...wTourUtils.testSwitchWebsite('Test Website'),
-    ...wTourUtils.clickOnEditAndWaitEditMode(),
-    {
-        content: "Check that the custom snippet is not here",
-        extra_trigger: '#oe_snippets:not(:has(#snippet_custom_body span:contains("custom_snippet_test")))',
-        trigger: '#oe_snippets:has(#snippet_custom.d-none)',
-        run: () => null,
-    },
-]);
+    () => [
+        {
+            content: "Click on the Custom category block",
+            trigger:
+                ".o-website-builder_sidebar .o_snippet[name='Custom'].o_draggable .o_snippet_thumbnail_area",
+            run: "click",
+        },
+        {
+            content: "Ensure custom snippet preview appeared in the dialog",
+            trigger:
+                ":iframe .o_snippet_preview_wrap[data-snippet-id^='s_carousel_'] section[data-name='custom_snippet_test']",
+        },
+        {
+            content: "Ensure custom snippet preview shows the base label",
+            trigger:
+                ":iframe .o_snippet_preview_wrap[data-snippet-id^='s_carousel_'][data-label='Carousel']",
+        },
+        {
+            content: "Close the 'add snippet' dialog",
+            trigger: ".o_add_snippet_dialog .modal-header .btn-close",
+            run: "click",
+        },
+        // There's no need to save, but canceling might or might not show a
+        // popup...
+        ...clickOnSave(),
+        ...testSwitchWebsite("Test Website"),
+        ...clickOnEditAndWaitEditMode(),
+        {
+            content: "Check that the custom snippet category is not here",
+            trigger: ".o-website-builder_sidebar:not(:has(.o_snippet[name='Custom']))",
+        },
+    ]
+);

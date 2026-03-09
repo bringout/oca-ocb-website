@@ -4,7 +4,7 @@ from lxml import html
 from unittest.mock import patch
 
 from odoo.addons.website.controllers.main import Website
-from odoo.addons.website.tools import MockRequest
+from odoo.addons.http_routing.tests.common import MockRequest
 from odoo.fields import Command
 from odoo.http import root
 from odoo.tests import common, HttpCase, tagged
@@ -205,33 +205,6 @@ class TestPage(common.TransactionCase):
         self.assertTrue(website_id not in pages.mapped('website_id').ids, "The website from which we deleted the generic page should not have a specific one.")
         self.assertTrue(website_id not in View.search([('name', 'in', ('Base', 'Extension'))]).mapped('website_id').ids, "Same for views")
 
-    def test_disabling_cow_on_generic_diverged(self):
-        """ When a generic page is COW and the new COW has its url changed, the
-        generic is available again since the COW does not shadow it. But they
-        both still share the same key. The write on the generic should not be
-        redirected to the specific view. Niche exception of holy grail rule of
-        multi website, see commit message.
-        """
-        Page = self.env['website.page']
-        specific_arch = '<div>website 1 content</div>'
-        generic_arch = '<div>new generic content</div>'
-        generic_page = self.page_1
-
-        specific_page = Page.search([('url', '=', self.page_1.url), ('website_id', '=', 1)])
-        self.assertFalse(specific_page, "For this test, the specific page should not exist yet")
-
-        # COW a generic page
-        generic_page.view_id.with_context(website_id=1).save(specific_arch, xpath='/div')
-        specific_page = Page.search([('url', '=', self.page_1.url), ('website_id', '=', 1)])
-        self.assertEqual(specific_page.arch.replace('\n', ''), specific_arch)
-        self.assertEqual(generic_page.arch, '<div>content</div>')
-        # Change the URL of the specific page
-        specific_page.url = '/page_1_specific'
-        # Change the generic page and ensure it did not write on specific page
-        generic_page.view_id.with_context(website_id=1).save(generic_arch, xpath='/div')
-        self.assertEqual(generic_page.arch.replace('\n', ''), generic_arch)
-        self.assertEqual(specific_page.arch.replace('\n', ''), specific_arch)
-
 
 @tagged('-at_install', 'post_install')
 class WithContext(HttpCase):
@@ -242,7 +215,7 @@ class WithContext(HttpCase):
         self.base_view = View.create({
             'name': 'Base',
             'type': 'qweb',
-            'arch': '''<t name="Homepage" t-name="website.base_view">
+            'arch': '''<t name="Homepage" t-name="test.base_view">
                         <t t-call="website.layout">
                             I am a generic page
                         </t>
@@ -268,6 +241,7 @@ class WithContext(HttpCase):
         self.assertEqual(r.status_code, 200, "Admin should see the specific unpublished page")
         self.assertEqual('I am a specific page' in r.text, True, "Admin should see the specific unpublished page")
 
+    @mute_logger('odoo.addons.rpc.controllers.xmlrpc')
     def test_search(self):
         dbname = common.get_db_name()
         admin_uid = self.env.ref('base.user_admin').id
@@ -291,7 +265,7 @@ class WithContext(HttpCase):
     @mute_logger('odoo.http')
     def test_03_error_page_debug(self):
         with MockRequest(self.env, website=self.env['website'].browse(1)):
-            self.base_view.arch = self.base_view.arch.replace('I am a generic page', '<t t-esc="15/0"/>')
+            self.base_view.arch = self.base_view.arch.replace('I am a generic page', '<t t-out="15/0"/>')
 
             # first call, no debug, traceback should not be visible
             r = self.url_open(self.page.url)
@@ -321,7 +295,7 @@ class WithContext(HttpCase):
         # Set another page (/page_1) as homepage
         website.write({
             'homepage_url': self.page.url,
-            'domain': f"http://{HOST}:{config['http_port']}",
+            'domain': self.base_url(),
         })
         assert self.page.url != '/'
 
@@ -332,6 +306,21 @@ class WithContext(HttpCase):
         root_html = html.fromstring(r.content)
         canonical_url = root_html.xpath('//link[@rel="canonical"]')[0].attrib['href']
         self.assertIn(canonical_url, [f"{website.domain}/", f"{website.domain}/page_1"])
+
+    def test_opengraph_image_with_absolute_url(self):
+        base_url = self.base_url()
+        with MockRequest(self.env, website=self.env['website'].browse(1)):
+            self.page.website_meta_og_img = 'http://wrong.example.com/favicon.ico'
+            r = self.url_open(self.page.url)
+            self.assertEqual(r.status_code, 200)
+            self.assertIn(f'"og:image" content="{base_url}/favicon.ico"', r.text)
+            self.assertIn(f'"twitter:image" content="{base_url}/favicon.ico"', r.text)
+
+            self.page.website_meta_og_img = '/logo'
+            r = self.url_open(self.page.url)
+            self.assertEqual(r.status_code, 200)
+            self.assertIn(f'"og:image" content="{base_url}/logo"', r.text)
+            self.assertIn(f'"twitter:image" content="{base_url}/logo"', r.text)
 
     def test_website_homepage_url_change(self):
         website = self.env['website'].browse([1])
@@ -344,13 +333,14 @@ class WithContext(HttpCase):
             'key': 'test.homepage_url_test',
             'url': '/homepage_url_test',
             'is_published': True,
+            'website_id': website.id
         })
         self.assertURLEqual(test_page.url, '/homepage_url_test')
 
         # If one has set the `homepage_url` to a specific page URL..
         website.write({
             'name': 'Test Website',
-            'domain': f'http://{HOST}:{config["http_port"]}',
+            'domain': self.base_url(),
             'homepage_url': test_page.url,
         })
         home_url_full = website.domain + '/'
@@ -389,7 +379,7 @@ class WithContext(HttpCase):
         website = self.env['website'].browse([1])
         website.write({
             'name': 'Test Website',
-            'domain': f'http://{HOST}:{config["http_port"]}',
+            'domain': self.base_url(),
             'homepage_url': False,
         })
         contactus_url = '/contactus'
@@ -547,6 +537,37 @@ class WithContext(HttpCase):
             self.assertEqual(alternate_en_url, f'{self.base_url()}/page_1')
             self.assertEqual(alternate_fr_url, f'{self.base_url()}/fr/page_1')
 
+    def test_alternate_hreflang(self):
+        website = self.env['website'].get_current_website() or self.env['website'].browse(1)
+        lang_en = self.env.ref('base.lang_en')
+        ResLang = self.env['res.lang'].with_context(website_id=website.id)
+        lang_fr = ResLang._activate_lang('fr_FR')
+        with MockRequest(self.env, website=website):
+            # Only one region per lang, the hreflang should be the short code
+            website.language_ids = [Command.set((lang_en + lang_fr).ids)]
+            langs = ResLang._get_frontend()
+            self.assertEqual(langs['en_US']['hreflang'], 'en')
+            self.assertEqual(langs['fr_FR']['hreflang'], 'fr')
+            # Multiple regions per lang, one lang from the same region should be
+            # the short code, others should keep the full code
+            lang_be = ResLang._activate_lang('fr_BE')
+            lang_ca = ResLang._activate_lang('fr_CA')
+            website.language_ids = [Command.set((lang_en + lang_fr + lang_be + lang_ca).ids)]
+            langs = ResLang._get_frontend()
+            self.assertEqual(langs['en_US']['hreflang'], 'en')
+            self.assertEqual(langs['fr_FR']['hreflang'], 'fr-fr')
+            self.assertEqual(langs['fr_BE']['hreflang'], 'fr')
+            self.assertEqual(langs['fr_CA']['hreflang'], 'fr-ca')
+            # Special case for es_419: if there is multiple regions for spanish,
+            # including es_419, es_419 should be the one shortened
+            lang_es = ResLang._activate_lang('es_ES')
+            lang_419 = ResLang._activate_lang('es_419')
+            website.language_ids = [Command.set((lang_en + lang_es + lang_419).ids)]
+            langs = ResLang._get_frontend()
+            self.assertEqual(langs['en_US']['hreflang'], 'en')
+            self.assertEqual(langs['es_ES']['hreflang'], 'es-es')
+            self.assertEqual(langs['es_419']['hreflang'], 'es')
+
     def test_07_not_authorized(self):
         # Create page that requires specific user role.
         specific_page = self.page.copy({'website_id': self.env['website'].get_current_website().id})
@@ -554,7 +575,7 @@ class WithContext(HttpCase):
             'arch': self.page.arch.replace('I am a generic page', 'I am a specific page not available for visitors'),
             'is_published': True,
             'visibility': 'restricted_group',
-            'groups_id': [Command.link(self.ref('website.group_website_designer'))],
+            'group_ids': [Command.link(self.ref('website.group_website_designer'))],
         })
         # Access page as anonymous visitor.
         self.authenticate(None, None)
@@ -569,6 +590,33 @@ class WithContext(HttpCase):
         r2 = self.url_open('/Page_1', allow_redirects=False)
         self.assertEqual(r2.status_code, 303, "URL exists only in different casing, should redirect to it")
         self.assertURLEqual(r2.headers.get('Location'), '/page_1', "Should redirect /Page_1 to /page_1")
+
+    def test_page_generic_diverged_url(self):
+        """ When a generic page is COW and the new COW has its url changed, the
+        generic should not be reachable anymore even if the COW page has a
+        different URL. Note that they will both still share the same key.
+        """
+        Page = self.env['website.page']
+        specific_arch = '<div>website 1 content</div>'
+        generic_page = self.page
+        generic_page.arch = '<div>content</div>'
+
+        specific_page = Page.search([('url', '=', self.page.url), ('website_id', '=', 1)])
+        self.assertFalse(specific_page, "For this test, the specific page should not exist yet")
+
+        # COW a generic page
+        generic_page.view_id.with_context(website_id=1).save(specific_arch, xpath='/div')
+        specific_page = Page.search([('url', '=', self.page.url), ('website_id', '=', 1)])
+        self.assertEqual(specific_page.arch.replace('\n', ''), specific_arch)
+        self.assertEqual(generic_page.arch, '<div>content</div>')
+        # Change the URL of the specific page
+        specific_page.url = '/page_1_specific'
+        # Check that the generic page is not reachable anymore
+        r = self.url_open(specific_page.url)
+        self.assertEqual(r.status_code, 200, "Specific should be reachable")
+        r = self.url_open(generic_page.url)
+        self.assertEqual(r.status_code, 404, "Generic should not be reachable")
+
 
 @tagged('-at_install', 'post_install')
 class TestNewPage(common.TransactionCase):

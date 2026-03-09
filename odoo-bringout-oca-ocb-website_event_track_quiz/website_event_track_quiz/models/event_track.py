@@ -1,12 +1,11 @@
-# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 from odoo import api, fields, models
-from odoo.osv import expression
+from odoo.fields import Domain
 
 
 class EventTrack(models.Model):
-    _inherit = ['event.track']
+    _inherit = 'event.track'
 
     quiz_id = fields.Many2one('event.quiz', string="Quiz", compute='_compute_quiz_id', store=True, groups="event.group_event_user")
     quiz_ids = fields.One2many('event.quiz', 'event_track_id', string="Quizzes")
@@ -33,7 +32,7 @@ class EventTrack(models.Model):
         (self - tracks_quiz).is_quiz_completed = False
         (self - tracks_quiz).quiz_points = 0
         if tracks_quiz:
-            current_visitor = self.env['website.visitor']._get_visitor_from_request(force_create=False)
+            current_visitor = self.env['website.visitor']._get_visitor_from_request()
             if self.env.user._is_public() and not current_visitor:
                 for track in tracks_quiz:
                     track.is_quiz_completed = False
@@ -51,7 +50,7 @@ class EventTrack(models.Model):
                     domain = [('partner_id', '=', self.env.user.partner_id.id)]
 
                 event_track_visitors = self.env['event.track.visitor'].sudo().search_read(
-                    expression.AND([
+                    Domain.AND([
                         domain,
                         [('track_id', 'in', tracks_quiz.ids)]
                     ]), fields=['track_id', 'quiz_completed', 'quiz_points']

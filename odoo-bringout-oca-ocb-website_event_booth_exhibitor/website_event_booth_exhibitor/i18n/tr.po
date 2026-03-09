@@ -1,27 +1,27 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* website_event_booth_exhibitor
-# 
-# Translators:
-# Tugay Hatıl <tugayh@projetgrup.com>, 2022
-# İlknur Püskül <ilknurpuskull@gmail.com>, 2022
-# abc Def <hdogan1974@gmail.com>, 2022
-# Murat Kaplan <muratk@projetgrup.com>, 2022
-# Ertuğrul Güreş <ertugrulg@projetgrup.com>, 2022
-# 
+# * website_event_booth_exhibitor
+#
+# "Tiffany Chang (tic)" <tic@odoo.com>, 2025.
+# Weblate <noreply-mt-weblate@weblate.org>, 2025.
+# DeepL <noreply-mt-deepl@weblate.org>, 2025.
+# Odoo Turkish Import <dyki+tr@odoo.com>, 2025.
+# "Malaz Siddig Elsayed Abuidris (msea)" <msea@odoo.com>, 2025.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0beta\n"
+"Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-23 08:03+0000\n"
-"PO-Revision-Date: 2022-09-22 05:56+0000\n"
-"Last-Translator: Ertuğrul Güreş <ertugrulg@projetgrup.com>, 2022\n"
-"Language-Team: Turkish (https://app.transifex.com/odoo/teams/41243/tr/)\n"
+"POT-Creation-Date: 2026-01-25 18:37+0000\n"
+"PO-Revision-Date: 2025-11-28 12:51+0000\n"
+"Last-Translator: \"Malaz Siddig Elsayed Abuidris (msea)\" <msea@odoo.com>\n"
+"Language-Team: Turkish <https://translate.odoo.com/projects/odoo-19/"
+"website_event_booth_exhibitor/tr/>\n"
+"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: tr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.14.3\n"
 
 #. module: website_event_booth_exhibitor
 #: model_terms:ir.ui.view,arch_db:website_event_booth_exhibitor.event_booth_booked_template
@@ -31,19 +31,19 @@ msgstr "<b>Sponsor</b>:"
 #. module: website_event_booth_exhibitor
 #: model_terms:ir.ui.view,arch_db:website_event_booth_exhibitor.event_booth_registration_details
 msgid ""
-"<span>Email</span>\n"
+"<span>Company Name</span>\n"
 "                        <span class=\"mandatory_mark\"> *</span>"
 msgstr ""
-"<span>E-posta</span>\n"
+"<span>Şirket Adı</span>\n"
 "                        <span class=\"mandatory_mark\"> *</span>"
 
 #. module: website_event_booth_exhibitor
 #: model_terms:ir.ui.view,arch_db:website_event_booth_exhibitor.event_booth_registration_details
 msgid ""
-"<span>Name</span>\n"
+"<span>Email</span>\n"
 "                        <span class=\"mandatory_mark\"> *</span>"
 msgstr ""
-"<span>İsim</span>\n"
+"<span>E-posta</span>\n"
 "                        <span class=\"mandatory_mark\"> *</span>"
 
 #. module: website_event_booth_exhibitor
@@ -68,6 +68,12 @@ msgid "Description"
 msgstr "Açıklama"
 
 #. module: website_event_booth_exhibitor
+#: model:ir.model.fields,field_description:website_event_booth_exhibitor.field_event_booth__display_name
+#: model:ir.model.fields,field_description:website_event_booth_exhibitor.field_event_booth_category__display_name
+msgid "Display Name"
+msgstr "İsim Göster"
+
+#. module: website_event_booth_exhibitor
 #: model:ir.model,name:website_event_booth_exhibitor.model_event_booth
 msgid "Event Booth"
 msgstr "Etkinlik Standı"
@@ -83,9 +89,15 @@ msgid "Exhibitor type"
 msgstr "Katılımcı türü"
 
 #. module: website_event_booth_exhibitor
-#: model_terms:ir.ui.view,arch_db:website_event_booth_exhibitor.event_booth_category_view_search
-msgid "Group By"
-msgstr "Grupla"
+#: model_terms:ir.ui.view,arch_db:website_event_booth_exhibitor.event_booth_registration_details
+msgid "How can we showcase your company ?"
+msgstr "Şirketinizi nasıl sergileyebiliriz?"
+
+#. module: website_event_booth_exhibitor
+#: model:ir.model.fields,field_description:website_event_booth_exhibitor.field_event_booth__id
+#: model:ir.model.fields,field_description:website_event_booth_exhibitor.field_event_booth_category__id
+msgid "ID"
+msgstr "ID"
 
 #. module: website_event_booth_exhibitor
 #: model:ir.model.fields,help:website_event_booth_exhibitor.field_event_booth__use_sponsor
@@ -138,11 +150,6 @@ msgid "Sponsor Logo"
 msgstr "Sponsor Logosu"
 
 #. module: website_event_booth_exhibitor
-#: model:ir.model.fields,field_description:website_event_booth_exhibitor.field_event_booth__sponsor_mobile
-msgid "Sponsor Mobile"
-msgstr "Sponsor Mobil"
-
-#. module: website_event_booth_exhibitor
 #: model:ir.model.fields,field_description:website_event_booth_exhibitor.field_event_booth__sponsor_name
 msgid "Sponsor Name"
 msgstr "Sponsor Adı"
@@ -171,12 +178,3 @@ msgstr "Sponsor Tipi"
 #: model_terms:ir.ui.view,arch_db:website_event_booth_exhibitor.event_booth_category_view_form
 msgid "Sponsorship"
 msgstr "Sponsorluk"
-
-#. module: website_event_booth_exhibitor
-#: model_terms:ir.ui.view,arch_db:website_event_booth_exhibitor.event_booth_registration_details
-msgid ""
-"This booth type allows you to have visibility on the event website. Please "
-"fill in this form"
-msgstr ""
-"Bu stand türü, etkinlik web sitesinde görünürlüğe sahip olmanızı sağlar. "
-"Lütfen bu formu doldurun"

@@ -4,17 +4,13 @@ from . import controllers
 from . import models
 from . import wizard
 
-import odoo
-from odoo import api, SUPERUSER_ID
 from odoo.http import request
-from functools import partial
 
 
-def uninstall_hook(cr, registry):
+def uninstall_hook(env):
     # Force remove ondelete='cascade' elements,
     # This might be prevented by another ondelete='restrict' field
     # TODO: This should be an Odoo generic fix, not a website specific one
-    env = api.Environment(cr, SUPERUSER_ID, {})
     website_domain = [('website_id', '!=', False)]
     env['ir.asset'].search(website_domain).unlink()
     env['ir.ui.view'].search(website_domain).with_context(active_test=False, _force_unlink=True).unlink()
@@ -26,22 +22,8 @@ def uninstall_hook(cr, registry):
     # from 15.0 and above.
     env['website'].search([])._remove_attachments_on_website_unlink()
 
-    # Properly unlink website_id from ir.model.fields
-    def rem_website_id_null(dbname):
-        db_registry = odoo.modules.registry.Registry.new(dbname)
-        with db_registry.cursor() as cr:
-            env = api.Environment(cr, SUPERUSER_ID, {})
-            env['ir.model.fields'].search([
-                ('name', '=', 'website_id'),
-                ('model', '=', 'res.config.settings'),
-            ]).unlink()
 
-    cr.postcommit.add(partial(rem_website_id_null, cr.dbname))
-
-
-def post_init_hook(cr, registry):
-    env = api.Environment(cr, SUPERUSER_ID, {})
-
+def post_init_hook(env):
     if request:
         env = env(context=request.default_context())
         request.website_routing = env['website'].get_current_website().id

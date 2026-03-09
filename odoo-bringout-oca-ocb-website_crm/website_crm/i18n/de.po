@@ -1,25 +1,28 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* website_crm
-# 
+# * website_crm
+#
 # Translators:
-# Martin Trigaux, 2023
-# Wil Odoo, 2023
-# Larissa Manderfeld, 2023
-# 
+# Friederike Fasterling-Nesselbosch, 2022
+# Martin Trigaux, 2022
+#
+# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
+# "Larissa Manderfeld (lman)" <lman@odoo.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server saas~15.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-09 14:05+0000\n"
-"PO-Revision-Date: 2022-09-22 05:56+0000\n"
-"Last-Translator: Larissa Manderfeld, 2023\n"
-"Language-Team: German (https://app.transifex.com/odoo/teams/41243/de/)\n"
+"POT-Creation-Date: 2026-01-25 18:36+0000\n"
+"PO-Revision-Date: 2025-10-31 13:01+0000\n"
+"Last-Translator: \"Larissa Manderfeld (lman)\" <lman@odoo.com>\n"
+"Language-Team: German <https://translate.odoo.com/projects/odoo-19/"
+"website_crm/de/>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: de\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.12.2\n"
 
 #. module: website_crm
 #: model:ir.model.fields,field_description:website_crm.field_website_visitor__lead_count
@@ -34,16 +37,19 @@ msgstr "# Seitenansichten"
 #. module: website_crm
 #. odoo-javascript
 #: code:addons/website_crm/static/src/js/website_crm_editor.js:0
-#, python-format
 msgid "Assign leads/opportunities to a sales team."
 msgstr "Weisen Sie Leads/Verkaufschancen einem Verkaufsteam zu."
 
 #. module: website_crm
 #. odoo-javascript
 #: code:addons/website_crm/static/src/js/website_crm_editor.js:0
-#, python-format
 msgid "Assign leads/opportunities to a salesperson."
 msgstr "Weisen Sie Leads/Verkaufschancen einem Vertriebsmitarbeiter zu."
+
+#. module: website_crm
+#: model:ir.model,website_form_label:website_crm.model_crm_lead
+msgid "Create an Opportunity"
+msgstr "Verkaufschance erstellen"
 
 #. module: website_crm
 #: model:ir.model.fields,help:website_crm.field_website__crm_default_team_id
@@ -70,9 +76,23 @@ msgstr ""
 "erstellt werden."
 
 #. module: website_crm
+#: model:ir.model.fields,field_description:website_crm.field_crm_lead__display_name
+#: model:ir.model.fields,field_description:website_crm.field_website__display_name
+#: model:ir.model.fields,field_description:website_crm.field_website_visitor__display_name
+msgid "Display Name"
+msgstr "Anzeigename"
+
+#. module: website_crm
+#: model:ir.model.fields,field_description:website_crm.field_crm_lead__id
+#: model:ir.model.fields,field_description:website_crm.field_website__id
+#: model:ir.model.fields,field_description:website_crm.field_website_visitor__id
+msgid "ID"
+msgstr "ID"
+
+#. module: website_crm
 #: model:ir.model,name:website_crm.model_crm_lead
-msgid "Lead/Opportunity"
-msgstr "Lead/Verkaufschance"
+msgid "Lead"
+msgstr "Lead"
 
 #. module: website_crm
 #: model:ir.actions.act_window,name:website_crm.crm_lead_action_from_visitor
@@ -100,28 +120,24 @@ msgstr "Seitenansichten"
 #. module: website_crm
 #. odoo-javascript
 #: code:addons/website_crm/static/src/js/website_crm_editor.js:0
-#, python-format
 msgid "Phone Number"
 msgstr "Telefonnummer"
 
 #. module: website_crm
 #. odoo-javascript
 #: code:addons/website_crm/static/src/js/website_crm_editor.js:0
-#, python-format
 msgid "Sales Team"
 msgstr "Verkaufsteam"
 
 #. module: website_crm
 #. odoo-javascript
 #: code:addons/website_crm/static/src/js/website_crm_editor.js:0
-#, python-format
 msgid "Salesperson"
 msgstr "Vertriebsmitarbeiter"
 
 #. module: website_crm
 #. odoo-javascript
 #: code:addons/website_crm/static/src/js/website_crm_editor.js:0
-#, python-format
 msgid "Subject"
 msgstr "Betreff"
 
@@ -153,27 +169,26 @@ msgstr "Website-Besucher"
 #. module: website_crm
 #. odoo-javascript
 #: code:addons/website_crm/static/src/js/website_crm_editor.js:0
-#, python-format
 msgid "Your Company"
 msgstr "Ihr Unternehmen"
 
 #. module: website_crm
 #. odoo-javascript
 #: code:addons/website_crm/static/src/js/website_crm_editor.js:0
-#, python-format
 msgid "Your Email"
 msgstr "Ihre E-Mail"
 
 #. module: website_crm
 #. odoo-javascript
 #: code:addons/website_crm/static/src/js/website_crm_editor.js:0
-#, python-format
 msgid "Your Name"
 msgstr "Ihr Name"
 
 #. module: website_crm
 #. odoo-javascript
 #: code:addons/website_crm/static/src/js/website_crm_editor.js:0
-#, python-format
 msgid "Your Question"
 msgstr "Ihre Frage"
+
+#~ msgid "Lead/Opportunity"
+#~ msgstr "Lead/Verkaufschance"

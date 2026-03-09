@@ -7,8 +7,7 @@ from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
 
 
-
-class Survey(models.Model):
+class SurveySurvey(models.Model):
     _inherit = 'survey.survey'
 
     slide_ids = fields.One2many(
@@ -32,9 +31,17 @@ class Survey(models.Model):
         # even if they don't have access to those surveys hence the sudo usage
         certifications = self.sudo().slide_ids.filtered(lambda slide: slide.slide_type == "certification").mapped('survey_id').exists()
         if certifications:
-            certifications_course_mapping = [_('- %s (Courses - %s)', certi.title, '; '.join(certi.slide_channel_ids.mapped('name'))) for certi in certifications]
+            certifications_course_mapping = [
+                self.env._(
+                    "- %(certification)s (Courses - %(courses)s)",
+                    certification=certi.title,
+                    courses=certi.slide_channel_ids.mapped("name"),
+                )
+                for certi in certifications
+            ]
             raise ValidationError(_(
-                'Any Survey listed below is currently used as a Course Certification and cannot be deleted:\n%s',
+                'Uh-oh! You can’t delete surveys used as a Course Certification! Otherwise, students might think diplomas just grow on trees.\n'
+                'The courses that need them are:\n%s',
                 '\n'.join(certifications_course_mapping)))
 
     # ---------------------------------------------------------
@@ -51,7 +58,7 @@ class Survey(models.Model):
             action.update({'views': [(False, 'form')],
                            'res_id': self.slide_channel_ids[0].id})
         else:
-            action.update({'views': [[False, 'tree'], [False, 'form']],
+            action.update({'views': [[False, 'list'], [False, 'form']],
                            'domain': [('id', 'in', self.slide_channel_ids.ids)]})
         action['context'] = dict(
             ast.literal_eval(action.get('context') or '{}'),  # sufficient in most cases
@@ -62,14 +69,6 @@ class Survey(models.Model):
     # ---------------------------------------------------------
     # Business
     # ---------------------------------------------------------
-
-    def _check_answer_creation(self, user, partner, email, test_entry=False, check_attempts=True, invite_token=False):
-        """ Overridden to allow website_slides_officer to test certifications. """
-        self.ensure_one()
-        if test_entry and user.has_group('website_slides.group_website_slides_officer'):
-            return True
-
-        return super(Survey, self)._check_answer_creation(user, partner, email, test_entry=test_entry, check_attempts=check_attempts, invite_token=invite_token)
 
     def _prepare_challenge_category(self):
         slide_survey = self.env['slide.slide'].search([('survey_id', '=', self.id)])

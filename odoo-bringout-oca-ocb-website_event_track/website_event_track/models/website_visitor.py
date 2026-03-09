@@ -1,13 +1,12 @@
-# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from odoo import api, fields, models, _
-from odoo.osv import expression
+from odoo import api, fields, models
+from odoo.exceptions import UserError
+from odoo.fields import Domain
 
 
 class WebsiteVisitor(models.Model):
-    _name = 'website.visitor'
-    _inherit = ['website.visitor']
+    _inherit = 'website.visitor'
 
     event_track_visitor_ids = fields.One2many(
         'event.track.visitor', 'visitor_id', string="Track Visitors",
@@ -26,10 +25,10 @@ class WebsiteVisitor(models.Model):
     def _compute_event_track_wishlisted_ids(self):
         results = self.env['event.track.visitor']._read_group(
             [('visitor_id', 'in', self.ids), ('is_wishlisted', '=', True)],
-            ['visitor_id', 'track_id:array_agg'],
-            ['visitor_id']
+            ['visitor_id'],
+            ['track_id:array_agg'],
         )
-        track_ids_map = {result['visitor_id'][0]: result['track_id'] for result in results}
+        track_ids_map = {visitor.id: track_ids for visitor, track_ids in results}
         for visitor in self:
             visitor.event_track_wishlisted_ids = track_ids_map.get(visitor.id, [])
             visitor.event_track_wishlisted_count = len(visitor.event_track_wishlisted_ids)
@@ -37,8 +36,8 @@ class WebsiteVisitor(models.Model):
     def _search_event_track_wishlisted_ids(self, operator, operand):
         """ Search visitors with terms on wishlisted tracks. E.g. [('event_track_wishlisted_ids',
         'in', [1, 2])] should return visitors having wishlisted tracks 1, 2. """
-        if operator == "not in":
-            raise NotImplementedError(_("Unsupported 'Not In' operation on track wishlist visitors"))
+        if operator in ('not in', 'not any'):
+            raise UserError(self.env._("Unsupported 'Not In' operation on track wishlist visitors"))
 
         track_visitors = self.env['event.track.visitor'].sudo().search([
             ('track_id', operator, operand),
@@ -50,8 +49,7 @@ class WebsiteVisitor(models.Model):
     def _inactive_visitors_domain(self):
         """ Visitors registered to push subscriptions are considered always active and should not be
         deleted. """
-        domain = super()._inactive_visitors_domain()
-        return expression.AND([domain, [('event_track_visitor_ids', '=', False)]])
+        return super()._inactive_visitors_domain() & Domain('event_track_visitor_ids', '=', False)
 
     def _merge_visitor(self, target):
         """ Override linking process to link wishlist to the final visitor. """

@@ -1,33 +1,26 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* website_event_track_quiz
-# 
-# Translators:
-# Levent Karakaş <levent@mektup.at>, 2022
-# Metin Akın <aknmetin@gmail.com>, 2022
-# Ediz Duman <neps1192@gmail.com>, 2022
-# Umur Akın <umura@projetgrup.com>, 2022
-# Murat Kaplan <muratk@projetgrup.com>, 2022
-# abc Def <hdogan1974@gmail.com>, 2022
-# Ertuğrul Güreş <ertugrulg@projetgrup.com>, 2022
-# Martin Trigaux, 2022
-# İlknur Gözütok, 2023
-# Tugay Hatıl <tugayh@projetgrup.com>, 2023
-# Murat Durmuş <muratd@projetgrup.com>, 2023
-# 
+# * website_event_track_quiz
+#
+# "Tiffany Chang (tic)" <tic@odoo.com>, 2025.
+# Weblate <noreply-mt-weblate@weblate.org>, 2025.
+# DeepL <noreply-mt-deepl@weblate.org>, 2025.
+# "Malaz Siddig Elsayed Abuidris (msea)" <msea@odoo.com>, 2025.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-06 13:32+0000\n"
-"PO-Revision-Date: 2022-09-22 05:56+0000\n"
-"Last-Translator: Murat Durmuş <muratd@projetgrup.com>, 2023\n"
-"Language-Team: Turkish (https://app.transifex.com/odoo/teams/41243/tr/)\n"
+"POT-Creation-Date: 2026-01-25 18:37+0000\n"
+"PO-Revision-Date: 2025-11-28 12:51+0000\n"
+"Last-Translator: \"Malaz Siddig Elsayed Abuidris (msea)\" <msea@odoo.com>\n"
+"Language-Team: Turkish <https://translate.odoo.com/projects/odoo-19/"
+"website_event_track_quiz/tr/>\n"
+"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: tr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.14.3\n"
 
 #. module: website_event_track_quiz
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_track__quiz_questions_count
@@ -55,11 +48,15 @@ msgid "Add Quiz"
 msgstr "Sınav Ekle"
 
 #. module: website_event_track_quiz
+#: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_quiz_view_form
+msgid "All Events"
+msgstr "Tüm Olaylar"
+
+#. module: website_event_track_quiz
 #. odoo-javascript
-#: code:addons/website_event_track_quiz/static/src/js/event_quiz.js:0
-#, python-format
-msgid "All questions must be answered !"
-msgstr "Tüm sorular cevaplanmalıdır !"
+#: code:addons/website_event_track_quiz/static/src/interactions/quiz.js:0
+msgid "All questions must be answered!"
+msgstr "Tüm sorular yanıtlanmalıdır!"
 
 #. module: website_event_track_quiz
 #: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_quiz_view_form
@@ -75,15 +72,12 @@ msgstr "Cevap"
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "Check answers"
 msgstr "Cevapları kontrol et"
 
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "Check your answers"
 msgstr "Yanıtları kontrol edin"
 
@@ -100,7 +94,6 @@ msgstr "Beton Blok Duvar"
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "Congratulations, you scored a total of"
 msgstr "Tebrikler, toplamda puan aldınız"
 
@@ -122,7 +115,6 @@ msgstr "Doğru Cevap"
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "Correct."
 msgstr "Doğru."
 
@@ -131,21 +123,24 @@ msgstr "Doğru."
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_answer__create_uid
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_question__create_uid
 msgid "Created by"
-msgstr "Oluşturan"
+msgstr "Tarafından oluşturuldu"
 
 #. module: website_event_track_quiz
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz__create_date
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_answer__create_date
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_question__create_date
 msgid "Created on"
-msgstr "Oluşturulma"
+msgstr "Oluşturuldu"
 
 #. module: website_event_track_quiz
+#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_event__display_name
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz__display_name
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_answer__display_name
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_question__display_name
+#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_track__display_name
+#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_track_visitor__display_name
 msgid "Display Name"
-msgstr "Görünüm Adı"
+msgstr "İsim Göster"
 
 #. module: website_event_track_quiz
 #: model:event.quiz.answer,comment:website_event_track_quiz.event_7_track_1_question_0_1
@@ -156,8 +151,7 @@ msgstr "Bazıları olacak olsa bile."
 #: model:event.quiz.answer,comment:website_event_track_quiz.event_7_track_5_question_0_1
 msgid "Even if you have a big trunk, some long products need to be secured."
 msgstr ""
-"Büyük bir bagajınız olsa bile, bazı uzun ürünlerin emniyete alınması "
-"gerekir."
+"Büyük bir bagajınız olsa bile, bazı uzun ürünlerin emniyete alınması gerekir."
 
 #. module: website_event_track_quiz
 #: model:ir.model,name:website_event_track_quiz.model_event_event
@@ -192,27 +186,18 @@ msgstr "Ekstra Yorum"
 msgid ""
 "From here you will be able to examine all quiz questions you have linked to "
 "Tracks."
-msgstr ""
-"Buradan, Tracks'e bağladığınız tüm test sorularını inceleyebilirsiniz."
+msgstr "Buradan, Tracks'e bağladığınız tüm test sorularını inceleyebilirsiniz."
 
 #. module: website_event_track_quiz
 #: model_terms:ir.actions.act_window,help:website_event_track_quiz.event_quiz_action
 msgid ""
-"From here you will be able to overview all quizzes you have linked to "
-"Tracks."
-msgstr ""
-"Buradan, Tracks'e bağladığınız tüm testleri gözden geçirebileceksiniz."
+"From here you will be able to overview all quizzes you have linked to Tracks."
+msgstr "Buradan, Tracks'e bağladığınız tüm testleri gözden geçirebileceksiniz."
 
 #. module: website_event_track_quiz
 #: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_track_view_form
 msgid "Go to Quiz"
 msgstr "Sınava git"
-
-#. module: website_event_track_quiz
-#: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_quiz_question_view_search
-#: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_quiz_view_search
-msgid "Group By"
-msgstr "Grupla"
 
 #. module: website_event_track_quiz
 #: model:event.quiz.answer,text_value:website_event_track_quiz.event_7_track_5_question_1_0
@@ -225,9 +210,12 @@ msgid "Hammer won't be of any help here!"
 msgstr "Hammer burada yardımcı olmayacak!"
 
 #. module: website_event_track_quiz
+#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_event__id
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz__id
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_answer__id
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_question__id
+#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_track__id
+#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_track_visitor__id
 msgid "ID"
 msgstr "ID"
 
@@ -237,13 +225,11 @@ msgid ""
 "In order to avoid accident, you need to secure any product of this kind "
 "during transportation!"
 msgstr ""
-"Kazaları önlemek için bu tür ürünleri nakliye sırasında emniyete "
-"almalısınız!"
+"Kazaları önlemek için bu tür ürünleri nakliye sırasında emniyete almalısınız!"
 
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "Incorrect."
 msgstr "Yanlış."
 
@@ -251,13 +237,6 @@ msgstr "Yanlış."
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_track__is_quiz_completed
 msgid "Is Quiz Done"
 msgstr "Sınav Yapıldı mı"
-
-#. module: website_event_track_quiz
-#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz____last_update
-#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_answer____last_update
-#: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_question____last_update
-msgid "Last Modified on"
-msgstr "Son Düzenleme"
 
 #. module: website_event_track_quiz
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz__write_uid
@@ -331,7 +310,6 @@ msgstr "Puan Sayısı"
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "Oopsie, you did not score any point on this quiz."
 msgstr "Hata, bu testte herhangi bir puan almadın."
 
@@ -348,7 +326,6 @@ msgstr "OpenWood, Uygulamalar hakkında bir Açık Kaynak kongresi değildir."
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "Point"
 msgstr "Puan"
 
@@ -356,7 +333,6 @@ msgstr "Puan"
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_answer__awarded_points
-#, python-format
 msgid "Points"
 msgstr "Puanlar"
 
@@ -374,7 +350,6 @@ msgstr "Soru"
 #. module: website_event_track_quiz
 #. odoo-python
 #: code:addons/website_event_track_quiz/models/event_quiz.py:0
-#, python-format
 msgid ""
 "Question \"%s\" must have 1 correct answer and at least 1 incorrect answer "
 "to be valid."
@@ -385,7 +360,6 @@ msgstr ""
 #. module: website_event_track_quiz
 #. odoo-python
 #: code:addons/website_event_track_quiz/models/event_quiz.py:0
-#, python-format
 msgid "Question \"%s\" must have 1 correct answer to be valid."
 msgstr "\"%s\" sorusunun geçerli olabilmesi için 1 doğru yanıtı olmalıdır."
 
@@ -429,8 +403,7 @@ msgstr "Sınav Soruları"
 
 #. module: website_event_track_quiz
 #. odoo-javascript
-#: code:addons/website_event_track_quiz/static/src/js/event_quiz.js:0
-#, python-format
+#: code:addons/website_event_track_quiz/static/src/interactions/quiz.js:0
 msgid "Quiz validation error"
 msgstr "Sınav doğrulama hatası"
 
@@ -445,7 +418,6 @@ msgstr "Sınavlar"
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "Reset"
 msgstr "Sıfırla"
 
@@ -478,7 +450,7 @@ msgstr "Taşıma sırasında Kerestenizin Emniyete Alınması"
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_answer__sequence
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_question__sequence
 msgid "Sequence"
-msgstr "Sıra"
+msgstr "Sıralama"
 
 #. module: website_event_track_quiz
 #: model:event.quiz.answer,text_value:website_event_track_quiz.event_7_track_13_question_0_1
@@ -487,8 +459,8 @@ msgstr "Çelik duvar"
 
 #. module: website_event_track_quiz
 #: model:event.quiz.answer,text_value:website_event_track_quiz.event_7_track_1_question_1_1
-msgid "Stores !"
-msgstr "Mağazalar !"
+msgid "Stores!"
+msgstr "Mağazalar!"
 
 #. module: website_event_track_quiz
 #: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_track_content
@@ -498,7 +470,6 @@ msgstr "Sınav Olmak"
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "The correct answer was:"
 msgstr "Doğru cevap şuydu:"
 
@@ -509,24 +480,26 @@ msgstr "Şu anda kullanılabilir bir skor tablosu yok"
 
 #. module: website_event_track_quiz
 #. odoo-javascript
-#: code:addons/website_event_track_quiz/static/src/js/event_quiz.js:0
-#, python-format
+#: code:addons/website_event_track_quiz/static/src/interactions/quiz.js:0
 msgid "There was an error validating this quiz."
 msgstr "Bu sınav doğrulanırken bir hata oluştu."
 
 #. module: website_event_track_quiz
 #: model:ir.model.fields,help:website_event_track_quiz.field_event_quiz_answer__comment
 msgid ""
-"This comment will be displayed to the user if they select this answer, after submitting the quiz.\n"
-"                It is used as a small informational text helping to understand why this answer is correct / incorrect."
+"This comment will be displayed to the user if they select this answer, after "
+"submitting the quiz.\n"
+"                It is used as a small informational text helping to "
+"understand why this answer is correct / incorrect."
 msgstr ""
-"Testi gönderdikten sonra bu cevabı seçerlerse bu yorum kullanıcıya gösterilecektir.\n"
-"Bu cevabın neden doğru/yanlış olduğunu anlamaya yardımcı olan küçük bir bilgilendirme metni olarak kullanılmaktadır."
+"Testi gönderdikten sonra bu cevabı seçerlerse bu yorum kullanıcıya "
+"gösterilecektir.\n"
+"Bu cevabın neden doğru/yanlış olduğunu anlamaya yardımcı olan küçük bir "
+"bilgilendirme metni olarak kullanılmaktadır."
 
 #. module: website_event_track_quiz
 #. odoo-javascript
-#: code:addons/website_event_track_quiz/static/src/js/event_quiz.js:0
-#, python-format
+#: code:addons/website_event_track_quiz/static/src/interactions/quiz.js:0
 msgid "This quiz is already done. Retaking it is not possible."
 msgstr "Bu sınav zaten yapıldı. Geri almak mümkün değil."
 
@@ -552,8 +525,8 @@ msgstr "Mağazalardan evinize kereste taşımak güvenlidir."
 
 #. module: website_event_track_quiz
 #: model:event.quiz.answer,text_value:website_event_track_quiz.event_7_track_1_question_1_0
-msgid "Trees !"
-msgstr "Ağaçlar !"
+msgid "Trees!"
+msgstr "Ağaçlar!"
 
 #. module: website_event_track_quiz
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz__repeatable
@@ -577,22 +550,22 @@ msgstr "Bu Etkinlik Neyle İlgili"
 
 #. module: website_event_track_quiz
 #: model:event.quiz.question,name:website_event_track_quiz.event_7_track_5_question_1
-msgid "What kind of tool are needed to secure your lumber ?"
-msgstr "Kerestenizi sabitlemek için ne tür bir alete ihtiyaç vardır?"
+msgid "What kind of tool are needed to secure your lumber?"
+msgstr "Kerestelerinizi sabitlemek için ne tür aletlere ihtiyacınız var?"
 
 #. module: website_event_track_quiz
 #: model:event.quiz.question,name:website_event_track_quiz.event_7_track_13_question_0
-msgid "What kind of wall is transformed here ?"
-msgstr "Burada ne tür bir duvar dönüştürülüyor?"
+msgid "What kind of wall is transformed here?"
+msgstr "Burada ne tür bir duvar dönüştürülmüş?"
 
 #. module: website_event_track_quiz
 #: model:event.quiz.question,name:website_event_track_quiz.event_7_track_1_question_0
-msgid "What will we talk about during this event ?"
-msgstr "Bu etkinlikte neler konuşacağız?"
+msgid "What will we talk about during this event?"
+msgstr "Bu etkinlik sırasında ne hakkında konuşacağız?"
 
 #. module: website_event_track_quiz
 #: model:event.quiz.question,name:website_event_track_quiz.event_7_track_1_question_1
-msgid "Where does lumber comes from ?"
+msgid "Where does lumber comes from?"
 msgstr "Kereste nereden geliyor?"
 
 #. module: website_event_track_quiz
@@ -613,8 +586,8 @@ msgstr "Siz"
 
 #. module: website_event_track_quiz
 #: model:event.quiz.answer,comment:website_event_track_quiz.event_7_track_1_question_0_0
-msgid "You're really smart !"
-msgstr "Gerçekten akıllısın!"
+msgid "You're really smart!"
+msgstr "Sen gerçekten zekisin!"
 
 #. module: website_event_track_quiz
 #: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_quiz_view_form
@@ -629,13 +602,11 @@ msgstr "Örneğin. Joe'nun favori sloganı nedir?"
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "point!"
 msgstr "puan!"
 
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
-#, python-format
 msgid "points!"
 msgstr "puanlar!"
