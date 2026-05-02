@@ -17,46 +17,51 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
+# taken from hr.po
 #. module: website_crm
 #: model:ir.model.fields,field_description:website_crm.field_website_visitor__lead_count
 msgid "# Leads"
-msgstr ""
+msgstr "# Potencijala"
 
+# taken from hr.po
 #. module: website_crm
 #: model:ir.model.fields,field_description:website_crm.field_crm_lead__visitor_page_count
 msgid "# Page Views"
-msgstr ""
+msgstr "# Pregledi stranica"
 
 #. module: website_crm
 #. odoo-javascript
 #: code:addons/website_crm/static/src/js/website_crm_editor.js:0
+#, python-format
 msgid "Assign leads/opportunities to a sales team."
-msgstr ""
+msgstr "Dodijeli potencijale/mogućnosti prodajnom timu."
 
 #. module: website_crm
 #. odoo-javascript
 #: code:addons/website_crm/static/src/js/website_crm_editor.js:0
+#, python-format
 msgid "Assign leads/opportunities to a salesperson."
-msgstr ""
+msgstr "Dodijeli potencijale/mogućnosti prodavcu."
 
 #. module: website_crm
 #: model:ir.model,website_form_label:website_crm.model_crm_lead
 msgid "Create an Opportunity"
-msgstr ""
+msgstr "Kreiraj priliku"
 
 #. module: website_crm
 #: model:ir.model.fields,help:website_crm.field_website__crm_default_team_id
 msgid "Default Sales Team for new leads created through the Contact Us form."
-msgstr ""
+msgstr "Zadani prodajni tim za nove potencijale kreiran kroz Kontakt formu."
 
+# taken from hr.po
 #. module: website_crm
 #: model:ir.model.fields,field_description:website_crm.field_website__crm_default_team_id
 msgid "Default Sales Teams"
-msgstr ""
+msgstr "Zadane prodajne ekipe"
 
+# taken from hr.po
 #. module: website_crm
 #: model:ir.model.fields,field_description:website_crm.field_website__crm_default_user_id
 msgid "Default Salesperson"
@@ -65,122 +70,142 @@ msgstr "Zadani prodavač(ica)"
 #. module: website_crm
 #: model:ir.model.fields,help:website_crm.field_website__crm_default_user_id
 msgid "Default salesperson for new leads created through the Contact Us form."
-msgstr ""
+msgstr "Zadani prodavac za nove potencijale kreirane kroz Kontakt formu."
 
 #. module: website_crm
 #: model:ir.model.fields,field_description:website_crm.field_crm_lead__display_name
-#: model:ir.model.fields,field_description:website_crm.field_website__display_name
-#: model:ir.model.fields,field_description:website_crm.field_website_visitor__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Naziv za prikaz"
 
 #. module: website_crm
 #: model:ir.model.fields,field_description:website_crm.field_crm_lead__id
-#: model:ir.model.fields,field_description:website_crm.field_website__id
-#: model:ir.model.fields,field_description:website_crm.field_website_visitor__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: website_crm
 #: model:ir.model,name:website_crm.model_crm_lead
 msgid "Lead"
-msgstr ""
+msgstr "Lead"
 
+# taken from hr.po
 #. module: website_crm
 #: model:ir.actions.act_window,name:website_crm.crm_lead_action_from_visitor
-#: model:ir.model.fields,field_description:website_crm.field_website_visitor__lead_ids
-#: model_terms:ir.ui.view,arch_db:website_crm.website_visitor_view_form
-#: model_terms:ir.ui.view,arch_db:website_crm.website_visitor_view_search
 msgid "Leads"
-msgstr ""
+msgstr "Potencijali"
 
+# taken from hr.po
 #. module: website_crm
 #: model_terms:ir.ui.view,arch_db:website_crm.website_visitor_view_kanban
 msgid "Leads / Opportunities"
-msgstr ""
+msgstr "Potencijali / Prilike"
 
 #. module: website_crm
 #: model_terms:ir.actions.act_window,help:website_crm.crm_lead_action_from_visitor
 msgid "No lead linked for this visitor"
-msgstr ""
+msgstr "Nema povezanog potencijala za ovog posjetitelja"
 
+# taken from hr.po
 #. module: website_crm
 #: model_terms:ir.ui.view,arch_db:website_crm.crm_lead_view_form
 msgid "Page views"
-msgstr ""
+msgstr "Pregledi stranica"
 
+# taken from hr.po
 #. module: website_crm
 #. odoo-javascript
 #: code:addons/website_crm/static/src/js/website_crm_editor.js:0
+#, python-format
 msgid "Phone Number"
-msgstr ""
+msgstr "Broj telefona"
 
+# taken from hr.po
 #. module: website_crm
 #. odoo-javascript
 #: code:addons/website_crm/static/src/js/website_crm_editor.js:0
+#, python-format
 msgid "Sales Team"
 msgstr "Prodajni tim"
 
+# taken from hr.po
 #. module: website_crm
 #. odoo-javascript
 #: code:addons/website_crm/static/src/js/website_crm_editor.js:0
+#, python-format
 msgid "Salesperson"
 msgstr "Prodavač(ica)"
 
+# taken from hr.po
 #. module: website_crm
 #. odoo-javascript
 #: code:addons/website_crm/static/src/js/website_crm_editor.js:0
+#, python-format
 msgid "Subject"
-msgstr ""
+msgstr "Tema"
 
 #. module: website_crm
 #: model:ir.model.fields,field_description:website_crm.field_crm_lead__visitor_ids
 msgid "Web Visitors"
-msgstr ""
+msgstr "Vaša poruka je uspješno poslana."
 
 #. module: website_crm
 #: model_terms:ir.ui.view,arch_db:website_crm.crm_lead_merge_summary_inherit_website
 msgid "Web Visitors:"
-msgstr ""
+msgstr "Web posjetitelji:"
 
+# taken from hr.po
 #. module: website_crm
 #: model:ir.model,name:website_crm.model_website
 msgid "Website"
 msgstr "Web stranica"
 
+# taken from hr.po
 #. module: website_crm
 #: model:ir.actions.act_url,name:website_crm.action_open_website
 msgid "Website Contact Form"
-msgstr ""
+msgstr "KOntakt obrazac"
 
 #. module: website_crm
 #: model:ir.model,name:website_crm.model_website_visitor
 msgid "Website Visitor"
-msgstr ""
+msgstr "Posjetilac web stranice"
 
 #. module: website_crm
 #. odoo-javascript
 #: code:addons/website_crm/static/src/js/website_crm_editor.js:0
+#, python-format
 msgid "Your Company"
-msgstr ""
+msgstr "Vaša kompanija"
 
+# taken from hr.po
 #. module: website_crm
 #. odoo-javascript
 #: code:addons/website_crm/static/src/js/website_crm_editor.js:0
+#, python-format
 msgid "Your Email"
 msgstr ""
+"Molimo postavite prodajni tim za web sajt. Inače ne možete pratiti povezane "
+"eventi."
 
+# taken from hr.po
 #. module: website_crm
 #. odoo-javascript
 #: code:addons/website_crm/static/src/js/website_crm_editor.js:0
+#, python-format
 msgid "Your Name"
-msgstr ""
+msgstr "Vaše ime"
 
 #. module: website_crm
 #. odoo-javascript
 #: code:addons/website_crm/static/src/js/website_crm_editor.js:0
+#, python-format
 msgid "Your Question"
-msgstr ""
+msgstr "Vaše pitanje"
+
+# taken from hr.po
+#. module: website_crm
+#: model:ir.model,name:website_crm.model_crm_lead
+msgid "Lead/Opportunity"
+msgstr "Potencijal/Prilika"
 
 #~ msgid "Lead/Opportunity"
 #~ msgstr "Potencijal/Prilika"

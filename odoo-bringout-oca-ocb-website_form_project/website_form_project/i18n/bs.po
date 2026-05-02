@@ -18,7 +18,7 @@ msgstr ""
 # taken from hr.po
 #. module: website_form_project
 #. odoo-javascript
-#: code:addons/website_form_project/static/src/js/website_form_project_editor.js
+#: code:addons/website_form_project/static/src/js/website_form_project_editor.js:0
 #, python-format
 msgid "Description"
 msgstr "Opis"
@@ -26,7 +26,7 @@ msgstr "Opis"
 # taken from hr.po
 #. module: website_form_project
 #. odoo-javascript
-#: code:addons/website_form_project/static/src/js/website_form_project_editor.js
+#: code:addons/website_form_project/static/src/js/website_form_project_editor.js:0
 #, python-format
 msgid "Project"
 msgstr "Projekt"
@@ -34,14 +34,14 @@ msgstr "Projekt"
 # taken from hr.po
 #. module: website_form_project
 #. odoo-javascript
-#: code:addons/website_form_project/static/src/js/website_form_project_editor.js
+#: code:addons/website_form_project/static/src/js/website_form_project_editor.js:0
 #, python-format
 msgid "Task Title"
 msgstr "Naslov zadatka"
 
 #. module: website_form_project
 #. odoo-javascript
-#: code:addons/website_form_project/static/src/js/website_form_project_editor.js
+#: code:addons/website_form_project/static/src/js/website_form_project_editor.js:0
 #, python-format
 msgid "Your Email"
 msgstr "Vaš e-mail"

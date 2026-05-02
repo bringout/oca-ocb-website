@@ -15,49 +15,50 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
 #. module: website_event_booth
 #: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_registration_details
 msgid ""
-"<i class=\"fa fa-exclamation-triangle me-2\" role=\"img\" aria-"
-"label=\"Error\" title=\"Error\"/>\n"
+"<i class=\"fa fa-exclamation-triangle me-2\" role=\"img\" aria-label=\"Error\" title=\"Error\"/>\n"
 "                    <span class=\"o_wbooth_registration_error_message\"/>"
 msgstr ""
+"<i class=\"fa fa-exclamation-triangle me-2\" role=\"img\" aria-label=\"Greška\" title=\"Greška\"/>\n"
+"                    <span class=\"o_wbooth_registration_error_message\"/>"
 
 #. module: website_event_booth
 #: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_registration
 msgid ""
 "<i class=\"fa fa-exclamation-triangle\"/>\n"
-"                                        <span>Sorry, several booths are now "
-"sold out. Please change your choices before validating again.</span>"
+"                                        <span>Sorry, several booths are now sold out. Please change your choices before validating again.</span>"
 msgstr ""
+"<i class=\"fa fa-exclamation-triangle\"/>\n"
+"                                        <span>Sorry, several booths are now sold out. Please change your choices before validating again.</span>"
 
 #. module: website_event_booth
 #: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_registration
 msgid "<i class=\"fa fa-map-o me-1\"/>View Plan"
-msgstr ""
+msgstr "<i class=\"fa fa-map-o me-1\"/>Pogledaj plan"
 
 #. module: website_event_booth
 #: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_layout
 msgid "<span class=\"fa fa-gear me-1\"/> Configure Booths"
-msgstr ""
+msgstr "<span class=\"fa fa-gear me-1\"/> Konfiguriši štandove"
 
 #. module: website_event_booth
 #: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_registration
 msgid "<span class=\"text-nowrap\">Sold Out</span>"
-msgstr ""
+msgstr "<span class=\"text-nowrap\">Rasprodano</span>"
 
 #. module: website_event_booth
 #: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_registration
 msgid "<span>Book my Booth<small>(s)</small></span>"
-msgstr ""
+msgstr "<span>Rezerviši moj štand<small>(ove)</small></span>"
 
 #. module: website_event_booth
 #: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_registration_details
 msgid "<span>Book my Booths</span>"
-msgstr ""
+msgstr "<span>Book my Štands</span>"
 
 #. module: website_event_booth
 #: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_order_progress
@@ -65,11 +66,13 @@ msgid ""
 "<span>Booth Selection</span><span class=\"fa fa-angle-right d-inline-block "
 "align-middle mx-2 mx-lg-3 opacity-75\"/>"
 msgstr ""
+"<span>Booth Selection</span><span class=\"fa fa-angle-right d-inline-block "
+"align-middle mx-2 mx-lg-3 opacity-75\"/>"
 
 #. module: website_event_booth
 #: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_order_progress
 msgid "<span>Confirmed</span>"
-msgstr ""
+msgstr "<span>Potvrđeno</span>"
 
 #. module: website_event_booth
 #: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_registration_details
@@ -84,39 +87,43 @@ msgid ""
 "<span>Name</span>\n"
 "                            <span> *</span>"
 msgstr ""
+"<span>Ime</span>\n"
+"                            <span> *</span>"
 
 #. module: website_event_booth
 #. odoo-python
 #: code:addons/website_event_booth/models/event_event.py:0
 msgid "Become exhibitor"
-msgstr ""
+msgstr "Postani izlagač"
 
 #. module: website_event_booth
 #: model_terms:ir.ui.view,arch_db:website_event_booth.event_type_view_form
 msgid "Booth Menu Item"
-msgstr ""
+msgstr "Stavka menija štanda"
 
 #. module: website_event_booth
 #: model:ir.model.fields,field_description:website_event_booth.field_event_event__booth_menu
 msgid "Booth Register"
-msgstr ""
+msgstr "štand registruj"
 
 #. module: website_event_booth
 #. odoo-javascript
 #: code:addons/website_event_booth/static/src/xml/event_booth_registration_templates.xml:0
+#, python-format
 msgid "Booth Registration completed!"
-msgstr ""
+msgstr "štand registracija completed!"
 
 #. module: website_event_booth
 #. odoo-javascript
 #: code:addons/website_event_booth/static/src/interactions/booth_registration.js:0
+#, python-format
 msgid "Booth registration failed."
-msgstr ""
+msgstr "štand registracija failed."
 
 #. module: website_event_booth
 #: model:ir.model.fields,field_description:website_event_booth.field_event_type__booth_menu
 msgid "Booths on Website"
-msgstr ""
+msgstr "štandovi on Website"
 
 #. module: website_event_booth
 #: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_layout
@@ -125,16 +132,19 @@ msgid ""
 "Future Events\" aria-label=\"Link to list of future events\">list of future "
 "events</a>."
 msgstr ""
+"Check our <a class=\"o_translate_inline\" href=\"/event\" title=\"List of "
+"Future Events\" aria-label=\"Link to list of future events\">list of future "
+"events</a>."
 
 #. module: website_event_booth
 #: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_registration
 msgid "Choose your type of booth"
-msgstr ""
+msgstr "Odaberite tip vašeg štanda"
 
 #. module: website_event_booth
 #: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_registration_details
 msgid "Contact Details"
-msgstr ""
+msgstr "Detalji kontakta"
 
 #. module: website_event_booth
 #: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_order_progress
@@ -142,131 +152,223 @@ msgid ""
 "Contact Details<span class=\"fa fa-angle-right d-inline-block align-middle "
 "mx-2 mx-lg-3 opacity-75\"/>"
 msgstr ""
+"Contact Details<span class=\"fa fa-angle-right d-inline-block align-middle "
+"mx-2 mx-lg-3 opacity-75\"/>"
 
+# taken from hr.po
 #. module: website_event_booth
 #: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_registration
 msgid "Contact Us"
-msgstr ""
+msgstr "Kontaktirajte nas"
 
 #. module: website_event_booth
 #: model:ir.model.fields,field_description:website_event_booth.field_event_event__display_name
-#: model:ir.model.fields,field_description:website_event_booth.field_event_type__display_name
-#: model:ir.model.fields,field_description:website_event_booth.field_website_event_menu__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Naziv za prikaz"
 
+# taken from hr.po
 #. module: website_event_booth
 #: model:ir.model,name:website_event_booth.model_event_event
 msgid "Event"
-msgstr ""
+msgstr "Događaj"
 
 #. module: website_event_booth
 #: model:ir.model.fields.selection,name:website_event_booth.selection__website_event_menu__menu_type__booth
 msgid "Event Booth Menus"
-msgstr ""
+msgstr "događaj štand meniji"
 
 #. module: website_event_booth
 #: model:ir.model.fields,field_description:website_event_booth.field_event_event__booth_menu_ids
 msgid "Event Booths Menus"
-msgstr ""
+msgstr "događaj štandovi meniji"
 
 #. module: website_event_booth
 #: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_layout
 msgid "Event Finished"
-msgstr ""
+msgstr "Događaj završen"
 
 #. module: website_event_booth
 #: model:ir.model,name:website_event_booth.model_event_type
 msgid "Event Template"
-msgstr ""
+msgstr "Šablon događaja"
 
 #. module: website_event_booth
 #: model:ir.model.fields,field_description:website_event_booth.field_event_event__exhibition_map
 msgid "Exhibition Map"
-msgstr ""
+msgstr "Mapa izložbe"
 
 #. module: website_event_booth
 #: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_registration
-#: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_registration_details
+#, python-format
 msgid "Get A Booth"
-msgstr ""
+msgstr "Dobij štand"
 
 #. module: website_event_booth
 #: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_registration_details
 msgid "Go back"
-msgstr ""
+msgstr "Nazad"
 
 #. module: website_event_booth
 #: model:ir.model.fields,field_description:website_event_booth.field_event_event__id
-#: model:ir.model.fields,field_description:website_event_booth.field_event_type__id
-#: model:ir.model.fields,field_description:website_event_booth.field_website_event_menu__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: website_event_booth
 #. odoo-javascript
 #: code:addons/website_event_booth/static/src/interactions/booth_registration.js:0
 msgid "It looks like your email is already in our system."
-msgstr ""
+msgstr "Izgleda da je vaš email već u našem sistemu."
 
 #. module: website_event_booth
 #: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_layout
 msgid "It's no longer possible to book a booth."
-msgstr ""
+msgstr "Više nije moguće rezervisati štand."
 
 #. module: website_event_booth
 #: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_registration
 msgid "Location"
-msgstr ""
+msgstr "Lokacija"
 
 #. module: website_event_booth
 #: model:ir.model.fields,field_description:website_event_booth.field_website_event_menu__menu_type
 msgid "Menu Type"
-msgstr ""
+msgstr "Tip menija"
 
+# taken from hr.po
 #. module: website_event_booth
 #: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_registration_details
 msgid "Phone"
-msgstr ""
+msgstr "Telefon"
 
 #. module: website_event_booth
 #: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_registration_details
 msgid "Please Sign In or Create an Account."
-msgstr ""
+msgstr "Molimo prijavite se ili kreirajte nalog."
 
 #. module: website_event_booth
 #. odoo-javascript
 #: code:addons/website_event_booth/static/src/interactions/booth_registration.js:0
+#, python-format
 msgid "Please fill out the form correctly."
-msgstr ""
+msgstr "Molimo ispunite formu ispravno."
 
 #. module: website_event_booth
 #: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_layout
 msgid "Registration Not Open."
-msgstr ""
+msgstr "Registracija nije otvorena."
 
 #. module: website_event_booth
 #: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_registration
 msgid "Sorry, all the booths are sold out."
-msgstr ""
+msgstr "izvinjavam se, sve the štandovi are sold out."
 
 #. module: website_event_booth
 #. odoo-javascript
 #: code:addons/website_event_booth/static/src/interactions/booth_registration.js:0
+#, python-format
 msgid "The booth category doesn't exist."
-msgstr ""
+msgstr "The štand category doesn't exist."
 
 #. module: website_event_booth
 #: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_layout
 msgid "This event is not open to exhibitors registration at this time."
-msgstr ""
+msgstr "Ovaj događaj trenutno nije otvoren za registraciju izlagača."
 
 #. module: website_event_booth
 #: model:ir.model,name:website_event_booth.model_website_event_menu
 msgid "Website Event Menu"
-msgstr ""
+msgstr "Meni web stranice događaja"
 
 #. module: website_event_booth
 #: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_registration
 msgid "if you have any question."
+msgstr "if you have any pitanje."
+
+#. module: website_event_booth
+#: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_registration
+msgid ""
+"<i class=\"fa fa-exclamation-triangle\"/>\n"
+"                                    <span>Sorry, several booths are now sold out. Please change your choices before validating again.</span>"
 msgstr ""
+"<i class=\"fa fa-exclamation-triangle\"/>\n"
+"                                    <span>Žao nam je, nekoliko štandova je sada rasprodano. Molimo promijenite izbor prije ponovne potvrde.</span>"
+
+#. module: website_event_booth
+#: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_layout
+msgid ""
+"<i class=\"fa fa-gear me-1\" role=\"img\" aria-label=\"Configure\" "
+"title=\"Configure event booths\"/><em>Configure Booths</em>"
+msgstr ""
+"<i class=\"fa fa-gear me-1\" role=\"img\" aria-label=\"Konfiguriši\" "
+"title=\"Konfiguriši štandove događaja\"/><em>Konfiguriši štandove</em>"
+
+#. module: website_event_booth
+#: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_layout
+msgid ""
+"<span class=\"alert alert-info\">This event is finished. It's no longer "
+"possible to book a booth.</span>"
+msgstr ""
+"<span class=\"alert alert-info\">Ovaj događaj je završen. Rezervacija štanda"
+" više nije moguća.</span>"
+
+#. module: website_event_booth
+#: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_registration_details
+msgid "<strong>Contact Details</strong>"
+msgstr "<strong>Kontakt podaci</strong>"
+
+#. module: website_event_booth
+#: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_registration_details
+msgid "Book my Booths"
+msgstr "Rezerviši moje štandove"
+
+#. module: website_event_booth
+#: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_registration
+msgid "Booths"
+msgstr "Štandovi"
+
+#. module: website_event_booth
+#: code:addons/website_event_booth/static/src/js/booth_register.js:0
+#, python-format
+msgid "It looks like your email is linked to an existing account."
+msgstr "It looks sviđa mi se your email is linked to an existing account."
+
+# taken from hr.po
+#. module: website_event_booth
+#: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_registration_details
+msgid "Mobile"
+msgstr "Mobitel"
+
+#. module: website_event_booth
+#: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_registration_details
+msgid "Please Sign In."
+msgstr "molimo Sign In."
+
+#. module: website_event_booth
+#: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_layout
+msgid "This event is not open to exhibitors registration,"
+msgstr "This događaj is not otvoreno to exhibitors registracija,"
+
+#. module: website_event_booth
+#: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_registration
+msgid "View Floor Plan"
+msgstr "Pogledaj plan prostora"
+
+#. module: website_event_booth
+#: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_layout
+msgid "check our"
+msgstr "provjerite naše"
+
+#. module: website_event_booth
+#: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_layout
+msgid "for this event."
+msgstr "for this događaj."
+
+#. module: website_event_booth
+#: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_layout
+msgid "list of future events"
+msgstr "lista of future događaji"
+
+#. module: website_event_booth
+#: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_layout
+msgid "you can"
+msgstr "možete"

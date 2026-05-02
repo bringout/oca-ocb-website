@@ -48,7 +48,7 @@ msgstr "Chat sobe"
 # taken from hr.po
 #. module: website_jitsi
 #. odoo-javascript
-#: code:addons/website_jitsi/static/src/xml/chat_room_modal.xml
+#: code:addons/website_jitsi/static/src/xml/chat_room_modal.xml:0
 #, python-format
 msgid "Close"
 msgstr "Zatvori"
@@ -69,7 +69,7 @@ msgstr "Kreirano"
 #. module: website_jitsi
 #: model:ir.model.fields,field_description:website_jitsi.field_chat_room__display_name
 msgid "Display Name"
-msgstr "Naziv"
+msgstr "Naziv za prikaz"
 
 #. module: website_jitsi
 #: model:ir.model.fields,field_description:website_jitsi.field_chat_room__is_full
@@ -107,19 +107,19 @@ msgstr "Posljednja aktivnost"
 #. module: website_jitsi
 #: model:ir.model.fields,field_description:website_jitsi.field_chat_room____last_update
 msgid "Last Modified on"
-msgstr "Zadnja promjena"
+msgstr "Zadnja izmjena"
 
 # taken from hr.po
 #. module: website_jitsi
 #: model:ir.model.fields,field_description:website_jitsi.field_chat_room__write_uid
 msgid "Last Updated by"
-msgstr "Promijenio"
+msgstr "Zadnji ažurirao"
 
 # taken from hr.po
 #. module: website_jitsi
 #: model:ir.model.fields,field_description:website_jitsi.field_chat_room__write_date
 msgid "Last Updated on"
-msgstr "Vrijeme promjene"
+msgstr "Zadnje ažurirano"
 
 #. module: website_jitsi
 #: model:ir.model.fields,field_description:website_jitsi.field_chat_room_mixin__room_last_activity
@@ -128,7 +128,7 @@ msgstr "Zadnja aktivnost"
 
 #. module: website_jitsi
 #. odoo-javascript
-#: code:addons/website_jitsi/static/src/xml/chat_room_modal.xml
+#: code:addons/website_jitsi/static/src/xml/chat_room_modal.xml:0
 #, python-format
 msgid "Loading your room..."
 msgstr "Učitava se vaša soba..."
