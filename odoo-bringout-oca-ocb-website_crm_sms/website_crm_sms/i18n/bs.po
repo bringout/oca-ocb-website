@@ -20,3 +20,13 @@ msgstr ""
 msgid "Website Visitor"
 msgstr ""
 "Prihvatam pravne uslove, politiku privatnosti &amp; uslove ove web stranice."
+
+#. module: website_crm_sms
+#: model:ir.model.fields,field_description:website_crm_sms.field_website_visitor__display_name
+msgid "Display Name"
+msgstr "Naziv za prikaz"
+
+#. module: website_crm_sms
+#: model:ir.model.fields,field_description:website_crm_sms.field_website_visitor__id
+msgid "ID"
+msgstr "ID"

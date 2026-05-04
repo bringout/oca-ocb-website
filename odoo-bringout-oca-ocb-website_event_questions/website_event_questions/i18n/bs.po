@@ -84,7 +84,7 @@ msgstr "Kreirano"
 #. module: website_event_questions
 #: model:ir.model.fields,field_description:website_event_questions.field_event_question__display_name
 msgid "Display Name"
-msgstr "Prikazani naziv"
+msgstr "Naziv za prikaz"
 
 # taken from hr.po
 #. module: website_event_questions
@@ -160,7 +160,7 @@ msgstr ""
 #. module: website_event_questions
 #: model:ir.model.fields,field_description:website_event_questions.field_event_question____last_update
 msgid "Last Modified on"
-msgstr "Zadnje mijenjano"
+msgstr "Zadnja izmjena"
 
 # taken from hr.po
 #. module: website_event_questions
@@ -224,7 +224,7 @@ msgstr "Tip pitanja"
 
 #. module: website_event_questions
 #. odoo-python
-#: code:addons/website_event_questions/models/event_question.py
+#: code:addons/website_event_questions/models/event_question.py:0
 #, python-format
 msgid "Question cannot be linked to both an Event and an Event Type."
 msgstr "Pitanje ne može biti povezano i sa događajem i sa tipom događaja."
@@ -272,7 +272,7 @@ msgstr "Odabir"
 #. module: website_event_questions
 #: model:ir.model.fields,field_description:website_event_questions.field_event_question__sequence
 msgid "Sequence"
-msgstr "Sekvenca"
+msgstr "Redoslijed"
 
 # taken from hr.po
 #. module: website_event_questions
@@ -312,7 +312,7 @@ msgstr "Naslov"
 #. module: website_event_questions
 #: model_terms:ir.ui.view,arch_db:website_event_questions.event_event_view_form
 msgid "Type"
-msgstr "Vrsta"
+msgstr "Tip"
 
 #. module: website_event_questions
 #: model:event.question.answer,name:website_event_questions.event_0_question_0_answer_1
@@ -332,7 +332,7 @@ msgstr "Da"
 
 #. module: website_event_questions
 #. odoo-python
-#: code:addons/website_event_questions/models/event_question.py
+#: code:addons/website_event_questions/models/event_question.py:0
 #, python-format
 msgid ""
 "You cannot change the question type of a question that already has answers!"
@@ -340,7 +340,7 @@ msgstr "Ne možete promijeniti tip pitanja koje već ima odgovore!"
 
 #. module: website_event_questions
 #. odoo-python
-#: code:addons/website_event_questions/models/event_question.py
+#: code:addons/website_event_questions/models/event_question.py:0
 #, python-format
 msgid ""
 "You cannot delete a question that has already been answered by attendees."
@@ -348,7 +348,7 @@ msgstr "Ne možete obrisati pitanje na koje su već odgovorili polaznici."
 
 #. module: website_event_questions
 #. odoo-python
-#: code:addons/website_event_questions/models/event_question.py
+#: code:addons/website_event_questions/models/event_question.py:0
 #, python-format
 msgid ""
 "You cannot delete an answer that has already been selected by attendees."

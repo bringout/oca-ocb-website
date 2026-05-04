@@ -28,7 +28,7 @@ msgstr "<small>Ne prati</small><i class=\"fa fa-fw ms-1\"/>"
 # taken from hr.po
 #. module: website_mail
 #. odoo-javascript
-#: code:addons/website_mail/static/src/js/follow.js
+#: code:addons/website_mail/static/src/js/follow.js:0
 #, python-format
 msgid "Error"
 msgstr "Greška"
@@ -46,7 +46,7 @@ msgstr "Pretplatite se"
 
 #. module: website_mail
 #. odoo-python
-#: code:addons/website_mail/controllers/main.py
+#: code:addons/website_mail/controllers/main.py:0
 #, python-format
 msgid "Suspicious activity detected by Google reCaptcha."
 msgstr "Sumnjiva aktivnost otkrivena od Google reCaptcha."
@@ -62,3 +62,18 @@ msgstr "Odjavi pretplatu"
 #: model_terms:ir.ui.view,arch_db:website_mail.follow
 msgid "your email..."
 msgstr "Vaš e-mail..."
+
+#. module: website_mail
+#: model:ir.model.fields,field_description:website_mail.field_ir_http__display_name
+msgid "Display Name"
+msgstr "Naziv za prikaz"
+
+#. module: website_mail
+#: model:ir.model,name:website_mail.model_ir_http
+msgid "HTTP Routing"
+msgstr "HTTP rutiranje"
+
+#. module: website_mail
+#: model:ir.model.fields,field_description:website_mail.field_ir_http__id
+msgid "ID"
+msgstr "ID"

@@ -17,7 +17,7 @@ msgstr ""
 
 #. module: website_event_exhibitor
 #. odoo-javascript
-#: code:addons/website_event_exhibitor/static/src/xml/event_exhibitor_connect.xml
+#: code:addons/website_event_exhibitor/static/src/xml/event_exhibitor_connect.xml:0
 #, python-format
 msgid ""
 ")\n"
@@ -46,8 +46,6 @@ msgid ""
 "<i class=\"fa fa-folder-open\"/>\n"
 "                By Level"
 msgstr ""
-"<i class=\"fa fa-folder-open\"/>\n"
-"                By Level"
 
 #. module: website_event_exhibitor
 #: model_terms:ir.ui.view,arch_db:website_event_exhibitor.exhibitor_main
@@ -76,7 +74,7 @@ msgstr "<small class=\"badge text-bg-danger\">Neobjavljeno</small>"
 #. module: website_event_exhibitor
 #: model_terms:ir.ui.view,arch_db:website_event_exhibitor.exhibitors_search_tag
 msgid "<span class=\"btn border-0 py-1\">×</span>"
-msgstr "<span class=\"btn border-0 py-1\">×</span>"
+msgstr ""
 
 #. module: website_event_exhibitor
 #: model_terms:ir.ui.view,arch_db:website_event_exhibitor.exhibitor_aside
@@ -124,13 +122,13 @@ msgstr "O programu"
 #. module: website_event_exhibitor
 #: model:ir.model.fields,field_description:website_event_exhibitor.field_event_sponsor__message_needaction
 msgid "Action Needed"
-msgstr "Potrebna dodatna radnja"
+msgstr "Potrebna akcija"
 
 # taken from hr.po
 #. module: website_event_exhibitor
 #: model:ir.model.fields,field_description:website_event_exhibitor.field_event_sponsor__active
 msgid "Active"
-msgstr "Aktivan"
+msgstr "Aktivno"
 
 # taken from hr.po
 #. module: website_event_exhibitor
@@ -142,7 +140,7 @@ msgstr "Aktivnosti"
 #. module: website_event_exhibitor
 #: model:ir.model.fields,field_description:website_event_exhibitor.field_event_sponsor__activity_exception_decoration
 msgid "Activity Exception Decoration"
-msgstr "Dekoracija iznimke aktivnosti"
+msgstr "Dekoracija izuzetka aktivnosti"
 
 # taken from hr.po
 #. module: website_event_exhibitor
@@ -218,7 +216,7 @@ msgstr "Chat soba"
 
 #. module: website_event_exhibitor
 #. odoo-javascript
-#: code:addons/website_event_exhibitor/static/src/xml/event_exhibitor_connect.xml
+#: code:addons/website_event_exhibitor/static/src/components/exhibitor_connect_closed_dialog/exhibitor_connect_closed_dialog.xml:0
 #, python-format
 msgid "Come back between"
 msgstr "Vratite se između"
@@ -236,7 +234,7 @@ msgstr "Poveži"
 
 # taken from hr.po
 #. module: website_event_exhibitor
-#: model_terms:ir.ui.view,arch_db:website_event_exhibitor.snippet_options
+#: code:addons/website_event_exhibitor/static/src/website_builder/event_page_option.xml:0
 msgid "Countries"
 msgstr "Države"
 
@@ -308,15 +306,15 @@ msgstr "Opis"
 
 # taken from hr.po
 #. module: website_event_exhibitor
-#: model_terms:event.sponsor,website_description:website_event_exhibitor.event_7_sponsor_0
+#: model_terms:event.sponsor,website_description:website_event_exhibitor.event_7_sponsor_6
 msgid "Discover more"
 msgstr "Otkrijte još"
 
 # taken from hr.po
 #. module: website_event_exhibitor
-#: model:ir.model.fields,field_description:website_event_exhibitor.field_event_sponsor__display_name
+#: model:ir.model.fields,field_description:website_event_exhibitor.field_event_event__display_name
 msgid "Display Name"
-msgstr "Prikazani naziv"
+msgstr "Naziv za prikaz"
 
 #. module: website_event_exhibitor
 #: model:ir.model.fields,help:website_event_exhibitor.field_event_type__exhibitor_menu
@@ -344,7 +342,7 @@ msgstr "Sat zatvaranja"
 # taken from hr.po
 #. module: website_event_exhibitor
 #. odoo-javascript
-#: code:addons/website_event_exhibitor/static/src/xml/event_exhibitor_connect.xml
+#: code:addons/website_event_exhibitor/static/src/components/exhibitor_connect_closed_dialog/exhibitor_connect_closed_dialog.xml:0
 #, python-format
 msgid "Event"
 msgstr "Dogadaj"
@@ -387,7 +385,7 @@ msgstr "Izlagač"
 
 #. module: website_event_exhibitor
 #. odoo-python
-#: code:addons/website_event_exhibitor/models/event_event.py
+#: model_terms:ir.ui.view,arch_db:website_event_exhibitor.event_sponsor_view_search
 #, python-format
 msgid "Exhibitors"
 msgstr "Izlagači"
@@ -406,13 +404,13 @@ msgstr "Meniji izlagača"
 #. module: website_event_exhibitor
 #: model:ir.model.fields,field_description:website_event_exhibitor.field_event_sponsor__message_follower_ids
 msgid "Followers"
-msgstr "Pratitelji"
+msgstr "Pratioci"
 
 # taken from hr.po
 #. module: website_event_exhibitor
 #: model:ir.model.fields,field_description:website_event_exhibitor.field_event_sponsor__message_partner_ids
 msgid "Followers (Partners)"
-msgstr "Pratitelji (Partneri)"
+msgstr "Pratioci (partneri)"
 
 # taken from hr.po
 #. module: website_event_exhibitor
@@ -435,7 +433,7 @@ msgstr "Zlato"
 #. module: website_event_exhibitor
 #: model_terms:ir.ui.view,arch_db:website_event_exhibitor.event_sponsor_view_search
 msgid "Group By"
-msgstr "Grupiraj po"
+msgstr "Grupiši po"
 
 # taken from hr.po
 #. module: website_event_exhibitor
@@ -450,7 +448,7 @@ msgid "Has Message"
 msgstr "Ima poruku"
 
 #. module: website_event_exhibitor
-#: model:ir.model.fields,field_description:website_event_exhibitor.field_event_sponsor__id
+#: model:ir.model.fields,field_description:website_event_exhibitor.field_event_event__id
 msgid "ID"
 msgstr "ID"
 
@@ -464,19 +462,19 @@ msgstr "Ikona"
 #. module: website_event_exhibitor
 #: model:ir.model.fields,help:website_event_exhibitor.field_event_sponsor__activity_exception_icon
 msgid "Icon to indicate an exception activity."
-msgstr "Ikona za prikaz iznimki."
+msgstr "Ikona za označavanje izuzetne aktivnosti."
 
 # taken from hr.po
 #. module: website_event_exhibitor
 #: model:ir.model.fields,help:website_event_exhibitor.field_event_sponsor__message_needaction
 msgid "If checked, new messages require your attention."
-msgstr "Ako je označeno, nove poruke zahtijevaju Vašu pažnju."
+msgstr "Ako je označeno, nove poruke zahtijevaju vašu pažnju."
 
 # taken from hr.po
 #. module: website_event_exhibitor
 #: model:ir.model.fields,help:website_event_exhibitor.field_event_sponsor__message_has_error
 msgid "If checked, some messages have a delivery error."
-msgstr "Ako je označeno neke poruke mogu imati grešku u dostavi."
+msgstr "Ako je označeno, neke poruke imaju grešku pri dostavi."
 
 # taken from hr.po
 #. module: website_event_exhibitor
@@ -514,7 +512,7 @@ msgstr "Upravljanje zalihama i skladištem"
 #. module: website_event_exhibitor
 #: model:ir.model.fields,field_description:website_event_exhibitor.field_event_sponsor__message_is_follower
 msgid "Is Follower"
-msgstr "Je pratitelj"
+msgstr "Je pratilac"
 
 # taken from hr.po
 #. module: website_event_exhibitor
@@ -566,7 +564,7 @@ msgstr "Jitsi ime"
 
 #. module: website_event_exhibitor
 #. odoo-javascript
-#: code:addons/website_event_exhibitor/static/src/xml/event_exhibitor_connect.xml
+#: code:addons/website_event_exhibitor/static/src/components/exhibitor_connect_closed_dialog/exhibitor_connect_closed_dialog.xml:0
 #, python-format
 msgid "Join us next time to meet"
 msgstr "Pridružite nam se sljedeći put da upoznate"
@@ -586,19 +584,19 @@ msgstr "Jezik"
 #. module: website_event_exhibitor
 #: model:ir.model.fields,field_description:website_event_exhibitor.field_event_sponsor____last_update
 msgid "Last Modified on"
-msgstr "Zadnje mijenjano"
+msgstr "Zadnja izmjena"
 
 # taken from hr.po
 #. module: website_event_exhibitor
 #: model:ir.model.fields,field_description:website_event_exhibitor.field_event_sponsor__write_uid
 msgid "Last Updated by"
-msgstr "Promijenio"
+msgstr "Zadnji ažurirao"
 
 # taken from hr.po
 #. module: website_event_exhibitor
 #: model:ir.model.fields,field_description:website_event_exhibitor.field_event_sponsor__write_date
 msgid "Last Updated on"
-msgstr "Vrijeme promjene"
+msgstr "Zadnje ažurirano"
 
 #. module: website_event_exhibitor
 #: model:ir.model.fields,field_description:website_event_exhibitor.field_event_sponsor__room_last_activity
@@ -609,7 +607,7 @@ msgstr "Poslednja aktivnost"
 #. module: website_event_exhibitor
 #: model_terms:ir.ui.view,arch_db:website_event_exhibitor.event_sponsor_view_search
 msgid "Level"
-msgstr "Razina"
+msgstr "Nivo"
 
 #. module: website_event_exhibitor
 #: model_terms:ir.ui.view,arch_db:website_event_exhibitor.event_sponsor_view_kanban
@@ -625,7 +623,7 @@ msgstr "Uživo"
 #. module: website_event_exhibitor
 #: model:ir.model.fields,field_description:website_event_exhibitor.field_event_sponsor__image_512
 msgid "Logo"
-msgstr "Logo"
+msgstr ""
 
 # taken from hr.po
 #. module: website_event_exhibitor
@@ -657,7 +655,7 @@ msgstr "Tip menija"
 #. module: website_event_exhibitor
 #: model:ir.model.fields,field_description:website_event_exhibitor.field_event_sponsor__message_has_error
 msgid "Message Delivery error"
-msgstr "Greška pri isporuci poruke"
+msgstr "Greška dostave poruke"
 
 # taken from hr.po
 #. module: website_event_exhibitor
@@ -681,7 +679,7 @@ msgstr "Više informacija"
 #. module: website_event_exhibitor
 #: model:ir.model.fields,field_description:website_event_exhibitor.field_event_sponsor__my_activity_date_deadline
 msgid "My Activity Deadline"
-msgstr "Rok za moju aktivnost"
+msgstr "Rok moje aktivnosti"
 
 # taken from hr.po
 #. module: website_event_exhibitor
@@ -699,7 +697,7 @@ msgstr "Događaj sljedećeg kalendara aktivnosti"
 #. module: website_event_exhibitor
 #: model:ir.model.fields,field_description:website_event_exhibitor.field_event_sponsor__activity_date_deadline
 msgid "Next Activity Deadline"
-msgstr "Krajnji rok slijedeće aktivnosti"
+msgstr "Rok sljedeće aktivnosti"
 
 # taken from hr.po
 #. module: website_event_exhibitor
@@ -739,16 +737,16 @@ msgstr "Broj grešaka"
 #. module: website_event_exhibitor
 #: model:ir.model.fields,help:website_event_exhibitor.field_event_sponsor__message_needaction_counter
 msgid "Number of messages requiring action"
-msgstr "Broj poruka koje zahtijevaju aktivnost"
+msgstr "Broj poruka koje zahtijevaju akciju"
 
 # taken from hr.po
 #. module: website_event_exhibitor
 #: model:ir.model.fields,help:website_event_exhibitor.field_event_sponsor__message_has_error_counter
 msgid "Number of messages with delivery error"
-msgstr "Broj poruka sa greškama pri isporuci"
+msgstr "Broj poruka sa greškom pri dostavi"
 
 #. module: website_event_exhibitor
-#: model_terms:ir.ui.view,arch_db:website_event_exhibitor.event_sponsor_view_form
+#: model_terms:ir.ui.view,arch_db:website_event_exhibitor.event_sponsor_view_search
 msgid "Online"
 msgstr "Na mreži"
 
@@ -810,7 +808,7 @@ msgstr "Telefon"
 
 # taken from hr.po
 #. module: website_event_exhibitor
-#: model_terms:ir.ui.view,arch_db:website_event_exhibitor.event_sponsor_view_search
+#: model_terms:ir.ui.view,arch_db:website_event_exhibitor.event_sponsor_view_kanban
 msgid "Published"
 msgstr "Objavljeno"
 
@@ -839,7 +837,7 @@ msgstr "Izvještavanje"
 #. module: website_event_exhibitor
 #: model:ir.model.fields,field_description:website_event_exhibitor.field_event_sponsor__activity_user_id
 msgid "Responsible User"
-msgstr "Odgovorna osoba"
+msgstr "Odgovorni korisnik"
 
 #. module: website_event_exhibitor
 #: model:ir.model.fields,field_description:website_event_exhibitor.field_event_sponsor_type__display_ribbon_style
@@ -871,7 +869,7 @@ msgstr "Prodaja i distribucija"
 #. module: website_event_exhibitor
 #: model:ir.model.fields,field_description:website_event_exhibitor.field_event_sponsor__sequence
 msgid "Sequence"
-msgstr "Sekvenca"
+msgstr "Redoslijed"
 
 #. module: website_event_exhibitor
 #: model:ir.model.fields,field_description:website_event_exhibitor.field_event_event__exhibitor_menu
@@ -887,11 +885,11 @@ msgstr "Srebrni"
 #. module: website_event_exhibitor
 #: model:ir.model.fields,field_description:website_event_exhibitor.field_event_sponsor__subtitle
 msgid "Slogan"
-msgstr "Slogan"
+msgstr ""
 
 #. module: website_event_exhibitor
 #. odoo-python
-#: code:addons/website_event_exhibitor/models/event_sponsor.py
+#: code:addons/website_event_exhibitor/models/event_sponsor.py:0
 #, python-format
 msgid "Sponsor"
 msgstr "Sponzor"
@@ -950,7 +948,7 @@ msgstr "Slika sponzora"
 
 # taken from hr.po
 #. module: website_event_exhibitor
-#: model:ir.model.fields,field_description:website_event_exhibitor.field_event_event__sponsor_ids
+#: code:addons/website_event_exhibitor/static/src/website_builder/event_page_option.xml:0
 msgid "Sponsors"
 msgstr "Sponzori"
 
@@ -964,7 +962,7 @@ msgstr ""
 "    Izlagači imaju posvećenu stranicu sa chat sobom za povezivanje sa ljudima."
 
 #. module: website_event_exhibitor
-#: model_terms:ir.ui.view,arch_db:website_event_exhibitor.snippet_options
+#: code:addons/website_event_exhibitor/static/src/website_builder/event_page_option.xml:0
 msgid "Sponsorship"
 msgstr "Sponzorstvo"
 
@@ -982,8 +980,8 @@ msgid ""
 "Today: Activity date is today\n"
 "Planned: Future activities."
 msgstr ""
-"Status baziran na aktivnostima\n"
-"Zakašnjelo: Rok je već prošao\n"
+"Status na osnovu aktivnosti\n"
+"Isteklo: Rok je već prošao\n"
 "Danas: Datum aktivnosti je danas\n"
 "Planirano: Buduće aktivnosti."
 
@@ -994,7 +992,7 @@ msgstr "Upravljanje talentima"
 
 #. module: website_event_exhibitor
 #. odoo-python
-#: code:addons/website_event_exhibitor/controllers/website_event_main.py
+#: code:addons/website_event_exhibitor/controllers/website_event_main.py:0
 #, python-format
 msgid ""
 "The event %s starts on %s (%s). \n"
@@ -1021,7 +1019,7 @@ msgid "Timezone"
 msgstr "Vremenska zona"
 
 #. module: website_event_exhibitor
-#: model_terms:ir.ui.view,arch_db:website_event_exhibitor.snippet_options
+#: code:addons/website_event_exhibitor/static/src/website_builder/event_page_option.xml:0
 msgid "Top Bar Filter"
 msgstr "Filter gornje trake"
 
@@ -1029,7 +1027,7 @@ msgstr "Filter gornje trake"
 #. module: website_event_exhibitor
 #: model:ir.model.fields,help:website_event_exhibitor.field_event_sponsor__activity_exception_decoration
 msgid "Type of the exception activity on record."
-msgstr "Vrsta aktivnosti iznimke na zapisu."
+msgstr "Tip izuzetne aktivnosti na zapisu."
 
 # taken from hr.po
 #. module: website_event_exhibitor
@@ -1050,7 +1048,7 @@ msgstr "Nismo pronašli nijednog izlagača koji odgovara vašoj"
 
 # taken from hr.po
 #. module: website_event_exhibitor
-#: model_terms:ir.ui.view,arch_db:website_event_exhibitor.event_sponsor_view_form
+#: model:ir.model,name:website_event_exhibitor.model_website
 msgid "Website"
 msgstr "Web stranica"
 
@@ -1063,7 +1061,7 @@ msgstr "Meni web stranice događaja"
 #. module: website_event_exhibitor
 #: model:ir.model.fields,field_description:website_event_exhibitor.field_event_sponsor__website_message_ids
 msgid "Website Messages"
-msgstr "Poruke webstranica"
+msgstr "Poruke web stranice"
 
 # taken from hr.po
 #. module: website_event_exhibitor
@@ -1075,7 +1073,7 @@ msgstr "URL web stranice"
 #. module: website_event_exhibitor
 #: model:ir.model.fields,help:website_event_exhibitor.field_event_sponsor__website_message_ids
 msgid "Website communication history"
-msgstr "Povijest komunikacije Web stranice"
+msgstr "Historija komunikacije web stranice"
 
 #. module: website_event_exhibitor
 #: model:ir.model.fields,field_description:website_event_exhibitor.field_event_sponsor__is_in_opening_hours
@@ -1084,7 +1082,7 @@ msgstr "Unutar radnog vremena"
 
 #. module: website_event_exhibitor
 #. odoo-javascript
-#: code:addons/website_event_exhibitor/static/src/xml/event_exhibitor_connect.xml
+#: code:addons/website_event_exhibitor/static/src/components/exhibitor_connect_closed_dialog/exhibitor_connect_closed_dialog.xml:0
 #, python-format
 msgid "a few seconds"
 msgstr "nekoliko sekundi"
@@ -1116,14 +1114,14 @@ msgstr "npr. Vaš najbolji izbor za vaš dom"
 
 #. module: website_event_exhibitor
 #. odoo-javascript
-#: code:addons/website_event_exhibitor/static/src/xml/event_exhibitor_connect.xml
+#: code:addons/website_event_exhibitor/static/src/components/exhibitor_connect_closed_dialog/exhibitor_connect_closed_dialog.xml:0
 #, python-format
 msgid "is not available right now."
 msgstr "nije dostupno upravo sada."
 
 #. module: website_event_exhibitor
 #. odoo-javascript
-#: code:addons/website_event_exhibitor/static/src/xml/event_exhibitor_connect.xml
+#: code:addons/website_event_exhibitor/static/src/components/exhibitor_connect_closed_dialog/exhibitor_connect_closed_dialog.xml:0
 #, python-format
 msgid "is over."
 msgstr "je završeno."
@@ -1144,14 +1142,124 @@ msgstr "pretrazi."
 
 #. module: website_event_exhibitor
 #. odoo-javascript
-#: code:addons/website_event_exhibitor/static/src/xml/event_exhibitor_connect.xml
+#: code:addons/website_event_exhibitor/static/src/components/exhibitor_connect_closed_dialog/exhibitor_connect_closed_dialog.xml:0
 #, python-format
 msgid "starts in"
 msgstr "počinje za"
 
 #. module: website_event_exhibitor
 #. odoo-javascript
-#: code:addons/website_event_exhibitor/static/src/xml/event_exhibitor_connect.xml
+#: code:addons/website_event_exhibitor/static/src/components/exhibitor_connect_closed_dialog/exhibitor_connect_closed_dialog.xml:0
 #, python-format
 msgid "starts on"
 msgstr "počinje na"
+
+#. module: website_event_exhibitor
+#: code:addons/website_event_exhibitor/static/src/components/exhibitor_connect_closed_dialog/exhibitor_connect_closed_dialog.xml:0
+msgid ""
+")\n"
+"                    to meet them!"
+msgstr ""
+")\n"
+"                    to meet them!"
+
+#. module: website_event_exhibitor
+#: model_terms:event.sponsor,website_description:website_event_exhibitor.event_7_sponsor_0
+msgid "<a href=\"#\" class=\"btn btn-primary o_translate_inline\">Discover more</a>"
+msgstr "<a href=\"#\" class=\"btn btn-primary o_translate_inline\">Saznajte više</a>"
+
+#. module: website_event_exhibitor
+#: model_terms:ir.ui.view,arch_db:website_event_exhibitor.exhibitors_main
+msgid "<span class=\"fa fa-plus me-1\"/> Add Exhibitors"
+msgstr "<span class=\"fa fa-plus me-1\"/> Dodaj izlagače"
+
+#. module: website_event_exhibitor
+#: model_terms:ir.ui.view,arch_db:website_event_exhibitor.event_sponsor_view_form
+msgid "All Events"
+msgstr "Svi događaji"
+
+#. module: website_event_exhibitor
+#: model_terms:ir.ui.view,arch_db:website_event_exhibitor.event_exhibitor_main
+msgid "All Exhibitors"
+msgstr "Svi izlagači"
+
+#. module: website_event_exhibitor
+#: model_terms:ir.ui.view,arch_db:website_event_exhibitor.event_exhibitor_main
+msgid "Back to all Exhibitors"
+msgstr "Nazad na sve izlagače"
+
+#. module: website_event_exhibitor
+#: model_terms:ir.ui.view,arch_db:website_event_exhibitor.exhibitors_topbar_country
+msgid "By Country"
+msgstr "Po državi"
+
+#. module: website_event_exhibitor
+#: model_terms:ir.ui.view,arch_db:website_event_exhibitor.exhibitors_topbar_sponsorship
+msgid "By Level"
+msgstr "Po nivou"
+
+#. module: website_event_exhibitor
+#: model_terms:ir.ui.view,arch_db:website_event_exhibitor.exhibitors_topbar
+msgid "Close"
+msgstr "Zatvori"
+
+#. module: website_event_exhibitor
+#: model_terms:event.sponsor,website_description:website_event_exhibitor.event_7_sponsor_0
+msgid "Come see us live, we hope to meet you!"
+msgstr "Dođite da nas vidite uživo, nadamo se susretu!"
+
+#. module: website_event_exhibitor
+#: model_terms:ir.ui.view,arch_db:website_event_exhibitor.event_sponsor_view_form
+msgid "Display on website footer"
+msgstr "Prikaži u podnožju web stranice"
+
+#. module: website_event_exhibitor
+#: code:addons/website_event_exhibitor/models/event_event.py:0
+msgid "Exhibitors list"
+msgstr "Lista izlagača"
+
+#. module: website_event_exhibitor
+#: model_terms:ir.ui.view,arch_db:website_event_exhibitor.exhibitors_topbar
+msgid "Filters"
+msgstr "Filteri"
+
+#. module: website_event_exhibitor
+#: model:ir.model.fields,field_description:website_event_exhibitor.field_event_sponsor__rating_ids
+msgid "Ratings"
+msgstr "Ocjene"
+
+#. module: website_event_exhibitor
+#: model_terms:ir.ui.view,arch_db:website_event_exhibitor.exhibitors_topbar
+msgid "Search an exhibitor ..."
+msgstr "Pretraži izlagača ..."
+
+#. module: website_event_exhibitor
+#: model:ir.model.fields,field_description:website_event_exhibitor.field_event_sponsor__show_on_ticket
+msgid "Show on ticket"
+msgstr "Prikaži na ulaznici"
+
+#. module: website_event_exhibitor
+#: model:ir.model.fields,help:website_event_exhibitor.field_event_sponsor__website_absolute_url
+msgid "The full absolute URL to access the document through the website."
+msgstr "Puni apsolutni URL za pristup dokumentu putem web stranice."
+
+#. module: website_event_exhibitor
+#: model:ir.model.fields,help:website_event_exhibitor.field_event_sponsor__website_url
+msgid "The full relative URL to access the document through the website."
+msgstr "Potpuni relativni URL za pristup dokumentu putem web stranice."
+
+#. module: website_event_exhibitor
+#: model_terms:ir.ui.view,arch_db:website_event_exhibitor.exhibitors_main
+msgid "We could not find any exhibitor at this moment."
+msgstr "Trenutno nismo mogli pronaći nijednog izlagača."
+
+#. module: website_event_exhibitor
+#: model_terms:ir.ui.view,arch_db:website_event_exhibitor.exhibitors_main
+msgid "We could not find any exhibitor matching your search for:"
+msgstr ""
+"Nismo mogli pronaći nijednog izlagača koji odgovara vašoj pretrazi za:"
+
+#. module: website_event_exhibitor
+#: model:ir.model.fields,field_description:website_event_exhibitor.field_event_sponsor__website_absolute_url
+msgid "Website Absolute URL"
+msgstr "Apsolutni URL web stranice"

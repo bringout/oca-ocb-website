@@ -18,4 +18,24 @@ msgstr ""
 #. module: website_event_crm
 #: model:event.lead.rule,name:website_event_crm.event_lead_rule_1
 msgid "Rule per order"
-msgstr "Rule per order"
+msgstr ""
+
+#. module: website_event_crm
+#: model:ir.model.fields,field_description:website_event_crm.field_event_registration__display_name
+msgid "Display Name"
+msgstr "Naziv za prikaz"
+
+#. module: website_event_crm
+#: model:ir.model,name:website_event_crm.model_event_registration
+msgid "Event Registration"
+msgstr "Registracija na događaj"
+
+#. module: website_event_crm
+#: model:ir.model.fields,field_description:website_event_crm.field_event_registration__id
+msgid "ID"
+msgstr "ID"
+
+#. module: website_event_crm
+#: code:addons/website_event_crm/models/event_registration.py:0
+msgid "Questions"
+msgstr "Pitanja"

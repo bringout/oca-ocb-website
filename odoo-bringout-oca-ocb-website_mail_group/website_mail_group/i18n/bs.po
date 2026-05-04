@@ -50,14 +50,14 @@ msgstr "Pravila moderacije"
 # taken from hr.po
 #. module: website_mail_group
 #. odoo-javascript
-#: code:addons/website_mail_group/static/src/snippets/s_group/options.js
+#: code:addons/website_mail_group/static/src/website_builder/mail_group_option_plugin.js:0
 #, python-format
 msgid "Name"
 msgstr "Naziv"
 
 #. module: website_mail_group
 #. odoo-javascript
-#: code:addons/website_mail_group/static/src/snippets/s_group/options.js
+#: code:addons/website_mail_group/static/src/website_builder/mail_group_option_plugin.js:0
 #, python-format
 msgid "New Mail Group"
 msgstr "Nova email grupa"
@@ -65,7 +65,7 @@ msgstr "Nova email grupa"
 # taken from hr.po
 #. module: website_mail_group
 #. odoo-javascript
-#: code:addons/website_mail_group/static/src/snippets/s_group/options.js
+#: model_terms:ir.ui.view,arch_db:website_mail_group.s_group
 #, python-format
 msgid "Subscribe"
 msgstr "Pretplatite se"
@@ -73,7 +73,7 @@ msgstr "Pretplatite se"
 # taken from hr.po
 #. module: website_mail_group
 #. odoo-javascript
-#: code:addons/website_mail_group/static/src/snippets/s_group/000.js
+#: model_terms:ir.ui.view,arch_db:website_mail_group.s_group
 #, python-format
 msgid "Unsubscribe"
 msgstr "Odjava"
@@ -83,3 +83,27 @@ msgstr "Odjava"
 #: model_terms:ir.ui.view,arch_db:website_mail_group.s_group
 msgid "your email..."
 msgstr "Vaš e-mail..."
+
+#. module: website_mail_group
+#: model_terms:ir.ui.view,arch_db:website_mail_group.mail_group_view_form
+msgid ""
+"<i class=\"fa fa-fw o_button_icon fa-globe text-success\" title=\"Mail group"
+" accessible on website\"/>"
+msgstr ""
+"<i class=\"fa fa-fw o_button_icon fa-globe text-success\" title=\"Mail grupa"
+" dostupna na web stranici\"/>"
+
+#. module: website_mail_group
+#: model:ir.model.fields,field_description:website_mail_group.field_mail_group__display_name
+msgid "Display Name"
+msgstr "Naziv za prikaz"
+
+#. module: website_mail_group
+#: model:ir.model.fields,field_description:website_mail_group.field_mail_group__id
+msgid "ID"
+msgstr "ID"
+
+#. module: website_mail_group
+#: code:addons/website_mail_group/static/src/website_builder/mail_group_option.xml:0
+msgid "List"
+msgstr "Lista"

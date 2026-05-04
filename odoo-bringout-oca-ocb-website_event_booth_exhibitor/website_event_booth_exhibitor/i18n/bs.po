@@ -26,8 +26,6 @@ msgid ""
 "<span>Email</span>\n"
 "                        <span class=\"mandatory_mark\"> *</span>"
 msgstr ""
-"<span>Email</span>\n"
-"                        <span class=\"mandatory_mark\"> *</span>"
 
 #. module: website_event_booth_exhibitor
 #: model_terms:ir.ui.view,arch_db:website_event_booth_exhibitor.event_booth_registration_details
@@ -35,8 +33,6 @@ msgid ""
 "<span>Name</span>\n"
 "                        <span class=\"mandatory_mark\"> *</span>"
 msgstr ""
-"<span>Name</span>\n"
-"                        <span class=\"mandatory_mark\"> *</span>"
 
 #. module: website_event_booth_exhibitor
 #: model_terms:ir.ui.view,arch_db:website_event_booth_exhibitor.event_booth_registration_details
@@ -78,7 +74,7 @@ msgstr "Tip izlagača"
 #. module: website_event_booth_exhibitor
 #: model_terms:ir.ui.view,arch_db:website_event_booth_exhibitor.event_booth_category_view_search
 msgid "Group By"
-msgstr "Grupiraj po"
+msgstr "Grupiši po"
 
 #. module: website_event_booth_exhibitor
 #: model:ir.model.fields,help:website_event_booth_exhibitor.field_event_booth__use_sponsor
@@ -101,7 +97,7 @@ msgstr "Slika"
 #. module: website_event_booth_exhibitor
 #: model_terms:ir.ui.view,arch_db:website_event_booth_exhibitor.event_booth_registration_details
 msgid "Slogan"
-msgstr "Slogan"
+msgstr ""
 
 #. module: website_event_booth_exhibitor
 #: model:ir.model.fields,field_description:website_event_booth_exhibitor.field_event_booth__sponsor_id
@@ -170,5 +166,27 @@ msgid ""
 "This booth type allows you to have visibility on the event website. Please "
 "fill in this form"
 msgstr ""
-"This booth type allows you to have visibility on the event website. Please "
-"fill in this form"
+
+#. module: website_event_booth_exhibitor
+#: model_terms:ir.ui.view,arch_db:website_event_booth_exhibitor.event_booth_registration_details
+msgid ""
+"<span>Company Name</span>\n"
+"                        <span class=\"mandatory_mark\"> *</span>"
+msgstr ""
+"<span>Company Name</span>\n"
+"                        <span class=\"mandatory_mark\"> *</span>"
+
+#. module: website_event_booth_exhibitor
+#: model:ir.model.fields,field_description:website_event_booth_exhibitor.field_event_booth__display_name
+msgid "Display Name"
+msgstr "Naziv za prikaz"
+
+#. module: website_event_booth_exhibitor
+#: model_terms:ir.ui.view,arch_db:website_event_booth_exhibitor.event_booth_registration_details
+msgid "How can we showcase your company ?"
+msgstr "Kako možemo predstaviti vašu kompaniju?"
+
+#. module: website_event_booth_exhibitor
+#: model:ir.model.fields,field_description:website_event_booth_exhibitor.field_event_booth__id
+msgid "ID"
+msgstr "ID"

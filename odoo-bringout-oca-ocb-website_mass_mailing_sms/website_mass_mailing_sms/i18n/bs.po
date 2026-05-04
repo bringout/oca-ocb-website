@@ -18,7 +18,7 @@ msgstr ""
 #. module: website_mass_mailing_sms
 #: model_terms:ir.ui.view,arch_db:website_mass_mailing_sms.s_newsletter_block_sms_template
 msgid "Always First."
-msgstr "Always First."
+msgstr ""
 
 #. module: website_mass_mailing_sms
 #: model_terms:ir.ui.view,arch_db:website_mass_mailing_sms.s_newsletter_block_sms_template
@@ -28,10 +28,10 @@ msgstr "Be the first to find out sve the latest news, products, and trends."
 #. module: website_mass_mailing_sms
 #: model_terms:ir.ui.view,arch_db:website_mass_mailing_sms.newsletter_subscribe_options
 msgid "SMS Newsletter"
-msgstr "SMS Newsletter"
+msgstr ""
 
 #. module: website_mass_mailing_sms
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing_sms.newsletter_subscribe_options
+#: code:addons/website_mass_mailing_sms/static/src/website_builder/newsletter_layout_option.xml:0
 msgid "SMS Subscription"
 msgstr "Pretplata na SMS"
 
@@ -51,3 +51,38 @@ msgstr "URL preusmjeravanja popup-a web stranice"
 #: model_terms:ir.ui.view,arch_db:website_mass_mailing_sms.s_newsletter_block_sms_template
 msgid "e.g. +1 555-555-1234"
 msgstr "Popup web stranice"
+
+#. module: website_mass_mailing_sms
+#: model_terms:ir.ui.view,arch_db:website_mass_mailing_sms.s_newsletter_subscribe_form
+msgid "+1 555-555-1234"
+msgstr "+1 555-555-1234"
+
+#. module: website_mass_mailing_sms
+#: model_terms:ir.ui.view,arch_db:website_mass_mailing_sms.s_newsletter_sms_notifications
+msgid "<i class=\"fa fa-check-circle-o fa-lg\" role=\"img\"/> Thanks for registering!"
+msgstr "<i class=\"fa fa-check-circle-o fa-lg\" role=\"img\"/> Hvala na registraciji!"
+
+#. module: website_mass_mailing_sms
+#: model_terms:ir.ui.view,arch_db:website_mass_mailing_sms.s_newsletter_sms_notifications
+msgid "Be the first to find out all the latest new, products and trends."
+msgstr ""
+"Budite prvi koji će saznati sve najnovije vijesti, proizvode i trendove."
+
+#. module: website_mass_mailing_sms
+#: model_terms:ir.ui.view,arch_db:website_mass_mailing_sms.snippets
+msgid "Newsletter SMS Notifications"
+msgstr "SMS obavještenja newslettera"
+
+#. module: website_mass_mailing_sms
+#: model_terms:ir.ui.view,arch_db:website_mass_mailing_sms.s_newsletter_sms_notifications
+msgid "Stay in the Loop !<br/>Get the latest updates"
+msgstr "Ostanite u toku!<br/>Primajte najnovija ažuriranja"
+
+#. module: website_mass_mailing_sms
+#: model_terms:ir.ui.view,arch_db:website_mass_mailing_sms.snippets
+msgid ""
+"updates, digest, bulletin, announcements, notifications, communication, "
+"promotional, sms, alert, dialog, prompt, subscription, subscribe, news"
+msgstr ""
+"ažuriranja, sažetak, bilten, obavještenja, notifikacije, komunikacija, "
+"promotivno, sms, upozorenje, dijalog, upit, pretplata, prijava, vijesti"

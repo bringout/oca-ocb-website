@@ -28,12 +28,12 @@ msgstr ""
 #. module: website_membership
 #: model_terms:ir.ui.view,arch_db:website_membership.index
 msgid "All"
-msgstr "Sve"
+msgstr "Svi"
 
 # taken from hr.po
 #. module: website_membership
 #. odoo-python
-#: code:addons/website_membership/controllers/main.py
+#: code:addons/website_membership/controllers/main.py:0
 #, python-format
 msgid "All Countries"
 msgstr "Sve zemlje"
@@ -59,7 +59,7 @@ msgstr "Pronađi poslovnog partnera"
 # taken from hr.po
 #. module: website_membership
 #. odoo-python
-#: code:addons/website_membership/controllers/main.py
+#: code:addons/website_membership/controllers/main.py:0
 #, python-format
 msgid "Free Members"
 msgstr "Slobodni članovi"
@@ -73,7 +73,7 @@ msgstr "Lokacija"
 # taken from hr.po
 #. module: website_membership
 #. odoo-python
-#: code:addons/website_membership/models/website.py
+#: code:addons/website_membership/models/website.py:0
 #, python-format
 msgid "Members"
 msgstr "Članovi"

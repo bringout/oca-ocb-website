@@ -74,3 +74,48 @@ msgstr "Website meta naslov"
 #: model:ir.model.fields,field_description:website_partner.field_res_partner__website_meta_og_img
 msgid "Website opengraph image"
 msgstr "OpenGraph slika web stranice"
+
+#. module: website_partner
+#: model:ir.model,website_form_label:website_partner.model_res_partner
+msgid "Create a Customer"
+msgstr "Kreiraj kupca"
+
+#. module: website_partner
+#: model_terms:ir.ui.view,arch_db:website_partner.partner_page
+msgid "DROP BUILDING BLOCKS HERE TO MAKE THEM AVAILABLE ACROSS ALL PARTNERS"
+msgstr "OVDJE OTPUSTITE GRADIVNE BLOKOVE DA BI BILI DOSTUPNI SVIM PARTNERIMA"
+
+#. module: website_partner
+#: model:ir.model.fields,field_description:website_partner.field_res_partner__display_name
+msgid "Display Name"
+msgstr "Naziv za prikaz"
+
+#. module: website_partner
+#: model:ir.model.fields,field_description:website_partner.field_res_partner__id
+msgid "ID"
+msgstr "ID"
+
+#. module: website_partner
+#: model:ir.model.fields,field_description:website_partner.field_res_partner__is_published
+msgid "Is Published"
+msgstr "Je objavljena"
+
+#. module: website_partner
+#: model:mail.message.subtype,description:website_partner.mt_partner_published
+msgid "Partner Published"
+msgstr "Partner objavljen"
+
+#. module: website_partner
+#: model:mail.message.subtype,description:website_partner.mt_partner_unpublished
+msgid "Partner Unpublished"
+msgstr "Partner povučen"
+
+#. module: website_partner
+#: model:mail.message.subtype,name:website_partner.mt_partner_published
+msgid "Partner published"
+msgstr "Partner objavljen"
+
+#. module: website_partner
+#: model:mail.message.subtype,name:website_partner.mt_partner_unpublished
+msgid "Partner unpublished"
+msgstr "Partner povučen"

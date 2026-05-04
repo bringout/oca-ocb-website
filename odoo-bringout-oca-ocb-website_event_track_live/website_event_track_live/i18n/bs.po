@@ -72,34 +72,34 @@ msgid "Is YouTube Replay"
 msgstr "Je YouTube ponavljanje"
 
 #. module: website_event_track_live
-#: model_terms:ir.ui.view,arch_db:website_event_track_live.tracks_display_list
+#: model_terms:ir.ui.view,arch_db:website_event_track_live.track_list_item
 msgid "Replay"
 msgstr "Ponovi"
 
 #. module: website_event_track_live
 #. odoo-javascript
-#: code:addons/website_event_track_live/static/src/xml/website_event_track_live_templates.xml
+#: code:addons/website_event_track_live/static/src/xml/website_event_track_live_templates.xml:0
 #, python-format
 msgid "Replay Video"
 msgstr "Ponovi video"
 
 #. module: website_event_track_live
 #. odoo-javascript
-#: code:addons/website_event_track_live/static/src/xml/website_event_track_live_templates.xml
+#: code:addons/website_event_track_live/static/src/xml/website_event_track_live_templates.xml:0
 #, python-format
 msgid "Starts in"
 msgstr "Počinje za"
 
 #. module: website_event_track_live
 #. odoo-javascript
-#: code:addons/website_event_track_live/static/src/xml/website_event_track_live_templates.xml
+#: code:addons/website_event_track_live/static/src/xml/website_event_track_live_templates.xml:0
 #, python-format
 msgid "Up Next:"
 msgstr "Sledeće:"
 
 #. module: website_event_track_live
 #. odoo-javascript
-#: code:addons/website_event_track_live/static/src/xml/website_event_track_live_templates.xml
+#: code:addons/website_event_track_live/static/src/xml/website_event_track_live_templates.xml:0
 #, python-format
 msgid "You just watched:"
 msgstr "Upravo ste gledali:"
@@ -112,4 +112,14 @@ msgstr "YouTube video veza"
 #. module: website_event_track_live
 #: model:ir.model.fields,field_description:website_event_track_live.field_event_track__youtube_video_id
 msgid "YouTube video ID"
-msgstr "YouTube video ID"
+msgstr ""
+
+#. module: website_event_track_live
+#: model:ir.model.fields,field_description:website_event_track_live.field_event_track__display_name
+msgid "Display Name"
+msgstr "Naziv za prikaz"
+
+#. module: website_event_track_live
+#: model:ir.model.fields,field_description:website_event_track_live.field_event_track__id
+msgid "ID"
+msgstr "ID"

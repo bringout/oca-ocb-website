@@ -146,8 +146,6 @@ msgid ""
 "<i class=\"fa fa-comments\"/><span class=\"ms-1 d-none d-md-inline-"
 "block\">Forum</span>"
 msgstr ""
-"<i class=\"fa fa-comments\"/><span class=\"ms-1 d-none d-md-inline-"
-"block\">Forum</span>"
 
 #. module: website_slides_forum
 #: model_terms:ir.ui.view,arch_db:website_slides_forum.website_slides_forum_header
@@ -229,7 +227,7 @@ msgstr ""
 #. module: website_slides_forum
 #: model:ir.model,name:website_slides_forum.model_forum_forum
 msgid "Forum"
-msgstr "Forum"
+msgstr ""
 
 #. module: website_slides_forum
 #: model_terms:ir.ui.view,arch_db:website_slides_forum.snippet_options
@@ -339,7 +337,7 @@ msgid "See all Courses"
 msgstr "Pogledaj sve kurseve"
 
 #. module: website_slides_forum
-#: model_terms:ir.ui.view,arch_db:website_slides_forum.snippet_options
+#: code:addons/website_slides_forum/static/src/website_builder/slides_forum_page_option.xml:0
 msgid "Separate Courses"
 msgstr "Zasebni kursevi"
 
@@ -508,3 +506,95 @@ msgid ""
 "your answer is provided along with the question, and you expect more "
 "answers: “I use ______ for ______, what do you use?”"
 msgstr "Odgovor koji je postavio korisnik je pozitivno ocijenjen"
+
+#. module: website_slides_forum
+#: model_terms:forum.forum,welcome_message:website_slides_forum.forum_forum_demo_channel_0
+msgid ""
+"<a class=\"btn btn-primary forum_register_url o_translate_inline\" "
+"href=\"/web/login\">Sign up</a>"
+msgstr ""
+"<a class=\"btn btn-primary forum_register_url o_translate_inline\" "
+"href=\"/web/login\">Registracija</a>"
+
+#. module: website_slides_forum
+#: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
+msgid "<span class=\"flex-grow-1\">What kind of questions can I ask here?</span>"
+msgstr "<span class=\"flex-grow-1\">Kakva pitanja mogu postaviti ovdje?</span>"
+
+#. module: website_slides_forum
+#: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
+msgid "<span class=\"flex-grow-1\">What should I avoid in my answers?</span>"
+msgstr ""
+"<span class=\"flex-grow-1\">Šta trebam izbjegavati u svojim "
+"odgovorima?</span>"
+
+#. module: website_slides_forum
+#: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
+msgid "<span class=\"flex-grow-1\">What should I avoid in my questions?</span>"
+msgstr ""
+"<span class=\"flex-grow-1\">Šta trebam izbjegavati u svojim "
+"pitanjima?</span>"
+
+#. module: website_slides_forum
+#: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
+msgid ""
+"<span class=\"flex-grow-1\">Why can other people edit my "
+"questions/answers?</span>"
+msgstr ""
+"<span class=\"flex-grow-1\">Zašto drugi ljudi mogu uređivati moja "
+"pitanja/odgovore?</span>"
+
+#. module: website_slides_forum
+#: model_terms:ir.ui.view,arch_db:website_slides_forum.website_slides_forum_breadcrumb
+msgid "<strong>Forum</strong>"
+msgstr "<strong>Forum</strong>"
+
+#. module: website_slides_forum
+#: model_terms:ir.ui.view,arch_db:website_slides_forum.forum_all_all_entries
+msgid "Check out our courses <i class=\"fa fa-long-arrow-right\"/>"
+msgstr "Pogledajte naše kurseve <i class=\"fa fa-long-arrow-right\"/>"
+
+#. module: website_slides_forum
+#: model_terms:forum.forum,welcome_message:website_slides_forum.forum_forum_demo_channel_0
+msgid "Dismiss"
+msgstr "Odbaci"
+
+#. module: website_slides_forum
+#: model_terms:forum.forum,welcome_message:website_slides_forum.forum_forum_demo_channel_0
+msgid "Dismiss message"
+msgstr "Odbaci poruku"
+
+#. module: website_slides_forum
+#: model:ir.model.fields,field_description:website_slides_forum.field_forum_forum__display_name
+msgid "Display Name"
+msgstr "Naziv za prikaz"
+
+#. module: website_slides_forum
+#: model:ir.model.fields,field_description:website_slides_forum.field_forum_forum__id
+msgid "ID"
+msgstr "ID"
+
+#. module: website_slides_forum
+#: model:ir.model.fields,field_description:website_slides_forum.field_forum_forum__image_1920
+msgid "Image"
+msgstr "Slika"
+
+#. module: website_slides_forum
+#: model_terms:forum.forum,welcome_message:website_slides_forum.forum_forum_demo_channel_0
+msgid ""
+"Share and discuss the best content and new marketing ideas, build your "
+"professional profile and become a better marketer together."
+msgstr ""
+"Dijelite i raspravljajte o najboljem sadržaju i novim marketinškim idejama, "
+"izgradite svoj profesionalni profil i postanite bolji marketinški stručnjak "
+"zajedno."
+
+#. module: website_slides_forum
+#: model:ir.model.fields,field_description:website_slides_forum.field_forum_forum__visibility
+msgid "Show Course To"
+msgstr "Prikaži kurs za"
+
+#. module: website_slides_forum
+#: code:addons/website_slides_forum/static/src/website_builder/slides_forum_page_option_plugin.js:0
+msgid "Slides Forum Snippet Options"
+msgstr "Opcije Slides Forum isječka"

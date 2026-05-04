@@ -17,7 +17,7 @@ msgstr ""
 
 #. module: website_slides_survey
 #. odoo-python
-#: code:addons/website_slides_survey/models/survey_survey.py
+#: code:addons/website_slides_survey/models/survey_survey.py:0
 #, python-format
 msgid "- %s (Courses - %s)"
 msgstr "- %s (Kursevi - %s)"
@@ -118,7 +118,7 @@ msgid "<i class=\"text-muted\"> awarded users</i>"
 msgstr "<i class=\"text-muted\"> nagrađeni korisnici</i>"
 
 #. module: website_slides_survey
-#: model_terms:ir.ui.view,arch_db:website_slides_survey.courses_home_inherit_survey
+#: model_terms:ir.ui.view,arch_db:website_slides_survey.courses_search_bar_inherit_survey
 msgid "<span class=\"ms-1\">Certifications</span>"
 msgstr "<span class=\"ms-1\">Certifikacije</span>"
 
@@ -169,13 +169,13 @@ msgid "A slide of type certification cannot be previewed."
 msgstr "Slajd tipa certifikacija ne može se pregledati."
 
 #. module: website_slides_survey
-#: model_terms:ir.ui.view,arch_db:website_slides_survey.slide_channel_view_form
+#: code:addons/website_slides_survey/static/src/js/public/components/slide_upload_dialog/slide_upload_dialog.js:0
 msgid "Add Certification"
 msgstr "Dodaj certifikaciju"
 
 #. module: website_slides_survey
 #. odoo-javascript
-#: code:addons/website_slides_survey/static/src/xml/website_slides_fullscreen.xml
+#: code:addons/website_slides_survey/static/src/xml/website_slides_fullscreen.xml:0
 #, python-format
 msgid "Add Questions to this Survey"
 msgstr "Dodaj pitanja u ovu anketu"
@@ -192,7 +192,7 @@ msgstr "Omogući pregled"
 
 #. module: website_slides_survey
 #. odoo-python
-#: code:addons/website_slides_survey/models/survey_survey.py
+#: code:addons/website_slides_survey/models/survey_survey.py:0
 #, python-format
 msgid ""
 "Any Survey listed below is currently used as a Course Certification and cannot be deleted:\n"
@@ -237,7 +237,7 @@ msgstr "Bukva"
 
 #. module: website_slides_survey
 #. odoo-javascript
-#: code:addons/website_slides_survey/static/src/xml/website_slides_fullscreen.xml
+#: code:addons/website_slides_survey/static/src/xml/website_slides_fullscreen.xml:0
 #, python-format
 msgid "Begin Certification"
 msgstr "Započni certifikaciju"
@@ -256,7 +256,7 @@ msgstr "Kategorija"
 # taken from hr.po
 #. module: website_slides_survey
 #. odoo-javascript
-#: code:addons/website_slides_survey/static/src/js/slides_upload.js
+#: code:addons/website_slides_survey/static/src/js/public/components/slide_upload_dialog/slide_upload_dialog.js:0
 #, python-format
 msgid "Certification"
 msgstr "Certificiranje"
@@ -308,7 +308,7 @@ msgstr "Ikona certifikacije"
 
 #. module: website_slides_survey
 #. odoo-python
-#: code:addons/website_slides_survey/controllers/slides.py
+#: code:addons/website_slides_survey/controllers/slides.py:0
 #, python-format
 msgid "Certification slides are completed when the survey is succeeded."
 msgstr "Slajdovi certifikacije se završavaju kada se anketa uspješno završi."
@@ -331,7 +331,7 @@ msgstr "Stolica"
 
 #. module: website_slides_survey
 #. odoo-javascript
-#: code:addons/website_slides_survey/static/src/xml/website_slides_fullscreen.xml
+#: code:addons/website_slides_survey/static/src/xml/website_slides_fullscreen.xml:0
 #, python-format
 msgid "Congratulations, you passed the Certification!"
 msgstr "Čestitamo, prošli ste certifikaciju!"
@@ -345,7 +345,7 @@ msgstr "Tečaj"
 # taken from hr.po
 #. module: website_slides_survey
 #. odoo-python
-#: code:addons/website_slides_survey/models/survey_survey.py
+#: code:addons/website_slides_survey/models/survey_survey.py:0
 #, python-format
 msgid "Courses"
 msgstr "Tečajevi"
@@ -372,7 +372,7 @@ msgstr "Stol"
 
 #. module: website_slides_survey
 #. odoo-javascript
-#: code:addons/website_slides_survey/static/src/xml/website_slides_fullscreen.xml
+#: code:addons/website_slides_survey/static/src/xml/website_slides_fullscreen.xml:0
 #, python-format
 msgid "Download certification"
 msgstr "Preuzmi certifikat"
@@ -400,7 +400,7 @@ msgstr "Vrati se na kurs"
 
 #. module: website_slides_survey
 #. odoo-javascript
-#: code:addons/website_slides_survey/static/src/xml/website_slide_upload.xml
+#: code:addons/website_slides_survey/static/src/js/public/components/slide_upload_dialog/slide_upload_dialog.xml:0
 #, python-format
 msgid "How to upload a certification on your course?"
 msgstr "Kako učitati certifikaciju na svoj kurs?"
@@ -448,7 +448,7 @@ msgstr "Hrast"
 
 #. module: website_slides_survey
 #. odoo-javascript
-#: code:addons/website_slides_survey/static/src/xml/website_slide_upload.xml
+#: code:addons/website_slides_survey/static/src/js/public/components/slide_upload_dialog/slide_upload_category.xml:0
 #, python-format
 msgid "Please select a certification."
 msgstr "Molimo odaberite certifikaciju."
@@ -549,7 +549,7 @@ msgstr "Anketa: Neuspjeh certifikacije"
 #. module: website_slides_survey
 #: model:survey.question.answer,value:website_slides_survey.furniture_certification_page_1_question_2_choice_2
 msgid "Table"
-msgstr "Table"
+msgstr ""
 
 #. module: website_slides_survey
 #: model_terms:ir.ui.view,arch_db:website_slides_survey.slide_content_detailed
@@ -558,7 +558,7 @@ msgstr "Pokreni kviz"
 
 #. module: website_slides_survey
 #. odoo-javascript
-#: code:addons/website_slides_survey/static/src/xml/website_slides_fullscreen.xml
+#: code:addons/website_slides_survey/static/src/xml/website_slides_fullscreen.xml:0
 #, python-format
 msgid "Test Certification"
 msgstr "Testiraj certifikaciju"
@@ -611,21 +611,21 @@ msgstr "Koji tip drva je najbolji za namještaj?"
 
 #. module: website_slides_survey
 #. odoo-python
-#: code:addons/website_slides_survey/controllers/slides.py
+#: code:addons/website_slides_survey/controllers/slides.py:0
 #, python-format
 msgid "You are not allowed to create a survey."
 msgstr "Nemate dozvolu za stvaranje ankete."
 
 #. module: website_slides_survey
 #. odoo-python
-#: code:addons/website_slides_survey/controllers/slides.py
+#: code:addons/website_slides_survey/controllers/slides.py:0
 #, python-format
 msgid "You are not allowed to link a certification."
 msgstr "Nemate dozvolu za povezivanje certifikacije."
 
 #. module: website_slides_survey
 #. odoo-javascript
-#: code:addons/website_slides_survey/static/src/xml/website_slide_upload.xml
+#: code:addons/website_slides_survey/static/src/xml/website_slide_upload.xml:0
 #, python-format
 msgid ""
 "You can create your certification from here or use an existing one. Once "
@@ -653,3 +653,137 @@ msgstr "Pali ste kurs: {{ object.slide_partner_id.channel_id.name }}"
 #: model_terms:ir.ui.view,arch_db:website_slides_survey.user_profile_content
 msgid "You have not taken any certification yet."
 msgstr "Još niste polagali nijednu certifikaciju."
+
+#. module: website_slides_survey
+#: model:ir.model.fields,field_description:website_slides_survey.field_slide_channel__members_certified_count
+msgid "# Certified Attendees"
+msgstr "# Certificirani polaznici"
+
+#. module: website_slides_survey
+#: code:addons/website_slides_survey/models/survey_survey.py:0
+msgid "- %(certification)s (Courses - %(courses)s)"
+msgstr "- %(certification)s (Kursevi - %(courses)s)"
+
+#. module: website_slides_survey
+#: model:mail.template,body_html:website_slides_survey.mail_template_user_input_certification_failed
+msgid ""
+"<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"        Dear <t t-out=\"object.partner_id.name or 'participant' or ''\">participant</t><br/><br/>\n"
+"        Unfortunately, you have failed the certification and are no longer a member of the course: <t t-out=\"object.slide_partner_id.channel_id.name or ''\">Basics of Gardening</t>.<br/><br/>\n"
+"        Don't hesitate to enroll again!\n"
+"        </p><div style=\"margin: 16px 0px 16px 0px;\">\n"
+"            <a t-att-href=\"(object.slide_partner_id.channel_id.website_absolute_url)\" t-attf-style=\"background-color: {{user.company_id.email_secondary_color or '#875A7B'}}; padding: 8px 16px 8px 16px; text-decoration: none; color: {{user.company_id.email_primary_color or '#FFFFFF'}}; border-radius: 5px; font-size:13px;\">\n"
+"                Enroll now\n"
+"            </a>\n"
+"        </div>\n"
+"        Thank you for your participation.\n"
+"    \n"
+"</div>\n"
+"            "
+msgstr ""
+"<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"        Poštovani <t t-out=\"object.partner_id.name or 'participant' or ''\">učesniče</t><br/><br/>\n"
+"        Nažalost, niste položili certifikaciju i više niste član kursa: <t t-out=\"object.slide_partner_id.channel_id.name or ''\">Basics of Gardening</t>.<br/><br/>\n"
+"        Ne oklijevajte da se ponovo upišete!\n"
+"        </p><div style=\"margin: 16px 0px 16px 0px;\">\n"
+"            <a t-att-href=\"(object.slide_partner_id.channel_id.website_absolute_url)\" t-attf-style=\"background-color: {{user.company_id.email_secondary_color or '#875A7B'}}; padding: 8px 16px 8px 16px; text-decoration: none; color: {{user.company_id.email_primary_color or '#FFFFFF'}}; border-radius: 5px; font-size:13px;\">\n"
+"                Upiši se sada\n"
+"            </a>\n"
+"        </div>\n"
+"        Hvala vam na učešću.\n"
+"    \n"
+"</div>\n"
+"            "
+
+#. module: website_slides_survey
+#: model_terms:ir.ui.view,arch_db:website_slides_survey.display_certificate
+msgid "<i class=\"fa fa-arrow-right\"/> Get Certified"
+msgstr "<i class=\"fa fa-arrow-right\"/> Steknite certifikat"
+
+#. module: website_slides_survey
+#: model_terms:ir.ui.view,arch_db:website_slides_survey.slide_content_detailed
+msgid "<i class=\"oi oi-arrow-right me-1\"/>Add Questions to this Survey"
+msgstr "<i class=\"oi oi-arrow-right me-1\"/>Dodaj pitanja u ovu anketu"
+
+#. module: website_slides_survey
+#: model_terms:ir.ui.view,arch_db:website_slides_survey.display_certificate
+msgid "<i class=\"oi oi-arrow-right me-1\"/>All Certifications"
+msgstr "<i class=\"oi oi-arrow-right me-1\"/>Sve certifikacije"
+
+#. module: website_slides_survey
+#: model_terms:ir.ui.view,arch_db:website_slides_survey.user_profile_content
+msgid "<i class=\"oi oi-arrow-right\"/> See Certifications"
+msgstr "<i class=\"oi oi-arrow-right\"/> Pogledaj certifikacije"
+
+#. module: website_slides_survey
+#: model_terms:ir.ui.view,arch_db:website_slides_survey.slide_channel_view_form
+msgid "<span class=\"o_stat_text\">Certified</span>"
+msgstr "<span class=\"o_stat_text\">Certificirano</span>"
+
+#. module: website_slides_survey
+#: model_terms:ir.ui.view,arch_db:website_slides_survey.course_main
+msgid "<span>Start Now</span><i class=\"oi oi-chevron-right ms-2 align-middle\"/>"
+msgstr ""
+"<span>Počni sada</span><i class=\"oi oi-chevron-right ms-2 align-middle\"/>"
+
+#. module: website_slides_survey
+#: model_terms:ir.ui.view,arch_db:website_slides_survey.display_certificate
+msgid "Certifications are exams that you successfully passed. <br/>"
+msgstr "Certifikacije su ispiti koje ste uspješno položili. <br/>"
+
+#. module: website_slides_survey
+#: model:ir.model.fields,field_description:website_slides_survey.field_slide_channel_partner__survey_certification_success
+msgid "Certified"
+msgstr "Certifikovano"
+
+#. module: website_slides_survey
+#: model:ir.model,name:website_slides_survey.model_slide_channel_partner
+msgid "Channel / Partners (Members)"
+msgstr "Kanal / Partneri (članovi)"
+
+#. module: website_slides_survey
+#: model:ir.model.fields,field_description:website_slides_survey.field_slide_channel__display_name
+msgid "Display Name"
+msgstr "Naziv za prikaz"
+
+#. module: website_slides_survey
+#: model:ir.model.fields,field_description:website_slides_survey.field_slide_channel__id
+msgid "ID"
+msgstr "ID"
+
+#. module: website_slides_survey
+#: code:addons/website_slides_survey/models/slide_channel.py:0
+msgid "No Attendee passed this course certification yet!"
+msgstr "Nijedan polaznik još nije položio certifikaciju ovog kursa!"
+
+#. module: website_slides_survey
+#: model_terms:ir.ui.view,arch_db:website_slides_survey.display_certificate
+msgid "Score:"
+msgstr "Rezultat:"
+
+#. module: website_slides_survey
+#: code:addons/website_slides_survey/static/src/js/public/components/slide_upload_dialog/slide_upload_category.js:0
+msgid "Select a certification"
+msgstr "Odaberi certifikaciju"
+
+#. module: website_slides_survey
+#: code:addons/website_slides_survey/static/src/js/public/components/slide_upload_dialog/slide_upload_dialog.xml:0
+msgid ""
+"Select an existing certification from the list. Creating or editing a "
+"certification can be done from the backend."
+msgstr ""
+"Odaberite postojeću certifikaciju s liste. Kreiranje ili uređivanje "
+"certifikacije može se obaviti iz backend-a."
+
+#. module: website_slides_survey
+#: code:addons/website_slides_survey/models/survey_survey.py:0
+msgid ""
+"Uh-oh! You can’t delete surveys used as a Course Certification! Otherwise, students might think diplomas just grow on trees.\n"
+"The courses that need them are:\n"
+"%s"
+msgstr ""
+"Uh-oh! Ne možete obrisati ankete koje se koriste kao certifikacija kursa! Inače, studenti bi mogli pomisliti da diplome rastu na drveću.\n"
+"Kursevi kojima trebaju su:\n"
+"%s"
