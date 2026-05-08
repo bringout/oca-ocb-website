@@ -1,41 +1,43 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 import base64
 import datetime
-import os
 import logging
+import math
+import os
 import re
-import requests
 import urllib.parse
-import werkzeug.urls
-import werkzeug.utils
-import werkzeug.wrappers
 import zipfile
-
 from hashlib import md5, sha256
 from io import BytesIO
 from itertools import islice
-from lxml import etree, html
-from markupsafe import escape as markup_escape
 from textwrap import shorten
-from werkzeug.exceptions import NotFound
 from xml.etree import ElementTree as ET
 
-import odoo
+import requests
+import werkzeug.urls
+import werkzeug.wrappers
+from lxml import etree, html
+from markupsafe import escape as markup_escape
+from werkzeug.exceptions import NotFound
 
-from odoo import http, models, fields, tools, _
+from odoo import _, fields, http, models, release, tools
 from odoo.exceptions import AccessError, UserError
 from odoo.fields import Domain
-from odoo.http import request, SessionExpiredException
-from odoo.tools import OrderedSet, escape_psql, html_escape as escape, py_to_js_locale
-from odoo.tools.translate import LazyTranslate
+from odoo.http import request
+from odoo.http.router import serve_ir_http
+from odoo.http.session import SessionExpiredException
+from odoo.http.stream import STATIC_CACHE_LONG
+from odoo.tools import OrderedSet, escape_psql, py_to_js_locale
+from odoo.tools import html_escape as escape
+from odoo.tools.json import scriptsafe as json
+from odoo.tools.translate import LazyTranslate, TRANSLATED_ELEMENTS
+
 from odoo.addons.base.models.ir_http import EXTENSION_TO_WEB_MIMETYPES
 from odoo.addons.portal.controllers.portal import pager as portal_pager
 from odoo.addons.portal.controllers.web import Home
 from odoo.addons.web.controllers.binary import Binary
 from odoo.addons.web.controllers.session import Session
 from odoo.addons.website.tools import get_base_domain
-from odoo.tools.json import scriptsafe as json
-from odoo.tools.translate import TRANSLATED_ELEMENTS
 
 _lt = LazyTranslate(__name__)
 logger = logging.getLogger(__name__)
@@ -46,6 +48,7 @@ LOC_PER_SITEMAP = 45000
 SITEMAP_CACHE_TIME = datetime.timedelta(hours=12)
 MAX_FONT_FILE_SIZE = 10 * 1024 * 1024
 SUPPORTED_FONT_EXTENSIONS = ['ttf', 'woff', 'woff2', 'otf']
+FORCE_SHOW_FIELDS = ['name', 'search_item_metadata', 'tags']
 
 
 class QueryURL:
@@ -86,7 +89,29 @@ class QueryURL:
 
 class Website(Home):
 
-    @http.route('/', auth="public", website=True, sitemap=True)
+    def sitemap_index(env, rule, qs):
+        Website = env['website'].get_current_website()
+        homepage_url = Website.homepage_url
+
+        def match(loc):
+            return not qs or qs.lower() in loc.lower()
+
+        website_page = env['website.page'].sudo().search([
+            ('url', '=', '/'),
+            ('is_published', '=', True),
+        ], limit=1)
+        if website_page and match('/'):
+            yield {'loc': '/'}
+            return
+
+        top_menu = Website.menu_id
+        reachable_menus = top_menu.child_id.filtered(Website.is_reachable)
+        if reachable_menus:
+            loc = reachable_menus[0].url
+            if match(loc):
+                yield {'loc': loc}
+
+    @http.route('/', auth="public", website=True, sitemap=sitemap_index)
     def index(self, **kw):
         """ The goal of this controller is to make sure we don't serve a 404 as
         the website homepage. As this is the website entry point, serving a 404
@@ -103,7 +128,7 @@ class Website(Home):
         Most DBs will just have a website.page with '/' as URL and keep the
         homepage_url setting empty.
         """
-        homepage_url = request.website._get_cached('homepage_url')
+        homepage_url = request.website.homepage_url
         if homepage_url and homepage_url != '/':
             request.reroute(homepage_url)
 
@@ -116,18 +141,13 @@ class Website(Home):
         if homepage_url and homepage_url != '/':
             try:
                 rule, args = request.env['ir.http']._match(homepage_url)
-                return request._serve_ir_http(rule, args)
+                return serve_ir_http(request, rule, args)
             except (AccessError, NotFound, SessionExpiredException):
                 pass
 
-        # Fallback on first accessible menu
-        def is_reachable(menu):
-            return menu.is_visible and menu.url not in ('/', '', '#') and not menu.url.startswith(('/?', '/#', ' '))
-
         # prefetch all menus (it will prefetch website.page too)
         top_menu = request.website.menu_id
-
-        reachable_menus = top_menu.child_id.filtered(is_reachable)
+        reachable_menus = top_menu.child_id.filtered(request.website.is_reachable)
         if reachable_menus:
             return request.redirect(reachable_menus[0].url)
 
@@ -206,6 +226,33 @@ class Website(Home):
         return super().web_login(*args, **kw)
 
     # ------------------------------------------------------
+    # Tracking
+    # ------------------------------------------------------
+
+    @http.route('/website/odoo_track', type='jsonrpc', auth='public', methods=['POST'], website=True, csrf=True)
+    def track(self, res_model, res_id, **kwargs):
+        if request.env['ir.http'].is_a_bot():
+            return {}
+        url = request.httprequest.referrer
+        extra_tracking_vals = {}
+        if (
+            res_model and res_id
+            and res_model in request.env
+            and hasattr(request.env[res_model], '_get_extra_tracking_values')
+        ):
+            params = dict(kwargs, res_model=res_model, res_id=res_id, url=url)
+            extra_tracking_vals = request.env[res_model].browse(res_id).sudo()._get_extra_tracking_values(**params)
+
+        request.env['ir.http']._get_visitor_from_request(
+            force_create=True,
+            force_track_values={
+                'url': url,
+                **extra_tracking_vals,
+            },
+        )
+        return {}
+
+    # ------------------------------------------------------
     # Business
     # ------------------------------------------------------
 
@@ -273,7 +320,7 @@ class Website(Home):
             create_date = fields.Datetime.from_string(sitemap.create_date)
             delta = datetime.datetime.now() - create_date
             if delta < SITEMAP_CACHE_TIME:
-                content = base64.b64decode(sitemap.datas)
+                content = sitemap.raw
 
         if not content:
             # Remove all sitemaps in ir.attachments as we're going to regenerated them
@@ -283,7 +330,7 @@ class Website(Home):
             sitemaps.unlink()
 
             pages = 0
-            locs = request.website.with_user(request.website.user_id)._enumerate_pages()
+            locs = request.website.with_user(request.website.user_id)._enumerate_pages(ignore_custom_homepage=True)
             while True:
                 values = {
                     'locs': islice(locs, 0, LOC_PER_SITEMAP),
@@ -326,22 +373,10 @@ class Website(Home):
     def favicon(self, **kw):
         website = request.website
         response = request.redirect(website.image_url(website, 'favicon'), code=301)
-        response.headers['Cache-Control'] = 'public, max-age=%s' % http.STATIC_CACHE_LONG
+        response.headers['Cache-Control'] = f'public, max-age={STATIC_CACHE_LONG}'
         return response
 
-    def sitemap_website_info(env, rule, qs):
-        website = env['website'].get_current_website()
-        if not (
-            website.is_view_active('website.website_info')
-            and website.is_view_active('website.show_website_info')
-        ):
-            # avoid 404 or blank page in sitemap
-            return False
-
-        if not qs or qs.lower() in '/website/info':
-            yield {'loc': '/website/info'}
-
-    @http.route('/website/info', type='http', auth="public", website=True, sitemap=sitemap_website_info, readonly=True, list_as_website_content=_lt("Website Information"))
+    @http.route('/website/info', type='http', auth="public", website=True, sitemap=False, readonly=True, list_as_website_content=_lt("Website Information"))
     def website_info(self, **kwargs):
         Module = request.env['ir.module.module'].sudo()
         apps = Module.search([('state', '=', 'installed'), ('application', '=', True)])
@@ -349,7 +384,11 @@ class Website(Home):
         values = {
             'apps': apps,
             'l10n': l10n,
-            'version': odoo.service.common.exp_version()
+            'version': {
+                'server_version': release.version,
+                'server_version_info': release.version_info,
+                'server_serie': release.serie,
+            }
         }
         return request.render('website.website_info', values)
 
@@ -365,13 +404,6 @@ class Website(Home):
         if step > 1:
             action_url += '&step=' + str(step)
         return request.redirect(action_url)
-
-    @http.route(['/website/social/<string:social>'], type='http', auth="public", website=True, sitemap=False)
-    def social(self, social, **kwargs):
-        url = getattr(request.website, 'social_%s' % social, False)
-        if not url:
-            raise werkzeug.exceptions.NotFound()
-        return request.redirect(url, local=False)
 
     @http.route('/website/get_suggested_links', type='jsonrpc', auth="user", website=True, readonly=True)
     def get_suggested_link(self, needle, limit=10):
@@ -461,13 +493,11 @@ class Website(Home):
         templates = request.env['ir.ui.view'].sudo().search_read(domain, ['key', 'name', 'arch_db'])
 
         for t in templates:
-            children = etree.fromstring(t.pop('arch_db')).getchildren()
-            attribs = children and children[0].attrib or {}
-            t['numOfEl'] = attribs.get('data-number-of-elements')
-            t['numOfElSm'] = attribs.get('data-number-of-elements-sm')
-            t['numOfElFetch'] = attribs.get('data-number-of-elements-fetch')
+            attribs = etree.fromstring(t.pop('arch_db')).attrib or {}
+            t['numberOfElements'] = attribs.get('data-number-of-elements')
+            t['numberOfElementsSmallDevices'] = attribs.get('data-number-of-elements-sm')
+            t['numberOfRecords'] = attribs.get('data-number-of-elements-fetch')
             t['rowPerSlide'] = attribs.get('data-row-per-slide')
-            t['arrowPosition'] = attribs.get('data-arrow-position')
             t['extraClasses'] = attribs.get('data-extra-classes')
             t['extraSnippetClasses'] = attribs.get('data-extra-snippet-classes')
             t['containerClasses'] = attribs.get('data-container-classes')
@@ -484,9 +514,96 @@ class Website(Home):
             'position': request.website.company_id.currency_id.position,
         }
 
+    @http.route("/website/get_new_pages", type="jsonrpc", auth="user")
+    def get_new_page_records(self, page_ids):
+        if not request.env.user.has_group('website.group_website_restricted_editor'):
+            raise werkzeug.exceptions.Forbidden()
+        page_records = request.env["website.page"].sudo().search_read(
+            [("id", "in", page_ids)],
+            ["is_new_page_template"]
+        )
+        return page_records
+
     # --------------------------------------------------------------------------
     # Search Bar
     # --------------------------------------------------------------------------
+
+    def _shorten_around_match(self, text, keyword, width=80, placeholder="..."):
+        """
+        Return a shortened version of `text`, ensuring `keyword` stays visible
+        within the returned text. If truncation is necessary, the output is
+        centered around the match and uses `placeholder` to indicate omitted
+        content.
+
+        Handles multi-word keywords by finding the first token match.
+
+            >>> _shorten_around_match("aaa bbb ccc ddd", "ccc", 12)
+            "...bb ccc..."
+
+            >>> _shorten_around_match("aaa bbb ccc ddd eee fff", "ccc fff", 15)
+            "...bbb ccc d..."
+
+        :param text: Text to shorten
+        :param keyword: Substring or multi-word phrase that must remain visible
+        :param width: Maximum length of the returned text
+        :param placeholder: String used to indicate omitted content
+
+        :return: Shortened text ensuring `keyword` remains visible if possible
+        """
+        if not text or not keyword or len(text) <= width:
+            return text
+
+        lower_text = text.lower()
+        lower_keyword = keyword.lower()
+
+        # Try exact match first
+        match_pos = lower_text.find(lower_keyword)
+
+        # If no exact match, break keyword into tokens and find first match
+        if match_pos == -1:
+            tokens = lower_keyword.split()
+            for token in tokens:
+                match_pos = lower_text.find(token)
+                if match_pos != -1:
+                    keyword = text[match_pos:match_pos + len(token)]
+                    break
+
+        # Still no match found or match already within visible range, shorten
+        # normally
+        if match_pos == -1 or match_pos < (width // 2):
+            return shorten(text, width=width, placeholder=placeholder)
+
+        # Account for placeholder space when calculating text range
+        placeholder_len = len(placeholder)
+        available_chars = width - (2 * placeholder_len)
+
+        # Center the visible range around the matched keyword
+        half_range = available_chars // 2
+        match_end = match_pos + len(keyword)
+        start = max(match_pos - half_range, 0)
+        end = start + available_chars
+
+        # Move the range back if we went past the end of the text
+        if end >= len(text):
+            end = len(text)
+            # No trailing placeholder needed - extend range backward to use the
+            # extra space
+            start = max(end - available_chars - placeholder_len, 0)
+
+        # Extend range forward if it cuts off part of the match
+        elif end < match_end:
+            end = match_end
+            start = max(end - available_chars, 0)
+
+        truncated = text[start:end]
+
+        # Add placeholders where content was omitted
+        if start > 0:
+            truncated = placeholder + truncated
+        if end < len(text):
+            truncated += placeholder
+
+        return truncated
 
     def _get_search_order(self, order):
         # OrderBy will be parsed in orm and so no direct sql injection
@@ -495,21 +612,28 @@ class Website(Home):
         return 'is_published desc, %s, id desc' % order
 
     @http.route('/website/snippet/autocomplete', type='jsonrpc', auth='public', website=True, readonly=True)
-    def autocomplete(self, search_type=None, term=None, order=None, limit=5, max_nb_chars=999, options=None):
+    def autocomplete(self, search_type=None, term=None, order=None, offset=0, limit=6, max_nb_chars=999, options=None):
         """
         Returns list of results according to the term and options
 
         :param str search_type: indicates what to search within, 'all' matches all available types
         :param str term: search term written by the user
         :param str order:
-        :param int limit: number of results to consider, defaults to 5
+        :param int offset: number of results to skip, defaults to 0
+        :param int limit: number of results to consider, defaults to 6
         :param int max_nb_chars: max number of characters for text fields
         :param dict options: options map containing
             allowFuzzy: enables the fuzzy matching when truthy
             fuzzy (boolean): True when called after finding a name through fuzzy matching
+            renderTemplate (bool): If True, returns rendered HTML instead of grouped dict results
 
         :returns: dict (or False if no result) containing
-            - 'results' (list): results (only their needed field values)
+            - 'results' (dict | str):
+                    - dict: contain multiple groups of results, each group is a dict with:
+                            - 'groupName' (str): the name of the group of results
+                            - 'searchCount' (int): the number of results in this group
+                            - 'data' (list of dict): the actual results (only their needed field values)
+                    - str: rendered HTML template (if `renderTemplate=True`)
                     note: the monetary fields will be strings properly formatted and
                     already containing the currency
             - 'results_count' (int): the number of results in the database
@@ -519,58 +643,107 @@ class Website(Home):
         """
         order = self._get_search_order(order)
         options = options or {}
-        results_count, search_results, fuzzy_term = request.website._search_with_fuzzy(search_type, term, limit, order, options)
+        results_count, search_results, fuzzy_term = request.website._search_with_fuzzy(search_type, term, offset, limit, order, options)
+        # Sort results based on sequence for ordered results.
+        search_results.sort(key=lambda d: d.get('sequence', float('inf')))
         if not results_count:
             return {
-                'results': [],
+                'results': "" if options.get('renderTemplate') else {},
                 'results_count': 0,
                 'parts': {},
             }
+
+        if options.get("proportionateAllocation") and results_count > limit:
+            """
+            Distribute a global result limit proportionally across groups
+            based on their contribution to the total results.
+
+            Example:
+                Total retrieved results across 3 models = 50
+                    - M1: 5   (10%)
+                    - M2: 10  (20%)
+                    - M3: 35  (70%)
+
+                With limit = 30:
+                    - M1 → 10% of 30 ≈ 3
+                    - M2 → 20% of 30 ≈ 6
+                    - M3 → 70% of 30 ≈ 21
+
+            Note:
+                Due to rounding and minimum allocation guarantees,
+                the total number of allocated results may slightly exceed `limit`.
+            """
+            total_obtained_results = sum(len(m.get("results", [])) for m in search_results)
+            for model in search_results:
+                results_data = model.get("results")
+                if results_data:
+                    # Calculate proportional allocation for this group
+                    allocated_count = math.ceil(
+                        (len(results_data) / total_obtained_results) * limit
+                    )
+                    # Ensure at least 1 result per group to maintain visibility
+                    allocated_count = max(allocated_count, 1)
+                    model["results"] = results_data[:allocated_count]
+
         term = fuzzy_term or term
         search_results = request.website._search_render_results(search_results, limit)
 
         mappings = []
-        results_data = []
+        result = {}
         for search_result in search_results:
-            results_data += search_result['results_data']
+            if not search_result['results_data']:
+                continue
             mappings.append(search_result['mapping'])
-        if search_type == 'all':
-            # Only supported order for 'all' is on name
-            results_data.sort(key=lambda r: r.get('name', ''), reverse='name desc' in order)
-        results_data = results_data[:limit]
-        result = []
-        for record in results_data:
-            mapping = record['_mapping']
-            mapped = {
-                '_fa': record.get('_fa'),
-            }
-            for mapped_name, field_meta in mapping.items():
-                value = record.get(field_meta.get('name'))
-                if not value:
-                    mapped[mapped_name] = ''
-                    continue
-                field_type = field_meta.get('type')
-                if field_type == 'text':
-                    if value and field_meta.get('truncate', True):
-                        value = shorten(value, max_nb_chars, placeholder='...')
-                    if field_meta.get('match') and value and term:
-                        pattern = '|'.join(map(re.escape, term.split()))
-                        if pattern:
-                            parts = re.split(f'({pattern})', value, flags=re.IGNORECASE)
-                            if len(parts) > 1:
-                                value = request.env['ir.ui.view'].sudo()._render_template(
-                                    "website.search_text_with_highlight",
-                                    {'parts': parts}
-                                )
-                                field_type = 'html'
+            group_name = search_result.get('group_name')
+            group_key = search_result.get('model').replace('.', '_')
+            result_data = []
+            model = request.env[search_result['model']]
+            for record in search_result['results_data']:
+                mapping = record['_mapping']
+                mapped = {
+                    '_fa': record.get('_fa'),
+                }
+                skip_matching_area = False
+                for mapped_name, field_meta in mapping.items():
+                    value = record.get(field_meta.get('name'))
+                    if not value:
+                        mapped[mapped_name] = ''
+                        continue
+                    field_type = field_meta.get('type')
+                    if field_type == 'text' and field_meta.get('truncate', True):
+                        value = self._shorten_around_match(value, term, max_nb_chars)
 
-                if field_type not in ('image', 'binary') and ('ir.qweb.field.%s' % field_type) in request.env:
-                    opt = {}
-                    if field_type == 'monetary':
-                        opt['display_currency'] = options['display_currency']
-                    value = request.env[('ir.qweb.field.%s' % field_type)].value_to_html(value, opt)
-                mapped[mapped_name] = escape(value)
-            result.append(mapped)
+                    if field_meta.get('match'):
+                        # If one field matches, we skip matching areas.
+                        if skip_matching_area and mapped_name not in FORCE_SHOW_FIELDS and not field_meta.get('force_show'):
+                            continue
+                        skip_field, value, field_type = model._search_highlight_field(field_meta, value, term)
+                        if skip_field:
+                            continue
+                        if field_type == 'html':
+                            skip_matching_area = True
+
+                    qweb_field = f'''ir.qweb.field.{field_type}'''
+                    if field_type not in ('image', 'binary') and qweb_field in request.env:
+                        opt = {}
+                        if field_type == 'monetary':
+                            opt['display_currency'] = options.get('display_currency')
+                        elif field_type == 'float':
+                            opt['precision'] = field_meta.get('precision', 2)
+                        value = request.env[qweb_field].value_to_html(value, opt)
+                    mapped[mapped_name] = escape(value)
+                result_data.append(mapped)
+
+            result[group_key] = {
+                'groupName': group_name,
+                'searchCount': search_result.get('count') or 0,
+                'data': result_data,
+                'has_more': search_result.get('count') > offset + limit
+            }
+
+        if options.get('renderTemplate'):
+            values = [item for group in result.values() for item in group['data']]
+            result = self.env['ir.ui.view']._render_template('website.search_result_items', {'results': values})
 
         return {
             'results': result,
@@ -581,11 +754,6 @@ class Website(Home):
 
     def _get_page_search_options(self, **post):
         return {
-            'displayDescription': False,
-            'displayDetail': False,
-            'displayExtraDetail': False,
-            'displayExtraLink': False,
-            'displayImage': False,
             'allowFuzzy': not post.get('noFuzzy'),
         }
 
@@ -594,7 +762,7 @@ class Website(Home):
         options = self._get_page_search_options(**kw)
         step = 50
         pages_count, details, fuzzy_search_term = request.website._search_with_fuzzy(
-            "pages", search, limit=page * step, order='name asc, website_id desc, id',
+            "pages", search, offset=0, limit=page * step, order='name asc, website_id desc, id',
             options=options)
         pages = details[0].get('results', request.env['website.page'])
 
@@ -619,51 +787,33 @@ class Website(Home):
 
     def _get_hybrid_search_options(self, **post):
         return {
-            'displayDescription': True,
-            'displayDetail': True,
-            'displayExtraDetail': True,
-            'displayExtraLink': True,
-            'displayImage': True,
             'allowFuzzy': not post.get('noFuzzy'),
         }
 
     @http.route([
         '/website/search',
-        '/website/search/page/<int:page>',
         '/website/search/<string:search_type>',
-        '/website/search/<string:search_type>/page/<int:page>',
     ], type='http', auth="public", website=True, sitemap=False, readonly=True)
-    def hybrid_list(self, page=1, search='', search_type='all', **kw):
+    def hybrid_list(self, search='', limit=24, search_type='all', **kw):
         if not search:
-            return request.render("website.list_hybrid")
+            return request.render('website.list_hybrid')
 
         options = self._get_hybrid_search_options(**kw)
-        data = self.autocomplete(search_type=search_type, term=search, order='name asc', limit=500, max_nb_chars=200, options=options)
+        data = self.autocomplete(search_type=search_type, term=search, order='name asc', limit=limit, offset=0, max_nb_chars=75, options=options)
 
         results = data.get('results', [])
-        search_count = len(results)
+        search_count = data.get('results_count', 0)
         parts = data.get('parts', {})
 
-        step = 50
-        pager = portal_pager(
-            url="/website/search/%s" % search_type,
-            url_args={'search': search},
-            total=search_count,
-            page=page,
-            step=step
-        )
-
-        results = results[(page - 1) * step:page * step]
-
         values = {
-            'pager': pager,
             'results': results,
             'parts': parts,
             'search': search,
+            'limit': limit,
             'fuzzy_search': data.get('fuzzy_search'),
             'search_count': search_count,
         }
-        return request.render("website.list_hybrid", values)
+        return request.render('website.list_hybrid', values)
 
     # ------------------------------------------------------
     # Edit
@@ -780,9 +930,9 @@ class Website(Home):
 
     @http.route('/website/save_xml', type='jsonrpc', auth='user', website=True)
     def save_xml(self, view_id, arch):
-        disable_delay_translations = self.env['ir.config_parameter'].sudo().get_param(
+        disable_delay_translations = self.env['ir.config_parameter'].sudo().get_bool(
             'website.disable_delay_translations'
-        ) not in ('False', '0', '', False)
+        )
         request.env['ir.ui.view'].browse(view_id).with_context(
             lang=request.website.default_lang_id.code,
             delay_translations=not disable_delay_translations,
@@ -790,7 +940,7 @@ class Website(Home):
 
     @http.route("/website/get_switchable_related_views", type="jsonrpc", auth="user", website=True, readonly=True)
     def get_switchable_related_views(self, key):
-        views = request.env["ir.ui.view"].with_context(is_customization_code=False).get_related_views(key, bundles=False).filtered(lambda v: v.customize_show)
+        views = request.env["ir.ui.view"].get_related_views(key, bundles=False).filtered(lambda v: v.customize_show)
         views = views.sorted(key=lambda v: (v.inherit_id.id, v.name))
         return views.with_context(display_website=False).read(['name', 'id', 'key', 'xml_id', 'active', 'inherit_id'])
 
@@ -1028,7 +1178,7 @@ class Website(Home):
                     'mimetype': 'application/json',
                     'raw': json_content,
                 })
-        return json.loads(metadata.raw)
+        return json.loads(metadata.raw.content)
 
     def _get_customize_data(self, keys, is_view_data):
         model = 'ir.ui.view' if is_view_data else 'ir.asset'
@@ -1260,7 +1410,7 @@ class Website(Home):
             dict: views, scss, js
         """
         # Related views must be fetched if the user wants the views and/or the style
-        views = request.env["ir.ui.view"].with_context(no_primary_children=True, __views_get_original_hierarchy=[], is_customization_code=False).get_related_views(key, bundles=bundles)
+        views = request.env["ir.ui.view"].with_context(no_primary_children=True, __views_get_original_hierarchy=[]).get_related_views(key, bundles=bundles)
         views = views.read(['name', 'id', 'key', 'xml_id', 'arch', 'active', 'inherit_id'])
 
         scss_files_data_by_bundle = []
@@ -1397,6 +1547,10 @@ class WebsiteSession(Session):
     @http.route(auth="public")
     def logout(self, *args, **kw):
         return super().logout(*args, **kw)
+
+    @http.route(website=True)
+    def session_identity(self, redirect=None):
+        return super().session_identity(redirect)
 
 
 class WebsiteBinary(Binary):

@@ -1,34 +1,26 @@
-import { SNIPPET_SPECIFIC_END } from "@html_builder/utils/option_sequence";
 import { Plugin } from "@html_editor/plugin";
 import { registry } from "@web/core/registry";
 import { _t } from "@web/core/l10n/translation";
 import { getCommonAncestor, selectElements } from "@html_editor/utils/dom_traversal";
-import { withSequence } from "@html_editor/utils/resource";
 import { BuilderAction } from "@html_builder/core/builder_action";
-import { BaseOptionComponent } from "@html_builder/core/utils";
 
 /**
  * @typedef { Object } InstagramOptionShared
  * @property { InstagramOptionPlugin['instagramPageNameFromUrl'] } instagramPageNameFromUrl
  */
 
-export class InstagramOption extends BaseOptionComponent {
-    static template = "website.InstagramOption";
-    static selector = ".s_instagram_page";
-}
-
-class InstagramOptionPlugin extends Plugin {
+export class InstagramOptionPlugin extends Plugin {
     static id = "instagramOption";
     static dependencies = ["history"];
     static shared = ["instagramPageNameFromUrl"];
 
     /** @type {import("plugins").WebsiteResources} */
     resources = {
-        builder_options: [withSequence(SNIPPET_SPECIFIC_END, InstagramOption)],
         builder_actions: {
             InstagramPageAction,
         },
-        normalize_handlers: this.normalize.bind(this),
+        so_content_addition_selectors: [".s_instagram_page"],
+        normalize_processors: this.normalize.bind(this),
     };
 
     setup() {
@@ -36,9 +28,7 @@ class InstagramOptionPlugin extends Plugin {
     }
 
     normalize(root) {
-        const nodes = [
-            ...selectElements(root, ".s_instagram_page[data-instagram-page-is-default]"),
-        ];
+        const nodes = selectElements(root, ".s_instagram_page[data-instagram-page-is-default]");
         if (nodes.length) {
             this.loadAndSetPage(nodes);
         }
@@ -50,10 +40,10 @@ class InstagramOptionPlugin extends Plugin {
             this.setPage(nodes);
             return;
         }
-        // Fetches the default url for instagram page from website config
+        // Fetches the default url for instagram page from company config
         const res = await this.services.orm.read(
-            "website",
-            [this.services.website.currentWebsite.id],
+            "res.company",
+            [this.services.website.currentWebsite.company_id],
             ["social_instagram"]
         );
         if (res && res[0].social_instagram) {
@@ -67,7 +57,7 @@ class InstagramOptionPlugin extends Plugin {
 
             if (hasChanged) {
                 const commonAncestor = getCommonAncestor(nodes, this.editable);
-                this.dispatchTo("content_manually_updated_handlers", commonAncestor);
+                this.trigger("on_content_manually_updated_handlers", commonAncestor);
                 this.config.onChange({ isPreviewing: false });
             }
         }

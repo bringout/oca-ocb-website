@@ -4,8 +4,8 @@ import {
 } from '@website/js/tours/tour_utils';
 import { stepUtils } from "@web_tour/tour_utils";
 
-registerBackendAndFrontendTour("question", {
-    url: '/forum/1',
+registerBackendAndFrontendTour("question_tour", {
+    undeterministicTour_doNotCopy: true, // Remove this key to make the tour failed. ( It removes delay between steps )
 }, () => [{
     trigger: ".o_wforum_ask_btn",
     tooltipPosition: "left",

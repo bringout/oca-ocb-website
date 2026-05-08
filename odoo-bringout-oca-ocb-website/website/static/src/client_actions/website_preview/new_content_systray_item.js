@@ -1,4 +1,5 @@
-import { Component, useState, xml } from "@odoo/owl";
+import { useState } from "@web/owl2/utils";
+import { Component, onMounted, xml } from "@odoo/owl";
 import { Dropdown } from "@web/core/dropdown/dropdown";
 import { DropdownItem } from "@web/core/dropdown/dropdown_item";
 import { useDropdownState } from "@web/core/dropdown/dropdown_hooks";
@@ -23,6 +24,7 @@ export class NewContentSystrayItem extends Component {
     static components = { Dropdown, DropdownItem };
     static props = {
         onNewPage: Function,
+        newInstalledModule: { type: String, optional: true }
     };
 
     setup() {
@@ -97,14 +99,20 @@ export class NewContentSystrayItem extends Component {
                     moduleXmlId: "base.module_website_livechat",
                     status: MODULE_STATUS.NOT_INSTALLED,
                     icon: "/website_livechat/static/description/icon.png",
-                    title: _t("Livechat Widget"),
-                    description: _t("Add a livechat widget"),
+                    title: _t("Live Chat Widget"),
+                    description: _t("Add a live chat widget"),
                 },
             ],
         });
 
         useHotkey("escape", () => this.dropdown.close(), {
             isAvailable: () => this.dropdown.isOpen,
+        });
+
+        onMounted(() => {
+            if (this.props.newInstalledModule) {
+                this.handlePostModuleInstall(this.props.newInstalledModule);
+            }
         });
     }
 
@@ -131,6 +139,10 @@ export class NewContentSystrayItem extends Component {
     }
 
     async toggleDropdown() {
+        if (!this.website.isRestrictedEditor) {
+            return;
+        }
+
         if (this.dropdownWasAlreadyOpened) {
             this.dropdown.isOpen = !this.dropdown.isOpen;
             return;
@@ -170,14 +182,16 @@ export class NewContentSystrayItem extends Component {
                         elementsToUpdate[element.model] = element;
                     }
                 }
-                const accesses = await rpc(
-                    "/website/check_new_content_access_rights",
-                    {
-                        models: modelsToCheck,
-                    },
-                    { cache: true }
+                if (!modelsToCheck.length) {
+                    return;
+                }
+                const accesses = await Promise.all(
+                    modelsToCheck.map(async (model) => [
+                        model,
+                        await user.checkAccessRight(model, "create"),
+                    ])
                 );
-                for (const [model, access] of Object.entries(accesses)) {
+                for (const [model, access] of accesses) {
                     elementsToUpdate[model].isDisplayed = access;
                 }
             })()
@@ -205,11 +219,15 @@ export class NewContentSystrayItem extends Component {
             .filter((el) => ("isDisplayed" in el ? el.isDisplayed : user.isSystem));
     }
 
-    async installModule(id, redirectUrl) {
+    async installModule(id, element) {
+        const { redirectUrl, moduleXmlId } = element;
         await this.orm.silent.call("ir.module.module", "button_immediate_install", [id]);
         if (redirectUrl) {
-            this.website.prepareOutLoader();
-            redirect(redirectUrl);
+            this.website.redirectOutFromLoader({
+                redirectAction: () => {
+                    redirect(redirectUrl);
+                },
+            });
         } else {
             const {
                 id,
@@ -221,9 +239,16 @@ export class NewContentSystrayItem extends Component {
             }
             // A reload is needed after installing a new module, to instantiate
             // the feature with patches from the installed module.
-            this.website.prepareOutLoader();
             const encodedPath = encodeURIComponent(url.toString());
-            redirect(`/odoo/action-website.website_preview?website_id=${id}&path=${encodedPath}`);
+            const data = { moduleXmlId: moduleXmlId };
+            const encodedData = encodeURIComponent(JSON.stringify(data));
+            this.website.redirectOutFromLoader({
+                redirectAction: () => {
+                    redirect(
+                        `/odoo/action-website.website_preview?website_id=${id}&path=${encodedPath}&module_installed=${encodedData}`
+                    );
+                },
+            });
         }
     }
 
@@ -246,11 +271,13 @@ export class NewContentSystrayItem extends Component {
                     }
                     return el;
                 });
-                this.website.showLoader({ title: _t("Building your %s", name) });
+                this.website.showLoader({
+                    title: _t("Install modules, unlock the potential of your website."),
+                });
                 try {
-                    await this.installModule(id, element.redirectUrl);
+                    await this.installModule(id, element);
                 } catch (error) {
-                    this.website.hideLoader();
+                    this.website.hideLoader({ completeRemainingProgress: false });
                     // Update the NewContentElement with failure icon and text.
                     this.state.newContentElements = this.state.newContentElements.map((el) => {
                         if (el.moduleXmlId === element.moduleXmlId) {
@@ -294,5 +321,26 @@ export class NewContentSystrayItem extends Component {
                 },
             },
         });
+    }
+
+    /**
+     * Opens the corresponding snippet new content dialog after the installation
+     * of a newly installed snippet module.
+     *
+     * @param {string} newInstalledModule - The JSON containing XML ID of the 
+     * installed module.
+     */
+    async handlePostModuleInstall(newInstalledModule) {
+        const { moduleXmlId } = JSON.parse(
+            decodeURIComponent(newInstalledModule)
+        );
+        if (moduleXmlId) {
+            const newContentElement = this.state.newContentElements.find(
+                (el) => el.moduleXmlId === moduleXmlId
+            );
+            if (newContentElement?.createNewContent) {
+                return newContentElement.createNewContent();
+            }
+        }
     }
 }

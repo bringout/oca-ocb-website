@@ -1,13 +1,12 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-import base64
 import re
 import requests
 
 from werkzeug.urls import url_parse
 
 from odoo import api, models
-from odoo.tools import misc
+from odoo.tools import BinaryBytes, file_open
 from odoo.addons.base.models.assetsbundle import EXTENSIONS
 
 _match_asset_file_url_regex = re.compile(r"^(/_custom/([^/]+))?/(\w+)/([/\w]+\.\w+)$")
@@ -56,14 +55,14 @@ class WebsiteAssets(models.AbstractModel):
                 either 'scss' or 'js' according to the file being customized
         """
         custom_url = self._make_custom_asset_url(url, bundle)
-        datas = base64.b64encode((content or "\n").encode("utf-8"))
+        raw = (content or "\n").encode("utf-8")
 
         # Check if the file to save had already been modified
         custom_attachment = self._get_custom_attachment(custom_url)
         if custom_attachment:
             # If it was already modified, simply override the corresponding
             # attachment content
-            custom_attachment.write({"datas": datas})
+            custom_attachment.write({"raw": raw})
             self.env.registry.clear_cache('assets')
         else:
             # If not, create a new attachment to copy the original scss/js file
@@ -72,7 +71,7 @@ class WebsiteAssets(models.AbstractModel):
                 'name': url.split("/")[-1],
                 'type': "binary",
                 'mimetype': (file_type == 'js' and 'text/javascript' or 'text/scss'),
-                'datas': datas,
+                'raw': raw,
                 'url': custom_url,
                 **self._add_website_id({}),
             }
@@ -130,12 +129,12 @@ class WebsiteAssets(models.AbstractModel):
                 attachment = self._get_custom_attachment(url)
             else:
                 attachment = custom_attachments.filtered(lambda r: r.url == url)
-            return attachment and base64.b64decode(attachment.datas) or False
+            return attachment.raw
 
         # If the file is not yet customized, the content is found by reading
         # the local file
-        with misc.file_open(url.strip('/'), 'rb', filter_ext=EXTENSIONS) as f:
-            return f.read()
+        with file_open(url.strip('/'), 'rb', filter_ext=EXTENSIONS) as f:
+            return BinaryBytes(f.read())
 
     @api.model
     def _get_data_from_url(self, url):
@@ -220,6 +219,7 @@ class WebsiteAssets(models.AbstractModel):
                 'menu-secondary-gradient': 'null',
                 'footer-gradient': 'null',
                 'copyright-gradient': 'null',
+                'breadcrumb-gradient': 'null',
                 **preset_gradients,
             })
 
@@ -262,7 +262,7 @@ class WebsiteAssets(models.AbstractModel):
                         attachment = IrAttachment.create({
                             'name': f'google-font-{name}',
                             'type': 'binary',
-                            'datas': base64.b64encode(req.content),
+                            'raw': BinaryBytes(req.content),
                             'public': True,
                         })
                         nonlocal font_family_attachments
@@ -278,7 +278,7 @@ class WebsiteAssets(models.AbstractModel):
                     attach_font = IrAttachment.create({
                         'name': f'{font_name} (google-font)',
                         'type': 'binary',
-                        'datas': base64.encodebytes(font_content.encode()),
+                        'raw': BinaryBytes(font_content.encode()),
                         'mimetype': 'text/css',
                         'public': True,
                     })
@@ -331,13 +331,13 @@ class WebsiteAssets(models.AbstractModel):
         if self.env.user.has_group('website.group_website_designer'):
             self = self.sudo()
         website = self.env['website'].get_current_website()
-        res = self.env["ir.attachment"].search([("url", op, custom_url)])
+        res = self.env["ir.attachment"].search([("url", op, custom_url), ("website_id", "=", website.id)])
         # It is guaranteed that the attachment we are looking for has a website_id.
         # When we serve an attachment we normally serve the ones which have the right website_id
         # or no website_id at all (which means "available to all websites", of
         # course if they are marked "public"). But this does not apply in this
         # case of customized asset files.
-        return res.with_context(website_id=website.id).filtered(lambda x: x.website_id == website)
+        return res
 
     @api.model
     def _get_custom_asset(self, custom_url):

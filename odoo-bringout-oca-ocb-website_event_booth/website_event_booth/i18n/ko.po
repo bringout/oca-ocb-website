@@ -288,9 +288,3 @@ msgstr "웹사이트 행사 메뉴"
 #: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_registration
 msgid "if you have any question."
 msgstr "문의 사항이 있으시면"
-
-#~ msgid "It looks like your email is linked to an existing account."
-#~ msgstr "이메일이 기존 계정에 연결되어 있습니다."
-
-#~ msgid "Please Sign In."
-#~ msgstr "로그인하세요"

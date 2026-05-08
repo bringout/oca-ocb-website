@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server saas~18.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-20 18:37+0000\n"
+"POT-Creation-Date: 2026-02-20 09:02+0000\n"
 "PO-Revision-Date: 2025-11-09 15:12+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Chinese (Traditional Han script) <https://translate.odoo.com/"
@@ -2355,11 +2355,6 @@ msgid "Left 10 answers with score of 10 or more"
 msgstr "保留10個10分以上的回答"
 
 #. module: website_forum
-#: model:ir.model.fields,field_description:website_forum.field_forum_tag__website_url
-msgid "Link to questions with the tag"
-msgstr "前往附有此標籤的其他問題的連結"
-
-#. module: website_forum
 #. odoo-javascript
 #: code:addons/website_forum/static/src/xml/public_templates.xml:0
 #: model_terms:ir.ui.view,arch_db:website_forum.post_display
@@ -3359,6 +3354,20 @@ msgid "The accepted answer is deleted"
 msgstr "獲採納答案已被刪除"
 
 #. module: website_forum
+#: model:ir.model.fields,help:website_forum.field_forum_forum__website_absolute_url
+#: model:ir.model.fields,help:website_forum.field_forum_post__website_absolute_url
+#: model:ir.model.fields,help:website_forum.field_forum_tag__website_absolute_url
+msgid "The full absolute URL to access the document through the website."
+msgstr ""
+
+#. module: website_forum
+#: model:ir.model.fields,help:website_forum.field_forum_forum__website_url
+#: model:ir.model.fields,help:website_forum.field_forum_post__website_url
+#: model:ir.model.fields,help:website_forum.field_forum_tag__website_url
+msgid "The full relative URL to access the document through the website."
+msgstr ""
+
+#. module: website_forum
 #: model_terms:forum.forum,faq:website_forum.forum_help
 #: model_terms:ir.ui.view,arch_db:website_forum.default_faq
 #: model_terms:ir.ui.view,arch_db:website_forum.faq_karma
@@ -3741,6 +3750,13 @@ msgid "Website / Forum"
 msgstr "網站 / 討論區"
 
 #. module: website_forum
+#: model:ir.model.fields,field_description:website_forum.field_forum_forum__website_absolute_url
+#: model:ir.model.fields,field_description:website_forum.field_forum_post__website_absolute_url
+#: model:ir.model.fields,field_description:website_forum.field_forum_tag__website_absolute_url
+msgid "Website Absolute URL"
+msgstr ""
+
+#. module: website_forum
 #: model:ir.model.fields,field_description:website_forum.field_forum_forum__website_message_ids
 #: model:ir.model.fields,field_description:website_forum.field_forum_post__website_message_ids
 #: model:ir.model.fields,field_description:website_forum.field_forum_tag__website_message_ids
@@ -3748,7 +3764,9 @@ msgid "Website Messages"
 msgstr "網站資訊"
 
 #. module: website_forum
+#: model:ir.model.fields,field_description:website_forum.field_forum_forum__website_url
 #: model:ir.model.fields,field_description:website_forum.field_forum_post__website_url
+#: model:ir.model.fields,field_description:website_forum.field_forum_tag__website_url
 msgid "Website URL"
 msgstr "網站網址"
 
@@ -4226,53 +4244,3 @@ msgstr "您的基礎資料可以被視為提示工具"
 #: model_terms:ir.ui.view,arch_db:website_forum.follow
 msgid "your email..."
 msgstr "你的電郵地址⋯"
-
-#~ msgid ""
-#~ "<a class=\"btn-link o_translate_inline\" t-attf-href=\"/forum\"><i "
-#~ "class=\"oi oi-arrow-right display-inline-block\"/> Return to questions "
-#~ "list</a>"
-#~ msgstr ""
-#~ "<a class=\"btn-link o_translate_inline\" t-attf-href=\"/forum\"><i "
-#~ "class=\"oi oi-arrow-right display-inline-block\"/> 返回問題列表</a>"
-
-#~ msgid "'Please enter 2 or more characters'"
-#~ msgstr "'請輸入 2 個或更多字元'"
-
-#~ msgid "'Tags'"
-#~ msgstr "'Tags'"
-
-#~ msgid ""
-#~ "<a class=\"mb-2 o_translate_inline\" t-attf-href=\"/profile/users?"
-#~ "forum_origin=#{request.httprequest.path}\" data-bs-original-title=\"\" "
-#~ "title=\"\" target=\"_blank\">Meet our community members</a>"
-#~ msgstr ""
-#~ "<a class=\"mb-2 o_translate_inline\" t-attf-href=\"/profile/users?"
-#~ "forum_origin=#{request.httprequest.path}\" data-bs-original-title=\"\" "
-#~ "title=\"\" target=\"_blank\">認識我們的社群成員</a>"
-
-#~ msgid "<i class=\"oi oi-chevron-left small\"/> Back"
-#~ msgstr "<i class=\"oi oi-chevron-left small\"/> 返回"
-
-#~ msgid "Date (high to low)"
-#~ msgstr "日期（從新到舊）"
-
-#~ msgid "Date (low to high)"
-#~ msgstr "日期（從舊到新）"
-
-#~ msgid "Group By"
-#~ msgstr "分組依據"
-
-#~ msgid "Oh no! Please sign in to perform this action"
-#~ msgstr "哎唷！請登入以執行此操作"
-
-#~ msgid "This user hasn't answered any questions yet. <br/>"
-#~ msgstr "此用戶尚未回答任何問題。<br/>"
-
-#~ msgid "This user hasn't posted any questions yet.<br/>"
-#~ msgstr "此用戶尚未提問任何問題。<br/>"
-
-#~ msgid "You have not answered any questions yet. <br/>"
-#~ msgstr "你尚未回答任何問題。<br/>"
-
-#~ msgid "You have not posted any questions yet. <br/>"
-#~ msgstr "你尚未提問任何問題。<br/>"

@@ -2,6 +2,7 @@ import { registry } from "@web/core/registry";
 import { Plugin } from "@html_editor/plugin";
 import { getCSSVariableValue, getHtmlStyle } from "@html_editor/utils/formatting";
 import { showAddFontDialog } from "./add_font_dialog";
+import { TextEffectPlugin } from "@html_builder/plugins/font/text_effect_plugin";
 
 /**
  * @typedef { Object } WebsiteFontShared
@@ -10,7 +11,7 @@ import { showAddFontDialog } from "./add_font_dialog";
  */
 
 // TODO Website-specific
-class WebsiteFontPlugin extends Plugin {
+export class WebsiteFontPlugin extends Plugin {
     static id = "websiteFont";
     static shared = ["addFont", "deleteFont"];
     static dependencies = ["savePlugin", "builderFont", "customizeWebsite"];
@@ -95,3 +96,4 @@ class WebsiteFontPlugin extends Plugin {
     }
 }
 registry.category("website-plugins").add(WebsiteFontPlugin.id, WebsiteFontPlugin);
+registry.category("website-plugins").add(TextEffectPlugin.id, TextEffectPlugin);

@@ -1,7 +1,6 @@
 import { registry } from "@web/core/registry";
 
 registry.category("web_tour.tours").add("portal_load_homepage", {
-    url: "/my",
     steps: () => [
         {
             content: "Check portal is loaded",

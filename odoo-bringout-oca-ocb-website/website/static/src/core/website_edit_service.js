@@ -1,5 +1,4 @@
 import { registry } from "@web/core/registry";
-import { PublicRoot } from "@web/legacy/js/public/public_root";
 import { Colibri } from "@web/public/colibri";
 import { Interaction } from "@web/public/interaction";
 import { patch } from "@web/core/utils/patch";
@@ -343,35 +342,9 @@ export const websiteEditService = {
 };
 registry.category("services").add("website_edit", websiteEditService);
 
-// Patch PublicRoot.
-
-PublicRoot.include({
-    // This file is lazy loaded, init will not be called when entering edit.
-    /**
-     * @override
-     */
-    _restartInteractions(targetEl, options) {
-        const websiteEdit = this.bindService("website_edit");
-        const mode = options?.editableMode ? "edit" : "normal";
-        websiteEdit.update(targetEl, mode);
-    },
-});
-
 // Patch Colibri.
 
 patch(Colibri.prototype, {
-    protectSyncAfterAsync(interaction, name, fn) {
-        fn = super.protectSyncAfterAsync(interaction, name, fn);
-        const fullName = `${interaction.constructor.name}/${name}`;
-        return (...args) => {
-            // TODO No jQuery ?
-            const wysiwyg = window.$?.("#wrapwrap").data("wysiwyg");
-            wysiwyg?.odooEditor.observerUnactive(fullName);
-            const result = fn(...args);
-            wysiwyg?.odooEditor.observerActive(fullName);
-            return result;
-        };
-    },
     addListener(target, event, fn, options) {
         const boundFn = fn.bind(this.interaction);
         if (event.startsWith("slide.bs.carousel")) {
@@ -385,42 +358,12 @@ patch(Colibri.prototype, {
         } else {
             fn = boundFn;
         }
-        let stealth = true;
         const parts = event.split(".");
         if (parts.includes("keepInHistory") || options?.keepInHistory) {
-            stealth = false;
             event = parts.filter((part) => part !== "keepInHistory").join(".");
             delete options?.keepInHistory;
         }
-        // TODO No jQuery ?
-        const wysiwyg = window.$?.("#wrapwrap").data("wysiwyg");
-        let stealthFn = fn;
-        if (wysiwyg?.odooEditor && !fn.isHandler && stealth) {
-            const name = `${this.interaction.constructor.name}/${event}`;
-            stealthFn = (...args) => {
-                wysiwyg.odooEditor.observerUnactive(name);
-                const result = fn(...args);
-                wysiwyg.odooEditor.observerActive(name);
-                return result;
-            };
-        }
-        return super.addListener(target, event, stealthFn, options);
-    },
-    applyAttr(el, attr, value) {
-        // TODO No jQuery ?
-        const wysiwyg = window.$?.("#wrapwrap").data("wysiwyg");
-        const name = `${this.interaction.constructor.name}/${attr}`;
-        wysiwyg?.odooEditor.observerUnactive(name);
-        super.applyAttr(...arguments);
-        wysiwyg?.odooEditor.observerActive(name);
-    },
-    applyTOut(el, value) {
-        // TODO No jQuery ?
-        const wysiwyg = window.$?.("#wrapwrap").data("wysiwyg");
-        const name = `${this.interaction.constructor.name}/t-out`;
-        wysiwyg?.odooEditor.observerUnactive(name);
-        super.applyTOut(...arguments);
-        wysiwyg?.odooEditor.observerActive(name);
+        return super.addListener(target, event, fn, options);
     },
 });
 

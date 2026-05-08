@@ -1,9 +1,12 @@
-import { BaseOptionComponent, useDomState } from "@html_builder/core/utils";
+import { BaseOptionComponent } from "@html_builder/core/base_option_component";
+import { useDomState } from "@html_builder/core/utils";
 import { BackgroundOption } from "@html_builder/plugins/background_option/background_option";
 import { ParallaxOption } from "./parallax_option";
 import { useBackgroundOption } from "@html_builder/plugins/background_option/background_hook";
+import { registry } from "@web/core/registry";
 
-export class BaseWebsiteBackgroundOption extends BaseOptionComponent {
+export class WebsiteBackgroundOption extends BaseOptionComponent {
+    static id = "website_background_option";
     static template = "website.WebsiteBackgroundOption";
     static components = {
         ...BackgroundOption.components,
@@ -27,9 +30,14 @@ export class BaseWebsiteBackgroundOption extends BaseOptionComponent {
         super.setup();
         const { showColorFilter } = useBackgroundOption(this.isActiveItem);
         this.showColorFilter = () => showColorFilter() || this.isActiveItem("toggle_bg_video_id");
+        // ":scope > .s_parallax_bg" is kept for compatibility.
+        const parallaxBgSelector =
+            ":scope > .s_parallax_bg, :scope > .s_parallax_bg_wrap > .s_parallax_bg";
         this.websiteBgOptionDomState = useDomState((el) => ({
             // Only search for .s_parallax_bg that are direct children
-            applyTo: el.querySelector(":scope > .s_parallax_bg") ? ".s_parallax_bg" : "",
+            applyTo: el.querySelector(parallaxBgSelector) ? parallaxBgSelector : "",
         }));
     }
 }
+
+registry.category("website-options").add(WebsiteBackgroundOption.id, WebsiteBackgroundOption);

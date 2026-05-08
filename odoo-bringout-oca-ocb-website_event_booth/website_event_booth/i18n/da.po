@@ -288,9 +288,3 @@ msgstr "Menu for arrangementer på hjemmeside"
 #: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_registration
 msgid "if you have any question."
 msgstr "hvis du har spørgsmål."
-
-#~ msgid "It looks like your email is linked to an existing account."
-#~ msgstr "Det ser ud til, at din e-mail er knyttet til en eksisterende konto."
-
-#~ msgid "Please Sign In."
-#~ msgstr "Log venligst ind."

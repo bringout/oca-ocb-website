@@ -1,9 +1,9 @@
 from datetime import datetime, timedelta
 
 from odoo import Command
-from odoo.http import Request
-from odoo.addons.mail.tests.common import mail_new_test_user
 from odoo.tests.common import HttpCase, tagged
+
+from odoo.addons.mail.tests.common import mail_new_test_user
 
 
 @tagged('-at_install', 'post_install')
@@ -19,10 +19,9 @@ class TestUsersHttp(HttpCase):
         )
 
         bank_account = self.env['res.partner.bank'].create({
-            'acc_number': '123456789',
+            'account_number': '123456789',
             'partner_id': portal_user.partner_id.id,
-            'acc_holder_name': 'Partner A Holder',
-            'acc_type': 'bank',
+            'holder_name': 'Partner A Holder',
         })
 
         common_data = {
@@ -43,11 +42,11 @@ class TestUsersHttp(HttpCase):
                 **common_data,
                 'name': portal_user.partner_id.name,
                 'partner_id': str(portal_user.partner_id.id),
-                'csrf_token': Request.csrf_token(self)
-            }
+                'csrf_token': self.csrf_token(),
+            },
         )
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(bank_account.acc_holder_name, 'Partner A Holder')
+        self.assertEqual(bank_account.holder_name, 'Partner A Holder')
 
     def test_deactivate_portal_user(self):
         # Create a portal user with data which should be removed on deactivation
@@ -70,7 +69,7 @@ class TestUsersHttp(HttpCase):
         self.url_open('/my/deactivate_account', data={
             'validation': login,
             'password': login,
-            'csrf_token': Request.csrf_token(self)
+            'csrf_token': self.csrf_token(),
         })
 
         # Assert the user is disabled, correctly renamed, the critical data is well removed.
@@ -97,6 +96,8 @@ class TestUsersHttp(HttpCase):
             'type': 'invoice',
             'parent_id': portal_user.commercial_partner_id.id,
         })
+        if 'enforce_cities' in self.env['res.country']._fields:
+            self.env.company.country_id.enforce_cities = False
         common_data = {
             'phone': '1234567890',
             'email': 'anonymous-user@example.com',
@@ -113,7 +114,7 @@ class TestUsersHttp(HttpCase):
                 **common_data,
                 'name': new_name,
                 'partner_id': str(anonymous_partner.id),
-                'csrf_token': Request.csrf_token(self)
-            }
+                'csrf_token': self.csrf_token(),
+            },
         )
         self.assertEqual(anonymous_partner.name, new_name)

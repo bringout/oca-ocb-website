@@ -28,7 +28,7 @@ registry.category("website.form_editor_actions").add("send_mail", {
         {
             type: "char",
             custom: true,
-            fillWith: "commercial_company_name",
+            fillWith: "parent_name",
             name: "company",
             string: _t("Your Company"),
         },
@@ -51,8 +51,9 @@ registry.category("website.form_editor_actions").add("send_mail", {
             name: "email_to",
             type: "char",
             required: true,
-            string: _t("Recipient Email"),
+            string: _t("Recipient Emails"),
             defaultValue: "info@yourcompany.example.com",
+            help: _t("Add multiple emails separated by commas"),
         },
     ],
 });

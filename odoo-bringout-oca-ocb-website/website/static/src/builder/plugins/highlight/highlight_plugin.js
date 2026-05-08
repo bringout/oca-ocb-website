@@ -1,6 +1,7 @@
+import { reactive, useRef, useState } from "@web/owl2/utils";
 import { Plugin } from "@html_editor/plugin";
 import { withSequence } from "@html_editor/utils/resource";
-import { Component, xml, useRef, reactive, useState } from "@odoo/owl";
+import { Component, xml } from "@odoo/owl";
 import { _t } from "@web/core/l10n/translation";
 import { usePopover } from "@web/core/popover/popover_hook";
 import { registry } from "@web/core/registry";
@@ -53,22 +54,26 @@ export class HighlightPlugin extends Plugin {
                     closestElement(editableSelection.anchorNode, ".o_text_highlight") && "compact"
             ),
         ],
-        normalize_handlers: (root) => {
+        normalize_processors: (root) => {
             for (const node of root.querySelectorAll(".o_text_highlight")) {
                 // Signal to the interaction that there is (maybe) a new element
                 node.dispatchEvent(new Event("text_highlight_added", { bubbles: true }));
             }
         },
-        format_class_predicates: (className) => className.startsWith("o_text_highlight"),
-        selectionchange_handlers: this.updateSelectedHighlight.bind(this),
-        remove_all_formats_handlers: () => {
+        is_format_class_predicates: (className) => {
+            if (className.startsWith("o_text_highlight")) {
+                return true;
+            }
+        },
+        on_selectionchange_handlers: this.updateSelectedHighlight.bind(this),
+        on_all_formats_removed_handlers: () => {
             // we rely on the normalize handler to start it again
             this.dependencies.edit_interaction.stopInteraction("website.text_highlight");
         },
-        format_selection_handlers: () => {
+        format_selection_overrides: () => {
             this.dependencies.edit_interaction.stopInteraction("website.text_highlight");
         },
-        before_save_handlers: () => {
+        on_will_save_handlers: () => {
             this.dependencies.edit_interaction.stopInteraction("website.text_highlight");
         },
     };
@@ -246,6 +251,7 @@ export class HighlightPlugin extends Plugin {
     }
 }
 registry.category("website-plugins").add(HighlightPlugin.id, HighlightPlugin);
+registry.category("translation-plugins").add(HighlightPlugin.id, HighlightPlugin);
 
 // Todo: formatsSpecs should allow to be register new formats through resources.
 formatsSpecs.highlight = {
@@ -290,7 +296,7 @@ class HighlightToolbarButton extends Component {
         getSelection: Function,
     };
     static template = xml`
-        <button t-ref="root" t-attf-class="btn btn-light o-select-highlight {{highlightState.highlightId ? 'active' : ''}}" t-on-click="openHighlightConfigurator" t-att-title="props.title">
+        <button t-custom-ref="root" t-attf-class="btn btn-light o-select-highlight {{this.highlightState.highlightId ? 'active' : ''}}" t-on-click="this.openHighlightConfigurator" t-att-title="this.props.title">
             <i class="fa oi oi-text-effect oi-fw py-1"/>
         </button>
     `;

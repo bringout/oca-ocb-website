@@ -13,7 +13,7 @@ import {
 } from "@website/js/tours/tour_utils";
 
 registry.category("web_tour.tours").add("parent_child_menu", {
-    url: "/odoo/action-website.action_website_menu",
+    undeterministicTour_doNotCopy: true, // Remove this key to make the tour failed. ( It removes delay between steps )
     steps: () => [
         {
             content: "Open Menu Form View",
@@ -37,7 +37,7 @@ registry.category("web_tour.tours").add("parent_child_menu", {
         },
         {
             content: "Click on Add a line button",
-            trigger: "div[name='child_id'] td.o_field_x2many_list_row_add a",
+            trigger: "div[name='child_id'] td.o_field_x2many_list_row_add button",
             run: "click",
         },
         {
@@ -74,7 +74,7 @@ registry.category("web_tour.tours").add("parent_child_menu", {
 registerWebsitePreviewTour(
     "edit_menus",
     {
-        url: "/",
+        undeterministicTour_doNotCopy: true, // Remove this key to make the tour failed. ( It removes delay between steps )
     },
     () => [
         // Add a megamenu item from the menu.
@@ -297,8 +297,8 @@ registerWebsitePreviewTour(
             run: "click",
         },
         {
-            content: `Drag "Contact Us" menu below "Home" menu`,
-            trigger: '.oe_menu_editor li:contains("Contact us") .oi-draggable',
+            content: `Drag "Modnar !!" menu below "Home" menu`,
+            trigger: '.oe_menu_editor li:contains("Modnar !!") .oi-draggable',
             run(helpers) {
                 return helpers.drag_and_drop('.oe_menu_editor li:contains("Home")', {
                     position: {
@@ -310,13 +310,13 @@ registerWebsitePreviewTour(
             },
         },
         {
-            content: "Drag 'Contact Us' item as a child of the 'Home' item",
-            trigger: '.oe_menu_editor li:contains("Contact us") .oi-draggable',
-            run: 'drag_and_drop .oe_menu_editor li:contains("Contact us") .form-control',
+            content: "Drag 'Modnar !!' item as a child of the 'Home' item",
+            trigger: '.oe_menu_editor li:contains("Modnar !!") .oi-draggable',
+            run: 'drag_and_drop .oe_menu_editor li:contains("Modnar !!") .form-control',
         },
         {
             content: "Wait for drop",
-            trigger: '.oe_menu_editor li:contains("Home") ul li:contains("Contact us")',
+            trigger: '.oe_menu_editor li:contains("Home") ul li:contains("Modnar !!")',
         },
         // Drag the Mega menu to the first position.
         {
@@ -350,7 +350,7 @@ registerWebsitePreviewTour(
         {
             content: "When menu item is opened, child item must appear in the shown menu",
             trigger:
-                ':iframe .top_menu .nav-item:contains("Home") ul.show li a.dropdown-item:contains("Contact us")[href="/contactus"]',
+                ':iframe .top_menu .nav-item:contains("Home") ul.show li a.dropdown-item:contains("Modnar !!")',
             run() {
                 // Scroll down.
                 this.anchor
@@ -375,7 +375,7 @@ registerWebsitePreviewTour(
             content: "Check that the Home menu is opened",
             trigger:
                 ':iframe .top_menu .nav-item:contains("Home") ul.show li' +
-                ' a.dropdown-item:contains("Contact us")[href="/contactus"]',
+                ' a.dropdown-item:contains("Modnar !!")',
         },
         {
             content: "Close the Home menu",
@@ -437,7 +437,7 @@ registerWebsitePreviewTour(
         {
             // If this step fails, it means that a patch inside bootstrap was lost.
             content: "Press the 'down arrow' key.",
-            trigger: ':iframe .top_menu .nav-item:contains("Home") li:contains("Contact us")',
+            trigger: ':iframe .top_menu .nav-item:contains("Home") li:contains("Modnar !!")',
             run: "press ArrowDown",
         },
         ...clickOnSave(),
@@ -514,7 +514,8 @@ registerWebsitePreviewTour(
         },
         {
             content: "Drag 'Modnar !!' below 'new_menu'",
-            trigger: '.oe_menu_editor li:contains("Modnar !!") .oi-draggable',
+            trigger:
+                '.oe_menu_editor li:contains("Home") > ul > li:contains("Modnar !!") .oi-draggable',
             run(helpers) {
                 return helpers.drag_and_drop(
                     '.oe_menu_editor li:contains("new_menu") .oi-draggable',
@@ -562,34 +563,28 @@ registerWebsitePreviewTour(
     ]
 );
 
-registerWebsitePreviewTour(
-    "edit_menus_delete_parent",
+registerWebsitePreviewTour("edit_menus_delete_parent", {}, () => [
     {
-        url: "/",
+        trigger: ":iframe #wrapwrap",
     },
-    () => [
-        {
-            trigger: ":iframe #wrapwrap",
-        },
-        {
-            content: "Open site menu",
-            trigger: 'button[data-menu-xmlid="website.menu_site"]',
-            run: "click",
-        },
-        {
-            content: "Click on Edit Menu",
-            trigger: 'a[data-menu-xmlid="website.menu_edit_menu"]',
-            run: "click",
-        },
-        {
-            content: "Delete Home menu",
-            trigger: ".modal-body ul li:nth-child(1) button.js_delete_menu",
-            run: "click",
-        },
-        {
-            content: "Save",
-            trigger: ".modal-footer button:first-child",
-            run: "click",
-        },
-    ]
-);
+    {
+        content: "Open site menu",
+        trigger: 'button[data-menu-xmlid="website.menu_site"]',
+        run: "click",
+    },
+    {
+        content: "Click on Edit Menu",
+        trigger: 'a[data-menu-xmlid="website.menu_edit_menu"]',
+        run: "click",
+    },
+    {
+        content: "Delete Home menu",
+        trigger: ".modal-body ul li:nth-child(1) button.js_delete_menu",
+        run: "click",
+    },
+    {
+        content: "Save",
+        trigger: ".modal-footer button:first-child",
+        run: "click",
+    },
+]);

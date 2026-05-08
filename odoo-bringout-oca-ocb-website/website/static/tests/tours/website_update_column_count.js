@@ -1,9 +1,12 @@
+import { registry } from "@web/core/registry";
 import {
     clickOnSnippet,
     insertSnippet,
     registerWebsitePreviewTour,
     toggleMobilePreview,
     changeOptionInPopover,
+    unfoldOptionsGroup,
+    waitForEditMode,
 } from "@website/js/tours/tour_utils";
 
 const columnCountOptSelector = "div[data-label='Layout'] .dropdown-toggle";
@@ -47,7 +50,6 @@ const checkIfNoMobileOrder = (snippetRowSelector) => ({
 registerWebsitePreviewTour(
     "website_update_column_count",
     {
-        url: "/",
         edition: true,
     },
     () => [
@@ -88,6 +90,11 @@ registerWebsitePreviewTour(
             run: "click",
         },
         {
+            content: `Target the "Columns" group`,
+            trigger: `.options-container[data-container-title="Columns"]:has(.options-container-label i.fa-caret-right) button[title="Select only this block"]`,
+            run: "click",
+        },
+        {
             content: "Check that there is 1 column on mobile and click on the selector",
             trigger: `${columnCountOptSelector}:contains('1')`,
             run: "click",
@@ -123,7 +130,7 @@ registerWebsitePreviewTour(
                         clientY: y,
                         pointerType: "mouse",
                     });
-                    (type === "pointermove" ? window : overlayEl).dispatchEvent(event);
+                    (type === "pointermove" ? document : overlayEl).dispatchEvent(event);
                 };
 
                 // Trigger pointer down
@@ -136,6 +143,7 @@ registerWebsitePreviewTour(
                 triggerPointerEvent("pointerup", 150, 100);
             },
         },
+        ...unfoldOptionsGroup("Columns"),
         {
             content: "Check that the counter shows 'Custom'",
             trigger: `${columnCountOptSelector}:contains('Custom')`,
@@ -188,13 +196,9 @@ registerWebsitePreviewTour(
     ]
 );
 
-registerWebsitePreviewTour(
-    "website_mobile_order_with_drag_and_drop",
-    {
-        url: "/",
-        edition: true,
-    },
-    () => [
+registry.category("web_tour.tours").add("website_mobile_order_with_drag_and_drop", {
+    steps: () => [
+        waitForEditMode,
         ...insertSnippet({ id: "s_three_columns", name: "Columns", groupName: "Columns" }),
         ...insertSnippet({ id: "s_text_image", name: "Text - Image", groupName: "Content" }),
         ...toggleMobilePreview(true),
@@ -245,5 +249,5 @@ registerWebsitePreviewTour(
                 `${columnsSnippetRow}:has(.order-lg-0[style*='order: 0;']:nth-child(1))` +
                 ":has(.order-lg-0[style*='order: 1;']:nth-child(2))",
         },
-    ]
-);
+    ],
+});

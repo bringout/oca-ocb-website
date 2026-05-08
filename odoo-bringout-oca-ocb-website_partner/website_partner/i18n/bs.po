@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server saas~11.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-25 18:37+0000\n"
+"POT-Creation-Date: 2025-09-11 14:03+0000\n"
 "PO-Revision-Date: 2018-09-18 09:49+0000\n"
 "Last-Translator: Boško Stojaković <bluesoft83@gmail.com>, 2018\n"
 "Language-Team: Bosnian (https://www.transifex.com/odoo/teams/41243/bs/)\n"
@@ -17,9 +17,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-# taken from hr.po
 #. module: website_partner
 #: model:ir.model,name:website_partner.model_res_partner
 msgid "Contact"
@@ -28,98 +28,87 @@ msgstr "Kontakt"
 #. module: website_partner
 #: model:ir.model,website_form_label:website_partner.model_res_partner
 msgid "Create a Customer"
-msgstr "Kreiraj kupca"
+msgstr ""
 
 #. module: website_partner
 #: model_terms:ir.ui.view,arch_db:website_partner.partner_page
 msgid "DROP BUILDING BLOCKS HERE TO MAKE THEM AVAILABLE ACROSS ALL PARTNERS"
-msgstr "OVDJE OTPUSTITE GRADIVNE BLOKOVE DA BI BILI DOSTUPNI SVIM PARTNERIMA"
+msgstr ""
 
 #. module: website_partner
 #: model:ir.model.fields,field_description:website_partner.field_res_partner__display_name
 msgid "Display Name"
-msgstr "Naziv za prikaz"
+msgstr ""
 
 #. module: website_partner
 #: model:ir.model.fields,field_description:website_partner.field_res_partner__id
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: website_partner
 #: model:ir.model.fields,field_description:website_partner.field_res_partner__is_published
+#: model:ir.model.fields,field_description:website_partner.field_res_users__is_published
 msgid "Is Published"
-msgstr "Je objavljena"
+msgstr ""
 
 #. module: website_partner
 #: model:mail.message.subtype,description:website_partner.mt_partner_published
 msgid "Partner Published"
-msgstr "Partner objavljen"
+msgstr ""
 
 #. module: website_partner
 #: model:mail.message.subtype,description:website_partner.mt_partner_unpublished
 msgid "Partner Unpublished"
-msgstr "Partner povučen"
+msgstr ""
 
 #. module: website_partner
 #: model:mail.message.subtype,name:website_partner.mt_partner_published
 msgid "Partner published"
-msgstr "Partner objavljen"
+msgstr ""
 
 #. module: website_partner
 #: model:mail.message.subtype,name:website_partner.mt_partner_unpublished
 msgid "Partner unpublished"
-msgstr "Partner povučen"
+msgstr ""
 
-# taken from hr.po
 #. module: website_partner
 #: model:ir.model.fields,field_description:website_partner.field_res_partner__is_seo_optimized
 msgid "SEO optimized"
-msgstr "SEO optimizirana"
+msgstr ""
 
-# taken from hr.po
 #. module: website_partner
 #: model:ir.model.fields,field_description:website_partner.field_res_partner__seo_name
 msgid "Seo name"
-msgstr "SEO naziv"
+msgstr ""
 
-# taken from hr.po
 #. module: website_partner
 #: model:ir.model.fields,field_description:website_partner.field_res_partner__website_description
+#: model:ir.model.fields,field_description:website_partner.field_res_users__website_description
 msgid "Website Partner Full Description"
-msgstr "Puni opis web partnera"
+msgstr ""
 
-# taken from hr.po
 #. module: website_partner
 #: model:ir.model.fields,field_description:website_partner.field_res_partner__website_short_description
+#: model:ir.model.fields,field_description:website_partner.field_res_users__website_short_description
 msgid "Website Partner Short Description"
-msgstr "Kratki opis web partnera"
+msgstr ""
 
-# taken from hr.po
 #. module: website_partner
 #: model:ir.model.fields,field_description:website_partner.field_res_partner__website_meta_description
 msgid "Website meta description"
 msgstr "Website meta opis"
 
-# taken from hr.po
 #. module: website_partner
 #: model:ir.model.fields,field_description:website_partner.field_res_partner__website_meta_keywords
 msgid "Website meta keywords"
 msgstr "Website meta ključne riječi"
 
-# taken from hr.po
 #. module: website_partner
 #: model:ir.model.fields,field_description:website_partner.field_res_partner__website_meta_title
 msgid "Website meta title"
 msgstr "Website meta naslov"
 
-# taken from hr.po
 #. module: website_partner
 #: model:ir.model.fields,field_description:website_partner.field_res_partner__website_meta_og_img
 msgid "Website opengraph image"
-msgstr "OpenGraph slika web stranice"
-
-# taken from hr.po
-#. module: website_partner
-#: model_terms:ir.ui.view,arch_db:website_partner.partner_detail
-msgid "Short Description for List View"
-msgstr "float-left"
+msgstr ""

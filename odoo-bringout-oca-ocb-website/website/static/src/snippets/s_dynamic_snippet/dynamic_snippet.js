@@ -21,12 +21,7 @@ export class DynamicSnippet extends Interaction {
         _window: { "t-on-resize": this.throttled(this.render) },
         _root: {
             "t-att-class": () => ({
-                // Compatibility code: A dynamic snippet may end up with one,
-                // several, or all of these classes as a default visibility one.
-                o_dynamic_empty: !this.isVisible,
-                s_dynamic_empty: !this.isVisible,
-                o_dynamic_snippet_empty: !this.isVisible,
-                o_dynamic_snippet_loading: !this.data.length,
+                o_dynamic_snippet_loading: this.loadingData,
             }),
         },
         ".missing_option_warning": {
@@ -161,14 +156,13 @@ export class DynamicSnippet extends Interaction {
     }
 
     render() {
+        this.loadingData = false;
         if (this.el.querySelector(".s_dialog_preview")) {
             return;
         }
         if (this.data.length > 0 || this.withSample) {
-            this.toggleVisibility(true);
             this.prepareContent();
         } else {
-            this.toggleVisibility(false);
             this.renderedContentNode = document.createDocumentFragment();
         }
         this.renderContent();
@@ -200,13 +194,6 @@ export class DynamicSnippet extends Interaction {
                 }
             });
         }, 0);
-    }
-
-    /**
-     * @param {Boolean} visible
-     */
-    toggleVisibility(visible) {
-        this.isVisible = visible;
     }
 
     /**

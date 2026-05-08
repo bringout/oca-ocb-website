@@ -2,7 +2,7 @@
 import threading
 import unicodedata
 
-from odoo.tests.common import BaseCase
+from odoo.tests.common import tagged, BaseCase
 from odoo.modules.registry import Registry
 
 

@@ -1,15 +1,14 @@
-import { patchWithCleanup } from "@web/../tests/helpers/utils";
-import { contains } from "@web/../tests/utils";
+import { patch } from "@web/core/utils/patch";
 import { registry } from "@web/core/registry";
-import { Deferred } from "@web/core/utils/concurrency";
 import { Chatbot } from "@im_livechat/core/common/chatbot_model";
 
 const messagesContain = (text) => `.o-livechat-root:shadow .o-mail-Message:contains("${text}")`;
 let chatbotDelayProcessingDef;
 
 registry.category("web_tour.tours").add("website_livechat_chatbot_flow_tour", {
+    undeterministicTour_doNotCopy: true, // Remove this key to make the tour failed. ( It removes delay between steps )
     steps: () => {
-        patchWithCleanup(Chatbot.prototype, {
+        patch(Chatbot.prototype, {
             // Count the number of times this method is called to check whether the chatbot is regularly
             // checking the user's input in the multi line step until the user finishes typing.
             async _delayThenProcessAnswerAgain(message) {
@@ -17,7 +16,7 @@ registry.category("web_tour.tours").add("website_livechat_chatbot_flow_tour", {
                 return await super._delayThenProcessAnswerAgain(message);
             },
         });
-        patchWithCleanup(Chatbot, {
+        patch(Chatbot, {
             MESSAGE_DELAY: 0,
             MULTILINE_STEP_DEBOUNCE_DELAY: 2000,
             TYPING_DELAY: 0,
@@ -29,34 +28,20 @@ registry.category("web_tour.tours").add("website_livechat_chatbot_flow_tour", {
             },
             {
                 trigger: messagesContain("How can I help you?"),
-                // check question_selection message is posted and reactions are not
-                // available since the thread is not yet persisted
-                run() {
-                    if (
-                        this.anchor.querySelector(
-                            ".o-mail-Message-actions [title='Add a Reaction']"
-                        )
-                    ) {
-                        console.error(
-                            "Reactions should not be available before thread is persisted."
-                        );
-                    }
-                },
+            },
+            {
+                content: "Reactions should not be available before thread is persisted.",
+                trigger: `body:not(:has(.o-mail-Message-actions [title='Add a Reaction']))`,
             },
             {
                 trigger: '.o-livechat-root:shadow button:contains("I\'d like to buy the software")',
                 run: "click",
             },
             {
-                trigger: ".o-livechat-root:shadow .o-mail-ChatWindow",
                 // check selected option is posted and reactions are available since
                 // the thread has been persisted in the process
-                async run() {
-                    await contains(".o-mail-Message-actions [title='Add a Reaction']", {
-                        target: this.anchor.getRootNode(),
-                        parent: [".o-mail-Message", { text: "I'd like to buy the software" }],
-                    });
-                },
+                trigger:
+                    ".o-livechat-root:shadow .o-mail-ChatWindow .o-mail-Message:has(.o-mail-Message-actions [title='Add a Reaction']):contains('I\\'d like to buy the software')",
             },
             {
                 // check ask email step following selecting option A
@@ -87,6 +72,33 @@ registry.category("web_tour.tours").add("website_livechat_chatbot_flow_tour", {
             {
                 // check that this time the email goes through and we proceed to next step
                 trigger: messagesContain("Your email is validated, thank you!"),
+            },
+            {
+                trigger: messagesContain("Can you give us your phone number please?"),
+            },
+            {
+                trigger: ".o-livechat-root:shadow .o-mail-Composer-input",
+                run: "edit 123456",
+            },
+            {
+                trigger: ".o-livechat-root:shadow .o-mail-Composer-input",
+                run: "press Enter",
+            },
+            {
+                trigger: messagesContain(
+                    "'123456' does not look like a valid phone number. Can you please try again?"
+                ),
+            },
+            {
+                trigger: ".o-livechat-root:shadow .o-mail-Composer-input",
+                run: "edit +919876543210",
+            },
+            {
+                trigger: ".o-livechat-root:shadow .o-mail-Composer-input",
+                run: "press Enter",
+            },
+            {
+                trigger: messagesContain("Your phone number is validated. thank you!"),
             },
             {
                 // should ask for website now
@@ -138,24 +150,24 @@ registry.category("web_tour.tours").add("website_livechat_chatbot_flow_tour", {
                 // Simulate that the user is typing, so the chatbot shouldn't go to the next step
                 trigger: ".o-livechat-root:shadow .o-mail-Composer-input",
                 async run(helpers) {
-                    chatbotDelayProcessingDef = new Deferred();
+                    chatbotDelayProcessingDef = Promise.withResolvers();
                     let failTimeout = setTimeout(() => {
                         chatbotDelayProcessingDef.reject(
                             "Chatbot should stay in multi line step when user is typing."
                         );
                     }, 5000);
-                    chatbotDelayProcessingDef.then(() => clearTimeout(failTimeout));
+                    chatbotDelayProcessingDef.promise.then(() => clearTimeout(failTimeout));
                     helpers.edit("Never mind!");
-                    await chatbotDelayProcessingDef;
-                    chatbotDelayProcessingDef = new Deferred();
+                    await chatbotDelayProcessingDef.promise;
+                    chatbotDelayProcessingDef = Promise.withResolvers();
                     failTimeout = setTimeout(() => {
                         chatbotDelayProcessingDef.reject(
                             "Chatbot should stay in multi line step if user isn't done typing."
                         );
                     }, 5000);
-                    chatbotDelayProcessingDef.then(() => clearTimeout(failTimeout));
+                    chatbotDelayProcessingDef.promise.then(() => clearTimeout(failTimeout));
                     helpers.edit("Never mind!!!");
-                    await chatbotDelayProcessingDef;
+                    await chatbotDelayProcessingDef.promise;
                 },
             },
             {

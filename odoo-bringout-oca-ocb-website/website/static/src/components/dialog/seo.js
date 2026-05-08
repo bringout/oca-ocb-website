@@ -1,3 +1,4 @@
+import { reactive, useLayoutEffect, useRef, useState } from "@web/owl2/utils";
 import { _t } from "@web/core/l10n/translation";
 import { deduceURLfromText } from "@html_editor/main/link/utils";
 import { pyToJsLocale, jsToPyLocale } from "@web/core/l10n/utils";
@@ -8,16 +9,9 @@ import { useService, useAutofocus } from "@web/core/utils/hooks";
 import { isVisible } from "@web/core/utils/ui";
 import { CheckBox } from "@web/core/checkbox/checkbox";
 import { MediaDialog } from "@html_editor/main/media/media_dialog/media_dialog";
+import { getMimetype } from "@html_editor/utils/image";
 import { WebsiteDialog } from "./dialog";
-import {
-    Component,
-    onMounted,
-    onWillStart,
-    reactive,
-    useEffect,
-    useState,
-    useRef,
-} from "@odoo/owl";
+import { Component, onMounted, onWillStart } from "@odoo/owl";
 import wUtils from "@website/js/utils";
 
 // This replaces \b, because accents(e.g. à, é) are not seen as word boundaries.
@@ -25,7 +19,7 @@ import wUtils from "@website/js/utils";
 const WORD_SEPARATORS_REGEX =
     "([\\u2000-\\u206F\\u2E00-\\u2E7F'!\"#\\$%&\\(\\)\\*\\+,\\-\\.\\/:;<=>\\?¿¡@\\[\\]\\^_`\\{\\|\\}~\\s]+|^|$)";
 
-const seoContext = reactive({
+export const seoContext = reactive({
     description: "",
     keywords: [],
     title: "",
@@ -205,6 +199,7 @@ class ImageSelector extends Component {
     setup() {
         this.website = useService("website");
         this.dialogs = useService("dialog");
+        this.notification = useService("notification");
 
         this.seoContext = useState(seoContext);
 
@@ -273,9 +268,16 @@ class ImageSelector extends Component {
             onlyImages: true,
             resModel: "ir.ui.view",
             useMediaLibrary: true,
-            save: (image) => {
+            save: async (image) => {
                 let existingImage;
                 const src = image.getAttribute("src");
+                if ((await getMimetype(image)) === "image/svg+xml") {
+                    this.notification.add(
+                        _t("SVG images are not supported. Please select a PNG, JPG, WEBP, or GIF"),
+                        { type: "danger" }
+                    );
+                    return;
+                }
                 this.state.images = this.state.images.map((img) => {
                     img.active = false;
                     if (img.src === src) {
@@ -541,7 +543,7 @@ class SEOPreview extends Component {
         return this.props.description || "";
     }
 }
-class TitleDescription extends Component {
+export class TitleDescription extends Component {
     static template = "website.TitleDescription";
     static props = {
         canEditSeo: Boolean,
@@ -549,7 +551,7 @@ class TitleDescription extends Component {
         canEditUrl: Boolean,
         canEditTitle: Boolean,
         seoNameHelp: String,
-        seoNameDefault: { optional: true, String },
+        seoNameDefault: { optional: true, type: String },
         isIndexed: Boolean,
         defaultTitle: String,
         previewDescription: String,
@@ -578,7 +580,7 @@ class TitleDescription extends Component {
         );
 
         // Update the title when its input value changes
-        useEffect(
+        useLayoutEffect(
             () => {
                 document.title = this.title;
             },
@@ -586,7 +588,7 @@ class TitleDescription extends Component {
         );
 
         // Restore the original title when unmounting the component
-        useEffect(
+        useLayoutEffect(
             () => {
                 const initialTitle = document.title;
                 return () => (document.title = initialTitle);
@@ -685,7 +687,7 @@ export class BrokenLink extends Component {
             checkingLink: false,
         });
 
-        useEffect(
+        useLayoutEffect(
             (input) => {
                 if (!input) {
                     return;
@@ -968,8 +970,11 @@ export class OptimizeSEODialog extends Component {
             this.canEditDescription = this.canEditSeo && "website_meta_description" in this.data;
             this.canEditTitle = this.canEditSeo && "website_meta_title" in this.data;
             // The URL must not be customizable if it does not contain an editable slug.
-            const editableSlugPattern = new RegExp(`.*/(${this.data.seo_name || ""}|${this.data.seo_name_default || ""})-\\d+.*`);
-            this.canEditUrl = this.canEditSeo && Boolean(new URL(path).pathname.match(editableSlugPattern));
+            const editableSlugPattern = new RegExp(
+                `.*/(${this.data.seo_name || ""}|${this.data.seo_name_default || ""})-\\d+.*`
+            );
+            this.canEditUrl =
+                this.canEditSeo && Boolean(new URL(path).pathname.match(editableSlugPattern));
             seoContext.title = this.canEditTitle && this.data.website_meta_title;
 
             // If website.page, hide the google preview & tell user his page is currently unindexed
@@ -979,7 +984,9 @@ export class OptimizeSEODialog extends Component {
             );
             this.previousSeoName = this.canEditUrl && this.data.seo_name;
             seoContext.seoName = this.previousSeoName;
-            this.seoNameDefault = this.canEditUrl && this.data.seo_name_default;
+            if (this.canEditUrl) {
+                this.seoNameDefault = this.data.seo_name_default;
+            }
 
             seoContext.description = this.getMeta({ name: "description" });
             this.previewDescription = _t(
@@ -991,8 +998,9 @@ export class OptimizeSEODialog extends Component {
 
             seoContext.metaImage =
                 this.data.website_meta_og_img || this.getMeta({ property: "og:image" });
+            this.previousMetaImage = seoContext.metaImage;
 
-            this.pageImages = this.getImages();
+            this.pageImages = await this.getImages();
             this.socialPreviewDescription = _t(
                 "The description will be generated by social media based on page content unless you specify one."
             );
@@ -1019,15 +1027,16 @@ export class OptimizeSEODialog extends Component {
         return this.website.pageDocument.documentElement;
     }
 
-    getImages() {
+    async getImages() {
         const imageEls = this.pageDocumentElement.querySelectorAll("#wrap img");
-        return [
-            ...new Set(
-                Array.from(imageEls)
-                    .filter((img) => img.naturalHeight > 200 && img.naturalWidth > 200)
-                    .map((img) => img.getAttribute("src"))
-            ),
-        ];
+        const imageSources = await Promise.all(
+            Array.from(imageEls)
+                .filter((img) => img.naturalHeight > 200 && img.naturalWidth > 200)
+                .map(async (img) =>
+                    (await getMimetype(img)) === "image/svg+xml" ? null : img.getAttribute("src")
+                )
+        );
+        return [...new Set(imageSources.filter(Boolean))];
     }
 
     getMeta({ name, property }) {
@@ -1064,7 +1073,9 @@ export class OptimizeSEODialog extends Component {
                 data.seo_name = seoContext.seoName;
             }
         }
-        data.website_meta_og_img = seoContext.metaImage;
+        if (seoContext.metaImage !== this.previousMetaImage) {
+            data.website_meta_og_img = seoContext.metaImage;
+        }
         await this.orm.write(this.object.model, [this.object.id], data, {
             context: {
                 lang: this.website.currentWebsite.metadata.lang,
@@ -1095,7 +1106,10 @@ export class OptimizeSEODialog extends Component {
         await Promise.all(rpcCalls);
 
         this.website.goToWebsite({
-            path: this.url.replace(this.previousSeoName || this.seoNameDefault, seoContext.seoName),
+            path: this.url.replace(
+                this.previousSeoName || this.seoNameDefault,
+                seoContext.seoName || this.seoNameDefault
+            ),
         });
     }
 }

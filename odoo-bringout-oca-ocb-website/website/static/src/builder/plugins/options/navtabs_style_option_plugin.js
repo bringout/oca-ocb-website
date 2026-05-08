@@ -1,11 +1,9 @@
 import { BuilderAction } from "@html_builder/core/builder_action";
-import { SNIPPET_SPECIFIC_END } from "@html_builder/utils/option_sequence";
 import { Plugin } from "@html_editor/plugin";
 import { withSequence } from "@html_editor/utils/resource";
 import { registry } from "@web/core/registry";
 import { _t } from "@web/core/l10n/translation";
 import { localization } from "@web/core/l10n/localization";
-import { BaseOptionComponent } from "@html_builder/core/utils";
 
 /**
  * @typedef { Object } NavTabsStyleOptionShared
@@ -14,27 +12,11 @@ import { BaseOptionComponent } from "@html_builder/core/utils";
  * @property { NavTabsStyleOptionPlugin['moveNavItem'] } moveNavItem
  */
 
-export class NavTabsStyleOption extends BaseOptionComponent {
-    static template = "website.NavTabsStyleOption";
-    static selector = ".s_tabs";
-    static applyTo = ".s_tabs_main";
-}
-
-export class NavTabsImagesStyleOption extends BaseOptionComponent {
-    static template = "website.NavTabsImagesStyleOption";
-    static selector = ".s_tabs_images";
-    static applyTo = ".s_tabs_main";
-}
-
-class NavTabsStyleOptionPlugin extends Plugin {
+export class NavTabsStyleOptionPlugin extends Plugin {
     static id = "navTabsOptionStyle";
     static shared = ["isNavItem", "getActiveOverlayButtons", "moveNavItem"];
     /** @type {import("plugins").WebsiteResources} */
     resources = {
-        builder_options: [
-            withSequence(SNIPPET_SPECIFIC_END, NavTabsStyleOption),
-            withSequence(SNIPPET_SPECIFIC_END, NavTabsImagesStyleOption),
-        ],
         builder_actions: {
             SetStyleAction,
             SetDirectionAction,
@@ -43,9 +25,13 @@ class NavTabsStyleOptionPlugin extends Plugin {
         get_overlay_buttons: withSequence(0, {
             getButtons: this.getActiveOverlayButtons.bind(this),
         }),
-        is_unremovable_selector: ".nav-item",
-        unsplittable_node_predicates: this.isUnsplittable,
-        dropzone_selector: {
+        is_unremovable_selectors: ".nav-item",
+        is_node_splittable_predicates: (node) => {
+            if (this.isUnsplittable(node)) {
+                return false;
+            }
+        },
+        dropzone_selectors: {
             selector: ".s_tabs, .s_tabs_images",
             excludeAncestor: ".s_table_of_content, .s_tabs, .s_tabs_images",
         },
@@ -278,3 +264,4 @@ class SetDirectionAction extends BaseNavtabsStyleOption {
 }
 
 registry.category("website-plugins").add(NavTabsStyleOptionPlugin.id, NavTabsStyleOptionPlugin);
+registry.category("translation-plugins").add(NavTabsTranslationPlugin.id, NavTabsTranslationPlugin);

@@ -92,7 +92,6 @@ class TestPostInternals(TestForumCommon):
         questions_post = Post.create({
             'name': 'My First Post',
             'forum_id': forum_questions.id,
-            'parent_id': self.post.id,
         })
         _answer = Post.create({
             'name': 'This is an answer',
@@ -100,6 +99,11 @@ class TestPostInternals(TestForumCommon):
             'parent_id': questions_post.id,
         })
         self.assertTrue(questions_post.uid_has_answered)
+
+        # Can add in favorite even if not enough karma to edit
+        self.user_employee.karma = 1
+        questions_post.with_user(self.user_employee).user_favourite = True
+        self.assertEqual(self.user_employee.karma, 1)
 
 
 @tagged('forum_internals')

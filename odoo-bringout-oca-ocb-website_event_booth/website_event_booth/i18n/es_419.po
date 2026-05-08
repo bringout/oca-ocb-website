@@ -3,14 +3,13 @@
 # * website_event_booth
 #
 # "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
-# "Patricia Gutiérrez (pagc)" <pagc@odoo.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-02-27 18:38+0000\n"
-"PO-Revision-Date: 2026-04-24 07:48+0000\n"
-"Last-Translator: \"Patricia Gutiérrez (pagc)\" <pagc@odoo.com>\n"
+"PO-Revision-Date: 2025-09-17 06:32+0000\n"
+"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@odoo.com>\n"
 "Language-Team: Spanish (Latin America) <https://translate.odoo.com/projects/"
 "odoo-19/website_event_booth/es_419/>\n"
 "Language: es_419\n"
@@ -18,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.17\n"
+"X-Generator: Weblate 5.12.2\n"
 
 #. module: website_event_booth
 #: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_registration_details
@@ -202,7 +201,7 @@ msgstr "Plantilla de evento"
 #. module: website_event_booth
 #: model:ir.model.fields,field_description:website_event_booth.field_event_event__exhibition_map
 msgid "Exhibition Map"
-msgstr "Mapa del evento"
+msgstr "Mapa de exposición"
 
 #. module: website_event_booth
 #: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_registration
@@ -226,7 +225,7 @@ msgstr "ID"
 #. odoo-javascript
 #: code:addons/website_event_booth/static/src/interactions/booth_registration.js:0
 msgid "It looks like your email is already in our system."
-msgstr "Parece que tu correo ya está en el sistema."
+msgstr ""
 
 #. module: website_event_booth
 #: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_layout
@@ -251,7 +250,7 @@ msgstr "Teléfono"
 #. module: website_event_booth
 #: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_registration_details
 msgid "Please Sign In or Create an Account."
-msgstr "Inicia sesión o crea una cuenta."
+msgstr ""
 
 #. module: website_event_booth
 #. odoo-javascript
@@ -290,9 +289,3 @@ msgstr "Menú de eventos del sitio web"
 #: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_registration
 msgid "if you have any question."
 msgstr "si tiene alguna pregunta."
-
-#~ msgid "It looks like your email is linked to an existing account."
-#~ msgstr "Parece que su correo electrónico ya está vinculado a una cuenta."
-
-#~ msgid "Please Sign In."
-#~ msgstr "Inicie sesión."

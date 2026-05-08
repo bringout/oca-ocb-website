@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-25 18:37+0000\n"
+"POT-Creation-Date: 2025-12-16 18:37+0000\n"
 "PO-Revision-Date: 2025-10-08 18:39+0000\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -15,121 +15,103 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
+#: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_2
 msgid "(The above section was adapted from Stackoverflow’s FAQ.)"
-msgstr "(Gornji odjeljak prilagođen je iz FAQ-a Stackoverflow-a.)"
+msgstr ""
 
 #. module: website_slides_forum
 #: model_terms:forum.forum,welcome_message:website_slides_forum.forum_forum_demo_channel_0
+#: model_terms:forum.forum,welcome_message:website_slides_forum.forum_forum_demo_channel_2
 msgid ""
-"<a class=\"btn btn-primary forum_register_url o_translate_inline\" "
-"href=\"/web/login\">Sign up</a>"
+"<a class=\"btn btn-primary forum_register_url o_translate_inline\" href=\"/"
+"web/login\">Sign up</a>"
 msgstr ""
-"<a class=\"btn btn-primary forum_register_url o_translate_inline\" "
-"href=\"/web/login\">Registracija</a>"
 
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
+#: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_2
 msgid ""
 "<b>Answers should not add or expand questions</b>. Instead either edit the "
 "question or add a question comment."
 msgstr ""
-"<b>Odgovori ne trebaju dodavati ili proširivati pitanja</b>. Umjesto toga "
-"uredite pitanje ili dodajte komentar na pitanje."
 
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
+#: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_2
 msgid ""
 "<b>Answers should not add or expand questions</b>. Instead, either edit the "
 "question or add a comment."
 msgstr ""
-"<b>Odgovori ne trebaju dodavati ili proširivati pitanja</b>. Umjesto toga, "
-"uredite pitanje ili dodajte komentar."
 
-# taken from hr.po
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
+#: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_2
 msgid ""
 "<b>Answers should not comment other answers</b>. Instead add a comment on "
 "the other answers."
 msgstr ""
-"<b>Odgovor ne treba komentirati druge odgovore</b>. Umjesto toga dodajte "
-"komentar na druge odgovore."
 
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
+#: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_2
 msgid ""
 "<b>Answers should not start debates</b> This community Q&amp;A is not a "
 "discussion group. Please avoid holding debates in your answers as they tend "
-"to dilute the essence of questions and answers. For brief discussions please"
-" use commenting facility."
+"to dilute the essence of questions and answers. For brief discussions please "
+"use commenting facility."
 msgstr ""
-"<b>Odgovori ne trebaju pokretati debate</b> Ova zajednica Q&A nije "
-"diskusijska grupa. Molimo izbjegavajte vođenje debata u vašim odgovorima jer"
-" imaju tendenciju razrjeđivanja suštine pitanja i odgovora. Za kratke "
-"rasprave molimo koristite funkciju komentiranja."
 
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
+#: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_2
 msgid ""
 "<b>Answers shouldn't just point to other Questions</b>. Instead add a "
 "question comment indication \"Possible duplicate of...\". However, it's ok "
-"to include links to other questions or answers providing relevant additional"
-" information."
+"to include links to other questions or answers providing relevant additional "
+"information."
 msgstr ""
-"<b>Odgovori ne trebaju samo usmjeriti na druga pitanja</b>. Umjesto toga "
-"dodajte komentar na pitanje s oznakom \"Mogući duplikat od...\". Međutim, u "
-"redu je uključiti linkove na druga pitanja ili odgovore koji pružaju "
-"relevantne dodatne informacije."
 
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
+#: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_2
 msgid ""
-"<b>Answers shouldn't just point to other questions</b>.Instead add a comment"
-" indicating <i>\"Possible duplicate of...\"</i>. However, it's fine to "
+"<b>Answers shouldn't just point to other questions</b>.Instead add a comment "
+"indicating <i>\"Possible duplicate of...\"</i>. However, it's fine to "
 "include links to other questions or answers providing relevant additional "
 "information."
 msgstr ""
-"<b>Odgovori ne trebaju samo usmjeriti na druga pitanja</b>. Umjesto toga "
-"dodajte komentar s oznakom <i>\"Mogući duplikat od...\"</i>. Međutim, u redu"
-" je uključiti linkove na druga pitanja ili odgovore koji pružaju relevantne "
-"dodatne informacije."
 
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
+#: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_2
 msgid ""
-"<b>Answers shouldn't just provide a link a solution</b>. Instead provide the"
-" solution description text in your answer, even if it's just a copy/paste. "
+"<b>Answers shouldn't just provide a link a solution</b>. Instead provide the "
+"solution description text in your answer, even if it's just a copy/paste. "
 "Links are welcome, but should be complementary to answer, referring sources "
 "or additional reading."
 msgstr ""
-"<b>Odgovori ne trebaju samo pružiti link na rješenje</b>. Umjesto toga "
-"unesite tekst opisa rješenja u svoj odgovor, čak i ako je samo "
-"kopiranje/lijepljenje. Linkovi su dobrodošli, ali trebaju biti dopunski "
-"odgovoru, pozivajući se na izvore ili dodatno čitanje."
 
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
+#: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_2
 msgid ""
 "<b>Before you ask - please make sure to search for a similar question.</b> "
-"You can search questions by their title or tags. It’s also OK to answer your"
-" own question."
+"You can search questions by their title or tags. It’s also OK to answer your "
+"own question."
 msgstr ""
-"<b>Prije postavljanja pitanja - molimo provjerite da nema sličnog "
-"pitanja.</b> Možete pretraživati pitanja po naslovu ili oznakama. Također je"
-" u redu odgovoriti na vlastito pitanje."
 
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
+#: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_2
 msgid ""
-"<b>Please avoid asking questions that are too subjective and "
-"argumentative</b> or not relevant to this community."
+"<b>Please avoid asking questions that are too subjective and argumentative</"
+"b> or not relevant to this community."
 msgstr ""
-"<b>Molimo izbjegavajte postavljanje pitanja koja su previše subjektivna i "
-"sporena</b> ili nisu relevantna za ovu zajednicu."
 
 #. module: website_slides_forum
 #: model_terms:ir.ui.view,arch_db:website_slides_forum.slide_fullscreen
@@ -140,98 +122,94 @@ msgstr ""
 
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
-msgid "<span class=\"flex-grow-1\">What kind of questions can I ask here?</span>"
-msgstr "<span class=\"flex-grow-1\">Kakva pitanja mogu postaviti ovdje?</span>"
+#: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_2
+msgid ""
+"<span class=\"flex-grow-1\">What kind of questions can I ask here?</span>"
+msgstr ""
 
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
+#: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_2
 msgid "<span class=\"flex-grow-1\">What should I avoid in my answers?</span>"
 msgstr ""
-"<span class=\"flex-grow-1\">Šta trebam izbjegavati u svojim "
-"odgovorima?</span>"
 
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
+#: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_2
 msgid "<span class=\"flex-grow-1\">What should I avoid in my questions?</span>"
 msgstr ""
-"<span class=\"flex-grow-1\">Šta trebam izbjegavati u svojim "
-"pitanjima?</span>"
 
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
+#: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_2
 msgid ""
-"<span class=\"flex-grow-1\">Why can other people edit my "
-"questions/answers?</span>"
+"<span class=\"flex-grow-1\">Why can other people edit my questions/answers?</"
+"span>"
 msgstr ""
-"<span class=\"flex-grow-1\">Zašto drugi ljudi mogu uređivati moja "
-"pitanja/odgovore?</span>"
-
-#. module: website_slides_forum
-#: model_terms:ir.ui.view,arch_db:website_slides_forum.website_slides_forum_breadcrumb
-msgid "<strong>Forum</strong>"
-msgstr "<strong>Forum</strong>"
 
 #. module: website_slides_forum
 #: model:forum.forum,name:website_slides_forum.forum_forum_demo_channel_0
 msgid "Basics of Gardening"
-msgstr "postavljanje pitanja"
+msgstr ""
 
 #. module: website_slides_forum
 #: model_terms:ir.ui.view,arch_db:website_slides_forum.forum_all_all_entries
 msgid "Check out our courses <i class=\"fa fa-long-arrow-right\"/>"
-msgstr "Pogledajte naše kurseve <i class=\"fa fa-long-arrow-right\"/>"
+msgstr ""
 
 #. module: website_slides_forum
 #: model_terms:ir.actions.act_window,help:website_slides_forum.forum_post_action_channel
 msgid "Come back later to monitor and moderate what is posted on your Forums."
 msgstr ""
-"Vratite se kasnije da pratite i moderirate što se objavljuje na vašim "
-"forumima."
 
-# taken from hr.po
 #. module: website_slides_forum
 #: model:ir.model,name:website_slides_forum.model_slide_channel
+#: model:ir.model.fields,field_description:website_slides_forum.field_forum_forum__slide_channel_id
+#: model_terms:ir.ui.view,arch_db:website_slides_forum.forum_all_all_entries
 msgid "Course"
-msgstr "Tečaj"
+msgstr ""
 
 #. module: website_slides_forum
 #: model:ir.model.fields,field_description:website_slides_forum.field_slide_channel__forum_id
 msgid "Course Forum"
-msgstr "karma bodovi"
+msgstr ""
 
-# taken from hr.po
 #. module: website_slides_forum
 #: model:ir.model.fields,field_description:website_slides_forum.field_forum_forum__slide_channel_ids
 msgid "Courses"
-msgstr "Tečajevi"
+msgstr ""
 
 #. module: website_slides_forum
 #: model_terms:ir.actions.act_window,help:website_slides_forum.forum_forum_action_channel
 msgid "Create a Forum"
-msgstr "Stvori forum"
+msgstr ""
 
 #. module: website_slides_forum
 #: model_terms:forum.forum,welcome_message:website_slides_forum.forum_forum_demo_channel_0
+#: model_terms:forum.forum,welcome_message:website_slides_forum.forum_forum_demo_channel_2
 msgid "Dismiss"
-msgstr "Odbaci"
+msgstr ""
 
 #. module: website_slides_forum
 #: model_terms:forum.forum,welcome_message:website_slides_forum.forum_forum_demo_channel_0
+#: model_terms:forum.forum,welcome_message:website_slides_forum.forum_forum_demo_channel_2
 msgid "Dismiss message"
-msgstr "Odbaci poruku"
+msgstr ""
 
 #. module: website_slides_forum
 #: model:ir.model.fields,field_description:website_slides_forum.field_forum_forum__display_name
+#: model:ir.model.fields,field_description:website_slides_forum.field_slide_channel__display_name
 msgid "Display Name"
-msgstr "Naziv za prikaz"
+msgstr ""
 
 #. module: website_slides_forum
 #: model:ir.model.fields,help:website_slides_forum.field_forum_forum__slide_channel_ids
 msgid "Edit the course linked to this forum on the course form."
-msgstr "potrebna karma"
+msgstr ""
 
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
+#: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_2
 msgid ""
 "For example, if you ask an interesting question or give a helpful answer, "
 "your input will be upvoted. On the other hand if the answer is misleading - "
@@ -240,365 +218,266 @@ msgid ""
 "accumulated for a question or answer per day. The table given at the end "
 "explains reputation point requirements for each type of moderation task."
 msgstr ""
-"Na primjer, ako postavite zanimljivo pitanje ili date koristan odgovor, vaš "
-"unos će biti pozitivno ocijenjen. S druge strane, ako je odgovor obmanjujući"
-" - bit će negativno ocijenjen. Svaki glas u korist generirat će 10 bodova, "
-"svaki glas protiv oduzet će 2 boda. Postoji ograničenje od 200 bodova koje "
-"se mogu akumulirati za pitanje ili odgovor dnevno. Tablica na kraju "
-"objašnjava uvjete reputacijskih bodova za svaki tip moderacijske zadaće."
 
 #. module: website_slides_forum
 #: model:ir.model,name:website_slides_forum.model_forum_forum
+#: model:ir.ui.menu,name:website_slides_forum.website_slides_menu_forum
+#: model_terms:ir.ui.view,arch_db:website_slides_forum.course_main
+#: model_terms:ir.ui.view,arch_db:website_slides_forum.slide_fullscreen
+#: model_terms:ir.ui.view,arch_db:website_slides_forum.website_slides_forum_breadcrumb
+#: model_terms:ir.ui.view,arch_db:website_slides_forum.website_slides_forum_channel_inherit_view_form
 msgid "Forum"
 msgstr ""
 
-# taken from hr.po
 #. module: website_slides_forum
 #: model:ir.actions.act_window,name:website_slides_forum.forum_post_action_channel
+#: model_terms:ir.ui.view,arch_db:website_slides_forum.website_slides_forum_channel_inherit_view_form
 msgid "Forum Posts"
-msgstr "Objave foruma"
+msgstr ""
 
 #. module: website_slides_forum
 #: model:ir.model.fields,help:website_slides_forum.field_forum_forum__visibility
 msgid ""
 "Forum linked to a Course, the visibility is the one applied on the course."
-msgstr "aktivnost"
+msgstr ""
 
-# taken from hr.po
 #. module: website_slides_forum
 #: model:ir.actions.act_window,name:website_slides_forum.forum_forum_action_channel
+#: model:ir.ui.menu,name:website_slides_forum.website_slides_menu_forum_forum
 msgid "Forums"
-msgstr "Forumi"
+msgstr ""
 
 #. module: website_slides_forum
 #: model_terms:ir.actions.act_window,help:website_slides_forum.forum_forum_action_channel
 msgid "Forums allow your attendees to ask questions to your community."
 msgstr ""
-"Forumi omogućavaju vašim polaznicima postavljanje pitanja vašoj zajednici."
 
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
+#: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_2
 msgid "Here a table with the privileges and the karma level"
-msgstr "Ovdje je tablica s privilegijama i razinom karme"
+msgstr ""
 
 #. module: website_slides_forum
 #: model:ir.model.fields,field_description:website_slides_forum.field_forum_forum__id
+#: model:ir.model.fields,field_description:website_slides_forum.field_slide_channel__id
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
+#: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_2
 msgid "If this approach is not for you, please respect the community."
-msgstr "Ako vam ovaj pristup ne odgovara, molimo poštujte zajednicu."
+msgstr ""
 
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
+#: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_2
 msgid ""
 "If you fit in one of these example or if your motivation for asking the "
-"question is “I would like to participate in a discussion about ______”, then"
-" you should not be asking here but on our mailing lists. However, if your "
+"question is “I would like to participate in a discussion about ______”, then "
+"you should not be asking here but on our mailing lists. However, if your "
 "motivation is “I would like others to explain ______ to me”, then you are "
 "probably OK."
 msgstr ""
-"Ako spadate u jedan od ovih primjera ili ako je vaša motivacija za "
-"postavljanje pitanja \\\"Želio bih sudjelovati u raspravi o ______\\\", onda"
-" ne biste trebali pitati ovdje već na našim mailing listama. Međutim, ako je"
-" vaša motivacija \\\"Želio bih da mi drugi objasne ______ \\\", tada ste "
-"vjerojatno na dobrom putu."
 
 #. module: website_slides_forum
 #: model:ir.model.fields,field_description:website_slides_forum.field_forum_forum__image_1920
 msgid "Image"
-msgstr "Slika"
+msgstr ""
 
 #. module: website_slides_forum
 #: model_terms:ir.ui.view,arch_db:website_slides_forum.res_config_settings_view_form
 msgid "Manage Forums"
-msgstr "Upravljaj forumima"
+msgstr ""
 
-# taken from hr.po
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
+#: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_2
 msgid "More over:"
-msgstr "Još više:"
+msgstr ""
 
 #. module: website_slides_forum
 #: model_terms:ir.actions.act_window,help:website_slides_forum.forum_post_action_channel
 msgid "No Forum Post yet!"
-msgstr "Još nema objava na forumu!"
+msgstr ""
 
 #. module: website_slides_forum
 #: model:ir.model.fields,field_description:website_slides_forum.field_slide_channel__forum_total_posts
 msgid "Number of active forum posts"
-msgstr "Broj aktivnih objava na forumu"
+msgstr ""
 
 #. module: website_slides_forum
 #: model:ir.model.constraint,message:website_slides_forum.constraint_slide_channel_forum_uniq
 msgid "Only one course per forum!"
-msgstr "uređivanje bilo kojih objava"
+msgstr ""
 
-# taken from hr.po
 #. module: website_slides_forum
 #: model:ir.ui.menu,name:website_slides_forum.website_slides_menu_forum_post
 msgid "Posts"
-msgstr "Objave"
+msgstr ""
 
 #. module: website_slides_forum
 #. odoo-javascript
 #: code:addons/website_slides_forum/static/src/website_builder/slides_forum_page_option.xml:0
 msgid "Separate Courses"
-msgstr "Zasebni kursevi"
+msgstr ""
 
 #. module: website_slides_forum
 #: model_terms:forum.forum,welcome_message:website_slides_forum.forum_forum_demo_channel_0
+#: model_terms:forum.forum,welcome_message:website_slides_forum.forum_forum_demo_channel_2
 msgid ""
 "Share and discuss the best content and new marketing ideas, build your "
 "professional profile and become a better marketer together."
 msgstr ""
-"Dijelite i raspravljajte o najboljem sadržaju i novim marketinškim idejama, "
-"izgradite svoj profesionalni profil i postanite bolji marketinški stručnjak "
-"zajedno."
 
 #. module: website_slides_forum
 #: model:ir.model.fields,field_description:website_slides_forum.field_forum_forum__visibility
 msgid "Show Course To"
-msgstr "Prikaži kurs za"
+msgstr ""
 
 #. module: website_slides_forum
 #. odoo-javascript
 #: code:addons/website_slides_forum/static/src/website_builder/slides_forum_page_option_plugin.js:0
 msgid "Slides Forum Snippet Options"
-msgstr "Opcije Slides Forum isječka"
+msgstr ""
 
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
+#: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_2
 msgid ""
 "The goal of this site is create a relevant knowledge base that would answer "
 "questions related to Odoo."
 msgstr ""
-"Cilj ove stranice je stvoriti relevantnu bazu znanja koja će odgovoriti na "
-"pitanja vezana za Odoo."
 
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
+#: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_2
 msgid ""
-"Therefore questions and answers can be edited like wiki pages by experienced"
-" users of this site in order to improve the overall quality of the knowledge"
-" base content. Such privileges are granted based on user karma level: you "
+"Therefore questions and answers can be edited like wiki pages by experienced "
+"users of this site in order to improve the overall quality of the knowledge "
+"base content. Such privileges are granted based on user karma level: you "
 "will be able to do the same once your karma gets high enough."
 msgstr ""
-"Stoga pitanja i odgovori mogu biti uređivani kao wiki stranice od strane "
-"iskusnih korisnika ove stranice radi poboljšanja ukupne kvalitete sadržaja "
-"baze znanja. Takve privilegije se dodjeljuju na osnovu korisničke razine "
-"karme: moći ćete činiti isto kad vaša karma postane dovoljno visoka."
 
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
+#: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_2
 msgid ""
 "This community is for professional and enthusiast users, partners and "
 "programmers. You can ask questions about:"
 msgstr ""
-"Ova zajednica je za profesionalne i entuzijastičke korisnike, partnere i "
-"programere. Možete postaviti pitanja o:"
 
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
+#: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_2
 msgid ""
 "To prevent your question from being flagged and possibly removed, avoid "
 "asking subjective questions where …"
 msgstr ""
-"Da bi se spriječilo označavanje i moguće uklanjanje vašeg pitanja, "
-"izbjegavajte postavljanje subjektivnih pitanja gdje ..."
 
 #. module: website_slides_forum
 #: model:forum.forum,name:website_slides_forum.forum_forum_demo_channel_2
 msgid "Trees, Wood and Gardens"
-msgstr "odgovaranje na pitanja"
+msgstr ""
 
-# taken from hr.po
 #. module: website_slides_forum
 #: model_terms:forum.forum,welcome_message:website_slides_forum.forum_forum_demo_channel_0
+#: model_terms:forum.forum,welcome_message:website_slides_forum.forum_forum_demo_channel_2
 msgid "Welcome!"
-msgstr "Dobrodošli!"
+msgstr ""
 
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
+#: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_2
 msgid ""
 "When a question or answer is upvoted, the user who posted them will gain "
 "some points, which are called \"karma points\". These points serve as a "
 "rough measure of the community trust to him/her. Various moderation tasks "
 "are gradually assigned to the users based on those points."
 msgstr ""
-"Kada se pitanje ili odgovor pozitivno ocijeni, korisnik koji ih je objavio "
-"dobit će neke bodove, koji se nazivaju \"karma bodovi\". Ti bodovi služe kao"
-" gruba mjera povjerenja zajednice prema njemu/njoj. Različiti moderacijski "
-"zadaci se postupno dodjeljuju korisnicima na osnovu tih bodova."
 
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
+#: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_2
 msgid ""
-"You should only ask practical, answerable questions based on actual problems"
-" that you face. Chatty, open-ended questions diminish the usefulness of this"
-" site and push other questions off the front page."
+"You should only ask practical, answerable questions based on actual problems "
+"that you face. Chatty, open-ended questions diminish the usefulness of this "
+"site and push other questions off the front page."
 msgstr ""
-"Trebate postaviti samo praktična, odgovoriva pitanja temeljena na stvarnim "
-"problemima s kojima se suočavate. Ćaskava, otvorena pitanja smanjuju "
-"korisnost ove stranice i guraju druga pitanja s prve stranice."
 
-# taken from hr.po
 #. module: website_slides_forum
 #: model_terms:ir.ui.view,arch_db:website_slides_forum.forum_forum_view_form
 msgid "eLearning"
-msgstr "eUčenje"
+msgstr ""
 
 #. module: website_slides_forum
 #: model_terms:ir.ui.view,arch_db:website_slides_forum.forum_post_view_graph_slides
 msgid "eLearning Forum Posts"
-msgstr "Objave na forumu e-učenja"
+msgstr ""
 
-# taken from hr.po
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
+#: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_2
 msgid "every answer is equally valid: “What’s your favorite ______?”"
-msgstr "svaki odgovor je jednako važan: \"Koja je vaša omiljena ______?\""
+msgstr ""
 
-# taken from hr.po
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
+#: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_2
 msgid "how to configure or customize Odoo to specific business needs,"
 msgstr ""
-"kako konfigurirati ili prilagoditi Odoo specifičnim poslovnim potrebama,"
 
-# taken from hr.po
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
+#: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_2
 msgid "how to develop modules for your own need,"
-msgstr "kako razviti module za vlastite potrebe,"
+msgstr ""
 
-# taken from hr.po
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
+#: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_2
 msgid "how to install Odoo on a specific infrastructure,"
-msgstr "kako instalirati Odoo na određenu infrastrukturu,"
+msgstr ""
 
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
+#: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_2
 msgid "it is a rant disguised as a question: “______ sucks, am I right?”"
-msgstr "Pitanje je pozitivno ocijenjeno"
+msgstr ""
 
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
+#: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_2
 msgid "specific questions about Odoo service offers, etc."
-msgstr "Odgovor je pozitivno ocijenjen"
+msgstr ""
 
-# taken from hr.po
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
+#: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_2
 msgid ""
 "there is no actual problem to be solved: “I’m curious if other people feel "
 "like I do.”"
 msgstr ""
-"ne postoji stvarni problem kojeg treba riješiti: \"Znatiželja sam da li "
-"drugi ljudi osjećaju što i ja.\""
 
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
+#: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_2
 msgid ""
 "we are being asked an open-ended, hypothetical question: “What if ______ "
 "happened?”"
-msgstr "Odgovor je negativno ocijenjen"
+msgstr ""
 
-# taken from hr.po
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
+#: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_2
 msgid "what's the best way to use Odoo for a specific business need,"
-msgstr "koji je najbolji način korištenja Odooa za određenu poslovnu potrebu,"
+msgstr ""
 
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
+#: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_2
 msgid ""
 "your answer is provided along with the question, and you expect more "
 "answers: “I use ______ for ______, what do you use?”"
-msgstr "Odgovor koji je postavio korisnik je pozitivno ocijenjen"
-
-#. module: website_slides_forum
-#: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
-msgid "<b>What kinds of questions can I ask here?</b>"
-msgstr "<b>Kakva pitanja mogu postaviti ovdje?</b>"
-
-#. module: website_slides_forum
-#: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
-msgid "<b>What should I avoid in my answers?</b>"
-msgstr "<b>Što trebam izbjegavati u svojim odgovorima?</b>"
-
-#. module: website_slides_forum
-#: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
-msgid "<b>What should I avoid in my questions?</b>"
-msgstr "<b>Što trebam izbjegavati u svojim pitanjima?</b>"
-
-#. module: website_slides_forum
-#: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
-msgid "<b>Why can other people edit my questions/answers?</b>"
-msgstr "<b>Zašto drugi ljudi mogu uređivati moja pitanja/odgovore?</b>"
-
-#. module: website_slides_forum
-#: model_terms:ir.ui.view,arch_db:website_slides_forum.website_slides_forum_header
-msgid "<i class=\"fa fa-home\"/> Course"
-msgstr "<i class=\"fa fa-home\"/> Kurs"
-
-#. module: website_slides_forum
-#: model_terms:ir.ui.view,arch_db:website_slides_forum.website_slides_forum_index
-msgid "Check our Courses <i class=\"fa fa-chevron-right\"/>"
-msgstr "Provjerite naše kurseve <i class=\"fa fa-chevron-right\"/>"
-
-#. module: website_slides_forum
-#: model_terms:ir.ui.view,arch_db:website_slides_forum.website_slides_forum_index
-msgid "Courses Discussions"
-msgstr "Rasprave o kursevima"
-
-# taken from hr.po
-#. module: website_slides_forum
-#: model_terms:ir.ui.view,arch_db:website_slides_forum.website_slides_forum_index
-msgid "Description"
-msgstr "Opis"
-
-#. module: website_slides_forum
-#: model_terms:ir.ui.view,arch_db:website_slides_forum.snippet_options
-msgid "Forum Page"
-msgstr "Stranica foruma"
-
-#. module: website_slides_forum
-#: model_terms:forum.forum,welcome_message:website_slides_forum.forum_forum_demo_channel_0
-msgid "Hide Intro"
-msgstr "Sakrij uvod"
-
-# taken from hr.po
-#. module: website_slides_forum
-#: model_terms:forum.forum,welcome_message:website_slides_forum.forum_forum_demo_channel_0
-msgid "Register"
-msgstr "Registracija"
-
-#. module: website_slides_forum
-#: model_terms:ir.ui.view,arch_db:website_slides_forum.website_slides_forum_header
-msgid "Reviews"
-msgstr "Recenzije"
-
-#. module: website_slides_forum
-#: model_terms:ir.ui.view,arch_db:website_slides_forum.website_slides_forum_index
-msgid "See all Courses"
-msgstr "Pogledaj sve kurseve"
-
-#. module: website_slides_forum
-#: model_terms:forum.forum,welcome_message:website_slides_forum.forum_forum_demo_channel_0
-msgid ""
-"This community is for professionals and enthusiasts of our products and services.\n"
-"                                        <br>Share and discuss the best content and new marketing ideas, build your professional profile and become a better marketer together."
 msgstr ""
-"Ova zajednica je za profesionalce i entuzijaste naših proizvoda i usluga.\n"
-"                                        <br>Dijelite i raspravljajte o najboljem sadržaju i novim marketinškim idejama, izgradite svoj profesionalni profil i postanite bolji prodavač zajedno."
-
-# taken from hr.po
-#. module: website_slides_forum
-#: model:ir.model.fields,field_description:website_slides_forum.field_forum_forum__visibility
-msgid "Visibility"
-msgstr "Vidljivost"

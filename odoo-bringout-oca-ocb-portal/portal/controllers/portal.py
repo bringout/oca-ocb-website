@@ -8,8 +8,16 @@ from werkzeug import urls
 from werkzeug.exceptions import Forbidden
 
 from odoo import SUPERUSER_ID, _, http
-from odoo.exceptions import AccessDenied, AccessError, MissingError, UserError, ValidationError
-from odoo.http import Controller, content_disposition, request, route
+from odoo.exceptions import (
+    AccessDenied,
+    AccessError,
+    MissingError,
+    UserError,
+    ValidationError,
+)
+from odoo.http import Controller, request, route
+from odoo.http.session import logout
+from odoo.http.stream import content_disposition
 from odoo.tools import clean_context, consteq, single_email_re, str2bool
 from odoo.tools.translate import LazyTranslate
 
@@ -158,9 +166,17 @@ class CustomerPortal(Controller):
             if fallback_sales_user and not fallback_sales_user._is_public():
                 sales_user_sudo = fallback_sales_user
 
+        portal_entries = dict(
+            request.env['portal.entry']._read_group(
+                [('show_in_portal', '=', True)],
+                groupby=["category"],
+                aggregates=['id:recordset']
+            )
+        )
         return {
             'sales_user': sales_user_sudo,
             'page_name': 'home',
+            'portal_entries': portal_entries,
         }
 
     def _prepare_home_portal_values(self, counters):
@@ -492,6 +508,19 @@ class CustomerPortal(Controller):
 
         return json.dumps(feedback_dict)
 
+    @http.route('/my/profile/save', type='jsonrpc', auth='user', methods=['POST'], website=True)
+    def save_edited_profile(self, user_id, image_1920):
+        """ Save the edited profile image.
+
+        :param int user_id: The identifier of the user whose profile is being edited.
+        :param str image_1920: The new profile image in base64 format.
+        :return: Boolean indicating whether the write operation was successful.
+        :rtype: bool
+        """
+        if (user_id != request.env.user.id):
+            raise UserError(_("You cannot edit another user's profile."))
+        return request.env.user.write({"image_1920": image_1920})
+
     def _create_or_update_address(
         self,
         partner_sudo,
@@ -544,7 +573,6 @@ class CustomerPortal(Controller):
             )
             create_context = clean_context(request.env.context)
             create_context.update({
-                'tracking_disable': True,
                 'no_vat_validation': True,  # Already verified in _validate_address_values
             })
             partner_sudo = request.env['res.partner'].sudo().with_context(
@@ -563,14 +591,14 @@ class CustomerPortal(Controller):
                 partner_sudo._onchange_phone_validation()
 
         if (
-            'company_name' in address_values
+            'parent_name' in address_values
             and partner_sudo.commercial_partner_id != partner_sudo
             and partner_sudo.commercial_partner_id.is_company
         ):
             # If partner is an individual, update existing company's name or remove one
-            company_name = address_values['company_name']
+            company_name = address_values['parent_name']
             parent_company = partner_sudo.commercial_partner_id
-            partner_sudo.company_name = False
+            partner_sudo.parent_name = False
 
             if company_name and parent_company and parent_company.name != company_name:
                 parent_company.name = company_name
@@ -599,6 +627,13 @@ class CustomerPortal(Controller):
                 field = partner_fields[key]
                 if field.type == 'many2one' and isinstance(value, str) and value.isdigit():
                     address_values[key] = field.convert_to_cache(int(value), ResPartner)
+                elif (
+                    field.type == 'selection'
+                    and value == ''  # noqa: PLC1901
+                    and '' not in field.get_values(request.env)
+                ):
+                    # An empty string from an HTML select means "no selection"; map it to False.
+                    address_values[key] = False
                 else:
                     # Always keep field values, even if falsy, as it might be for resetting a field.
                     address_values[key] = field.convert_to_cache(value, ResPartner)
@@ -712,7 +747,7 @@ class CustomerPortal(Controller):
                 # Company name shouldn't be updated anywhere but the main and company address, even
                 # if it's not in the fields returned by _commercial_fields.
                 if partner_sudo != request.env['res.partner']._get_current_partner(**kwargs):
-                    address_values.pop('company_name', None)
+                    address_values.pop('parent_name', None)
             # Prevent changing the VAT number on a commercial partner if documents have been issued.
             elif (
                 'vat' in address_values
@@ -872,7 +907,7 @@ class CustomerPortal(Controller):
     def security(self, **post):
         values = self._prepare_portal_layout_values()
         values['get_error'] = get_error
-        values['allow_api_keys'] = bool(request.env['ir.config_parameter'].sudo().get_param('portal.allow_api_keys'))
+        values['allow_api_keys'] = request.env['ir.config_parameter'].sudo().get_bool('portal.allow_api_keys')
         values['open_deactivate_modal'] = False
 
         if request.httprequest.method == 'POST':
@@ -924,7 +959,7 @@ class CustomerPortal(Controller):
             try:
                 request.env['res.users']._check_credentials(credential, {'interactive': True})
                 request.env.user.sudo()._deactivate_portal_user(**post)
-                request.session.logout()
+                logout(request.session)
                 return request.redirect('/web/login?message=%s' % urls.url_quote(_('Account deleted!')))
             except AccessDenied:
                 values['errors'] = {'deactivate': 'password'}

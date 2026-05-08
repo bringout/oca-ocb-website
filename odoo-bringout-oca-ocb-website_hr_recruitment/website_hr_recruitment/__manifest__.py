@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 {
@@ -21,7 +20,6 @@
     'demo': [
         'data/hr_job_demo.xml',
     ],
-    'installable': True,
     'application': True,
     'auto_install': ['hr_recruitment', 'website_mail'],
     'assets': {
@@ -32,7 +30,6 @@
         'web.assets_backend': [
             'website_hr_recruitment/static/src/js/widgets/copy_link_menuitem.js',
             'website_hr_recruitment/static/src/js/widgets/copy_link_menuitem.xml',
-            'website_hr_recruitment/static/src/fields/**/*',
         ],
         'website.website_builder_assets': [
             'website_hr_recruitment/static/src/js/website_hr_recruitment_editor.js',

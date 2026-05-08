@@ -8,17 +8,13 @@
         }
 
         .card {
-            &, * {
+            &, .o_unpublished_badge, & > a {
                 transition: all .1s;
             }
 
             &:hover {
                 box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.1), 0 2px 2px 0 rgba(0, 0, 0, 0.05);
             }
-        }
-
-        .o_jobs_unpublished {
-            opacity: .6;
         }
     }
 

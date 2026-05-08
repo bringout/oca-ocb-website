@@ -2,11 +2,7 @@ import { registry } from "@web/core/registry";
 import { Plugin } from "@html_editor/plugin";
 import { selectElements } from "@html_editor/utils/dom_traversal";
 import { pyToJsLocale } from "@web/core/l10n/utils";
-import { VisibilityOption } from "./visibility_option";
-import { withSequence } from "@html_editor/utils/resource";
-import { CONDITIONAL_VISIBILITY, DEVICE_VISIBILITY } from "@website/builder/option_sequence";
 import { BuilderAction } from "@html_builder/core/builder_action";
-import { BaseOptionComponent } from "@html_builder/core/utils";
 
 /**
  * @typedef {{
@@ -15,30 +11,21 @@ import { BaseOptionComponent } from "@html_builder/core/utils";
  *      callWith: "code" | "name" | "value" | "id";
  * }[]} visibility_selector_parameters
  */
+
+/**
+ * @typedef {((editingElement: HTMLElement) => void)[]} on_visibility_toggled_handlers
+ */
 export const DEVICE_VISIBILITY_OPTION_SELECTOR = "section .row > div";
-
-export class DeviceVisibilityOption extends BaseOptionComponent {
-    static template = "website.DeviceVisibilityOption";
-    static dependencies = ["visibility"];
-    static selector = DEVICE_VISIBILITY_OPTION_SELECTOR;
-    static exclude =
-        ".s_col_no_resize.row > div, .s_masonry_block .s_col_no_resize, .s_website_form_submit";
-}
-
-class VisibilityOptionPlugin extends Plugin {
+export class VisibilityOptionPlugin extends Plugin {
     static id = "visibilityOption";
     static dependencies = ["visibility", "websiteSession"];
     /** @type {import("plugins").WebsiteResources} */
     resources = {
-        builder_options: [
-            withSequence(CONDITIONAL_VISIBILITY, VisibilityOption),
-            withSequence(DEVICE_VISIBILITY, DeviceVisibilityOption),
-        ],
         builder_actions: {
             ForceVisibleAction,
             ToggleDeviceVisibilityAction,
         },
-        normalize_handlers: this.normalizeCSSSelectors.bind(this),
+        normalize_processors: this.normalizeCSSSelectors.bind(this),
         visibility_selector_parameters: [
             {
                 saveAttribute: "visibilityValueCountry",
@@ -71,6 +58,9 @@ class VisibilityOptionPlugin extends Plugin {
                 callWith: "value",
             },
         ],
+        builder_options_render_context: {
+            deviceVisibilityOptionSelector: DEVICE_VISIBILITY_OPTION_SELECTOR,
+        },
     };
 
     setup() {
@@ -78,7 +68,7 @@ class VisibilityOptionPlugin extends Plugin {
     }
 
     normalizeCSSSelectors(rootEl) {
-        for (const el of selectElements(rootEl, VisibilityOption.selector)) {
+        for (const el of selectElements(rootEl, "section, .s_hr")) {
             this.updateCSSSelectors(el);
         }
     }
@@ -211,6 +201,7 @@ export class ToggleDeviceVisibilityAction extends BuilderAction {
                 editingElement.classList.remove("o_snippet_override_invisible");
             },
         });
+        this.trigger("on_visibility_toggled_handlers", editingElement);
     }
     clean({ editingElement }) {
         editingElement.classList.remove(
@@ -229,6 +220,7 @@ export class ToggleDeviceVisibilityAction extends BuilderAction {
             },
             revert: () => {},
         });
+        this.trigger("on_visibility_toggled_handlers", editingElement);
     }
     isApplied({ editingElement, params: { mainParam: visibilityParam } }) {
         const classList = [...editingElement.classList];

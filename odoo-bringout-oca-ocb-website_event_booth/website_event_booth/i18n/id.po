@@ -288,9 +288,3 @@ msgstr "Menu Acara Website"
 #: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_registration
 msgid "if you have any question."
 msgstr "jika Anda memiliki pertanyaan apapun."
-
-#~ msgid "It looks like your email is linked to an existing account."
-#~ msgstr "Sepertinya email Anda terhubung ke akun yang sudah tersedia."
-
-#~ msgid "Please Sign In."
-#~ msgstr "Mohon Sign In."

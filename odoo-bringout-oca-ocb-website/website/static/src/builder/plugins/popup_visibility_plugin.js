@@ -15,12 +15,13 @@ export class PopupVisibilityPlugin extends Plugin {
 
     /** @type {import("plugins").WebsiteResources} */
     resources = {
-        target_show: this.onTargetShow.bind(this),
-        target_hide: this.onTargetHide.bind(this),
-        clean_for_save_handlers: this.cleanForSave.bind(this),
-        on_restore_containers_handlers: this.hidePopupsWithoutTarget.bind(this),
-        on_reveal_target_handlers: this.hidePopupsWithoutTarget.bind(this),
-        attribute_change_processors: ({ target, attributeName, value }) => {
+        on_target_shown_handlers: this.onTargetShow.bind(this),
+        on_target_hidden_handlers: this.onTargetHide.bind(this),
+        clean_for_save_processors: this.cleanForSave.bind(this),
+        on_will_restore_containers_handlers: this.hidePopupsWithoutTarget.bind(this),
+        on_target_revealed_handlers: this.hidePopupsWithoutTarget.bind(this),
+        attribute_change_processors: (attributeChange) => {
+            const { target, attributeName, value } = attributeChange;
             // On hide/show of the popup, the `style` attribute of the modal in
             // the popup is changed. This also happens with the option
             // "Backdrop" on the popup. When reverting/re-applying steps that
@@ -31,9 +32,11 @@ export class PopupVisibilityPlugin extends Plugin {
             if (attributeName === "style" && target.matches(".s_popup > .modal")) {
                 const re = /display: .*?;/;
                 const currentDisplay = target.attributes.style?.value.match(re)?.[0] ?? "";
-                value = re.test(value) ? value.replace(re, currentDisplay) : value + currentDisplay;
+                attributeChange.value = re.test(value)
+                    ? value.replace(re, currentDisplay)
+                    : value + currentDisplay;
             }
-            return value;
+            return attributeChange;
         },
     };
 
@@ -85,7 +88,7 @@ export class PopupVisibilityPlugin extends Plugin {
         }
     }
 
-    cleanForSave({ root: rootEl }) {
+    cleanForSave(rootEl) {
         // Hide the popups manually, as we cannot rely on the `onTargetHide`
         // flow since the cleaned popup is a clone and is not in the DOM.
         for (const modalEl of rootEl.querySelectorAll(".s_popup .modal.show")) {
@@ -119,3 +122,4 @@ export class PopupVisibilityPlugin extends Plugin {
 }
 
 registry.category("website-plugins").add(PopupVisibilityPlugin.id, PopupVisibilityPlugin);
+registry.category("translation-plugins").add(PopupVisibilityPlugin.id, PopupVisibilityPlugin);

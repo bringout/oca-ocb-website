@@ -288,9 +288,3 @@ msgstr "网站活动菜单"
 #: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_registration
 msgid "if you have any question."
 msgstr "如果您有任何问题。"
-
-#~ msgid "It looks like your email is linked to an existing account."
-#~ msgstr "您的电子邮件似乎已与现有账户关联。"
-
-#~ msgid "Please Sign In."
-#~ msgstr "请登入。"

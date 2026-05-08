@@ -4,16 +4,16 @@ import { registry } from "@web/core/registry";
 import { addBackgroundGrid, setElementToMaxZindex } from "@html_builder/utils/grid_layout_utils";
 import { StyleAction } from "@html_builder/core/core_builder_action_plugin";
 
-class SpacingOptionPlugin extends Plugin {
+export class SpacingOptionPlugin extends Plugin {
     static id = "SpacingOption";
     /** @type {import("plugins").WebsiteResources} */
     resources = {
         builder_actions: {
             SetGridSpacingAction,
         },
-        savable_mutation_record_predicates: this.isMutationRecordSavable.bind(this),
+        is_mutation_record_savable_predicates: this.isMutationRecordSavable.bind(this),
         on_cloned_handlers: this.onCloned.bind(this),
-        clean_for_save_handlers: this.cleanForSave.bind(this),
+        clean_for_save_processors: this.cleanForSave.bind(this),
     };
 
     /**
@@ -32,7 +32,6 @@ class SpacingOptionPlugin extends Plugin {
                 return false;
             }
         }
-        return true;
     }
 
     removeGridPreviews(el) {
@@ -45,7 +44,7 @@ class SpacingOptionPlugin extends Plugin {
         this.removeGridPreviews(cloneEl);
     }
 
-    cleanForSave({ root }) {
+    cleanForSave(root) {
         this.removeGridPreviews(root);
     }
 }

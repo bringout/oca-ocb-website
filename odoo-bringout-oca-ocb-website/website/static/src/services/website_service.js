@@ -1,3 +1,4 @@
+import { reactive } from "@web/owl2/utils";
 import { jsToPyLocale } from "@web/core/l10n/utils";
 import { _t } from "@web/core/l10n/translation";
 import { registry } from "@web/core/registry";
@@ -6,7 +7,7 @@ import { isVisible } from "@web/core/utils/ui";
 
 import { FullscreenIndication } from "../components/fullscreen_indication/fullscreen_indication";
 import { WebsiteLoader } from "../components/website_loader/website_loader";
-import { reactive, EventBus } from "@odoo/owl";
+import { EventBus } from "@odoo/owl";
 
 const websiteSystrayRegistry = registry.category("website_systray");
 
@@ -158,6 +159,7 @@ export const websiteService = {
                         mainObject,
                         seoObject,
                         isPublished,
+                        publishOn,
                         canOptimizeSeo,
                         canPublish,
                         editableInBackend,
@@ -185,6 +187,7 @@ export const websiteService = {
                         mainObject: unslugHtmlDataObject(mainObject),
                         seoObject: unslugHtmlDataObject(seoObject),
                         isPublished: isPublished === "True",
+                        publishOn: publishOn || false,
                         canOptimizeSeo: canOptimizeSeo === "True",
                         canPublish: canPublish === "True",
                         editableInBackend: editableInBackend === "True",
@@ -262,7 +265,7 @@ export const websiteService = {
                 invalidateSnippetCache = value;
             },
 
-            goToWebsite({ websiteId, path, edition, translation, lang } = {}) {
+            async goToWebsite({ websiteId, path, edition, translation, lang } = {}) {
                 this.websiteRootInstance = undefined;
                 if (lang) {
                     invalidateSnippetCache = true;
@@ -270,7 +273,7 @@ export const websiteService = {
                         path
                     )}`;
                 }
-                action.doAction("website.website_preview", {
+                await action.doAction("website.website_preview", {
                     clearBreadcrumbs: true,
                     props: {
                         websiteId: websiteId || currentWebsiteId || false,
@@ -298,6 +301,7 @@ export const websiteService = {
                             language_ids: {},
                             default_lang_id: { fields: { code: {} } },
                             cookies_bar: {},
+                            company_id: {},
                         },
                     })
                 ).records;
@@ -317,14 +321,37 @@ export const websiteService = {
                     }
                 }
             },
+            /**
+             * @param {Object} [props]
+             * @param {string} [props.title]
+             * @param {"colors"|"generic"|"images"|"text"} [props.flag]
+             * @param {boolean} [props.showCloseButton=false]
+             * @param {string} [props.bottomMessageTemplate]
+             * @param {boolean} [props.showProgressBar=true]
+             * @param {() => number} [props.getProgress]
+             * @param {Array<Object>} [props.loadingSteps]
+             * @param {string} [props.loadingSteps[].title]
+             * @param {"colors"|"generic"|"images"|"text"} [props.loadingSteps[].flag]
+             * @param {string} [props.loadingSteps[].description]
+             * @param {boolean} [props.loadingSteps[].completed]
+             */
             showLoader(props) {
                 bus.trigger("SHOW-WEBSITE-LOADER", props);
             },
-            hideLoader() {
-                bus.trigger("HIDE-WEBSITE-LOADER");
+            /**
+             * @param {Object} [props]
+             * @param {boolean} [props.completeRemainingProgress=true]
+             */
+            hideLoader(props) {
+                bus.trigger("HIDE-WEBSITE-LOADER", props);
             },
-            prepareOutLoader() {
-                bus.trigger("PREPARE-OUT-WEBSITE-LOADER");
+            /**
+             * @param {Object} [props]
+             * @param {boolean} [props.completeRemainingProgress=true]
+             * @param {Function} [props.redirectAction]
+             */
+            redirectOutFromLoader(props) {
+                bus.trigger("REDIRECT-OUT-FROM-WEBSITE-LOADER", props);
             },
             /**
              * Returns the (translated) "functional" name of a model

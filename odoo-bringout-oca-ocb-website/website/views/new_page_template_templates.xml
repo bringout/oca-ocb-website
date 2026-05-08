@@ -592,7 +592,10 @@ overridden by modules), because:
 
 <template id="new_page_template_about_s_cover" inherit_id="website.new_page_template_s_cover" primary="True">
     <xpath expr="//section" position="attributes">
-        <attribute name="class" add="pt40 pb40" remove="pt232 pb232" separator=" "/>
+        <attribute name="class" add="pt40 pb40" remove="pt72 pb72" separator=" "/>
+    </xpath>
+    <xpath expr="//div[hasclass('row')]/div" position="attributes">
+        <attribute name="class" remove="pt160 pb160" separator=" "/>
     </xpath>
     <xpath expr="//h1" position="replace">
         <h1 style="text-align: center;">About Us</h1>
@@ -602,8 +605,8 @@ overridden by modules), because:
 <template id="new_page_template_landing_s_cover" inherit_id="website.new_page_template_s_cover" primary="True"/>
 
 <template id="new_page_template_landing_0_s_cover" inherit_id="website.new_page_template_landing_s_cover" primary="True">
-    <xpath expr="//section" position="attributes">
-        <attribute name="class" add="pt256 pb256" remove="pt232 pb232" separator=" "/>
+    <xpath expr="//div[hasclass('row')]/div" position="attributes">
+        <attribute name="class" add="pt184 pb184" remove="pt160 pb160" separator=" "/>
     </xpath>
     <xpath expr="//h1" position="replace">
         <h1 style="text-align: center;">Coming Soon</h1>
@@ -618,7 +621,10 @@ overridden by modules), because:
 
 <template id="new_page_template_landing_4_s_cover" inherit_id="website.new_page_template_landing_s_cover" primary="True">
     <xpath expr="//section" position="attributes">
-        <attribute name="class" add="o_half_screen_height" remove="o_full_screen_height" separator=" "/>
+        <attribute name="class" add="o_three_quarter_height" remove="o_full_screen_height" separator=" "/>
+    </xpath>
+    <xpath expr="//div[hasclass('row')]/div" position="attributes">
+        <attribute name="class" add="pt40 pb40" remove="pt160 pb160" separator=" "/>
     </xpath>
     <xpath expr="//h1" position="replace">
         <h1 style="text-align: center;">We Are Coming Soon</h1>
@@ -935,7 +941,7 @@ overridden by modules), because:
 
 <template id="new_page_template_services_s_parallax" inherit_id="website.new_page_template_s_parallax" primary="True">
     <xpath expr="//section" position="attributes">
-        <attribute name="class" add="pb168 pt256" remove="o_half_screen_height" separator=" "/>
+        <attribute name="class" add="pb168 pt256" remove="o_three_quarter_height" separator=" "/>
     </xpath>
     <xpath expr="//span[hasclass('s_parallax_bg')]" position="attributes">
         <attribute name="style" add="background-position: 0% 44.4099%;" remove="background-position: 50% 75%;" separator=";"/>
@@ -992,9 +998,24 @@ overridden by modules), because:
     </xpath>
     <xpath expr="//div[hasclass('carousel-indicators')]" position="replace">
         <div class="carousel-indicators">
-            <button data-bs-target="#slideshow_sample" data-bs-slide-to="0" style="background-image: url(/web/image/website.s_company_team_image_1)" class="active" aria-label="Carousel indicator"/>
-            <button data-bs-target="#slideshow_sample" data-bs-slide-to="1" style="background-image: url(/web/image/website.s_company_team_image_2)" aria-label="Carousel indicator"/>
-            <button data-bs-target="#slideshow_sample" data-bs-slide-to="2" style="background-image: url(/web/image/website.s_company_team_image_3)" aria-label="Carousel indicator"/>
+            <button data-bs-target="#slideshow_sample"
+                    data-bs-slide-to="0"
+                    class="o_not_editable d-flex overflow-hidden active">
+                <span class="visually-hidden">Carousel indicator</span>
+                <img class="object-fit-cover w-100 h-100" src="/web/image/website.s_company_team_image_1" aria-hidden="true"/>
+            </button>
+            <button data-bs-target="#slideshow_sample"
+                    data-bs-slide-to="1"
+                    class="o_not_editable d-flex overflow-hidden">
+                <span class="visually-hidden">Carousel indicator</span>
+                <img class="object-fit-cover w-100 h-100" src="/web/image/website.s_company_team_image_2" aria-hidden="true"/>
+            </button>
+            <button data-bs-target="#slideshow_sample"
+                    data-bs-slide-to="2"
+                    class="o_not_editable d-flex overflow-hidden">
+                <span class="visually-hidden">Carousel indicator</span>
+                <img class="object-fit-cover w-100 h-100" src="/web/image/website.s_company_team_image_3" aria-hidden="true"/>
+            </button>
         </div>
     </xpath>
 </template>
@@ -1019,7 +1040,7 @@ overridden by modules), because:
         <img alt="" src="/website/static/src/img/snippets_demo/s_mega_menu_images_subtitles_default_image_6.webp" class="img img-fluid d-block"/>
     </xpath>
     <xpath expr="(//img)[6]" position="replace">
-        <img alt="" src="/website/static/src/img/snippets_demo/s_mega_menu_images_subtitles_default_image_3.jpg" class="img img-fluid d-block"/>
+        <img alt="" src="/website/static/src/img/snippets_demo/s_mega_menu_images_subtitles_default_image_3.webp" class="img img-fluid d-block"/>
     </xpath>
 </template>
 
@@ -1040,7 +1061,7 @@ overridden by modules), because:
 <!-- Map: change height -->
 <template id="new_page_template_s_map" inherit_id="s_map" primary="True">
     <xpath expr="//section" position="attributes">
-        <attribute name="class" add="o_half_screen_height" separator=" "/>
+        <attribute name="class" add="o_three_quarter_height" separator=" "/>
     </xpath>
 </template>
 

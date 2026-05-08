@@ -10,13 +10,13 @@
 # Leonardo J. Caballero G. <leonardocaballero@gmail.com>, 2022
 # "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
 # Weblate <noreply-mt-weblate@weblate.org>, 2025.
-# "Noemi Pla Garcia (nopl)" <nopl@odoo.com>, 2025, 2026.
+# "Noemi Pla Garcia (nopl)" <nopl@odoo.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-25 18:37+0000\n"
-"PO-Revision-Date: 2026-01-23 07:36+0000\n"
+"POT-Creation-Date: 2026-03-12 18:37+0000\n"
+"PO-Revision-Date: 2025-11-27 09:04+0000\n"
 "Last-Translator: \"Noemi Pla Garcia (nopl)\" <nopl@odoo.com>\n"
 "Language-Team: Spanish <https://translate.odoo.com/projects/odoo-19/"
 "website_blog/es/>\n"
@@ -46,8 +46,13 @@ msgstr "\". Mostrando resultados para \""
 
 #. module: website_blog
 #: model_terms:ir.ui.view,arch_db:website_blog.date_selector
-msgid "-- All dates"
-msgstr "- Todas las fechas"
+msgid "-- Scheduled"
+msgstr ""
+
+#. module: website_blog
+#: model_terms:ir.ui.view,arch_db:website_blog.date_selector
+msgid "-- Unpublished"
+msgstr ""
 
 #. module: website_blog
 #: model_terms:blog.post,content:website_blog.blog_post_6
@@ -199,20 +204,6 @@ msgid "<i class=\"fa fa-globe me-1\" title=\"Website\"/>"
 msgstr "<i class=\"fa fa-globe me-1\" title=\"Website\"/>"
 
 #. module: website_blog
-#: model_terms:ir.ui.view,arch_db:website_blog.opt_blog_post_share_links_display
-msgid ""
-"<i class=\"fa fa-linkedin text-linkedin\" aria-label=\"LinkedIn\" "
-"title=\"LinkedIn\"/>"
-msgstr ""
-"<i class=\"fa fa-linkedin text-linkedin\" aria-label=\"LinkedIn\" "
-"title=\"LinkedIn\"/>"
-
-#. module: website_blog
-#: model_terms:ir.ui.view,arch_db:website_blog.opt_blog_post_share_links_display
-msgid "<i class=\"fa fa-twitter text-twitter\" aria-label=\"X\" title=\"X\"/>"
-msgstr "<i class=\"fa fa-twitter text-twitter\" aria-label=\"X\" title=\"X\"/>"
-
-#. module: website_blog
 #: model_terms:ir.ui.view,arch_db:website_blog.s_dynamic_snippet_blog_posts_single_aside_preview_data
 #: model_terms:ir.ui.view,arch_db:website_blog.s_dynamic_snippet_blog_posts_single_circle_preview_data
 #: model_terms:ir.ui.view,arch_db:website_blog.s_dynamic_snippet_blog_posts_single_full_preview_data
@@ -220,13 +211,11 @@ msgid ""
 "<i class=\"fa fa-user-circle-o me-2\" role=\"presentation\"/><span>Marc "
 "Demo</span> • <span>Mar 13, 2025</span> •"
 msgstr ""
-"<i class=\"fa fa-user-circle-o me-2\" role=\"presentation\"/><span>Marc "
-"Demo</span> • <span>13 de marzo de 2025</span> •"
 
 #. module: website_blog
 #: model_terms:ir.ui.view,arch_db:website_blog.s_dynamic_snippet_blog_posts_card_preview_data
 msgid "<small class=\"text-muted\">Mar 13, 2025</small>"
-msgstr "<small class=\"text-muted\">13 de marzo de 2025</small>"
+msgstr ""
 
 #. module: website_blog
 #: model_terms:ir.ui.view,arch_db:website_blog.opt_blog_post_read_next
@@ -272,19 +261,11 @@ msgid ""
 "long-arrow-right\" role=\"presentation\"/></span>\n"
 "                </span>"
 msgstr ""
-"<span class=\"o_cc o_cc1 d-inline-flex align-items-center justify-content-"
-"center gap-3 border rounded py-2 px-3 rounded-pill\">\n"
-"                    <span class=\"badge text-bg-primary\">NUEVO</span>\n"
-"                    <strong>Sierra Tarahumara</strong>\n"
-"                    <span class=\"text-muted\">Marc Demo en Viajes</span>\n"
-"                    <span class=\"text-primary\">Leer ahora <i class=\"fa fa-"
-"long-arrow-right\" role=\"presentation\"/></span>\n"
-"               </span>"
 
 #. module: website_blog
 #: model_terms:ir.ui.view,arch_db:website_blog.s_dynamic_snippet_blog_posts_horizontal_preview_data
 msgid "<span class=\"text-muted\">Mar 13, 2025</span>"
-msgstr "<span class=\"text-muted\">13 de marzo de 2025</span>"
+msgstr ""
 
 #. module: website_blog
 #: model_terms:ir.ui.view,arch_db:website_blog.dynamic_filter_template_blog_post_single_badge
@@ -292,8 +273,6 @@ msgid ""
 "<span class=\"text-primary text-nowrap\">Read Now <i class=\"fa fa-long-"
 "arrow-right\"/></span>"
 msgstr ""
-"<span class=\"text-primary text-nowrap\">Leer ahora <i class=\"fa fa-long-"
-"arrow-right\"/></span>"
 
 #. module: website_blog
 #: model_terms:web_tour.tour,rainbow_man_message:website_blog.blog
@@ -309,8 +288,6 @@ msgid ""
 "<span><i class=\"fa fa-user-circle-o me-2\" role=\"presentation\"/> Marc "
 "Demo</span>"
 msgstr ""
-"<span><i class=\"fa fa-user-circle-o me-2\" role=\"presentation\"/> Marc "
-"Demo</span>"
 
 #. module: website_blog
 #: model_terms:ir.ui.view,arch_db:website_blog.s_dynamic_snippet_blog_posts_list_preview_data
@@ -319,9 +296,6 @@ msgid ""
 "Demo</span>\n"
 "                    <span class=\"text-muted\"> • Mar 13, 2025</span>"
 msgstr ""
-"<span><i class=\"fa fa-user-circle-o me-2\" role=\"presentation\"/>Marc "
-"Demo</span>\n"
-"                    <span class=\"text-muted\"> • 13 de marzo de 2025</span>"
 
 #. module: website_blog
 #: model:blog.post,subtitle:website_blog.blog_post_2
@@ -556,6 +530,16 @@ msgid "Author Name"
 msgstr "Nombre del autor"
 
 #. module: website_blog
+#: model:ir.model.fields,field_description:website_blog.field_blog_post__publish_on
+msgid "Auto publish on"
+msgstr ""
+
+#. module: website_blog
+#: model:ir.model.fields,help:website_blog.field_blog_post__publish_on
+msgid "Automatically publish the page on the chosen date and time."
+msgstr ""
+
+#. module: website_blog
 #: model:ir.model.fields,field_description:website_blog.field_blog_post__author_avatar
 msgid "Avatar"
 msgstr "Avatar"
@@ -639,12 +623,19 @@ msgstr "Más allá del ojo"
 #: model:ir.model,name:website_blog.model_blog_blog
 #: model:ir.model.fields,field_description:website_blog.field_blog_post__blog_id
 #: model:ir.ui.menu,name:website_blog.menu_website_blog_root_global
+#: model:res.groups.privilege,name:website_blog.res_groups_privilege_blog
 #: model:website.menu,name:website_blog.menu_blog
 #: model_terms:ir.ui.view,arch_db:website_blog.blog_blog_view_search
 #: model_terms:ir.ui.view,arch_db:website_blog.view_blog_blog_form
 #: model_terms:ir.ui.view,arch_db:website_blog.view_blog_post_search
+#: model_terms:ir.ui.view,arch_db:website_blog.website_blog
 msgid "Blog"
 msgstr "Blog"
+
+#. module: website_blog
+#: model:res.groups,name:website_blog.group_website_blog_manager
+msgid "Blog Manager"
+msgstr ""
 
 #. module: website_blog
 #: model:ir.model.fields,field_description:website_blog.field_blog_blog__name
@@ -715,6 +706,11 @@ msgid "Blog Tags"
 msgstr "Etiquetas del blog"
 
 #. module: website_blog
+#: model_terms:ir.ui.view,arch_db:website_blog.view_blog_post_form
+msgid "Blog Teaser"
+msgstr ""
+
+#. module: website_blog
 #: model_terms:ir.ui.view,arch_db:website_blog.opt_blog_cover_post_fullwidth_design
 msgid "Blog Title"
 msgstr "Título del blog"
@@ -762,6 +758,11 @@ msgid "Breadcrumb"
 msgstr "Migas de pan"
 
 #. module: website_blog
+#: model:ir.model.fields,field_description:website_blog.field_blog_post__breadcrumb_visible
+msgid "Breadcrumb Visible"
+msgstr ""
+
+#. module: website_blog
 #: model_terms:blog.post,content:website_blog.blog_post_3
 msgid ""
 "But how do you sift through the amazing choices on offer? And more "
@@ -804,10 +805,6 @@ msgid ""
 "is a big next step in the development of your passion for the stars. In many "
 "ways, it is a big step from someone..."
 msgstr ""
-"Elegir el telescopio adecuado para llevar tu entusiasmo por la astronomía al "
-"siguiente nivel es un gran paso en el desarrollo de tu pasión por las "
-"estrellas. En muchos aspectos, marca una gran diferencia respecto a cuando "
-"uno..."
 
 #. module: website_blog
 #: model_terms:ir.ui.view,arch_db:website_blog.s_dynamic_snippet_blog_posts_card_preview_data
@@ -815,8 +812,6 @@ msgid ""
 "Buying the right telescope to take your love of astronomy to the next level "
 "is a big next step in the development..."
 msgstr ""
-"Elegir el telescopio adecuado para llevar tu pasión por la astronomía a otro "
-"nivel es un gran paso en el desarrollo..."
 
 #. module: website_blog
 #: model:ir.model.fields,field_description:website_blog.field_blog_post__can_publish
@@ -1044,11 +1039,6 @@ msgid "Enter your post's title"
 msgstr "Escriba el título de su publicación"
 
 #. module: website_blog
-#: model_terms:ir.ui.view,arch_db:website_blog.opt_blog_post_share_links_display
-msgid "Facebook"
-msgstr "Facebook"
-
-#. module: website_blog
 #: model:blog.post,subtitle:website_blog.blog_post_3
 #: model_terms:ir.ui.view,arch_db:website_blog.s_dynamic_snippet_blog_posts_horizontal_preview_data
 #: model_terms:ir.ui.view,arch_db:website_blog.s_dynamic_snippet_blog_posts_single_circle_preview_data
@@ -1125,9 +1115,6 @@ msgid ""
 "bodies begins when we saw our first full moon in the sky. It is truly a "
 "magnificent view even to the naked eye...."
 msgstr ""
-"Para muchos de nosotros, la primera experiencia de aprendizaje sobre los "
-"cuerpos celestes empieza cuando vemos por primera vez la luna llena en el "
-"cielo. Es un espectáculo maravilloso, incluso a simple vista..."
 
 #. module: website_blog
 #: model_terms:blog.post,content:website_blog.blog_post_5
@@ -1381,9 +1368,6 @@ msgid ""
 "has that moment when we are suddenly stunned when we come face to face with "
 "the enormity of the universe that we..."
 msgstr ""
-"Se puede decir que, en algún momento de nuestras vidas, todos hemos vivido "
-"un instante en el que nos quedamos asombrados al encontrarnos frente a "
-"frente con la inmensidad del universo..."
 
 #. module: website_blog
 #: model_terms:blog.post,content:website_blog.blog_post_5
@@ -1479,11 +1463,6 @@ msgid "Leisure Facilities"
 msgstr "Instalaciones de ocio"
 
 #. module: website_blog
-#: model_terms:ir.ui.view,arch_db:website_blog.opt_blog_post_share_links_display
-msgid "LinkedIn"
-msgstr "LinkedIn"
-
-#. module: website_blog
 #. odoo-javascript
 #: code:addons/website_blog/static/src/website_builder/blog_post_page_option.xml:0
 msgid "List"
@@ -1541,8 +1520,6 @@ msgid ""
 "Maui helicopter tours are a great way to see the island from a different "
 "perspective and have a fun adventure..."
 msgstr ""
-"Los tours en helicóptero por Maui son una buena forma de ver la isla desde "
-"una perspectiva diferente y vivir una aventura emocionante..."
 
 #. module: website_blog
 #: model_terms:blog.post,content:website_blog.blog_post_2
@@ -1685,10 +1662,11 @@ msgid "New Tag"
 msgstr "Nueva etiqueta"
 
 #. module: website_blog
-#. odoo-javascript
-#: code:addons/website_blog/static/src/website_builder/blog_page_option.xml:0
-msgid "Next Article"
-msgstr "Siguiente artículo"
+#: model:ir.model.fields,help:website_blog.field_blog_post__recommended_next_post_id
+msgid ""
+"Next blog post that will be shown as the next article to users at the bottom "
+"of the blog post."
+msgstr ""
 
 #. module: website_blog
 #. odoo-javascript
@@ -1915,12 +1893,24 @@ msgstr "Lista de publicaciones"
 
 #. module: website_blog
 #. odoo-javascript
+#: code:addons/website_blog/static/src/website_builder/blog_page_option.xml:0
+msgid "Promote a post"
+msgstr ""
+
+#. module: website_blog
+#. odoo-javascript
 #: code:addons/website_blog/static/src/website_builder/blog_searchbar_option_plugin.js:0
 msgid "Publication Date"
 msgstr "Fecha de publicación"
 
 #. module: website_blog
+#: model_terms:ir.ui.view,arch_db:website_blog.view_blog_post_form
+msgid "Publish on"
+msgstr ""
+
+#. module: website_blog
 #: model_terms:ir.ui.view,arch_db:website_blog.blog_post_view_kanban
+#: model_terms:ir.ui.view,arch_db:website_blog.view_blog_post_form
 msgid "Published"
 msgstr "Publicado"
 
@@ -1930,15 +1920,15 @@ msgid "Published ("
 msgstr "Publicado ("
 
 #. module: website_blog
-#: model:ir.model.fields,field_description:website_blog.field_blog_post__published_date
-msgid "Published Date"
-msgstr "Fecha publicada"
-
-#. module: website_blog
 #: model:mail.message.subtype,description:website_blog.mt_blog_blog_published
 #: model:mail.message.subtype,name:website_blog.mt_blog_blog_published
 msgid "Published Post"
 msgstr "Publicación publicada"
+
+#. module: website_blog
+#: model:ir.model.fields,field_description:website_blog.field_blog_post__published_date
+msgid "Published date"
+msgstr ""
 
 #. module: website_blog
 #: model_terms:ir.ui.view,arch_db:website_blog.view_blog_post_form
@@ -1946,14 +1936,9 @@ msgid "Publishing Options"
 msgstr "Opciones de publicación"
 
 #. module: website_blog
-#: model:ir.model.fields,field_description:website_blog.field_blog_post__post_date
-msgid "Publishing date"
-msgstr "Fecha de publicación"
-
-#. module: website_blog
 #: model_terms:ir.ui.view,arch_db:website_blog.sidebar_blog_index
 msgid "RSS"
-msgstr "RSS"
+msgstr ""
 
 #. module: website_blog
 #: model:ir.model.fields,field_description:website_blog.field_blog_blog__rating_ids
@@ -1966,7 +1951,6 @@ msgstr "Calificaciones"
 msgid ""
 "Read Now <i class=\"fa fa-long-arrow-right ms-2\" role=\"presentation\"/>"
 msgstr ""
-"Leer ahora <i class=\"fa fa-long-arrow-right ms-2\" role=\"presentation\"/>"
 
 #. module: website_blog
 #: model_terms:ir.ui.view,arch_db:website_blog.dynamic_filter_template_blog_post_single_aside
@@ -1974,12 +1958,29 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website_blog.dynamic_filter_template_blog_post_single_full
 #: model_terms:ir.ui.view,arch_db:website_blog.s_dynamic_snippet_blog_posts_single_circle_preview_data
 msgid "Read Now <i class=\"fa fa-long-arrow-right\" role=\"presentation\"/>"
-msgstr "Leer ahora <i class=\"fa fa-long-arrow-right\" role=\"presentation\"/>"
+msgstr ""
 
 #. module: website_blog
 #: model_terms:ir.ui.view,arch_db:website_blog.posts_loop
 msgid "Read more <i class=\"oi oi-chevron-right ms-2\"/>"
 msgstr "Leer más <i class=\"oi oi-chevron-right ms-2\"/>"
+
+#. module: website_blog
+#: model:ir.model.fields,field_description:website_blog.field_blog_post__recommended_next_post_id
+msgid "Recommended Next Post"
+msgstr ""
+
+#. module: website_blog
+#. odoo-javascript
+#: code:addons/website_blog/static/src/website_builder/blog_page_option.xml:0
+msgid "Recommended Post"
+msgstr ""
+
+#. module: website_blog
+#. odoo-javascript
+#: code:addons/website_blog/static/src/website_builder/blog_page_option.xml:0
+msgid "Reset to default post"
+msgstr ""
 
 #. module: website_blog
 #: model_terms:blog.post,content:website_blog.blog_post_3
@@ -2028,6 +2029,17 @@ msgstr "Muestra"
 #: code:addons/website_blog/models/website_snippet_filter.py:0
 msgid "Satellites"
 msgstr "Satélites"
+
+#. module: website_blog
+#: model_terms:ir.ui.view,arch_db:website_blog.blog_post_view_kanban
+#: model_terms:ir.ui.view,arch_db:website_blog.view_blog_post_list
+msgid "Scheduled"
+msgstr ""
+
+#. module: website_blog
+#: model_terms:ir.ui.view,arch_db:website_blog.posts_loop
+msgid "Scheduled ("
+msgstr ""
 
 #. module: website_blog
 #. odoo-javascript
@@ -2107,23 +2119,13 @@ msgstr "Compartir enlaces"
 
 #. module: website_blog
 #: model_terms:ir.ui.view,arch_db:website_blog.opt_blog_post_share_links_display
-msgid "Share on Facebook"
-msgstr "Compartir en Facebook"
-
-#. module: website_blog
-#: model_terms:ir.ui.view,arch_db:website_blog.opt_blog_post_share_links_display
-msgid "Share on LinkedIn"
-msgstr "Compartir en Linkedin"
-
-#. module: website_blog
-#: model_terms:ir.ui.view,arch_db:website_blog.opt_blog_post_share_links_display
-msgid "Share on X"
-msgstr "Compartir en X"
-
-#. module: website_blog
-#: model_terms:ir.ui.view,arch_db:website_blog.opt_blog_post_share_links_display
 msgid "Share this post"
 msgstr "Compartir esta publicación"
+
+#. module: website_blog
+#: model_terms:ir.ui.view,arch_db:website_blog.view_blog_post_form
+msgid "Shown as a preview on the /blog page"
+msgstr ""
 
 #. module: website_blog
 #. odoo-javascript
@@ -2160,9 +2162,6 @@ msgid ""
 "The area is a favorite destination among those seeking an adventurous "
 "vacation. Copper Canyon is one of the six gorges in the..."
 msgstr ""
-"La Sierra Tarahumara, conocida como el Cañón del Cobre, se encuentra en "
-"México. Es uno de los destinos favoritos para quienes buscan unas vacaciones "
-"de aventura. El Cañón del Cobre es uno de los seis cañones..."
 
 #. module: website_blog
 #: model_terms:ir.ui.view,arch_db:website_blog.s_dynamic_snippet_blog_posts_list_preview_data
@@ -2171,9 +2170,6 @@ msgid ""
 "The area is a favorite destination among those seeking an adventurous "
 "vacation. Copper Canyon is one of the six gorges..."
 msgstr ""
-"La Sierra Tarahumara, conocida como el Cañón del Cobre, se encuentra en "
-"México. Es uno de los destinos favoritos para quienes buscan unas vacaciones "
-"de aventura. El Cañón del Cobre es uno de los seis cañones..."
 
 #. module: website_blog
 #: model_terms:ir.ui.view,arch_db:website_blog.s_dynamic_snippet_blog_posts_card_preview_data
@@ -2181,8 +2177,6 @@ msgid ""
 "Sierra Tarahumara, popularly known as Copper Canyon is situated in Mexico. "
 "The area is a favorite destination among those..."
 msgstr ""
-"La Sierra Tarahumara, conocida como el Cañón del Cobre, se encuentra en "
-"México. Es uno de los destinos favoritos para quienes buscan..."
 
 #. module: website_blog
 #. odoo-javascript
@@ -2265,9 +2259,6 @@ msgid ""
 "choose a hotel. Ten years ago, you'd have probably visited your local travel "
 "agent and trusted the face-to-face advice you we..."
 msgstr ""
-"Vas a viajar al extranjero, ya has elegido el destino y ahora tienes que "
-"encontrar un hotel. Hace diez años, probablemente habrías ido a la agencia "
-"de viajes de tu ciudad y habrías confiado en el asesoramiento cara a cara..."
 
 #. module: website_blog
 #: model_terms:ir.ui.view,arch_db:website_blog.s_dynamic_snippet_blog_posts_list_preview_data
@@ -2276,9 +2267,6 @@ msgid ""
 "choose a hotel. Ten years ago, you'd have probably visited your local travel "
 "agent and trusted the face-to-face advice..."
 msgstr ""
-"Vas a viajar al extranjero, ya has elegido el destino y ahora tienes que "
-"encontrar un hotel. Hace diez años, probablemente habrías ido a la agencia "
-"de viajes de tu ciudad y habrías confiado en el asesoramiento cara a cara..."
 
 #. module: website_blog
 #: model_terms:ir.ui.view,arch_db:website_blog.s_dynamic_snippet_blog_posts_card_preview_data
@@ -2286,8 +2274,6 @@ msgid ""
 "So you're going abroad, you've chosen your destination and now you have to "
 "choose a hotel. Ten years ago, you'd have..."
 msgstr ""
-"Vas a viajar al extranjero, ya has elegido el destino y ahora tienes que "
-"encontrar un hotel. Hace diez años, probablemente habrías..."
 
 #. module: website_blog
 #: model_terms:blog.post,content:website_blog.blog_post_3
@@ -2483,15 +2469,6 @@ msgid "The best time to view the moon."
 msgstr "El mejor momento para ver la luna."
 
 #. module: website_blog
-#: model:ir.model.fields,help:website_blog.field_blog_post__post_date
-msgid ""
-"The blog post will be visible for your visitors as of this date on the "
-"website if it is set as published."
-msgstr ""
-"La entrada del blog será visible para sus visitantes en la fecha indicada en "
-"el sitio web si se fija como publicada."
-
-#. module: website_blog
 #: model_terms:blog.post,content:website_blog.blog_post_2
 msgid ""
 "The cliffs in this region are among the highest in the world and to see "
@@ -2505,12 +2482,14 @@ msgstr ""
 "de Maui merece la pena para contemplar la belleza de este entorno natural."
 
 #. module: website_blog
+#: model:ir.model.fields,help:website_blog.field_blog_blog__website_absolute_url
 #: model:ir.model.fields,help:website_blog.field_blog_post__website_absolute_url
 msgid "The full absolute URL to access the document through the website."
 msgstr ""
 "La URL absoluta completa para acceder al documento a través del sitio web."
 
 #. module: website_blog
+#: model:ir.model.fields,help:website_blog.field_blog_blog__website_url
 #: model:ir.model.fields,help:website_blog.field_blog_post__website_url
 msgid "The full relative URL to access the document through the website."
 msgstr ""
@@ -2756,6 +2735,12 @@ msgstr ""
 
 #. module: website_blog
 #. odoo-javascript
+#: code:addons/website_blog/static/src/website_builder/blog_page_option.xml:0
+msgid "Toggle comments"
+msgstr ""
+
+#. module: website_blog
+#. odoo-javascript
 #: code:addons/website_blog/static/src/website_builder/blog_post_page_option.xml:0
 msgid "Top Banner"
 msgstr "Banner superior"
@@ -2771,14 +2756,14 @@ msgid "Travel"
 msgstr "Viajes"
 
 #. module: website_blog
-#: model_terms:ir.ui.view,arch_db:website_blog.opt_blog_post_share_links_display
-msgid "Twitter"
-msgstr "Twitter"
-
-#. module: website_blog
 #: model_terms:ir.ui.view,arch_db:website_blog.posts_loop
 msgid "Unpublished ("
 msgstr "No publicado ("
+
+#. module: website_blog
+#: model_terms:ir.ui.view,arch_db:website_blog.view_blog_post_form
+msgid "Unschedule"
+msgstr ""
 
 #. module: website_blog
 #: model_terms:ir.ui.view,arch_db:website_blog.post_heading
@@ -2832,6 +2817,7 @@ msgid "Website"
 msgstr "Sitio web"
 
 #. module: website_blog
+#: model:ir.model.fields,field_description:website_blog.field_blog_blog__website_absolute_url
 #: model:ir.model.fields,field_description:website_blog.field_blog_post__website_absolute_url
 msgid "Website Absolute URL"
 msgstr "URL absoluta del sitio web"
@@ -2853,6 +2839,7 @@ msgid "Website Snippet Filter"
 msgstr "Filtro de fragmentos del sitio web"
 
 #. module: website_blog
+#: model:ir.model.fields,field_description:website_blog.field_blog_blog__website_url
 #: model:ir.model.fields,field_description:website_blog.field_blog_post__website_url
 msgid "Website URL"
 msgstr "URL del sitio web"
@@ -3022,11 +3009,6 @@ msgid "to leave a comment"
 msgstr "para dejar un comentario"
 
 #. module: website_blog
-#: model_terms:ir.ui.view,arch_db:website_blog.posts_loop
-msgid "unpublished"
-msgstr "no publicado"
-
-#. module: website_blog
 #: model_terms:ir.ui.view,arch_db:website_blog.blog_post_info
 msgid ""
 "|\n"
@@ -3039,101 +3021,3 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website_blog.blog_post_info
 msgid "| No comments yet"
 msgstr "| Sin comentarios aún"
-
-#~ msgid "&amp;nbsp;"
-#~ msgstr "&amp;nbsp;"
-
-#~ msgid "' page header."
-#~ msgstr "' encabezado de página."
-
-#~ msgid ""
-#~ "<i class=\"fa fa-github text-github\" aria-label=\"Github\" "
-#~ "title=\"Github\"/>"
-#~ msgstr ""
-#~ "<i class=\"fa fa-github text-github\" aria-label=\"Github\" "
-#~ "title=\"Github\"/>"
-
-#~ msgid ""
-#~ "<i class=\"fa fa-instagram text-instagram\" aria-label=\"Instagram\" "
-#~ "title=\"Instagram\"/>"
-#~ msgstr ""
-#~ "<i class=\"fa fa-instagram text-instagram\" aria-label=\"Instagram\" "
-#~ "title=\"Instagram\"/>"
-
-#~ msgid "<i class=\"fa fa-rss-square\" aria-label=\"RSS\" title=\"RSS\"/>"
-#~ msgstr "<i class=\"fa fa-rss-square\" aria-label=\"RSS\" title=\"RSS\"/>"
-
-#~ msgid ""
-#~ "<i class=\"fa fa-twitter text-twitter\" aria-label=\"Twitter\" "
-#~ "title=\"Twitter\"/>"
-#~ msgstr ""
-#~ "<i class=\"fa fa-twitter text-twitter\" aria-label=\"Twitter\" "
-#~ "title=\"Twitter\"/>"
-
-#~ msgid ""
-#~ "<i class=\"fa fa-youtube-play text-youtube\" aria-label=\"Youtube\" "
-#~ "title=\"Youtube\"/>"
-#~ msgstr ""
-#~ "<i class=\"fa fa-youtube-play text-youtube\" aria-label=\"Youtube\" "
-#~ "title=\"Youtube\"/>"
-
-#~ msgid "Amazing blog article: %s! Check it live: %s"
-#~ msgstr "Increíble artículo de blog: %s Compruébalo en vivo: %s"
-
-#~ msgid "Drop Zone for Building Blocks"
-#~ msgstr "Zona de descenso para bloques de construcción"
-
-#~ msgid "Edit the '"
-#~ msgstr "Edite el '"
-
-#~ msgid "Follow us"
-#~ msgstr "Síganos"
-
-#~ msgid "Group By"
-#~ msgstr "Agrupar por"
-
-#~ msgid "Hover effect"
-#~ msgstr "Efecto al pasar el ratón"
-
-#~ msgid "Latest"
-#~ msgstr "Último"
-
-#~ msgid "Name / Latest Post"
-#~ msgstr "Nombre / Última publicación"
-
-#~ msgid "Number of messages which requires an action"
-#~ msgstr "Número de mensajes que requieren una acción"
-
-#~ msgid "Read more"
-#~ msgstr "Leer más"
-
-#~ msgid "Restrict publishing to this website."
-#~ msgstr "Restringir publicar a este sitio web."
-
-#~ msgid "Select to Comment"
-#~ msgstr "Seleccionar para comentar"
-
-#~ msgid "Select to Tweet"
-#~ msgstr "Seleccionar para twittear"
-
-#~ msgid "Share on Twitter"
-#~ msgstr "Compartir en Twitter"
-
-#~ msgid "The full URL to access the document through the website."
-#~ msgstr "La URL completa para acceder al documento a través del sitio web."
-
-#~ msgid "This tag already exists"
-#~ msgstr "¡El nombre de categoría ya existe!"
-
-#~ msgid "in <i class=\"fa fa-folder-open text-muted\"/>"
-#~ msgstr "en"
-
-#~ msgid "in <i class=\"fa fa-folder-open text-white-75\"/>"
-#~ msgstr "en"
-
-#~ msgid ""
-#~ "|\n"
-#~ "                            <i class=\"fa fa-comment text-muted me-1\"/>"
-#~ msgstr ""
-#~ "|\n"
-#~ "                            <i class=\"fa fa-comment text-muted me-1\"/>"

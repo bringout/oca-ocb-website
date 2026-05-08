@@ -1,37 +1,14 @@
-import { SNIPPET_SPECIFIC, SNIPPET_SPECIFIC_END } from "@html_builder/utils/option_sequence";
 import { Plugin } from "@html_editor/plugin";
 import { registry } from "@web/core/registry";
-import { withSequence } from "@html_editor/utils/resource";
 import { BuilderAction } from "@html_builder/core/builder_action";
-import { BaseOptionComponent } from "@html_builder/core/utils";
 
-export const POPUP = SNIPPET_SPECIFIC;
-export const COOKIES_BAR = SNIPPET_SPECIFIC_END;
-
-export class PopupOption extends BaseOptionComponent {
-    static template = "website.PopupOption";
-    static selector = ".s_popup";
-    static exclude = "#website_cookies_bar";
-    static applyTo = ".modal";
-}
-
-export class PopupCookiesOption extends BaseOptionComponent {
-    static template = "website.PopupCookiesOption";
-    static selector = ".s_popup#website_cookies_bar";
-    static applyTo = ".modal";
-}
-
-class PopupOptionPlugin extends Plugin {
+export class PopupOptionPlugin extends Plugin {
     static id = "PopupOption";
     static dependencies = ["anchor", "visibility", "history", "popupVisibilityPlugin"];
 
     /** @type {import("plugins").WebsiteResources} */
     resources = {
-        builder_options: [
-            withSequence(POPUP, PopupOption),
-            withSequence(COOKIES_BAR, PopupCookiesOption),
-        ],
-        dropzone_selector: {
+        dropzone_selectors: {
             selector: ".s_popup",
             exclude: "#website_cookies_bar",
             excludeAncestor:
@@ -47,9 +24,9 @@ class PopupOptionPlugin extends Plugin {
             CopyAnchorAction,
             SetPopupDelayAction,
         },
-        empty_node_predicates: (el) => {
+        is_node_empty_predicates: (el) => {
             if (!el.matches?.(".s_popup")) {
-                return false;
+                return;
             }
             const popupModalChildrenEls = [...(el.querySelector(".modal-content")?.children ?? [])];
             return popupModalChildrenEls.every((child) => child.matches(".s_popup_close"));
@@ -108,8 +85,7 @@ export class MoveBlockAction extends BuilderAction {
             : value === "currentPage";
     }
     apply({ editingElement, value }) {
-        const selector =
-            value === "allPages" ? "#o_shared_blocks" : "main .oe_structure.o_editable";
+        const selector = value === "allPages" ? "#o_shared_blocks" : "main .oe_structure.o_savable";
         const whereEl = this.editable.querySelector(selector);
         const popupEl = editingElement.closest(".s_popup");
         whereEl.insertAdjacentElement("afterbegin", popupEl);

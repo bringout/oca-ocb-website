@@ -6,7 +6,7 @@ from unittest.mock import patch
 
 from odoo.exceptions import AccessError
 from odoo.fields import Command
-from odoo.tests.common import tagged, new_test_user, JsonRpcException, TransactionCase
+from odoo.tests.common import tagged, new_test_user, TransactionCase
 from odoo.tools import mute_logger
 
 from odoo.addons.base.tests.common import HttpCase
@@ -51,7 +51,7 @@ class TestPartnerAssign(TransactionCase):
         """ Test the automatic assignation using geolocalisation """
         partner_be = self.env['res.partner'].create({
             "name": "Agrolait",
-            "is_company": True,
+            "vat": "BE0477472701",
             "city": "Wavre",
             "zip": "1300",
             "country_id": self.env.ref("base.be").id,
@@ -60,7 +60,7 @@ class TestPartnerAssign(TransactionCase):
         })
         partner_uk = self.env['res.partner'].create({
             "name": "Think Big Systems",
-            "is_company": True,
+            "vat": "GB123456782",
             "city": "London",
             "country_id": self.env.ref("base.uk").id,
             "street": "89 Lingfield Tower",
@@ -119,7 +119,7 @@ class TestPartnerLeadPortal(TestCrmCommon, HttpCase):
         )
 
         # New lead, assigned to the new portal
-        self.lead_portal = self.env['crm.lead'].with_context(mail_notrack=True).create({
+        self.lead_portal = self.env['crm.lead'].create({
             'type': "lead",
             'name': "Test lead new",
             'user_id': False,
@@ -158,7 +158,7 @@ class TestPartnerLeadPortal(TestCrmCommon, HttpCase):
     def test_lead_access_right(self):
         """ Test another portal user can not write on every leads """
         # portal user having no right
-        poor_portal_user = self.env['res.users'].with_context({'no_reset_password': True, 'mail_notrack': True}).create({
+        poor_portal_user = self.env['res.users'].with_context({'no_reset_password': True}).create({
             'name': 'Poor Partner (not integrating one)',
             'email': 'poor.partner@ododo.com',
             'login': 'poorpartner',
@@ -269,60 +269,6 @@ class TestPartnerLeadPortal(TestCrmCommon, HttpCase):
             }
         )
 
-    def test_portal_post_child_contact_assigned(self):
-        """ Test that a child contact of the assigned partner can post a
-        message on the lead, and that an unrelated portal user cannot. """
-        child_partner = self.env['res.partner'].create({
-            'name': 'Child Portal Contact',
-            'parent_id': self.user_portal.partner_id.id,
-            'email': 'child.portal@test.example.com',
-        })
-        user_child_portal = mail_new_test_user(
-            self.env, login='user_child_portal',
-            partner_id=child_partner.id,
-            groups='base.group_portal',
-        )
-        self.authenticate(user_child_portal.login, user_child_portal.login)
-        result = self.make_jsonrpc_request(
-            route="/mail/message/post",
-            params={
-                'thread_model': self.lead_portal._name,
-                'thread_id': self.lead_portal.id,
-                'post_data': {
-                    'body': 'Test',
-                    'message_type': 'comment',
-                    'subtype_xmlid': 'mail.mt_comment',
-                },
-            },
-        )
-        message = self.env['mail.message'].browse(result['message_id'])
-        self.assertMessageFields(
-            message, {
-                'author_id': child_partner,
-                'body': '<p>Test</p>',
-                'message_type': 'comment',
-            },
-        )
-        # An unrelated portal user (not a child of the assigned partner) must not be able to post
-        unrelated_portal_user = mail_new_test_user(
-            self.env, login='user_unrelated_portal',
-            groups='base.group_portal',
-        )
-        self.authenticate(unrelated_portal_user.login, unrelated_portal_user.login)
-        with self.assertRaises(JsonRpcException), mute_logger('odoo.http'):
-            self.make_jsonrpc_request(
-                route="/mail/message/post",
-                params={
-                    'thread_model': self.lead_portal._name,
-                    'thread_id': self.lead_portal.id,
-                    'post_data': {
-                        'body': 'Should not post',
-                        'message_type': 'comment',
-                        'subtype_xmlid': 'mail.mt_comment',
-                    },
-                },
-            )
-
     def test_route_portal_my_opportunities_as_portal(self):
         """Test that the portal user can access its own opportunities even if
         does not have access to the 'activity_date_deadline' field (needed
@@ -357,12 +303,12 @@ class TestPartnerLeadPortal(TestCrmCommon, HttpCase):
             )
 
         with self.with_user(self.user_portal.login), MockRequest(
-            self.env, website=self.env["website"].browse(1)
+            self.env, website=self.env.ref('website.default_website')
         ) as mock_request:
             mock_request.render = render_function
             WebsiteAccount().portal_my_opportunities(filterby="today")
 
-    @patch('odoo.http.GeoIP')
+    @patch('odoo.http.geoip.GeoIP')
     def test_03_crm_partner_assign_geolocalization(self, GeoIpMock):
         """
             This test checks situation when "{OdooURL}/partners" is visited from foreign country without resellers.
@@ -379,7 +325,7 @@ class TestPartnerLeadPortal(TestCrmCommon, HttpCase):
         # Create a partner outside of Mexico
         non_mexican_partner = self.env['res.partner'].create({
             'name': 'Non_Mexican_Partner',
-            'is_company': True,
+            'vat': 'ABC010203AB9',
             'grade_id': self.env['res.partner.grade'].search([], limit=1).id,
             'website_published': True,
             'country_id': self.env['res.country'].search([('code', '!=', 'mx')], limit=1).id
@@ -391,7 +337,7 @@ class TestPartnerLeadPortal(TestCrmCommon, HttpCase):
             self.assertIn(non_mexican_partner, values['partners'], "Non-Mexican Partner is not present when rendering partners from Mexico; fallback protection (protecting from no results) didn't work.")
             return 'rendered'
 
-        with MockRequest(self.env, website=self.env['website'].browse(1)) as mock_request:
+        with MockRequest(self.env, website=self.env.ref('website.default_website')) as mock_request:
             mock_request.render = render_function
             res = WebsiteCrmPartnerAssign().partners()
             self.assertEqual([b'rendered'], res.response, "render_function wasn't called")
@@ -417,7 +363,7 @@ class TestPublish(HttpCase):
         })
         cls.partner = cls.env['res.partner'].create({
             'name': "Agrolait",
-            'is_company': True,
+            'vat': "BE0477472701",
             'city': "Wavre",
             'zip': "1300",
             'country_id': cls.env.ref('base.be').id,

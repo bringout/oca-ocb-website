@@ -44,7 +44,7 @@ class TestEventRegisterUTM(HttpCase, TestEventOnlineCommon):
             f'1-name-{name_question.id}': 'Bob',
             f'1-email-{email_question.id}': 'bob@test.lan',
             '1-event_ticket_id': self.event_0.event_ticket_ids[0].id,
-            'csrf_token': http.Request.csrf_token(self),
+            'csrf_token': self.csrf_token(),
         })
         new_registration = self.event_0.registration_ids
         self.assertEqual(len(new_registration), 1)
@@ -134,7 +134,7 @@ class TestUi(HttpCaseWithUserDemo, HttpCaseWithUserPortal):
             })]
         })
 
-        self.start_tour("/", 'test_tickets_questions', login="portal")
+        self.start_tour("/event", 'test_tickets_questions', login="portal")
 
         registrations = self.env['event.registration'].search([
             ('email', 'in', ['attendee-a@gmail.com', 'attendee-b@gmail.com'])
@@ -211,15 +211,12 @@ class TestUi(HttpCaseWithUserDemo, HttpCaseWithUserPortal):
             event.cover_properties = """{"background-image": "url('/1.jpg')"}"""
             meta = event.get_website_meta()
             self.assertEqual(meta['opengraph_meta']['og:image'], 'http://example.com/1.jpg')
-            self.assertEqual(meta['twitter_meta']['twitter:image'], 'http://example.com/1.jpg')
             event.cover_properties = """{"background-image": "url(\\"/2.jpg\\")"}"""
             meta = event.get_website_meta()
             self.assertEqual(meta['opengraph_meta']['og:image'], 'http://example.com/2.jpg')
-            self.assertEqual(meta['twitter_meta']['twitter:image'], 'http://example.com/2.jpg')
             event.cover_properties = """{"background-image": "url(/3.jpg)"}"""
             meta = event.get_website_meta()
             self.assertEqual(meta['opengraph_meta']['og:image'], 'http://example.com/3.jpg')
-            self.assertEqual(meta['twitter_meta']['twitter:image'], 'http://example.com/3.jpg')
 
 
 @tagged('post_install', '-at_install')
@@ -328,7 +325,7 @@ class TestWebsiteAccess(HttpCaseWithUserDemo, OnlineEventCase):
     @users('user_portal')
     def test_check_search_in_address(self):
         ret = self.env['event.event']._search_get_detail(
-            self.website, order=None, options={'displayDescription':'', 'displayDetail':''}
+            self.website, order=None, options={}
         )
         result = ret['search_extra'](self.env, 'Turlock')[0][-1].get_result_ids()
         self.assertEqual(*result, self.events[0].id, 'Event should exist for the searched term')

@@ -290,9 +290,3 @@ msgstr "Web Sitesi Etkinlik Menüsü"
 #: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_registration
 msgid "if you have any question."
 msgstr "herhangi bir sorun varmı."
-
-#~ msgid "It looks like your email is linked to an existing account."
-#~ msgstr "Görünüşe göre e-postanız mevcut bir hesaba bağlı."
-
-#~ msgid "Please Sign In."
-#~ msgstr "Lütfen Oturum Açın."

@@ -32,29 +32,6 @@ export function assertCssVariable(variableName, variableValue, trigger = ":ifram
         },
     };
 }
-export function assertPathName(pathname, trigger) {
-    return {
-        content: `Check if we have been redirected to ${pathname}`,
-        trigger: trigger,
-        async run() {
-            await new Promise((resolve) => {
-                let elapsedTime = 0;
-                const intervalTime = 100;
-                const interval = setInterval(() => {
-                    if (window.location.pathname.startsWith(pathname)) {
-                        clearInterval(interval);
-                        resolve();
-                    }
-                    elapsedTime += intervalTime;
-                    if (elapsedTime >= 5000) {
-                        clearInterval(interval);
-                        console.error(`The pathname ${pathname} has not been found`);
-                    }
-                }, intervalTime);
-            });
-        },
-    };
-}
 
 export function changeBackground(snippet, position = "bottom") {
     return [
@@ -134,7 +111,8 @@ export function changeOption(
 ) {
     const noPalette = allowPalette
         ? ""
-        : !document.querySelector(".o_popover .o_font_color_selector") && ".o_customize_tab";
+        : !document.querySelector(".o_popover .o_font_color_selector") &&
+          ".o-tab-content > [role='tabpanel']";
     const option_block = `${noPalette} [data-container-title='${blockName}']`;
     return {
         trigger: `${option_block} ${actionId}, ${option_block} [data-action-id="${actionId}"]`,
@@ -178,9 +156,17 @@ export function changeOptionInPopover(blockName, optionName, elementName) {
         {
             content: `Check if "${elementName}" option is shown. If not, search for it.`,
             trigger: ".o_popover .o-dropdown-item",
-            async run(helpers) {
-                if (!helpers.queryFirst(itemSelector)) {
-                    await helpers.edit(elementName, ".o_popover input");
+            async run({ waitFor, edit }) {
+                let item = await waitFor(itemSelector).catch(() => false);
+                if (!item) {
+                    const popoverInput = await waitFor(".o_popover input").catch(() => false);
+                    if (popoverInput) {
+                        await edit(elementName, ".o_popover input");
+                    }
+                }
+                item = await waitFor(itemSelector).catch(() => false);
+                if (!item) {
+                    console.error(`${itemSelector} not found after edit`);
                 }
             },
         },
@@ -271,7 +257,8 @@ export function clickOnEditAndWaitEditMode(position = "bottom") {
     return [
         {
             content: markup(_t("<b>Click Edit</b> to start designing your homepage.")),
-            trigger: "body .o_menu_systray .o_menu_systray_item.o_edit_website_container button",
+            trigger:
+                "body:has(:iframe body[is-ready=true]) .o_menu_systray .o_menu_systray_item.o_edit_website_container button",
             tooltipPosition: position,
             run: "click",
         },
@@ -292,7 +279,8 @@ export function clickOnEditAndWaitEditModeInTranslatedPage(position = "bottom") 
     return [
         {
             content: markup(_t("<b>Click Edit</b> dropdown")),
-            trigger: "body .o_menu_systray button:contains('Edit')",
+            trigger:
+                "body:has(:iframe body[is-ready=true]) .o_menu_systray button:contains('Edit')",
             tooltipPosition: position,
             run: "click",
         },
@@ -319,7 +307,6 @@ export function clickOnSnippet(snippet, position = "bottom") {
     return [
         {
             trigger: ".o-website-builder_sidebar",
-            noPrepend: true,
         },
         {
             trigger: `:iframe ${trigger}`,
@@ -337,7 +324,6 @@ export function clickOnSave(position = "bottom", timeout = 50000, withContains =
         },
         {
             trigger: "body:not(:has(.o_dialog))",
-            noPrepend: true,
         },
         {
             trigger: withContains
@@ -350,7 +336,6 @@ export function clickOnSave(position = "bottom", timeout = 50000, withContains =
         },
         {
             trigger: "body:not(.o_builder_open)",
-            noPrepend: true,
             timeout,
         },
         stepUtils.waitIframeIsReady(),
@@ -393,7 +378,6 @@ export function insertSnippet(snippet, { position = "bottom", ignoreLoading = fa
     const insertSnippetSteps = [
         {
             trigger: ".o_builder_sidebar_open",
-            noPrepend: true,
         },
     ];
     const snippetIDSelector = snippet.id
@@ -412,7 +396,6 @@ export function insertSnippet(snippet, { position = "bottom", ignoreLoading = fa
                 // FIXME `:not(.d-none)` should obviously not be needed but it seems
                 // currently needed when using a tour in user/interactive mode.
                 trigger: `.modal .show:iframe .o_snippet_preview_wrap${snippetIDSelector}:not(.d-none)`,
-                noPrepend: true,
                 tooltipPosition: "top",
                 run: "click",
             }
@@ -482,13 +465,14 @@ export function selectSnippetColumn(snippet, index = 0, position = "bottom") {
     };
 }
 
-export function prepend_trigger(steps, prepend_text = "") {
-    for (const step of steps) {
-        if (!step.noPrepend && prepend_text) {
-            step.trigger = prepend_text + step.trigger;
-        }
-    }
-    return steps;
+export function unfoldOptionsGroup(name) {
+    return [
+        {
+            content: `Unfold the "${name}" group`,
+            trigger: `.options-container[data-container-title="${name}"] .options-container-label i.fa-caret-right`,
+            run: "click",
+        },
+    ];
 }
 
 export function getClientActionUrl(path, edition) {
@@ -513,13 +497,26 @@ export function clickOnExtraMenuItem(stepOptions, backend = false) {
                 const extraMenuButton = this.anchor.querySelector(".o_extra_menu_items a.nav-link");
                 // Don't click on the extra menu button if it's already visible.
                 if (extraMenuButton && !extraMenuButton.classList.contains("show")) {
+                    const dropdownFullyOpen = Promise.withResolvers();
+                    extraMenuButton.addEventListener(
+                        "shown.bs.dropdown",
+                        dropdownFullyOpen.resolve,
+                        { once: true }
+                    );
                     await actions.click(extraMenuButton);
+                    await dropdownFullyOpen.promise;
                 }
             },
         },
         stepOptions
     );
 }
+
+export const waitForEditMode = {
+    content: "Wait for the edit mode to be started",
+    trigger: ".o_builder_sidebar_open",
+    timeout: 30000,
+};
 
 /**
  * Registers a tour that will go in the website client action.
@@ -537,7 +534,6 @@ export function registerWebsitePreviewTour(name, options, steps) {
     registry.category("web_tour.tours").remove(name);
     return registry.category("web_tour.tours").add(name, {
         ...omit(options, "edition"),
-        url: getClientActionUrl(options.url, !!options.edition),
         steps: () => {
             const tourSteps = [...steps()];
             // Note: for both non edit mode and edit mode, we set a high timeout for the
@@ -554,10 +550,7 @@ export function registerWebsitePreviewTour(name, options, steps) {
             } else {
                 tourSteps[0].timeout = 20000;
             }
-            return tourSteps.map((step) => {
-                delete step.noPrepend;
-                return step;
-            });
+            return tourSteps;
         },
     });
 }
@@ -568,9 +561,7 @@ export function registerThemeHomepageTour(name, steps) {
     }
     return registerWebsitePreviewTour(
         "homepage", // it overrides the community tour with the associated theme tour
-        {
-            url: "/",
-        },
+        {},
         () => [
             ...clickOnEditAndWaitEditMode(),
             // FIXME(?) this should probably reuse the prepend_trigger function
@@ -599,7 +590,7 @@ export function registerBackendAndFrontendTour(name, options, steps) {
     }
 
     return registry.category("web_tour.tours").add(name, {
-        url: options.url,
+        ...options,
         steps: () => steps(),
     });
 }
@@ -723,7 +714,6 @@ export function selectFullText(elementName, selector) {
         content: `Select all the text of the ${elementName}`,
         trigger: `:iframe ${selector}`,
         async run(actions) {
-            await actions.click();
             const range = document.createRange();
             const selection = this.anchor.ownerDocument.getSelection();
             range.selectNodeContents(this.anchor);
@@ -735,6 +725,7 @@ export function selectFullText(elementName, selector) {
                     cancelable: true,
                 })
             );
+            await actions.click();
         },
     };
 }
@@ -765,4 +756,50 @@ export function clickToolbarButton(elementName, selector, button, expand = false
         });
     }
     return steps;
+}
+
+export function changeBackgroundShape(shape = "html_builder/Connections/01") {
+    return [
+        {
+            content: "Open Background Shape selector",
+            trigger: "div[data-label='Background'] ~ div[data-label='Shape'] button.o-hb-btn",
+            run: "click",
+        },
+        {
+            content: "Wait for panel to open",
+            trigger: ".hb-sliding-panel.d-block",
+        },
+        {
+            content: "Pick a Background Shape",
+            trigger: `.o_pager_container .o-hb-bg-shape-btn [data-action-id='setBackgroundShape'][data-action-value='${shape}']`,
+            run: "click",
+        },
+        {
+            content: "Wait for panel to close",
+            trigger: ".options-container:visible",
+        },
+    ];
+}
+
+export function changeImageShape(shape = "html_builder/geometric/geo_shuriken") {
+    return [
+        {
+            content: "Open Image Shape selector",
+            trigger: "div[data-label='Media'] ~ div[data-label='Shape'] button.o-hb-btn",
+            run: "click",
+        },
+        {
+            content: "Wait for panel to open",
+            trigger: ".hb-sliding-panel.d-block",
+        },
+        {
+            content: "Pick an Image Shape",
+            trigger: `.o_pager_container .o-hb-img-shape-btn [data-action-id='setImageShape'][data-action-value='${shape}']`,
+            run: "click",
+        },
+        {
+            content: "Wait for panel to close",
+            trigger: ".options-container:visible",
+        },
+    ];
 }

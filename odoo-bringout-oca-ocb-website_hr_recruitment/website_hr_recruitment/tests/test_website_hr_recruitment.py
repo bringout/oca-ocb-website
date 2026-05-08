@@ -23,12 +23,11 @@ class TestWebsiteHrRecruitmentForm(odoo.tests.HttpCase):
             'is_published': True,
             'department_id': department.id,
         })
-        self.start_tour(self.env['website'].get_client_action_url('/jobs'), 'model_required_field_should_have_action_name', login='admin')
 
         self.start_tour(self.env['website'].get_client_action_url('/jobs'), 'website_hr_recruitment_tour_edit_form', login='admin')
 
         with odoo.tests.RecordCapturer(self.env['hr.applicant']) as capt:
-            self.start_tour("/", 'website_hr_recruitment_tour')
+            self.start_tour("/jobs", 'website_hr_recruitment_tour')
 
         # check result
         self.assertEqual(len(capt.records), 2)
@@ -79,7 +78,7 @@ class TestWebsiteHrRecruitmentForm(odoo.tests.HttpCase):
             },
         ])
         WebsiteHrRecruitmentController = WebsiteHrRecruitment()
-        with MockRequest(self.env, website=self.env['website'].browse(1)):
+        with MockRequest(self.env, website=self.env.ref('website.default_website')):
             response = WebsiteHrRecruitmentController.jobs()
         self.assertEqual(response.status, '200 OK')
 
@@ -111,6 +110,7 @@ class TestWebsiteHrRecruitmentForm(odoo.tests.HttpCase):
         self.assertEqual(applicant.partner_name, 'Georges')
         self.assertEqual(applicant.email_from, 'georges@test.com')
         self.assertEqual(applicant.partner_phone, '12345678')
+        self.assertEqual(applicant.medium_id, self.env['utm.mixin']._utm_ref('utm.utm_medium_website'))
         self.assertTrue(
             any(
                 html2plaintext(message.body) == 'Other Information:\n___________\n\ndescription : This is a short introduction\nAdditional info : Test'

@@ -289,9 +289,3 @@ msgstr "قائمة فعالية الموقع الإلكتروني"
 #: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_registration
 msgid "if you have any question."
 msgstr "إذا كانت لديك أي أسئلة."
-
-#~ msgid "It looks like your email is linked to an existing account."
-#~ msgstr "يبدو أن بريدك الإلكتروني مرتبط بحساب موجود بالفعل."
-
-#~ msgid "Please Sign In."
-#~ msgstr "يُرجى تسجيل الدخول."

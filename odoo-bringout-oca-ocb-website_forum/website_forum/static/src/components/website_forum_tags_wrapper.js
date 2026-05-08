@@ -1,4 +1,5 @@
-import { Component, useState, onWillStart } from "@odoo/owl";
+import { useState } from "@web/owl2/utils";
+import { Component, onWillStart } from "@odoo/owl";
 import { get } from "@web/core/network/http_service";
 import { SelectMenu } from "@web/core/select_menu/select_menu";
 import { DropdownItem } from "@web/core/dropdown/dropdown_item";
@@ -11,7 +12,7 @@ export class WebsiteForumTagsWrapper extends Component {
     };
     static props = {
         defaulValue: { optional: true, type: Array },
-        isReadOnly: { optional: true, Type: Boolean },
+        isReadOnly: { optional: true, type: Boolean },
     };
 
     setup() {

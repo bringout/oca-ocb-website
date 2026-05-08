@@ -2,12 +2,10 @@ import { Plugin } from "@html_editor/plugin";
 import { withSequence } from "@html_editor/utils/resource";
 import { registry } from "@web/core/registry";
 import { getScrollingElement } from "@web/core/utils/scrolling";
-import { AnimateOption } from "./animate_option";
 import { _t } from "@web/core/l10n/translation";
 import { AnimateText } from "./animate_text";
 import { isHtmlContentSupported } from "@html_editor/core/selection_plugin";
 import { ancestors, closestElement, findFurthest } from "@html_editor/utils/dom_traversal";
-import { ANIMATE } from "@html_builder/utils/option_sequence";
 import { childNodeIndex, DIRECTIONS, nodeSize } from "@html_editor/utils/position";
 import { BuilderAction } from "@html_builder/core/builder_action";
 import { EmphasizeAnimatedText } from "./emphasize_animated_text";
@@ -21,11 +19,12 @@ import { handleImagesIfDataset } from "@html_builder/utils/image";
  */
 
 /**
- * @typedef {((editingElement: HTMLElement) => Promise<void>)[]} remove_hover_effect_handlers
- * @typedef {((editingElement: HTMLElement) => Promise<void>)[]} set_hover_effect_handlers
+ * @typedef {((editingElement: HTMLElement) => Promise<void>)[]} on_hover_animation_mode_cleaned_handlers
+ * @typedef {((editingElement: HTMLElement) => Promise<void>)[]} on_hover_animation_mode_applied_handlers
  */
 
 /**
+ * @typedef {((el: HTMLElement) => boolean | undefined)[]} can_have_hover_effect_predicates
  * @typedef {((el: HTMLElement) => Promise<boolean>)[]} hover_effect_allowed_predicates
  */
 
@@ -41,7 +40,6 @@ export class AnimateOptionPlugin extends Plugin {
     ];
     /** @type {import("plugins").WebsiteResources} */
     resources = {
-        builder_options: [withSequence(ANIMATE, AnimateOption)],
         toolbar_items: [
             {
                 id: "animateText",
@@ -72,11 +70,18 @@ export class AnimateOptionPlugin extends Plugin {
             ForceAnimationAction,
             SetAnimationEffectAction,
         },
-        normalize_handlers: this.normalize.bind(this),
-        clean_for_save_handlers: this.cleanForSave.bind(this),
-        unsplittable_node_predicates: (node) => node.classList?.contains("o_animated_text"),
+        normalize_processors: this.normalize.bind(this),
+        clean_for_save_processors: this.cleanForSave.bind(this),
+        is_node_splittable_predicates: (node) => {
+            if (node.classList?.contains("o_animated_text")) {
+                return false;
+            }
+        },
         lower_panel_entries: withSequence(10, { Component: EmphasizeAnimatedText }),
-        on_media_dialog_saved_handlers: withSequence(5, this.onMediaDialogSavedHandlers.bind(this)),
+        on_will_save_media_dialog_handlers: withSequence(
+            5,
+            this.onWillSaveMediaDialogHandlers.bind(this)
+        ),
     };
 
     setup() {
@@ -84,12 +89,13 @@ export class AnimateOptionPlugin extends Plugin {
     }
 
     async canHaveHoverEffect(el) {
-        const proms = this.getResource("hover_effect_allowed_predicates").map((p) => p(el));
-        const settledProms = await Promise.all(proms);
-        return settledProms.length && settledProms.every(Boolean);
+        const proms = this.getResource("hover_effect_image_dataset_providers").map((p) => p(el));
+        const datasets = await Promise.all(proms);
+        const dataset = Object.assign({}, ...datasets);
+        return this.checkPredicates("can_have_hover_effect_predicates", el, dataset) ?? false;
     }
 
-    async onMediaDialogSavedHandlers(elements, { node }) {
+    async onWillSaveMediaDialogHandlers(elements, { node }) {
         const callback = async (toProcessEl, nodeEl) => {
             const canImgHaveHoverEffect = await this.canHaveHoverEffect(toProcessEl);
             if (!canImgHaveHoverEffect) {
@@ -351,7 +357,7 @@ export class AnimateOptionPlugin extends Plugin {
         const selection = this.dependencies.selection.getSelectionData().editableSelection;
         const ancestor = closestElement(selection.commonAncestorContainer, ".o_animated_text");
         if (ancestor) {
-            const selectionText = selection.textContent().replace(/\s+/g, " ").trim();
+            const selectionText = selection.toString().replace(/\s+/g, " ").trim();
             const ancestorText = ancestor.innerText.replace(/\s+/g, " ").trim();
             if (selection.isCollapsed || selectionText === ancestorText) {
                 return ancestor;
@@ -393,12 +399,15 @@ export class AnimateOptionPlugin extends Plugin {
             img.loading = "eager";
         }
     }
-    cleanForSave({ root }) {
+    cleanForSave(root) {
         for (const el of root.querySelectorAll(".o_animate_preview")) {
             el.classList.remove("o_animate_preview");
         }
     }
 }
+
+registry.category("website-plugins").add(AnimateOptionPlugin.id, AnimateOptionPlugin);
+registry.category("translation-plugins").add(AnimateOptionPlugin.id, AnimateOptionPlugin);
 
 export class SetAnimationModeAction extends BuilderAction {
     static id = "setAnimationMode";
@@ -433,7 +442,7 @@ export class SetAnimationModeAction extends BuilderAction {
             // Use getResource instead of this.dependencies as imageHover is not
             // included in translation. This implementation is a hack and could
             // be improved.
-            await this.getResource("remove_hover_effect_handlers")[0](editingElement);
+            await this.triggerAsync("on_hover_animation_mode_cleaned_handlers", editingElement);
         }
 
         const isNextAnimationFadein = this.animationWithFadein.includes(nextAction.value);
@@ -459,7 +468,7 @@ export class SetAnimationModeAction extends BuilderAction {
             // Use getResource instead of this.dependencies as imageHover is not
             // included in translation. This implementation is a hack and could
             // be improved.
-            await this.getResource("set_hover_effect_handlers")[0](editingElement);
+            await this.triggerAsync("on_hover_animation_mode_applied_handlers", editingElement);
         }
         if (forceAnimation) {
             this.dependencies.animateOption.forceAnimation(editingElement);
@@ -553,8 +562,6 @@ export class SetAnimationEffectAction extends BuilderAction {
         this.dependencies.animateOption.forceAnimation(editingElement);
     }
 }
-
-registry.category("website-plugins").add(AnimateOptionPlugin.id, AnimateOptionPlugin);
 
 function intersect(a, b) {
     return a.filter((value) => b.includes(value));

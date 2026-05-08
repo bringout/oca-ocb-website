@@ -7,11 +7,9 @@ from odoo.addons.mail.tools.discuss import Store
 class WebClient(WebclientController):
     @classmethod
     def _process_request_for_all(self, store: Store, name, params):
-        if name == "init_livechat" and (
-            chat_request_channel := self._link_visitor_to_livechat(params)
-        ):
-            store.add(chat_request_channel, extra_fields={"open_chat_window": True})
-            chat_request_channel.is_pending_chat_request = False
+        if name == "init_livechat" and (channel := self._link_visitor_to_livechat(params)):
+            channel.is_pending_chat_request = False
+            store.add(channel, "_store_open_chat_window_fields")
         super()._process_request_for_all(store, name, params)
 
     @classmethod
@@ -19,9 +17,9 @@ class WebClient(WebclientController):
         """ Check if there is an opened chat request for the website livechat
         channel and the current visitor (from request). If so, link the visitor
         to the chat request channel. Channel will then be returned as part of
-        the mail store initialization (/mail/data).
+        the mail store initialization (/mail/store).
         """
-        visitor = request.env['website.visitor']._get_visitor_from_request()
+        visitor = request.env['ir.http']._get_visitor_from_request()
         if not visitor:
             return
         # get active chat_request linked to visitor

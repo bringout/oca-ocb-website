@@ -8,7 +8,6 @@ import {
 import { Builder } from "@html_builder/builder";
 import { SetupEditorPlugin } from "@html_builder/core/setup_editor_plugin";
 import { Plugin } from "@html_editor/plugin";
-import { withSequence } from "@html_editor/utils/resource";
 import { defineMailModels, startServer } from "@mail/../tests/mail_test_helpers";
 import { describe } from "@odoo/hoot";
 import { advanceTime, animationFrame, click, queryOne, tick, waitFor } from "@odoo/hoot-dom";
@@ -34,10 +33,11 @@ import { WebsiteBuilderClientAction } from "@website/client_actions/website_prev
 import { WebsiteSystrayItem } from "@website/client_actions/website_preview/website_systray_item";
 import { mockImageRequests } from "./image_test_helpers";
 import { getWebsiteSnippets } from "./snippets_getter.hoot";
-import { BaseOptionComponent, revertPreview } from "@html_builder/core/utils";
-import { BorderConfigurator } from "@html_builder/plugins/border_configurator_option";
+import { revertPreview } from "@html_builder/core/utils";
 import { WebsiteBuilder } from "@website/builder/website_builder";
+import { session } from "@web/session";
 import { getTranslatedElements } from "./translated_elements_getter.hoot";
+import { BackgroundShapeOptionPlugin } from "@html_builder/plugins/background_option/background_shape_option_plugin";
 
 class Website extends models.Model {
     _name = "website";
@@ -58,9 +58,11 @@ export const setupWebsiteBuilderOeId = 539;
 export const invisibleEl =
     '<div class="s_invisible_el o_snippet_invisible" data-name="Invisible Element" data-invisible="1"></div>';
 
-export function defineWebsiteModels() {
+export function defineWebsiteModels({ includeMailModels = true } = {}) {
     describe.current.tags("desktop");
-    defineMailModels();
+    if (includeMailModels) {
+        defineMailModels();
+    }
     defineModels([Website, IrUiView]);
     onRpc("/website/theme_customize_data_get", () => []);
     onRpc("website", "web_search_read", () => ({
@@ -114,6 +116,7 @@ export async function setupWebsiteBuilder(
         footerContent = "",
         beforeWrapwrapContent = "",
         translateMode = false,
+        enableIframeTransitions = false,
         onIframeLoaded = () => {},
         delayReload = async () => {},
     } = {}
@@ -140,7 +143,9 @@ export async function setupWebsiteBuilder(
         resolveIframeLoaded = async (el) => {
             const iframe = el;
             const styleEl = iframe.contentDocument.createElement("style");
-            styleEl.textContent = /*css*/ `* { transition: none !important; } `;
+            if (!enableIframeTransitions) {
+                styleEl.textContent = /*css*/ `* { transition: none !important; }`;
+            }
             if (styleContent) {
                 styleEl.textContent += styleContent;
             }
@@ -171,9 +176,9 @@ export async function setupWebsiteBuilder(
         resolveEditAssetsLoaded = () => resolve();
     });
 
-    onRpc("/website/get_translated_elements", () => getTranslatedElements());
-
     patchDOMParser();
+
+    onRpc("/website/get_translated_elements", () => getTranslatedElements());
 
     patchWithCleanup(WebsiteBuilderClientAction.prototype, {
         setIframeLoaded() {
@@ -266,15 +271,32 @@ export async function setupWebsiteBuilder(
     patchWithCleanup(SetupEditorPlugin.prototype, {
         setup() {
             super.setup();
-            editableContent = this.getEditableElements(
-                '.oe_structure.oe_empty, [data-oe-type="html"]'
-            )[0];
+            editableContent = this.editable.querySelector(
+                '.o_savable.oe_structure.oe_empty, .o_savable[data-oe-type="html"]'
+            );
         },
     });
 
     patchWithCleanup(WebsiteSessionPlugin.prototype, {
         getSession() {
             return {};
+        },
+    });
+
+    // Remove as soon as the background shape are not always instantiated when
+    // entering in edit mode.
+    patchWithCleanup(BackgroundShapeOptionPlugin.prototype, {
+        getShapeStylePosition(shapeId, flip) {
+            if (!this.shapeStyles[this.convertShapeIdForStyleSearch(shapeId)]) {
+                return [50, 50];
+            }
+            return super.getShapeStylePosition(shapeId, flip);
+        },
+        getShapeStyleUrl(shapeId) {
+            if (!this.shapeStyles[this.convertShapeIdForStyleSearch(shapeId)]) {
+                return "";
+            }
+            return super.getShapeStyleUrl(shapeId);
         },
     });
 
@@ -291,8 +313,16 @@ export async function setupWebsiteBuilder(
         await originalIframeLoaded;
     }
     if (loadIframeBundles) {
+        const targetDoc = iframe.contentDocument;
+        const sessionScriptEl = targetDoc.createElement("script");
+        sessionScriptEl.type = "text/javascript";
+        sessionScriptEl.textContent = `
+            odoo = {};
+            odoo.__session_info__ = ${JSON.stringify(session)}
+        `;
+        targetDoc.head.append(sessionScriptEl);
         await loadBundle("web.assets_frontend", {
-            targetDoc: iframe.contentDocument,
+            targetDoc,
             js: loadAssetsFrontendJS,
         });
     }
@@ -340,29 +370,6 @@ export function addPlugin(...Plugin) {
     });
 }
 
-export function addOption(option) {
-    const pluginId = uniqueId("test-option");
-    const BaseComponent = option.Component || BaseOptionComponent;
-    class Option extends BaseComponent {
-        static components = { ...BaseComponent.components, BorderConfigurator };
-    }
-    const staticProps = { ...option };
-    const sequence = staticProps.sequence;
-    delete staticProps.Component;
-    delete staticProps.sequence;
-    Object.assign(Option, staticProps);
-
-    const P = {
-        [pluginId]: class extends Plugin {
-            static id = pluginId;
-            resources = {
-                builder_options: sequence ? withSequence(sequence, Option) : Option,
-            };
-        },
-    }[pluginId];
-    addPlugin(P);
-}
-
 export function addActionOption(actions = {}) {
     const pluginId = uniqueId("test-action-plugin");
     class P extends Plugin {
@@ -380,7 +387,7 @@ export function addDropZoneSelector(selector) {
     class P extends Plugin {
         static id = pluginId;
         resources = {
-            dropzone_selector: [selector],
+            dropzone_selectors: [selector],
         };
     }
     addPlugin(P);
@@ -447,6 +454,7 @@ export async function setupWebsiteBuilderWithSnippet(snippetName, options = {}) 
                 default_lang_id: {
                     code: "en_US",
                 },
+                company_id: 1,
             };
         },
     });
@@ -460,6 +468,57 @@ export async function setupWebsiteBuilderWithSnippet(snippetName, options = {}) 
         ...options,
         hasToCreateWebsite: false,
     });
+}
+export const websiteServiceInTranslateMode = {
+    currentWebsite: {
+        metadata: {
+            lang: "fr_BE",
+            langName: " Français (BE)",
+            translatable: true,
+            defaultLangName: "English (US)",
+        },
+        default_lang_id: {
+            code: "en_US",
+        },
+    },
+    // Minimal context to avoid crashes.
+    context: {},
+    websites: [
+        {
+            id: 1,
+            metadata: {},
+        },
+    ],
+};
+
+export async function setupSidebarBuilderForTranslation(options) {
+    const { websiteContent, loadIframeBundles = false } = options;
+    // Hack: configure the snippets menu as in translate mode when clicking
+    // on the "Edit" button of the systray. The goal of this hack is to avoid
+    // the handling of an extra reload of the action to arrive in translate
+    // mode.
+    patchWithCleanup(Builder.prototype, {
+        setup() {
+            super.setup();
+            this.env.services.website = websiteServiceInTranslateMode;
+            this.websiteService = websiteServiceInTranslateMode;
+            this.websiteContext = this.websiteService.context;
+        },
+    });
+    const { getEditor, getEditableContent, openBuilderSidebar } = await setupWebsiteBuilder(
+        websiteContent,
+        {
+            openEditor: false,
+            translateMode: true,
+            onIframeLoaded: (iframe) => {
+                websiteServiceInTranslateMode.pageDocument = iframe.contentDocument;
+            },
+            loadIframeBundles,
+        }
+    );
+    await getTranslatedElements();
+    await openBuilderSidebar();
+    return { getEditor, getEditableContent };
 }
 
 export async function getStructureSnippet(snippetName) {
@@ -482,4 +541,12 @@ export async function insertStructureSnippet(editor, snippetName) {
     const parentEl = editor.editable.querySelector("#wrap") || editor.editable;
     parentEl.append(snippetEl);
     editor.shared.history.addStep();
+}
+
+export async function toggleMobilePreview() {
+    await contains("button[data-action='mobile']").click();
+    // The click above will cause a resize of the iframe containing the builder.
+    // Resize observers that react to that change and update the ui accordingly
+    // will need one more animation frame to have their changes reflected
+    await animationFrame();
 }

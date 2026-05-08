@@ -1,10 +1,12 @@
+import { useLayoutEffect, useRef } from "@web/owl2/utils";
 import { PageDependencies } from "@website/components/dialog/page_properties";
 import { standardFieldProps } from "@web/views/fields/standard_field_props";
 import { UrlField, urlField } from "@web/views/fields/url/url_field";
 import { registry } from "@web/core/registry";
 import { _t } from "@web/core/l10n/translation";
 import { debounce } from "@web/core/utils/timing";
-import { Component, useEffect, useRef } from "@odoo/owl";
+import { Component } from "@odoo/owl";
+import { charField, CharField } from "@web/views/fields/char/char_field";
 
 /**
  * Displays website page dependencies and URL redirect options when the page URL
@@ -27,7 +29,7 @@ class PageUrlField extends UrlField {
         // parameters as soon as the user types.
         // TODO should find a way to do this more automatically (and option in
         // the framework? or at least a t-on-input?)
-        useEffect(
+        useLayoutEffect(
             (inputEl) => {
                 if (inputEl) {
                     const originalValue = inputEl.value;
@@ -123,3 +125,30 @@ export const imageRadioField = {
 };
 
 registry.category("fields").add("image_radio", imageRadioField);
+
+/**
+ * A Char field that updates its value on input.
+ */
+export class UrlWarningBannerVisibilityCharField extends CharField {
+    static template = "website.UrlWarningBannerVisibilityCharField";
+
+    onFocus(ev) {
+        if (this.props.record.data.is_url_from_exist) {
+            this.props.record.update({ is_url_from_exist: false });
+        }
+    }
+
+    onBlur() {
+        this.props.record.update({ [this.props.name]: this.input.el.value });
+        super.onBlur();
+    }
+}
+
+export const urlWarningBannerVisibilityCharField = {
+    ...charField,
+    component: UrlWarningBannerVisibilityCharField,
+};
+
+registry
+    .category("fields")
+    .add("url_warning_banner_visibility", urlWarningBannerVisibilityCharField);

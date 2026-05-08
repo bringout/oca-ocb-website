@@ -4,10 +4,10 @@
 <template id="event_exhibitor_main" name="Event Exhibitor">
     <t t-set="no_header" t-value="option_widescreen"/>
     <t t-set="no_footer" t-value="option_widescreen"/>
-    <t t-call="website_event.layout">
-        <t t-set="navbar_back_url" t-value="'/event/%s/exhibitors' % (slug(event))"/>
-        <t t-set="navbar_back_title">Back to all Exhibitors</t>
-        <t t-set="navbar_back_text">All Exhibitors</t>
+    <t t-call="website_event.layout"
+        navbar_back_url="'/event/%s/exhibitors' % (slug(event))"
+        navbar_back_title.translate="Back to all Exhibitors"
+        navbar_back_text.translate="All Exhibitors">
 
 
         <div class="o_wevent_online o_wesponsor_index">
@@ -147,6 +147,7 @@
                     <a class="d-flex flex-wrap flex-md-nowrap text-decoration-none text-reset"
                         t-att-href="sponsor_other.website_absolute_url"
                         t-att-data-publish="sponsor_other.website_published and 'on' or 'off'">
+                        <t t-if="not sponsor_other.website_published" t-call="website.unpublished_badge" is_minimal_badge="True"/>
                         <div class="d-flex flex-column align-items-center">
                             <img t-if="sponsor_other.partner_id.country_id"
                             class="o_wesponsor_aside_logo mb-1"
@@ -163,9 +164,6 @@
                                 <span class="d-inline-block text-truncate" t-out="sponsor_other.name"/>
                             </span>
                             <small class="opacity-75" t-out="sponsor_other.subtitle"/>
-                            <div class="d-inline-block float-end" t-if="not sponsor_other.website_published">
-                                <small class="badge text-bg-danger">Unpublished</small>
-                            </div>
                         </div>
                     </a>
                 </li>

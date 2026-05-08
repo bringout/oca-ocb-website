@@ -21,13 +21,13 @@ class TestWebsitePageManager(odoo.tests.HttpCase):
         })
 
         website.domain = self.base_url()
-        self.start_tour('/odoo#action=website.action_website_pages_list', 'website_page_manager_direct_access', login='admin')
+        self.start_tour('/odoo/action-website.action_website_pages_list', 'website_page_manager_direct_access', login='admin')
 
     def test_generic_page_diverged_not_shown(self):
         Page = self.env['website.page']
         Website = self.env['website']
 
-        website = Website.browse(1)
+        website = self.env.ref('website.default_website')
         generic_page = Page.create({
             'name': 'Test Diverged',
             'type': 'qweb',
@@ -67,7 +67,7 @@ class TestWebsitePageManager(odoo.tests.HttpCase):
             'view_id': test_view.id,
             'url': '/test-duplicate',
             'name': 'Test Duplicate',
-            'website_id': 1,
+            'website_id': self.ref('website.default_website'),
         })
 
         pages = Page.search([('name', 'like', 'Test Duplicate')])

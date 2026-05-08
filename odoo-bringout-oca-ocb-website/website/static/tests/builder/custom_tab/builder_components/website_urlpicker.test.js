@@ -1,8 +1,8 @@
 import { after, before, expect, test } from "@odoo/hoot";
 import { xml } from "@odoo/owl";
 import { contains, onRpc } from "@web/../tests/web_test_helpers";
+import { addBuilderOption } from "@html_builder/../tests/helpers";
 import {
-    addOption,
     defineWebsiteModels,
     setupWebsiteBuilder,
 } from "@website/../tests/builder/website_helpers";
@@ -67,7 +67,7 @@ after(() => {
 });
 
 test("link button opens in new window if url not empty", async () => {
-    addOption({
+    addBuilderOption({
         selector: ".test-options-target",
         template: xml`<BuilderUrlPicker dataAttributeAction="'url'"/>`,
     });
@@ -88,7 +88,7 @@ test("opens dropdown when typing /", async () => {
     mockGetSuggestedLinks(() => {
         expect.step("button_immediate_install");
     });
-    addOption({
+    addBuilderOption({
         selector: ".test-options-target",
         template: xml`<BuilderUrlPicker dataAttributeAction="'url'"/>`,
     });
@@ -103,7 +103,7 @@ test("opens dropdown when typing /", async () => {
 
 test("selects and commits value from dropdown", async () => {
     mockGetSuggestedLinks();
-    addOption({
+    addBuilderOption({
         selector: ".test-options-target",
         template: xml`<BuilderUrlPicker dataAttributeAction="'url'"/>`,
     });
@@ -120,7 +120,7 @@ test("selects and commits value from dropdown", async () => {
 
 test("collects anchors in current page and suggests them", async () => {
     mockGetSuggestedLinks();
-    addOption({
+    addBuilderOption({
         selector: ".test-options-target",
         template: xml`<BuilderUrlPicker dataAttributeAction="'url'"/>`,
     });

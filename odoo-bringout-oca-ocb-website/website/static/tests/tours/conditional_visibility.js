@@ -6,6 +6,7 @@ import {
     insertSnippet,
     goBackToBlocks,
     registerWebsitePreviewTour,
+    unfoldOptionsGroup,
 } from "@website/js/tours/tour_utils";
 
 const snippets = [
@@ -56,7 +57,6 @@ registerWebsitePreviewTour(
     "conditional_visibility_1",
     {
         edition: true,
-        url: "/",
     },
     () => [
         ...insertSnippet(snippets[0]),
@@ -116,7 +116,6 @@ registerWebsitePreviewTour(
     "conditional_visibility_3",
     {
         edition: true,
-        url: "/",
     },
     () => [
         checkEyeIcon("Text - Image", true),
@@ -176,7 +175,6 @@ registerWebsitePreviewTour(
     "conditional_visibility_4",
     {
         edition: true,
-        url: "/",
     },
     () => [
         // Click on the "Text-Image" snippet.
@@ -218,8 +216,8 @@ registerWebsitePreviewTour(
 registerWebsitePreviewTour(
     "conditional_visibility_5",
     {
+        undeterministicTour_doNotCopy: true, // Remove this key to make the tour failed. ( It removes delay between steps )
         edition: true,
-        url: "/",
     },
     () => [
         {
@@ -238,6 +236,7 @@ registerWebsitePreviewTour(
             trigger: ":iframe .s_text_image[data-snippet=s_image_text] img",
             run: "click",
         },
+        ...unfoldOptionsGroup("Column"),
         {
             content: "Change visibility of the 'Image - Text' snippet",
             trigger:

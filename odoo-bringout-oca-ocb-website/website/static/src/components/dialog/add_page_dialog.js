@@ -1,3 +1,4 @@
+import { useRef, useState, useSubEnv } from "@web/owl2/utils";
 import { isBrowserFirefox } from "@web/core/browser/feature_detection";
 import { getActiveHotkey } from "@web/core/hotkeys/hotkey_service";
 import { rpc } from "@web/core/network/rpc";
@@ -5,13 +6,14 @@ import { renderToElement } from "@web/core/utils/render";
 import { useAutofocus, useService } from "@web/core/utils/hooks";
 import { _t } from "@web/core/l10n/translation";
 import { WebsiteDialog } from "@website/components/dialog/dialog";
+import { useMatrixKeyNavigation } from "@html_builder/utils/keyboard_navigation";
 import { Switch } from "@html_editor/components/switch/switch";
 import {
     applyTextHighlight,
     removeTextHighlight,
     getObservedEls,
 } from "@website/js/highlight_utils";
-import { useRef, useState, useSubEnv, Component, onWillStart, onMounted, status } from "@odoo/owl";
+import { Component, onWillStart, onMounted, status } from "@odoo/owl";
 import { onceAllImagesLoaded } from "@website/utils/images";
 
 const NO_OP = () => {};
@@ -58,6 +60,7 @@ class AddPageTemplateBlank extends Component {
             type: Boolean,
             optional: true,
         },
+        onPageKeydown: { type: Function },
     };
 
     setup() {
@@ -87,6 +90,7 @@ class AddPageTemplatePreview extends Component {
             type: Boolean,
             optional: true,
         },
+        onPageKeydown: { type: Function },
     };
 
     setup() {
@@ -94,6 +98,7 @@ class AddPageTemplatePreview extends Component {
         this.iframeRef = useRef("iframe");
         this.previewRef = useRef("preview");
         this.holderRef = useRef("holder");
+
         this.resizeObserver = new ResizeObserver((entries) => {
             for (const entry of entries) {
                 const targetEl = entry.target.querySelector(".o_text_highlight") || entry.target;
@@ -133,6 +138,8 @@ class AddPageTemplatePreview extends Component {
             const styleEl = document.createElement("style");
             // Prevent successive resizes.
             const fullHeight = getComputedStyle(document.querySelector(".o_action_manager")).height;
+            const threeQuarterHeight = `${Math.round((3 * parseInt(fullHeight)) / 4)}px`;
+            // This is kept for compatibility
             const halfHeight = `${Math.round(parseInt(fullHeight) / 2)}px`;
             const css = `
                 html, body {
@@ -160,6 +167,9 @@ class AddPageTemplatePreview extends Component {
                 }
                 section.o_half_screen_height {
                     min-height: ${halfHeight} !important;
+                }
+                section.o_three_quarter_height {
+                    min-height: ${threeQuarterHeight} !important;
                 }
                 section.o_full_screen_height {
                     min-height: ${fullHeight} !important;
@@ -301,6 +311,13 @@ class AddPageTemplatePreviews extends Component {
 
     setup() {
         super.setup();
+        this.container = useRef("previews-container");
+
+        this.onPageKeydown = useMatrixKeyNavigation(
+            () => [this.container.el],
+            ".o_page_template",
+            ".o_button_area"
+        );
     }
 
     get columns() {
@@ -318,6 +335,7 @@ class AddPageTemplates extends Component {
     static template = "website.AddPageTemplates";
     static props = {
         onTemplatePageChanged: Function,
+        defaultTemplateId: { type: String, optional: true },
     };
     static components = {
         AddPageTemplatePreviews,
@@ -344,12 +362,21 @@ class AddPageTemplates extends Component {
                     },
                 },
             ],
+            activePageId: "basic",
         });
         this.pages = undefined;
 
         onWillStart(() => {
             this.preparePages().then((pages) => {
                 this.state.pages = pages;
+                if (
+                    this.props.defaultTemplateId &&
+                    this.state.pages.some((page) => page.id === this.props.defaultTemplateId)
+                ) {
+                    this.state.activePageId = this.props.defaultTemplateId;
+                } else {
+                    this.state.activePageId = this.state.pages[0]?.props.id;
+                }
             });
         });
     }
@@ -393,23 +420,8 @@ class AddPageTemplates extends Component {
     }
 
     onTabListBtnClick(id) {
-        for (const page of this.state.pages) {
-            if (page.id === id) {
-                page.isAccessed = true;
-            }
-        }
-        const activeTabEl = this.tabsRef.el.querySelector(".active");
-        const activePaneEl = this.panesRef.el.querySelector(".active");
-        activeTabEl?.classList?.remove("active");
-        activeTabEl?.setAttribute("tabIndex", "-1");
-        activePaneEl?.classList?.remove("active");
-        activePaneEl?.setAttribute("inert", "inert"); // Make sure trapFocus() works.
+        this.state.activePageId = id;
         const tabEl = this.tabsRef.el.querySelector(`[data-id=${id}]`);
-        const paneEl = this.panesRef.el.querySelector(`[data-id=${id}]`);
-        tabEl.classList.add("active");
-        tabEl.tabIndex = 0;
-        paneEl.classList.add("active");
-        paneEl.removeAttribute("inert");
         this.props.onTemplatePageChanged(tabEl.dataset.id === "basic" ? "" : tabEl.textContent);
     }
 
@@ -447,6 +459,10 @@ export class AddPageDialog extends Component {
             optional: true,
         },
         pageTitle: {
+            type: String,
+            optional: true,
+        },
+        defaultTemplateId: {
             type: String,
             optional: true,
         },

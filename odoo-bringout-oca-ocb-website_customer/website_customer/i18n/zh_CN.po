@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.5alpha1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-25 18:37+0000\n"
+"POT-Creation-Date: 2025-12-16 18:37+0000\n"
 "PO-Revision-Date: 2025-11-08 19:09+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Chinese (Simplified Han script) <https://translate.odoo.com/"
@@ -82,6 +82,16 @@ msgstr "所有行业"
 #: model_terms:ir.ui.view,arch_db:website_customer.res_partner_tag_view_search
 msgid "Archived"
 msgstr "已归档"
+
+#. module: website_customer
+#: model:ir.model.fields,field_description:website_customer.field_res_partner_tag__publish_on
+msgid "Auto publish on"
+msgstr ""
+
+#. module: website_customer
+#: model:ir.model.fields,help:website_customer.field_res_partner_tag__publish_on
+msgid "Automatically publish the page on the chosen date and time."
+msgstr ""
 
 #. module: website_customer
 #: model_terms:ir.ui.view,arch_db:website_customer.details
@@ -278,6 +288,11 @@ msgid "Partners"
 msgstr "合作伙伴"
 
 #. module: website_customer
+#: model:ir.model.fields,field_description:website_customer.field_res_partner_tag__published_date
+msgid "Published date"
+msgstr ""
+
+#. module: website_customer
 #. odoo-python
 #: code:addons/website_customer/models/website.py:0
 #: model_terms:ir.ui.view,arch_db:website_customer.references_block
@@ -369,43 +384,3 @@ msgstr "站点标签"
 #: model_terms:ir.ui.view,arch_db:website_customer.opt_country
 msgid "World Map"
 msgstr "地界地图"
-
-#~ msgid ""
-#~ "<span class=\"fa fa-external-link\" role=\"img\" aria-label=\"External "
-#~ "link\" title=\"External link\"/>"
-#~ msgstr ""
-#~ "<span class=\"fa fa-external-link\" role=\"img\" aria-label=\"External "
-#~ "link\" title=\"External link\"/>"
-
-#~ msgid "Implemented By"
-#~ msgstr "执行者"
-
-#~ msgid "Last Modified on"
-#~ msgstr "最后修改时间"
-
-#~ msgid "No result found"
-#~ msgstr "找不到结果"
-
-#~ msgid "Our References"
-#~ msgstr "我们的参考"
-
-#~ msgid "References Page"
-#~ msgstr "参考网页"
-
-#~ msgid "References by Country"
-#~ msgstr "按国家参考"
-
-#~ msgid "References by Industries"
-#~ msgstr "行业案例"
-
-#~ msgid "References by Tag"
-#~ msgstr "通过标记引用"
-
-#~ msgid "The full URL to access the document through the website."
-#~ msgstr "通过网站访问文档的完整网址。"
-
-#~ msgid "Trusted by millions worldwide"
-#~ msgstr "备受全世界百万人的信任"
-
-#~ msgid "reference(s))"
-#~ msgstr "参考"

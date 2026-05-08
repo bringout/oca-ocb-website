@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
+from odoo.tests import tagged
+
 from odoo.addons.website.tests.test_performance import UtilPerf
 import random
 import datetime
@@ -30,7 +32,7 @@ class TestBlogPerformance(UtilPerf):
             "name": "Post Test",
             "subtitle": "Subtitle Test",
             "blog_id": blog.id,
-            "author_id": self.env.user.id,
+            "author_id": self.env.user.partner_id.id,
             "tag_ids": [(4, tag.id) for tag in blog_tags],
             "is_published": True,
             "cover_properties": """{"background-image": "url('/website_blog/static/src/img/cover_1.jpg')", "resize_class": "o_record_has_cover o_half_screen_height", "opacity": "0"}""",

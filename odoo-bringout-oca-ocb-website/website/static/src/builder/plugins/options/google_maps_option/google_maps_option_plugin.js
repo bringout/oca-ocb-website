@@ -1,10 +1,7 @@
 import { registry } from "@web/core/registry";
 import { _t } from "@web/core/l10n/translation";
-import { renderToElement } from "@web/core/utils/render";
 import { Plugin } from "@html_editor/plugin";
 import { GoogleMapsApiKeyDialog } from "./google_maps_api_key_dialog";
-import { GoogleMapsOption } from "./google_maps_option";
-import { Deferred } from "@web/core/utils/concurrency";
 import { BuilderAction } from "@html_builder/core/builder_action";
 
 /**
@@ -54,15 +51,17 @@ export class GoogleMapsOptionPlugin extends Plugin {
     ];
     /** @type {import("plugins").WebsiteResources} */
     resources = {
-        builder_options: [GoogleMapsOption],
-        so_content_addition_selector: [".s_google_map"],
+        so_content_addition_selectors: [".s_google_map"],
         on_snippet_dropped_handlers: this.onSnippetDropped.bind(this),
         builder_actions: {
             ResetMapColorAction,
-            ShowDescriptionAction,
         },
         // TODO remove when the snippet will have a "Height" option.
-        keep_overlay_options: (el) => el.matches(".s_google_map"),
+        should_keep_overlay_options_predicates: (el) => {
+            if (el.matches(".s_google_map")) {
+                return true;
+            }
+        },
     };
 
     setup() {
@@ -76,14 +75,24 @@ export class GoogleMapsOptionPlugin extends Plugin {
 
         /** @type {Map<HTMLElement, Deferred} */
         this.recentlyDroppedSnippetDeferredInit = new Map();
+        this.upgradeSnippets();
+    }
+
+    // TODO: Remove this method when data-vxml is reintroduced.
+    upgradeSnippets() {
+        // This is for pages which already existed before the plugin was created.
+        this.document.querySelectorAll(".s_google_map").forEach((mapSnippetEl) => {
+            mapSnippetEl.classList.add("o_not_editable");
+            mapSnippetEl.dataset.vxml = "001";
+        });
     }
 
     async onSnippetDropped({ snippetEl }) {
         if (snippetEl.matches(".s_google_map")) {
-            const deferredInit = new Deferred();
+            const deferredInit = Promise.withResolvers();
             this.recentlyDroppedSnippetDeferredInit.set(snippetEl, deferredInit);
             this.dependencies.edit_interaction.restartInteractions(snippetEl);
-            const initSuccess = await deferredInit;
+            const initSuccess = await deferredInit.promise;
             this.recentlyDroppedSnippetDeferredInit.delete(snippetEl);
             if (!initSuccess) {
                 return true; // cancel
@@ -153,7 +162,7 @@ export class GoogleMapsOptionPlugin extends Plugin {
                 editingElement.dataset.mapGps = coordinates;
                 editingElement.dataset.pinAddress = place.formatted_address;
                 // Restart interactions to re-render the map.
-                this.dispatchTo("content_manually_updated_handlers", editingElement);
+                this.trigger("on_content_manually_updated_handlers", editingElement);
                 this.dependencies.history.addStep();
             }
         }
@@ -297,18 +306,6 @@ export class ResetMapColorAction extends BuilderAction {
     static id = "resetMapColor";
     apply({ editingElement }) {
         editingElement.dataset.mapColor = "";
-    }
-}
-export class ShowDescriptionAction extends BuilderAction {
-    static id = "showDescription";
-    isApplied({ editingElement }) {
-        return !!editingElement.querySelector(".description");
-    }
-    apply({ editingElement }) {
-        editingElement.append(renderToElement("html_builder.GoogleMapsDescription"));
-    }
-    clean({ editingElement }) {
-        editingElement.querySelector(".description").remove();
     }
 }
 

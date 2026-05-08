@@ -45,15 +45,24 @@ class TestWebsiteBlogFlow(TestWebsiteBlogCommon):
             self.user_public.partner_id, self.test_blog_post.message_partner_ids,
             'website_blog: subscribing to a blog should not subscribe to its posts')
 
-        # Publish the blog
-        self.test_blog_post.write({'website_published': True})
+        # Publish the blog post at a future date
+        self.test_blog_post.write({"website_published": False, "publish_on": '2050-01-01 00:00:00', "published_date": False})
+
+        publish_message = next((m for m in self.test_blog_post.blog_id.message_ids if m.subtype_id.id == self.ref('website_blog.mt_blog_blog_published')), None)
+        self.assertTrue(
+            not publish_message or publish_message.notified_partner_ids != (self.user_employee.partner_id | self.user_public.partner_id),
+            'website_blog: people following a blog should not be notified of a post that will be published in the future')
+
+        # Publish the blog post now
+        self.test_blog_post.write({"website_published": True, "publish_on": False, "published_date": False})
 
         # Check publish message has been sent to blog followers
         publish_message = next((m for m in self.test_blog_post.blog_id.message_ids if m.subtype_id.id == self.ref('website_blog.mt_blog_blog_published')), None)
+        self.assertTrue(publish_message)
         self.assertEqual(
             publish_message.notified_partner_ids,
             self.user_employee.partner_id | self.user_public.partner_id,
-            'website_blog: peuple following a blog should be notified of a published post')
+            'website_blog: people following a blog should be notified of a published post')
 
         # Armand posts a message -> becomes follower
         self.test_blog_post.with_user(self.user_employee).message_post(
@@ -72,7 +81,7 @@ class TestWebsiteBlogFlow(TestWebsiteBlogCommon):
         attachment = self.env['ir.attachment'].sudo().create({
             'name': 'some_attachment.pdf',
             'res_model': 'mail.compose.message',
-            'datas': 'test',
+            'raw': b'test',
             'type': 'binary',
         })
 
@@ -93,7 +102,7 @@ class TestWebsiteBlogFlow(TestWebsiteBlogCommon):
         second_attachment = self.env['ir.attachment'].sudo().create({
             'name': 'some_attachment.pdf',
             'res_model': 'mail.compose.message',
-            'datas': 'test',
+            'raw': b'test',
             'type': 'binary',
         })
 
@@ -188,8 +197,8 @@ class TestWebsiteBlogTranslationFlow(HttpCase, TestWebsiteBlogCommon):
         # Setup
         br_lang = self.env['res.lang']._activate_lang('pt_BR')
         en_lang = self.env['res.lang']._activate_lang('en_US')
-        
-        website = self.env['website'].browse(1)
+
+        website = self.env.ref('website.default_website')
         website.language_ids += br_lang
         website.default_lang_id = br_lang
 
@@ -206,7 +215,7 @@ class TestWebsiteBlogTranslationFlow(HttpCase, TestWebsiteBlogCommon):
         })
         self.assertEqual('Todos os blogs', blog_post.with_context(lang=br_lang.code).content)
         self.assertEqual('All blogs', blog_post.with_context(lang=en_lang.code).content)
-        
+
         # Test updating translation
         payload = self.build_rpc_payload({
             'model': blog_post._name,
@@ -217,6 +226,20 @@ class TestWebsiteBlogTranslationFlow(HttpCase, TestWebsiteBlogCommon):
         self.url_open('/website/field/translation/update', data=json.dumps(payload), headers=self.headers)
         self.assertEqual('Todos os blogs', blog_post.with_context(lang=br_lang.code).content)
         self.assertEqual('Updated blogs', blog_post.with_context(lang=en_lang.code).content)
+
+    def test_url_with_falsy_value(self):
+        """Test that accessing a tag without id in the url does not crash."""
+        blog = self.env['blog.blog'].create({'name': 'Test Blog'})
+        blog_tag = self.env['blog.tag'].create({'name': 'demo'})
+        self.env['blog.post'].create({
+            'name': 'Test Blog Post',
+            'blog_id': blog.id,
+            'tag_ids': [(6, 0, [blog_tag.id])],
+            'author_id': self.env.user.partner_id.id,
+            'is_published': True,
+        })
+        response = self.url_open('/blog/tag/demo')
+        self.assertEqual(response.status_code, 200)
 
     def test_cannot_delete_field_used_in_website_blog(self):
         self.partner_model = self.env['ir.model'].search([('model', '=', 'res.partner')])

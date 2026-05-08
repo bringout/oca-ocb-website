@@ -288,9 +288,3 @@ msgstr "Menu de evento do site"
 #: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_registration
 msgid "if you have any question."
 msgstr "caso tenha dúvidas."
-
-#~ msgid "It looks like your email is linked to an existing account."
-#~ msgstr "Parece que seu e-mail está vinculado a uma conta existente."
-
-#~ msgid "Please Sign In."
-#~ msgstr "Faça login."

@@ -3,10 +3,11 @@
 import re
 from contextlib import contextmanager
 
-from odoo import http
+from odoo.http.router import root
+from odoo.tests.common import TransactionCase, tagged
+
 from odoo.addons.base.tests.common import TransactionCaseWithUserDemo
 from odoo.addons.http_routing.tests.common import MockRequest
-from odoo.tests.common import TransactionCase, tagged
 
 
 class TestQweb(TransactionCaseWithUserDemo):
@@ -51,14 +52,14 @@ class TestQweb(TransactionCaseWithUserDemo):
         rendered = self.env['ir.qweb']._render(template.id)
         self.assertEqual(rendered.strip(), result.strip(), 'First rendering (without website_id)')
 
-        rendered = self.env['ir.qweb'].with_context(website_id=1)._render(template.id)
-        self.assertEqual(rendered.strip(), result.strip(), 'Second rendering (with website_id=1)')
+        rendered = self.env['ir.qweb'].with_context(website_id=self.ref('website.default_website'))._render(template.id)
+        self.assertEqual(rendered.strip(), result.strip(), 'Second rendering (with website_id=default)')
 
         rendered = self.env['ir.qweb'].with_context(website_id=None)._render(template.id)
         self.assertEqual(rendered.strip(), result.strip(), 'Third rendering (with website_id=None)')
 
-        rendered = self.env['ir.qweb'].with_context(website_id=1)._render(template.id)
-        self.assertEqual(rendered.strip(), result.strip(), 'Fourth rendering (with website_id=1)')
+        rendered = self.env['ir.qweb'].with_context(website_id=self.ref('website.default_website'))._render(template.id)
+        self.assertEqual(rendered.strip(), result.strip(), 'Fourth rendering (with website_id=default)')
 
     def test_render_query_count(self):
         """
@@ -77,10 +78,10 @@ class TestQweb(TransactionCaseWithUserDemo):
             'key': 'base.testing_header_0',
             'arch_db': '''<span>0</span>''',
         })
-        IrUiView.create([{  # website_id=1
+        IrUiView.create([{  # website_id=default
             'name': 'test',
             'type': 'qweb',
-            'website_id': 1,
+            'website_id': self.ref('website.default_website'),
             'key': 'base.testing_header_1',
             'arch_db': '''<span>WITH WEBSITE</span>''',
         }, {  # same key but website_id=False
@@ -117,10 +118,10 @@ class TestQweb(TransactionCaseWithUserDemo):
                     <footer>footer</footer>
                 <t t-call="base.testing_footer_1"/>
             </t>''',
-        }, {  # website_id=1
+        }, {  # website_id=default
             'name': 'test',
             'type': 'qweb',
-            'website_id': 1,
+            'website_id': self.ref('website.default_website'),
             'key': 'base.testing_footer',
             'arch_db': '''<t t-name="base.testing_footer">
                 <t t-call="base.testing_footer_0"/>
@@ -145,7 +146,7 @@ class TestQweb(TransactionCaseWithUserDemo):
             'key': 'base.testing_content',
             'arch_db': '''<t t-call="base.testing_layout"><div><t t-call="base.testing_header_0"/><t t-out="doc"/></div></t>''',
         })
-        website = self.env['website'].browse(1)
+        website = self.env.ref('website.default_website')
         other_website = self.env['website'].create({'name': 'testing'})
 
         expected = """
@@ -374,7 +375,7 @@ class TestQwebProcessAtt(TransactionCase):
 
     def test_process_att_url_crap(self):
         with MockRequest(self.env, website=self.website):
-            match = http.root.get_db_router.return_value.bind.return_value.match
+            match = root.get_db_router.return_value.bind.return_value.match
             # #{fragment} is stripped from URL when testing route
             self._test_att('/x#y?z', {'href': '/x#y?z'})
             match.assert_called_with('/x', method='POST', query_args=None)
@@ -503,6 +504,39 @@ class TestQwebDataSnippet(TransactionCase):
         rendered = self._render_snippet('website.s_c')
         self.assertEqual(self._normalize_xml(rendered), self._normalize_xml(expected_output))
 
+        # test that they are no wrong information in cache
+        rendered = self._render_snippet('website.s_c')
+        self.assertEqual(self._normalize_xml(rendered), self._normalize_xml(expected_output))
+
+    def test_t_snippet_call_root_unalter_cache(self):
+        noise = self.env['ir.ui.view'].create({
+            'name': 't-snippet-call_website.s_c',
+            'type': 'qweb',
+            'arch': '''
+                <t t-snippet-call="website.s_c"/>
+            '''
+        })
+        template = self.env['ir.ui.view'].create({
+            'name': 't-snippet-call_website.s_b',
+            'type': 'qweb',
+            'arch': '''
+                <t t-snippet-call="website.s_b"/>
+            '''
+        })
+
+        expected_output = '''
+            <section class="foo" data-snippet="s_b">
+                <section class="hello" data-snippet="s_a">
+                    <article>
+                        <span>Hello</span>
+                    </article>
+                </section>
+            </section>
+        '''
+        self.env['ir.qweb']._render(noise.id)
+        rendered = self.env['ir.qweb']._render(template.id)
+        self.assertEqual(self._normalize_xml(rendered), self._normalize_xml(expected_output))
+
     def test_t_snippet_call_as_snippet_root(self):
         expected_output = '''
             <section class="hello" data-snippet="s_a">
@@ -518,7 +552,7 @@ class TestQwebDataSnippet(TransactionCase):
     def test_call_query_count_snippets_template(self):
         actual_queries = []
         with contextmanager(lambda: self._patchExecute(actual_queries))():
-            with MockRequest(self.env, website=self.env['website'].browse(1)):
+            with MockRequest(self.env, website=self.env.ref('website.default_website')):
                 render = self.env['ir.ui.view'].render_public_asset('website.snippets')
                 self.assertTrue('name="Blockquote"' in render)
 

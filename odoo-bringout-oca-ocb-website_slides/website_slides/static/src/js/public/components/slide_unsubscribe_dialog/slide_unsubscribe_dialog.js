@@ -1,4 +1,5 @@
-import { Component, useState } from "@odoo/owl";
+import { useState } from "@web/owl2/utils";
+import { Component } from "@odoo/owl";
 import { CheckBox } from "@web/core/checkbox/checkbox";
 import { Dialog } from "@web/core/dialog/dialog";
 import { _t } from "@web/core/l10n/translation";
@@ -9,7 +10,7 @@ export class SlideUnsubscribeDialog extends Component {
     static components = { CheckBox, Dialog };
     static props = {
         channelId: Number,
-        isFollower: { type: String, optional: true },
+        isFollower: { type: Boolean, optional: true },
         visibility: String,
         enroll: { type: String, optional: true },
         close: Function,
@@ -20,14 +21,13 @@ export class SlideUnsubscribeDialog extends Component {
             buttonDisabled: false,
         });
         this.channelID = parseInt(this.props.channelId, 10);
-        this.isFollower = this.props.isFollower === "True";
         this.updateState("subscription");
-        this.isChecked = this.isFollower;
+        this.isChecked = this.props.isFollower;
     }
 
     updateState(mode) {
         if (mode === "subscription") {
-            this.state.title = this.isFollower ? _t("Subscribe") : _t("Notifications");
+            this.state.title = this.props.isFollower ? _t("Subscribe") : _t("Notifications");
             this.state.mode = "subscription";
         } else if (mode === "leave") {
             this.state.title = _t("Leave the course");
@@ -67,7 +67,7 @@ export class SlideUnsubscribeDialog extends Component {
         }
         this.state.buttonDisabled = true;
 
-        if (this.isFollower === this.isChecked) {
+        if (this.props.isFollower === this.isChecked) {
             this.props.close();
         } else {
             await rpc(`/slides/channel/${this.isChecked ? "subscribe" : "unsubscribe"}`, {

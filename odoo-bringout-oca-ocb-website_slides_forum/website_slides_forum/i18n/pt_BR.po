@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-25 18:37+0000\n"
+"POT-Creation-Date: 2025-12-16 18:37+0000\n"
 "PO-Revision-Date: 2025-12-02 16:38+0000\n"
 "Last-Translator: \"Maitê Dietze (madi)\" <madi@odoo.com>\n"
 "Language-Team: Portuguese (Brazil) <https://translate.odoo.com/projects/"
@@ -188,11 +188,6 @@ msgid ""
 msgstr ""
 "<span class=\"flex-grow-1\">Por que outras pessoas podem editar minhas "
 "perguntas/respostas?</span>"
-
-#. module: website_slides_forum
-#: model_terms:ir.ui.view,arch_db:website_slides_forum.website_slides_forum_breadcrumb
-msgid "<strong>Forum</strong>"
-msgstr "<strong>Fórum</strong>"
 
 #. module: website_slides_forum
 #: model:forum.forum,name:website_slides_forum.forum_forum_demo_channel_0
@@ -575,43 +570,3 @@ msgid ""
 msgstr ""
 "sua resposta é fornecida junto com a pergunta, e você pode esperar mais "
 "respostas do tipo: “eu uso ______ para ______, o que você usa?”"
-
-#~ msgid "<b>What kinds of questions can I ask here?</b>"
-#~ msgstr "<b>Que tipo de perguntas posso fazer aqui?</b>"
-
-#~ msgid "<b>What should I avoid in my answers?</b>"
-#~ msgstr "<b>O que devo evitar em minhas respostas?</b>"
-
-#~ msgid "<b>What should I avoid in my questions?</b>"
-#~ msgstr "<b>O que devo evitar em minhas perguntas?</b>"
-
-#~ msgid "<b>Why can other people edit my questions/answers?</b>"
-#~ msgstr ""
-#~ "<b>Por que outras pessoas podem editar minhas perguntas/respostas?</b>"
-
-#~ msgid "<i class=\"fa fa-home\"/> Course"
-#~ msgstr "<i class=\"fa fa-home\"/> Curso"
-
-#~ msgid "Check our Courses <i class=\"oi oi-chevron-right\"/>"
-#~ msgstr "Confira nossos cursos <i class=\"oi oi-chevron-right\"/>"
-
-#~ msgid "Courses Discussions"
-#~ msgstr "Discussões dos Cursos"
-
-#~ msgid "Description"
-#~ msgstr "Descrição"
-
-#~ msgid "Forum Page"
-#~ msgstr "Página do fórum"
-
-#~ msgid "Hide Intro"
-#~ msgstr "Ocultar Introdução"
-
-#~ msgid "Register"
-#~ msgstr "Inscrição"
-
-#~ msgid "Reviews"
-#~ msgstr "Revisões"
-
-#~ msgid "See all Courses"
-#~ msgstr "Ver todos os Cursos"

@@ -60,19 +60,18 @@ class MailMessage(models.Model):
         """
         return {
             'attachment_ids',
-            'author_avatar_url',
             'author_id',
             'author_guest_id',
             'body',
             'date',
             'id',
+            'is_bookmarked',
             'is_internal',
             'is_message_subtype_note',
             'message_type',
             'model',
             'published_date_str',
             'res_id',
-            'starred',
             'subtype_id',
         }
 
@@ -120,20 +119,13 @@ class MailMessage(models.Model):
             values["body"] = ["markup", values["body"]]
             if message_to_attachments:
                 values['attachment_ids'] = message_to_attachments.get(message.id, {})
-            if 'author_avatar_url' in properties_names:
-                if options and options.get("token"):
-                    values['author_avatar_url'] = f'/mail/avatar/mail.message/{message.id}/author_avatar/50x50?access_token={options["token"]}'
-                elif options and options.get("hash") and options.get("pid"):
-                    values['author_avatar_url'] = f'/mail/avatar/mail.message/{message.id}/author_avatar/50x50?_hash={options["hash"]}&pid={options["pid"]}'
-                else:
-                    values['author_avatar_url'] = f'/web/image/mail.message/{message.id}/author_avatar/50x50'
             if 'is_message_subtype_note' in properties_names:
                 values['is_message_subtype_note'] = (values.get('subtype_id') or [False, ''])[0] == note_id
             if 'published_date_str' in properties_names:
                 values['published_date_str'] = format_datetime(self.env, values['date']) if values.get('date') else ''
             reaction_groups = []
             for content, reactions in groupby(message.sudo().reaction_ids, lambda r: r.content):
-                reactions = self.env["mail.message.reaction"].union(*reactions)
+                reactions = self.env["mail.message.reaction"].union(reactions)
                 reaction_groups.append(
                     {
                         "content": content,
@@ -156,6 +148,7 @@ class MailMessage(models.Model):
                     "author_id": {
                         "id": message.author_id.id,
                         "name": message.author_id.name,
+                        "avatar_128_access_token": message.author_id._get_avatar_128_access_token(),
                     } if message.author_id else False,
                     "thread": {
                        "has_mail_thread": isinstance(self.env[values["model"]], self.pool["mail.thread"]),

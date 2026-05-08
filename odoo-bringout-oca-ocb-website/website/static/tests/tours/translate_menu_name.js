@@ -9,7 +9,7 @@ import { translationIsReady } from "@web/core/l10n/translation";
 registerWebsitePreviewTour(
     "translate_menu_name",
     {
-        url: "/pa_GB",
+        undeterministicTour_doNotCopy: true, // Remove this key to make the tour failed. ( It removes delay between steps )
         edition: false,
     },
     () => [
@@ -41,7 +41,6 @@ registerWebsitePreviewTour(
         },
         {
             trigger: "body:not(.o_builder_open)",
-            noPrepend: true,
         },
         stepUtils.waitIframeIsReady(),
         {

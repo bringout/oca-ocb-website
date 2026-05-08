@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-25 18:37+0000\n"
+"POT-Creation-Date: 2025-12-16 18:37+0000\n"
 "PO-Revision-Date: 2025-10-21 14:24+0000\n"
 "Last-Translator: \"Marta (wacm)\" <wacm@odoo.com>\n"
 "Language-Team: Polish <https://translate.odoo.com/projects/odoo-19/"
@@ -195,11 +195,6 @@ msgid ""
 msgstr ""
 "<span class=\"flex-grow-1\">Dlaczego inne osoby mogą edytować moje pytania/"
 "odpowiedzi?</span>"
-
-#. module: website_slides_forum
-#: model_terms:ir.ui.view,arch_db:website_slides_forum.website_slides_forum_breadcrumb
-msgid "<strong>Forum</strong>"
-msgstr "<strong>Forum</strong>"
 
 #. module: website_slides_forum
 #: model:forum.forum,name:website_slides_forum.forum_forum_demo_channel_0
@@ -580,27 +575,3 @@ msgid ""
 msgstr ""
 "twoja odpowiedź jest dostarczana wraz z pytaniem i oczekujesz więcej "
 "odpowiedzi: \"Używam ______ dla ______, z czego korzystasz?\""
-
-#~ msgid "<i class=\"fa fa-home\"/> Course"
-#~ msgstr "<i class=\"fa fa-home\"/>Kurs"
-
-#~ msgid "Courses Discussions"
-#~ msgstr "Kursy Dyskusja "
-
-#~ msgid "Description"
-#~ msgstr "Opis"
-
-#~ msgid "Forum Page"
-#~ msgstr "Strona forum"
-
-#~ msgid "Hide Intro"
-#~ msgstr "Ukryj Intro"
-
-#~ msgid "Register"
-#~ msgstr "Zarejestruj"
-
-#~ msgid "Reviews"
-#~ msgstr "Opinie"
-
-#~ msgid "See all Courses"
-#~ msgstr "Zobacz wszystkie Kursy"

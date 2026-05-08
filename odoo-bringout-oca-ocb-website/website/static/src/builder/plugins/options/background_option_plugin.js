@@ -18,10 +18,13 @@ function getBgVideoOrParallax(editingElement) {
     if (bgVideoEl) {
         return bgVideoEl;
     }
-    return editingElement.querySelector(":scope > .s_parallax_bg");
+    return (
+        editingElement.querySelector(":scope > .s_parallax_bg_wrap") ||
+        editingElement.querySelector(":scope > .s_parallax_bg")
+    ); // Kept for compatibility.
 }
 
-class WebsiteBackgroundImageOptionPlugin extends Plugin {
+export class WebsiteBackgroundImageOptionPlugin extends Plugin {
     static id = "websiteBackgroundImageOptionPlugin";
     /** @type {import("plugins").WebsiteResources} */
     resources = {
@@ -29,7 +32,7 @@ class WebsiteBackgroundImageOptionPlugin extends Plugin {
     };
 }
 
-class WebsiteBackgroundShapeOptionPlugin extends Plugin {
+export class WebsiteBackgroundShapeOptionPlugin extends Plugin {
     static id = "websiteBackgroundShapeOptionPlugin";
     /** @type {import("plugins").WebsiteResources} */
     resources = {
@@ -37,7 +40,7 @@ class WebsiteBackgroundShapeOptionPlugin extends Plugin {
     };
 }
 
-class WebsiteBackgroundVideoPlugin extends Plugin {
+export class WebsiteBackgroundVideoPlugin extends Plugin {
     static id = "websiteBackgroundVideoPlugin";
     static dependencies = ["media"];
     static shared = [
@@ -119,7 +122,7 @@ class WebsiteBackgroundVideoPlugin extends Plugin {
             loadResult: "",
             params: { ...params, forceClean: true },
         });
-        this.dispatchTo("on_bg_image_hide_handlers", editingElement);
+        this.trigger("on_bg_image_hidden_handlers", editingElement);
     }
 }
 
@@ -135,7 +138,7 @@ export class ToggleBgVideoAction extends BuilderAction {
             params: params,
             loadResult: loadResult,
         });
-        this.dispatchTo("on_bg_image_hide_handlers", editingElement);
+        this.trigger("on_bg_image_hidden_handlers", editingElement);
     }
     isApplied({ editingElement }) {
         return editingElement.classList.contains("o_background_video");

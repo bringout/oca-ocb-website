@@ -1,5 +1,6 @@
+import { reactive, useRef, useState } from "@web/owl2/utils";
 import { Wysiwyg } from "@html_editor/wysiwyg";
-import { Component, markup, onMounted, onWillStart, reactive, useRef, useState } from "@odoo/owl";
+import { Component, markup, onMounted, onWillStart } from "@odoo/owl";
 import { Dialog } from "@web/core/dialog/dialog";
 import { localization } from "@web/core/l10n/localization";
 import { _t } from "@web/core/l10n/translation";
@@ -26,10 +27,12 @@ export class ProfileDialog extends Component {
             optional: true,
         },
         userId: { type: Number },
+        canEditCountry: { type: Boolean, optional: true },
     };
     static defaultProps = {
         confirm: () => {},
         focusWebsiteDescription: false,
+        canEditCountry: true,
     };
 
     setup() {

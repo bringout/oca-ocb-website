@@ -1,8 +1,6 @@
 import { registry } from "@web/core/registry";
-import { inputFiles } from "@web/../tests/utils";
 
 registry.category("web_tour.tours").add("course_review_modification", {
-    url: "/slides",
     steps: () => [
         {
             trigger: "a:contains(Basics of Gardening - Test)",
@@ -43,10 +41,14 @@ registry.category("web_tour.tours").add("course_review_modification", {
         },
         {
             trigger: "#chatterRoot:shadow .o-mail-Message:contains(First review)",
-            run: "hover && click #chatterRoot:shadow .o-mail-Message [title='Delete']",
+            run: "hover && click #chatterRoot:shadow .o-mail-Message [title='Expand']",
         },
         {
-            trigger: "#chatterRoot:shadow button:contains(Delete)",
+            trigger: "#chatterRoot:shadow .o-mail-Message-moreMenu",
+            run: "click #chatterRoot:shadow button[name='delete']",
+        },
+        {
+            trigger: "#chatterRoot:shadow .modal button:contains(Delete)",
             run: "click",
         },
         {
@@ -95,6 +97,10 @@ registry.category("web_tour.tours").add("course_review_modification", {
             trigger:
                 "#chatterRoot:shadow .o-mail-Message:contains(Second review) .o_website_rating_static[title='3 stars on 5']",
         },
+        // If it fails here, it means that empty messages are also being fetched.
+        {
+            trigger: "#chatterRoot:shadow .o-mail-Chatter .o-mail-Message:count(1)",
+        },
         {
             trigger: "span:contains(Edit Review)",
             run: "click",
@@ -139,11 +145,14 @@ registry.category("web_tour.tours").add("course_review_modification", {
         },
         {
             trigger: "#chatterRoot:shadow .dropdown-item:contains('Attach Files')",
-            async run() {
-                const text = new File(["test"], "test.txt", { type: "text/plain" });
-                await inputFiles(".o-mail-Message .o_input_file", [text], {
-                    target: document.querySelector("#chatterRoot").shadowRoot,
-                });
+            async run({ queryFirst }) {
+                //FIXME: Would prefer to use setInputFiles(), but it doesn't work at the moment because of the Shadow DOM (:shadow).
+                const file = new File(["test"], "test.txt", { type: "text/plain" });
+                const dataTransfer = new window.DataTransfer();
+                dataTransfer.items.add(file);
+                const el = queryFirst("#chatterRoot:shadow .o-mail-Composer .o_input_file");
+                el.files = dataTransfer.files;
+                el.dispatchEvent(new Event("change"));
             },
         },
         {
@@ -179,10 +188,14 @@ registry.category("web_tour.tours").add("course_review_modification", {
         {
             trigger:
                 "#chatterRoot:shadow .o-mail-Message:contains(Second review is editable in rating composer after editing in message composer)",
-            run: "hover && click #chatterRoot:shadow .o-mail-Message [title='Delete']",
+            run: "hover && click #chatterRoot:shadow .o-mail-Message [title='Expand']",
         },
         {
-            trigger: "#chatterRoot:shadow button:contains(Delete)",
+            trigger: "#chatterRoot:shadow .o-mail-Message-moreMenu",
+            run: "click #chatterRoot:shadow button[name='delete']",
+        },
+        {
+            trigger: "#chatterRoot:shadow .modal button:contains(Delete)",
             run: "click",
         },
         {
@@ -239,7 +252,6 @@ registry.category("web_tour.tours").add("course_review_modification", {
 });
 
 registry.category("web_tour.tours").add("course_review_modification_by_admin", {
-    url: "/slides",
     steps: () => [
         {
             trigger: "a:text(Basics of Gardening - Test)",
@@ -256,12 +268,11 @@ registry.category("web_tour.tours").add("course_review_modification_by_admin", {
         {
             trigger:
                 "#chatterRoot:shadow .o-mail-Message:contains(Non admin user review) .o_website_rating_static[title='3 stars on 5']",
-            run: "hover && click #chatterRoot:shadow .o-mail-Message [title='Expand']"
+            run: "hover && click #chatterRoot:shadow .o-mail-Message [title='Expand']",
         },
         {
-            trigger:
-                "#chatterRoot:shadow .o-mail-Message:contains(Non admin user review) .o_website_rating_static[title='3 stars on 5']",
-            run: "hover && click #chatterRoot:shadow button[name='edit']",
+            trigger: "#chatterRoot:shadow button[name='edit']",
+            run: "click",
         },
         {
             trigger: "#chatterRoot:shadow .o-mail-Message .o-mail-Composer-input",
@@ -304,7 +315,7 @@ registry.category("web_tour.tours").add("course_review_modification_by_admin", {
             run: "click",
         },
         {
-            trigger: "#chatterRoot:shadow button:text(Delete)",
+            trigger: "#chatterRoot:shadow .modal button:text(Delete)",
             run: "click",
         },
         {

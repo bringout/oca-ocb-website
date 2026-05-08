@@ -46,6 +46,7 @@ registry.category("web_tour.tours").add("snippets_all_drag_and_drop", {
                 "s_popup",
                 "s_newsletter_subscribe_popup",
                 "s_newsletter_benefits_popup",
+                "s_age_verification_popup",
             ].includes(snippet.name);
             const isDropInOnlySnippet = Object.keys(DROP_IN_ONLY_SNIPPETS).includes(snippet.name);
             const snippetKey = SUB_SNIPPET_TEMPLATES[snippet.name] || snippet.name;
@@ -143,7 +144,7 @@ registry.category("web_tour.tours").add("snippets_all_drag_and_drop", {
             ...insertSnippet({ id: "s_text_image", name: "Text - Image", groupName: "Content" }),
             {
                 content: "Click on s_text_image snippet",
-                trigger: ":iframe #wrap.o_editable [data-snippet='s_text_image']",
+                trigger: ":iframe #wrap.o_savable [data-snippet='s_text_image']",
                 run: "click",
             },
             {
@@ -157,11 +158,6 @@ registry.category("web_tour.tours").add("snippets_all_drag_and_drop", {
             ...clickOnSnippet({ id: "o_header_standard", name: "Header" }),
             ...changeOptionInPopover("Header", "Header Position", "Hidden"),
             goBackToBlocks(),
-        ]
-            .concat(steps)
-            .map((step) => {
-                delete step.noPrepend;
-                return step;
-            });
+        ].concat(steps);
     },
 });

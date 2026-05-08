@@ -110,7 +110,7 @@ class ThemeIrUiView(models.Model):
 
 class ThemeIrAttachment(models.Model):
     _name = 'theme.ir.attachment'
-    _description = 'Theme Attachments'
+    _description = 'Theme Attachment'
 
     name = fields.Char(required=True)
     key = fields.Char(required=True)
@@ -246,6 +246,12 @@ class ThemeUtils(models.AbstractModel):
         'website.footer_custom',
     ]
 
+    # Templates managing the header content width.
+    _header_width_templates = [
+        'website.header_width_small',
+        'website.header_width_full',
+    ]
+
     def _post_copy(self, mod):
         # Call specific theme post copy
         theme_post_copy = '_%s_post_copy' % mod.name
@@ -290,6 +296,10 @@ class ThemeUtils(models.AbstractModel):
 
         # Reinitialize footer scrolltop template
         self.disable_view('website.option_footer_scrolltop')
+
+        # Reinitialize the header content width
+        for view in self._header_width_templates:
+            self.disable_view(view)
 
     @api.model
     def _toggle_asset(self, key, active):
@@ -347,6 +357,9 @@ class ThemeUtils(models.AbstractModel):
         elif xml_id in self._footer_templates:
             for view in self._footer_templates:
                 self.disable_view(view)
+        elif xml_id in self._header_width_templates:
+            for view in self._header_width_templates:
+                self.disable_view(view)
         self._toggle_view(xml_id, True)
 
     @api.model
@@ -364,7 +377,7 @@ class IrUiView(models.Model):
         # update should not be considered as `arch_updated`, as this is not a
         # user made change.
         test_mode = modules.module.current_test
-        if not (test_mode or self.pool._init):
+        if not (test_mode or not self.pool.ready):
             return super().write(vals)
         no_arch_updated_views = other_views = self.env['ir.ui.view']
         for record in self:

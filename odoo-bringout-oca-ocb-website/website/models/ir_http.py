@@ -2,11 +2,11 @@
 import contextlib
 import functools
 import logging
-from lxml import etree
 import unittest
+from zoneinfo import ZoneInfoNotFoundError, ZoneInfo
 
-import pytz
 import werkzeug
+from lxml import etree
 
 import odoo
 from odoo import api, models, tools
@@ -114,8 +114,19 @@ class IrHttp(models.AbstractModel):
         return len(rewrites)
 
     def _get_rewrites(self, website_id):
-        domain = [('redirect_type', 'in', ('308', '404')), '|', ('website_id', '=', False), ('website_id', '=', website_id)]
-        return  {x.url_from: x for x in self.env['website.rewrite'].sudo().search(domain)}
+        domain = (
+            Domain('redirect_type', 'in', ('308', '404'))
+            & Domain('website_id', 'in', [False, website_id])
+        )
+        cache = self.env.cr.cache.setdefault('website_rewrites_cache', {})
+        rewrites = cache.get(website_id)
+        if rewrites is None:
+            rewrites = {
+                rewrite.url_from: rewrite.sudo(False)
+                for rewrite in self.env['website.rewrite'].sudo().search(domain)
+            }
+            cache[website_id] = rewrites
+        return rewrites
 
     def _generate_routing_rules(self, modules, converters):
         if not request:
@@ -126,9 +137,13 @@ class IrHttp(models.AbstractModel):
         rewrites = self._get_rewrites(website_id)
         self._rewrite_len.__cache__.add_value(self, website_id, cache_value=len(rewrites))
 
+        if not rewrites:
+            yield from super()._generate_routing_rules(modules, converters)
+            return
+
         for url, endpoint in super()._generate_routing_rules(modules, converters):
-            if url in rewrites:
-                rewrite = rewrites[url]
+            rewrite = rewrites.get(url)
+            if rewrite:
                 url_to = rewrite.url_to
                 if rewrite.redirect_type == '308':
                     logger.debug('Add rule %s for %s' % (url_to, website_id))
@@ -163,7 +178,7 @@ class IrHttp(models.AbstractModel):
         public_users = super()._get_public_users()
         website = request.env(user=SUPERUSER_ID)['website'].with_context(lang='en_US').get_current_website()  # sudo
         if website:
-            public_users.append(website._get_cached('user_id'))
+            public_users.append(website.user_id.id)
         return public_users
 
     @classmethod
@@ -174,31 +189,10 @@ class IrHttp(models.AbstractModel):
         if not request.session.uid:
             website = request.env(user=SUPERUSER_ID)['website'].with_context(lang='en_US').get_current_website()  # sudo
             if website:
-                request.update_env(user=website._get_cached('user_id'))
+                request.update_env(user=website.user_id.id)
 
         if not request.env.uid:
             super()._auth_method_public()
-
-    @classmethod
-    def _register_website_track(cls, response):
-        if request.env['ir.http'].is_a_bot():
-            return False
-        if getattr(response, 'status_code', 0) != 200 or request.httprequest.headers.get('X-Disable-Tracking') == '1':
-            return False
-        template = False
-        if hasattr(response, '_cached_page'):
-            website_page, template = response._cached_page, response._cached_view_id
-        elif hasattr(response, 'qcontext'):  # classic response
-            main_object = response.qcontext.get('main_object')
-            website_page = getattr(main_object, '_name', False) == 'website.page' and main_object
-            template = response.qcontext.get('response_template')
-            if isinstance(template, str) and '.' not in template:
-                template = 'website.%s' % template
-
-        if template and not request.env.cr.readonly and request.env['ir.ui.view']._get_cached_template_info(template)['track']:
-            request.env['website.visitor']._handle_webpage_dispatch(website_page)
-
-        return False
 
     @classmethod
     def _match(cls, path):
@@ -235,9 +229,9 @@ class IrHttp(models.AbstractModel):
     def _frontend_pre_dispatch(cls):
         super()._frontend_pre_dispatch()
 
-        if not request.env.context.get('tz'):
-            with contextlib.suppress(pytz.UnknownTimeZoneError):
-                request.update_context(tz=pytz.timezone(request.geoip.location.time_zone).zone)
+        if not request.env.context.get('tz') and (tz := request.geoip.location.time_zone):
+            with contextlib.suppress(ZoneInfoNotFoundError):
+                request.update_context(tz=ZoneInfo(tz).key)
 
         website = request.env['website'].get_current_website()
         user = request.env.user
@@ -247,8 +241,8 @@ class IrHttp(models.AbstractModel):
         # propagate to the global context of the tab. If the company of
         # the website is not in the allowed companies of the user, set
         # the main company of the user.
-        website_company_id = website._get_cached('company_id')
-        if user.id == website._get_cached('user_id'):
+        website_company_id = website.company_id.id
+        if user == website.user_id:
             # avoid a read on res_company_user_rel in case of public user
             allowed_company_ids = [website_company_id]
         elif website_company_id in user._get_company_ids():
@@ -267,7 +261,6 @@ class IrHttp(models.AbstractModel):
     @classmethod
     def _post_dispatch(cls, response):
         super()._post_dispatch(response)
-        cls._register_website_track(response)
 
     @api.model
     def get_nearest_lang(self, lang_code):
@@ -285,7 +278,7 @@ class IrHttp(models.AbstractModel):
     def _get_default_lang(cls):
         if getattr(request, 'is_frontend', True):
             website = request.env['website'].sudo().get_current_website()
-            return request.env['res.lang']._get_data(id=website._get_cached('default_lang_id'))
+            return request.env['res.lang']._get_data(id=website.default_lang_id.id)
         return super()._get_default_lang()
 
     @classmethod
@@ -413,7 +406,7 @@ class IrHttp(models.AbstractModel):
         if request.env.user.has_group('website.group_website_restricted_editor'):
             session_info.update({
                 'website_id': request.website.id,
-                'website_company_id': request.website._get_cached('company_id'),
+                'website_company_id': request.website.company_id.id,
             })
         session_info['bundle_params']['website_id'] = request.website.id
         return session_info
@@ -441,6 +434,45 @@ class IrHttp(models.AbstractModel):
         # is not restricted by the website module.
         return result
 
+    def _get_visitor_from_request(self, force_create=False, force_track_values=None):
+        """ Return the visitor as sudo from the request.
+
+        :param force_create: force a visitor creation if no visitor exists
+        :param force_track_values: an optional dict to create a track at the
+            same time.
+        :return: the website visitor if exists or forced, empty recordset
+            otherwise.
+        """
+
+        # This function can be called in json with mobile app.
+        # In case of mobile app, no uid is set on the jsonRequest env.
+        # In case of multi db, _env is None on request, and request.env unbound.
+        if not (request and request.env and request.env.uid):
+            return None
+
+        access_token = self.env['website.visitor']._get_access_token()
+
+        if force_create:
+            force_track_values = force_track_values or {}
+            visitor_id, _ = self.env['website.visitor']._upsert_visitor(
+                token_or_partner_id=access_token,
+                website_id=request.website.id,
+                lang_id=request.lang.id,
+                country_code=request.geoip.country_code,  # GEOIP might return a country code unknown to odoo
+                timezone=self.env['website.visitor']._get_visitor_timezone(),
+                **force_track_values
+            )
+            return self.env['website.visitor'].sudo().browse(visitor_id)
+
+        visitor = self.env['website.visitor'].sudo().search_fetch([('access_token', '=', access_token)])
+
+        if not force_create and not self.env.cr.readonly and visitor and not visitor.timezone:
+            tz = self.env['website.visitor']._get_visitor_timezone()
+            if tz:
+                visitor._update_visitor_timezone(tz)
+
+        return visitor
+
 
 class ModelConverter(ir_http.ModelConverter):
 
@@ -454,9 +486,9 @@ class ModelConverter(ir_http.ModelConverter):
         # Allow to current_website_id directly in route domain
         args['current_website_id'] = env['website'].get_current_website().id
         domain = safe_eval(self.domain, args)
+        domain = Domain(domain)
         if dom:
-            domain += dom
-        for record in Model.search(domain):
-            # return record so URL will be the real endpoint URL as the record will go through `slug()`
-            # the same way as endpoint URL is retrieved during dispatch (301 redirect), see `to_url()` from ModelConverter
-            yield record
+            domain &= Domain(dom)
+        # return record so URL will be the real endpoint URL as the record will go through `slug()`
+        # the same way as endpoint URL is retrieved during dispatch (301 redirect), see `to_url()` from ModelConverter
+        yield from Model.search(domain)

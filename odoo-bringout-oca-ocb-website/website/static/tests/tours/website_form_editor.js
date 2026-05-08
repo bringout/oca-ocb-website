@@ -6,12 +6,13 @@ import {
     goBackToBlocks,
     registerWebsitePreviewTour,
     changeOptionInPopover,
+    unfoldOptionsGroup,
 } from "@website/js/tours/tour_utils";
 import { stepUtils } from "@web_tour/tour_utils";
 import { editorsWeakMap } from "@html_editor/../tests/tours/helpers/editor";
 
 // Visibility possible values:
-const VISIBLE = "Always Visible";
+const VISIBLE = "None";
 const CONDITIONALVISIBILITY = "Visible only if";
 
 const NB_NON_ESSENTIAL_REQUIRED_FIELDS_IN_DEFAULT_FORM = 2;
@@ -109,7 +110,7 @@ const addField = function (
             content: "Wait for field to load",
             trigger: `:iframe .s_website_form_field[data-type="${name}"],:iframe .s_website_form_input[name="${name}"]`, //custom or existing field
         },
-        ...changeOptionInPopover("Field", "Visibility", display.visibility),
+        ...changeOptionInPopover("Field", "Visibility Rule", display.visibility),
     ];
     let testText = ":iframe .s_website_form_field";
     if (display.condition) {
@@ -119,13 +120,22 @@ const addField = function (
             run: `edit ${display.condition} && press Tab`,
         });
     }
-    if (required) {
-        testText += ".s_website_form_required";
+    const addToggleRequiredStep = (required = true) =>
         ret.push({
-            content: "Mark the field as required",
+            content: `Mark the field as ${required ? "" : "non-"}required`,
             trigger: ".o_customize_tab div[data-action-id='toggleRequired'] input[type='checkbox']",
             run: "click",
         });
+    if (required) {
+        testText += ".s_website_form_required";
+        if (name !== "boolean") {
+            addToggleRequiredStep();
+        }
+    } else {
+        if (name === "boolean") {
+            // Checkbox fields are "required" by default.
+            addToggleRequiredStep(false);
+        }
     }
     if (label) {
         testText += `:has(label:contains(${label}))`;
@@ -169,7 +179,7 @@ const compareIds = ({ content, firstElSelector, secondElSelector, errorMessage }
 registerWebsitePreviewTour(
     "website_form_editor_tour",
     {
-        url: "/",
+        undeterministicTour_doNotCopy: true, // Remove this key to make the tour failed. ( It removes delay between steps )
         edition: true,
     },
     () => [
@@ -238,19 +248,20 @@ registerWebsitePreviewTour(
             trigger: ':iframe input[name="phone"]',
             run: "click",
         },
+        ...unfoldOptionsGroup("Form"),
         {
-            content: "Change the label position of the phone field",
+            content: "Change the label position of all fields",
             trigger:
-                ".o_customize_tab div[data-label='Position'] button[data-action-value='right']",
+                ".o_customize_tab div[data-label='Labels Position'] button[data-action-value='right']",
             run: "click",
         },
         ...addCustomField("char", "text", "Conditional Visibility Check 1", false),
         ...addCustomField("char", "text", "Conditional Visibility Check 2", false),
-        ...changeOptionInPopover("Field", "Visibility", "Visible only if"),
+        ...changeOptionInPopover("Field", "Visibility Rule", "Visible only if"),
         ...selectButtonByData("Your Name", "[data-action-value='Conditional Visibility Check 1']"),
         ...addCustomField("char", "text", "Conditional Visibility Check 2", false),
         ...selectFieldByLabel("Conditional Visibility Check 1"),
-        ...changeOptionInPopover("Field", "Visibility", "Visible only if"),
+        ...changeOptionInPopover("Field", "Visibility Rule", "Visible only if"),
         {
             content: "Open list of the visibility selector of Conditional Visibility Check 1",
             trigger: ".o_customize_tab button:contains('Your Name')",
@@ -264,7 +275,7 @@ registerWebsitePreviewTour(
         },
         ...addCustomField("char", "text", "Conditional Visibility Check 3", false),
         ...addCustomField("char", "text", "Conditional Visibility Check 4", false),
-        ...changeOptionInPopover("Field", "Visibility", "Visible only if"),
+        ...changeOptionInPopover("Field", "Visibility Rule", "Visible only if"),
         ...selectButtonByData("Your Name", "[data-action-value='Conditional Visibility Check 3']"),
         {
             content:
@@ -275,11 +286,11 @@ registerWebsitePreviewTour(
         },
         {
             content: "Check that the conditional visibility of the renamed field is removed",
-            trigger: ".o_customize_tab [data-label='Visibility'] button:contains('Always Visible')",
+            trigger: ".o_customize_tab [data-label='Visibility Rule'] button:contains('None')",
         },
         ...addCustomField("char", "text", "Conditional Visibility Check 5", false),
         ...addCustomField("char", "text", "Conditional Visibility Check 6", false),
-        ...changeOptionInPopover("Field", "Visibility", "Visible only if"),
+        ...changeOptionInPopover("Field", "Visibility Rule", "Visible only if"),
         {
             content:
                 "Change the label of 'Conditional Visibility Check 6' and change it to 'Conditional Visibility Check 5'",
@@ -319,7 +330,7 @@ registerWebsitePreviewTour(
         ...selectFieldByLabel("dependent"),
         {
             content: "Open the select",
-            trigger: ".o_customize_tab button:contains('Always Visible')",
+            trigger: ".o_customize_tab [data-label='Visibility Rule'] button:contains('None')",
             run: "click",
         },
         {
@@ -381,7 +392,7 @@ registerWebsitePreviewTour(
                 ":has(.checkbox:has(label:contains('Wiko Stairway')):has(input[type='checkbox'][required]))",
         },
         // Check conditional visibility for the relational fields
-        ...changeOptionInPopover("Field", "Visibility", "Visible only if"),
+        ...changeOptionInPopover("Field", "Visibility Rule", "Visible only if"),
         ...selectButtonByData("Your Name", "[data-action-value='recipient_ids']"),
         ...selectButtonByText("Is equal to", "Is not equal to"),
         {
@@ -550,25 +561,29 @@ registerWebsitePreviewTour(
                 "div[data-container-title='Button'] .options-container-header:not(:has(.oe_snippet_remove, .oe_snippet_clone, .oe_snippet_save))",
         },
         {
-            content: "Click on Edit Link in Popover",
-            trigger: ".o-we-linkpopover .o_we_edit_link",
+            content: "Click on button type dropdown",
+            trigger: "[data-label=Type] .o-hb-select-toggle",
             run: "click",
         },
         {
             content: "Change button's style",
-            trigger: ".o-we-linkpopover select[name='link_type']",
-            run: "select custom",
+            trigger: ".o_popover .dropdown-item:contains('Custom')",
+            run: "click",
         },
         {
-            trigger: ".o-we-linkpopover select[name=link_style_shape]",
-            run: "select rounded-circle",
+            trigger: "[data-label=Shape] .o-hb-select-toggle",
+            run: "click",
         },
         {
-            trigger: ".o-we-linkpopover select[name='link_style_size']",
-            run: "select sm",
+            trigger: ".o_popover [data-action-value='rounded-circle']",
+            run: "click",
         },
         {
-            trigger: ".o-we-linkpopover .o_we_apply_link",
+            trigger: "[data-label=Size] .o-hb-select-toggle",
+            run: "click",
+        },
+        {
+            trigger: ".o_popover [data-action-value='sm']",
             run: "click",
         },
         {
@@ -645,7 +660,7 @@ registerWebsitePreviewTour(
         },
         ...addCustomField("char", "text", "field C", false),
         ...selectFieldByLabel("field B"),
-        ...changeOptionInPopover("Field", "Visibility", "Visible only if"),
+        ...changeOptionInPopover("Field", "Visibility Rule", "Visible only if"),
         {
             content: "Verify that the default comparator should be set",
             trigger: ".o_customize_tab #hidden_condition_opt:not(:empty)",
@@ -686,6 +701,7 @@ registerWebsitePreviewTour(
         // while field B's visibility is also tied to another field.
         ...clickOnEditAndWaitEditMode(),
         ...selectFieldByLabel("field A"),
+        ...unfoldOptionsGroup("Form"),
         {
             content: "Verify that the form editor appeared",
             trigger: ".o_customize_tab div[data-container-title='Form'] .we-bg-options-container",
@@ -727,7 +743,12 @@ registerWebsitePreviewTour(
                 ':iframe .s_website_form_field.s_website_form_model_required:has(label:contains("Subject"))',
             run: "click",
         },
-        ...changeOptionInPopover("Field", "Visibility", "Visible only if"),
+        {
+            content: "Check that the delete button is disabled and shows the tooltip",
+            trigger:
+                '.options-container-header span[title=\'The field "subject" is mandatory for the action "Send an E-mail".\'] > button.fa-trash[disabled]',
+        },
+        ...changeOptionInPopover("Field", "Visibility Rule", "Visible only if"),
         ...selectButtonByData("Your Name", "[data-action-value='Philippe of Belgium']"),
         ...selectButtonByText("Is equal to", "Is set"),
         {
@@ -741,7 +762,7 @@ registerWebsitePreviewTour(
                 ':iframe .s_website_form_field.s_website_form_required:has(label:contains("Your Message"))',
             run: "click",
         },
-        ...changeOptionInPopover("Field", "Visibility", "Visible only if"),
+        ...changeOptionInPopover("Field", "Visibility Rule", "Visible only if"),
         ...selectButtonByData("Your Name", "[data-action-value='Philippe of Belgium']"),
         ...selectButtonByText("Is equal to", "Is set"),
 
@@ -770,7 +791,7 @@ registerWebsitePreviewTour(
                 ':iframe .s_website_form_field.s_website_form_model_required:has(label:contains("Subject"))',
             run: "click",
         },
-        ...changeOptionInPopover("Field", "Visibility", "Always Visible"),
+        ...changeOptionInPopover("Field", "Visibility Rule", "None"),
         {
             content: "Empty the default value of the 'Subject' field",
             trigger: "[data-label='Default Value'] input",
@@ -782,7 +803,7 @@ registerWebsitePreviewTour(
                 ':iframe .s_website_form_field.s_website_form_required:has(label:contains("Your Message"))',
             run: "click",
         },
-        ...changeOptionInPopover("Field", "Visibility", "Always Visible"),
+        ...changeOptionInPopover("Field", "Visibility Rule", "None"),
         // This step is to ensure select fields are properly cleaned before
         // exiting edit mode
         {
@@ -795,9 +816,10 @@ registerWebsitePreviewTour(
             trigger: ":iframe .s_website_form_send",
             run: "click",
         },
+        ...unfoldOptionsGroup("Form"),
         {
             content: "Change the Recipient Email",
-            trigger: '[data-label="Recipient Email"] input',
+            trigger: '[data-label="Recipient Emails"] input',
             run: "edit test@test.test",
         },
         // Test a field visibility when it's tied to another Date [Time] field
@@ -874,7 +896,7 @@ registerWebsitePreviewTour(
 
         // Ensure that the description option is working as wanted.
         ...addCustomField("char", "text", "Check description option", false),
-        changeOption("Field", "[data-action-id='toggleDescription'] input"),
+        changeOption("Field", "[data-action-id='setDescription'] input"),
         {
             content: "Ensure that the description has correctly been added on the field",
             trigger:
@@ -908,14 +930,14 @@ function editContactUs(steps) {
 registerWebsitePreviewTour(
     "website_form_contactus_edition_with_email",
     {
-        url: "/contactus",
         edition: true,
     },
     () =>
         editContactUs([
+            ...unfoldOptionsGroup("Form"),
             {
                 content: "Change the Recipient Email",
-                trigger: "div[data-label='Recipient Email'] input",
+                trigger: "div[data-label='Recipient Emails'] input",
                 run: "edit test@test.test",
             },
         ])
@@ -923,11 +945,11 @@ registerWebsitePreviewTour(
 registerWebsitePreviewTour(
     "website_form_contactus_edition_no_email",
     {
-        url: "/contactus",
         edition: true,
     },
     () =>
         editContactUs([
+            ...unfoldOptionsGroup("Form"),
             {
                 content: "Change a random option",
                 trigger: "[data-action-id='setMark'] input",
@@ -936,7 +958,7 @@ registerWebsitePreviewTour(
             {
                 content: "Check that the recipient email is correct",
                 trigger:
-                    "div[data-label='Recipient Email'] input:value('website_form_contactus_edition_no_email@mail.com')",
+                    "div[data-label='Recipient Emails'] input:value('website_form_contactus_edition_no_email@mail.com')",
             },
         ])
 );
@@ -944,7 +966,6 @@ registerWebsitePreviewTour(
 registerWebsitePreviewTour(
     "website_form_conditional_required_checkboxes",
     {
-        url: "/",
         edition: true,
     },
     () => [
@@ -1009,7 +1030,7 @@ registerWebsitePreviewTour(
         },
         {
             content: "Open condition comparator select",
-            trigger: "[data-container-title='Field'] #hidden_condition_no_text_opt",
+            trigger: "[data-container-title='Field'] #hidden_condition_record_opt",
             run: "click",
         },
         {
@@ -1100,11 +1121,11 @@ registerWebsitePreviewTour(
 registerWebsitePreviewTour(
     "website_form_contactus_change_random_option",
     {
-        url: "/contactus",
         edition: true,
     },
     () =>
         editContactUs([
+            ...unfoldOptionsGroup("Form"),
             {
                 content: "Change a random option",
                 trigger: "[data-action-id='setMark'] input",
@@ -1116,13 +1137,11 @@ registerWebsitePreviewTour(
 registerWebsitePreviewTour(
     "website_form_nested_forms",
     {
-        url: "/my/account",
         edition: true,
     },
     () => [
         {
             trigger: ".o-website-builder_sidebar .o_snippets_container .o_snippet",
-            noPrepend: true,
         },
         {
             trigger:
@@ -1143,7 +1162,6 @@ registerWebsitePreviewTour(
 registerWebsitePreviewTour(
     "website_form_editable_content",
     {
-        url: "/",
         edition: true,
     },
     () => [
@@ -1211,7 +1229,6 @@ registerWebsitePreviewTour(
 registerWebsitePreviewTour(
     "website_form_special_characters",
     {
-        url: "/",
         edition: true,
     },
     () => [
@@ -1254,7 +1271,6 @@ registerWebsitePreviewTour(
 registerWebsitePreviewTour(
     "website_form_duplicate_field_ids",
     {
-        url: "/",
         edition: true,
     },
     () => [

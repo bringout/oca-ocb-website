@@ -43,11 +43,14 @@
                         <setting string="Languages"
                                  title="Languages available on your website"
                                  documentation="/applications/websites/website/configuration/translate.html">
+                            <div class="text-muted mt-n3 mb16">
+                                <span invisible="website_language_count &lt; 2">Website visitors see the version matching their browser language, or the default if unavailable.</span>
+                                <span invisible="website_language_count &gt;= 2">Install multiple languages to enable translation across your website.</span>
+                            </div>
                             <field name="language_ids" widget="many2many_tags" options="{'no_create': True, 'no_open': True}" required="website_id"/>
                             <div class="row mt8" invisible="website_language_count &lt; 2">
-                                <field name="website_language_count" invisible="1"/>
                                 <label class="col-lg-3" string="Default" for="website_default_lang_id"/>
-                                <field name="website_default_lang_id" options="{'no_open': True, 'no_create': True}" required="website_id"/>
+                                <field name="website_default_lang_id" options="{'no_open': True, 'no_create': True}" required="website_id" domain="[('id', 'in', language_ids)]"/>
                             </div>
                             <div class="mt8">
                                 <button type="action" name="%(base.action_view_base_language_install)d" string="Install new languages" class="btn-link" icon="oi-arrow-right"/>
@@ -84,7 +87,7 @@
                                 </div>
                             </div>
                         </setting>
-                        <setting id="livechat" string="Livechat" help="Allows your visitors to chat with you">
+                        <setting id="livechat" string="Live Chat" help="Allows your visitors to chat with you">
                             <field name="module_website_livechat"/>
                         </setting>
                     </block>
@@ -188,7 +191,17 @@
                             help="If set, replaces the website logo as the default social share image."
                         >
                             <field name="has_default_share_image"/>
-                            <field name="social_default_image" widget="image" class="w-25 mt-2" invisible="not has_default_share_image"/>
+                            <field
+                                name="social_default_image"
+                                widget="image"
+                                class="w-25 mt-2"
+                                invisible="not has_default_share_image"
+                                options="{'accepted_file_extensions': '.png,.jpg,.jpeg,.gif,.webp'}"
+                            />
+                            <div class="text-muted mt-2">
+                                <i class="fa fa-info-circle me-1"/>
+                                Supported formats for social share images are PNG, JPG, WEBP, or GIF.
+                            </div>
                         </setting>
                         <setting
                             id="google_console_setting"

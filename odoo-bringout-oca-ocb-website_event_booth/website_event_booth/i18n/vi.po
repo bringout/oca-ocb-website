@@ -290,9 +290,3 @@ msgstr "Menu sự kiện website"
 #: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_registration
 msgid "if you have any question."
 msgstr "nếu bạn có bất kỳ câu hỏi nào."
-
-#~ msgid "It looks like your email is linked to an existing account."
-#~ msgstr "Có vẻ như email của bạn đã được liên kết với một tài khoản hiện có."
-
-#~ msgid "Please Sign In."
-#~ msgstr "Vui lòng Đăng nhập."

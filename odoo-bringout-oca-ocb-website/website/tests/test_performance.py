@@ -2,11 +2,12 @@
 
 import logging
 from odoo.addons.base.tests.common import HttpCaseWithUserPortal, HttpCaseWithUserDemo
+from odoo.addons.base.tests.files import PNG_RAW
 
 from contextlib import closing
 
 from odoo.sql_db import categorize_query
-from odoo.tools import mute_logger
+from odoo.tools import BinaryBytes, mute_logger
 from odoo.tests.common import tagged
 
 
@@ -123,34 +124,35 @@ class TestStandardPerformance(UtilPerf):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.env['res.users'].browse(2).image_1920 = b'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGNgYGAAAAAEAAH2FzhVAAAAAElFTkSuQmCC'
+        cls.env.ref('base.user_admin').image_1920 = BinaryBytes(PNG_RAW)
 
     @mute_logger('odoo.http')
     def test_10_perf_sql_img_controller(self):
         self.authenticate('demo', 'demo')
         # not published user, get the not found image placeholder
-        self.assertEqual(self.env['res.users'].sudo().browse(2).website_published, False)
-        url = '/web/image/res.users/2/image_256'
-        self.assertEqual(self._get_url_hot_query(url), 7)
+        self.assertEqual(self.env.ref('base.user_admin').sudo().website_published, False)
+        user_id = self.ref('base.user_admin')
+        url = f'/web/image/res.users/{user_id}/image_256'
+        self.assertEqual(self._get_url_hot_query(url), 6)
 
     @mute_logger('odoo.http')
     def test_11_perf_sql_img_controller(self):
         self.authenticate('demo', 'demo')
-        self.env['res.users'].sudo().browse(2).website_published = True
-        url = '/web/image/res.users/2/image_256'
+        self.env.ref('base.user_admin').sudo().website_published = True
+        user_id = self.ref('base.user_admin')
+        url = f'/web/image/res.users/{user_id}/image_256'
         select_tables_perf = {
-            'orm_signaling_registry': 1,
             'res_users': 2,
             'res_partner': 1,
             'ir_attachment': 1,
         }
-        self._check_url_hot_query(url, 5, select_tables_perf)
+        self._check_url_hot_query(url, 4, select_tables_perf)
 
     @mute_logger('odoo.http')
     def test_20_perf_sql_img_controller_bis(self):
-        url = '/web/image/website/1/favicon'
+        website_id = self.ref('website.default_website')
+        url = f'/web/image/website/{website_id}/favicon'
         select_tables_perf = {
-            'orm_signaling_registry': 1,
             'website': 2,
             # 1. `_find_record()` performs an access right check through
             #    `exists()` which perform a request on the website.
@@ -160,10 +162,10 @@ class TestStandardPerformance(UtilPerf):
             # 1. `_record_to_stream()` does a `search()`..
             # 2. ..followed by a `_read()`
         }
-        self._check_url_hot_query(url, 5, select_tables_perf)
+        self._check_url_hot_query(url, 4, select_tables_perf)
 
         self.authenticate('portal', 'portal')
-        self._check_url_hot_query(url, 5, select_tables_perf)
+        self._check_url_hot_query(url, 4, select_tables_perf)
 
 
 class TestWebsitePerformanceCommon(UtilPerf):
@@ -174,7 +176,7 @@ class TestWebsitePerformanceCommon(UtilPerf):
 
     def _create_page_with_menu(self, url):
         name = url[1:]
-        website = self.env['website'].browse(1)
+        website = self.env.ref('website.default_website')
         page = self.env['website.page'].create({
             'url': url,
             'name': name,
@@ -199,6 +201,7 @@ class TestWebsitePerformanceCommon(UtilPerf):
         return (page, menu)
 
 
+@tagged('at_install', '-post_install')  # LEGACY at_install, fails post install
 class TestWebsitePerformance(TestWebsitePerformanceCommon):
 
     def test_10_perf_sql_queries_page(self):
@@ -208,11 +211,10 @@ class TestWebsitePerformance(TestWebsitePerformanceCommon):
             self.set_registry_readonly_mode(readonly_enabled)
             with self.subTest(readonly_enabled=readonly_enabled), closing(self.env.cr.savepoint()):
                 select_tables_perf = {
-                    'orm_signaling_registry': 1,
                     'ir_attachment': 1,
                     # `_get_serve_attachment` dispatcher fallback
                 }
-                expected_query_count = 2
+                expected_query_count = 1
                 self._check_url_hot_query(self.page.url, expected_query_count, select_tables_perf)
                 self.assertEqual(self._get_url_hot_query(self.page.url), expected_query_count)
                 self.menu.unlink()  # page being or not in menu shouldn't add queries
@@ -220,7 +222,6 @@ class TestWebsitePerformance(TestWebsitePerformanceCommon):
                 self.assertEqual(self._get_url_hot_query(self.page.url), expected_query_count)
 
                 select_tables_perf = {
-                    'orm_signaling_registry': 1,
                     'ir_attachment': 1,
                     # `_get_serve_attachment` dispatcher fallback
                     'website_page': 2,
@@ -230,9 +231,8 @@ class TestWebsitePerformance(TestWebsitePerformanceCommon):
                     # menu and layout
                     'website_menu': 1,
                     'ir_ui_view': 1,
-                    'res_company': 1,
                 }
-                expected_query_count = 8
+                expected_query_count = 6
                 self._check_url_hot_query(self.page.url, expected_query_count, select_tables_perf, nocache=True)
                 self.assertEqual(self._get_url_hot_query(self.page.url, nocache=True), expected_query_count)
 
@@ -242,11 +242,9 @@ class TestWebsitePerformance(TestWebsitePerformanceCommon):
             self.set_registry_readonly_mode(readonly_enabled)
             with self.subTest(readonly_enabled=readonly_enabled), closing(self.env.cr.savepoint()):
                 select_tables_perf = {
-                    'orm_signaling_registry': 1,
                     'ir_attachment': 1,
                     # `_get_serve_attachment` dispatcher fallback
                 } if cache else {
-                    'orm_signaling_registry': 1,
                     'ir_attachment': 1,
                     # `_get_serve_attachment` dispatcher fallback
                     'website_page': 2,
@@ -256,16 +254,9 @@ class TestWebsitePerformance(TestWebsitePerformanceCommon):
                     # menu and layout
                     'website_menu': 1,
                     'ir_ui_view': 1,
-                    'res_company': 1,
                 }
-                expected_query_count = 2 if cache else 8
+                expected_query_count = 1 if cache else 6
                 insert_tables_perf = {}
-                if not readonly_enabled:
-                    insert_tables_perf = {
-                        'website_visitor': 1,
-                        # Visitor upsert
-                    }
-                    expected_query_count += 1
                 self.page.track = True
 
                 self.menu.unlink()  # page being or not in menu shouldn't add queries
@@ -277,22 +268,13 @@ class TestWebsitePerformance(TestWebsitePerformanceCommon):
         for readonly_enabled in (True, False):
             self.set_registry_readonly_mode(readonly_enabled)
             with self.subTest(readonly_enabled=readonly_enabled), closing(self.env.cr.savepoint()):
-                select_tables_perf = {
-                    'orm_signaling_registry': 1,
-                }
-                expected_query_count = 1
+                select_tables_perf = {}
+                expected_query_count = 0
                 insert_tables_perf = {}
-                if not readonly_enabled:
-                    insert_tables_perf = {
-                        'website_visitor': 1,
-                        # Visitor upsert
-                    }
-                    expected_query_count += 1
                 self._check_url_hot_query('/', expected_query_count, select_tables_perf, insert_tables_perf)
                 self.assertEqual(self._get_url_hot_query('/'), expected_query_count)
 
                 select_tables_perf = {
-                    'orm_signaling_registry': 1,
                     'website_menu': 1,
                     # homepage controller is prefetching all menus for perf in one go
                     'website_page': 2,
@@ -301,16 +283,9 @@ class TestWebsitePerformance(TestWebsitePerformanceCommon):
                     'website': 1,
                     # layout
                     'ir_ui_view': 1,
-                    'res_company': 1,
                 }
-                expected_query_count = 7
+                expected_query_count = 5
                 insert_tables_perf = {}
-                if not readonly_enabled:
-                    insert_tables_perf = {
-                        'website_visitor': 1,
-                        # Visitor upsert
-                    }
-                    expected_query_count += 1
                 self._check_url_hot_query('/', expected_query_count, select_tables_perf, insert_tables_perf, nocache=True)
                 self.assertEqual(self._get_url_hot_query('/', nocache=True), expected_query_count)
 
@@ -319,27 +294,23 @@ class TestWebsitePerformance(TestWebsitePerformanceCommon):
         self.page.arch = '<div>I am a blank page</div>'
 
         select_tables_perf = {
-            'orm_signaling_registry': 1,
             'ir_attachment': 1,
             # `_get_serve_attachment` dispatcher fallback
         }
-        self._check_url_hot_query(self.page.url, 2, select_tables_perf)
-        self.assertEqual(self._get_url_hot_query(self.page.url), 2)
+        self._check_url_hot_query(self.page.url, 1, select_tables_perf)
+        self.assertEqual(self._get_url_hot_query(self.page.url), 1)
 
         select_tables_perf = {
-            'orm_signaling_registry': 1,
             'ir_attachment': 1,
             # `_get_serve_attachment` dispatcher fallback
             'website_page': 1,
             # 1. `_serve_page` search page matching URL..
             # 2. ..then reads it (`is_visible`)
-            'website': 1,
-            # Check if website.cookies_bar is active
             'ir_ui_view': 1,
             # Check if `view.track` to track visitor or not
         }
-        self._check_url_hot_query(self.page.url, 5, select_tables_perf, nocache=True)
-        self.assertEqual(self._get_url_hot_query(self.page.url, nocache=True), 5)
+        self._check_url_hot_query(self.page.url, 3, select_tables_perf, nocache=True)
+        self.assertEqual(self._get_url_hot_query(self.page.url, nocache=True), 3)
 
     def test_40_perf_sql_queries_page_multi_level_menu(self):
         # menu structure should not impact SQL requests
@@ -352,15 +323,13 @@ class TestWebsitePerformance(TestWebsitePerformanceCommon):
         menu_aa.parent_id = menu_a
 
         select_tables_perf = {
-            'orm_signaling_registry': 1,
             'ir_attachment': 1,
             # `_get_serve_attachment` dispatcher fallback
         }
-        self._check_url_hot_query(self.page.url, 2, select_tables_perf)
-        self.assertEqual(self._get_url_hot_query(self.page.url), 2)
+        self._check_url_hot_query(self.page.url, 1, select_tables_perf)
+        self.assertEqual(self._get_url_hot_query(self.page.url), 1)
 
         select_tables_perf = {
-            'orm_signaling_registry': 1,
             'ir_attachment': 1,
             # `_get_serve_attachment` dispatcher fallback
             'website_page': 2,
@@ -369,12 +338,10 @@ class TestWebsitePerformance(TestWebsitePerformanceCommon):
             'website': 1,
             'website_menu': 1,
             'ir_ui_view': 1,
-            # Check if `view.track` to track visitor or not
-            # layout content (company name, logo)
-            'res_company': 1,
         }
-        self._check_url_hot_query(self.page.url, 8, select_tables_perf, nocache=True)
-        self.assertEqual(self._get_url_hot_query(self.page.url, nocache=True), 8)
+        self._check_url_hot_query(self.page.url, 6, select_tables_perf, nocache=True)
+        self.assertEqual(self._get_url_hot_query(self.page.url, nocache=True), 6)
+
 
 @tagged('-at_install', 'post_install')
 class TestWebsitePerformancePost(UtilPerf):
@@ -384,11 +351,10 @@ class TestWebsitePerformancePost(UtilPerf):
         assets_url = self.env['ir.qweb']._get_asset_bundle('web.assets_frontend_lazy', css=False, js=True).get_links()[0]
         self.assertIn('web.assets_frontend_lazy.min.js', assets_url)
         select_tables_perf = {
-            'orm_signaling_registry': 1,
             'ir_attachment': 2,
             # All 2 coming from the /web/assets and ir.binary stack
             # 1. `search() the attachment`
             # 2. `_record_to_stream` reads the other attachment fields
         }
-        self._check_url_hot_query(assets_url, 3, select_tables_perf)
-        self.assertEqual(self._get_url_hot_query(assets_url), 3)
+        self._check_url_hot_query(assets_url, 2, select_tables_perf)
+        self.assertEqual(self._get_url_hot_query(assets_url), 2)

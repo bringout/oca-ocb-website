@@ -1,4 +1,5 @@
-import { Component, onMounted, onWillStart, useState } from "@odoo/owl";
+import { useState } from "@web/owl2/utils";
+import { Component, onMounted, onWillStart } from "@odoo/owl";
 import { getDataURLFromFile } from "@web/core/utils/urls";
 import { rpc } from "@web/core/network/rpc";
 import { uniqueId } from "@web/core/utils/functions";
@@ -350,9 +351,7 @@ export class SlideUploadCategory extends Component {
     async _fetch_choices(type, domain = [], fields = ["name"]) {
         const results = await rpc(`/slides/${type}/search_read`, { fields, domain });
 
-        return results.read_results.map((choice) => {
-            return { value: choice.id, label: choice.name };
-        });
+        return results.read_results.map((choice) => ({ value: choice.id, label: choice.name }));
     }
 
     /**

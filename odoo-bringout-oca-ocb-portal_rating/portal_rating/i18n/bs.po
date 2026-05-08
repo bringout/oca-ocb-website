@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server saas~11.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-25 18:36+0000\n"
+"POT-Creation-Date: 2026-02-04 18:36+0000\n"
 "PO-Revision-Date: 2018-09-18 09:49+0000\n"
 "Last-Translator: Boško Stojaković <bluesoft83@gmail.com>, 2018\n"
 "Language-Team: Bosnian (https://www.transifex.com/odoo/teams/41243/bs/)\n"
@@ -17,135 +17,125 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #. module: portal_rating
 #: model_terms:ir.ui.view,arch_db:portal_rating.rating_rating_view_form
 msgid "<span> on </span>"
-msgstr "<span> dana </span>"
+msgstr ""
 
 #. module: portal_rating
 #: model_terms:ir.ui.view,arch_db:portal_rating.rating_rating_view_form
 msgid "<span>by </span>"
-msgstr "<span>od </span>"
+msgstr ""
 
 #. module: portal_rating
 #. odoo-javascript
 #: code:addons/portal_rating/static/src/interactions/portal_rating_composer.js:0
-#, python-format
+#: model_terms:ir.ui.view,arch_db:portal_rating.rating_stars_static_popup_composer
 msgid "Add Review"
-msgstr "Dodaj recenziju"
+msgstr ""
 
-# taken from hr.po
 #. module: portal_rating
 #. odoo-javascript
 #: code:addons/portal_rating/static/src/xml/portal_tools.xml:0
-#, python-format
 msgid "Average"
 msgstr "Prosjek"
 
-# taken from hr.po
 #. module: portal_rating
 #. odoo-javascript
 #: code:addons/portal_rating/static/src/xml/portal_rating_composer.xml:0
-#, python-format
 msgid "Close"
-msgstr "Vaš Odoo račun u ${object.user_id.company_id.name}"
+msgstr ""
 
-# taken from hr.po
 #. module: portal_rating
 #. odoo-javascript
-#: code:addons/portal_rating/static/src/chatter/frontend/message_patch.xml:0
-#, python-format
+#: code:addons/portal_rating/static/src/chatter/portal/message_patch.xml:0
+#: model_terms:ir.ui.view,arch_db:portal_rating.rating_rating_view_form
 msgid "Comment"
-msgstr "Komentar"
+msgstr ""
 
 #. module: portal_rating
 #: model:ir.model.fields,field_description:portal_rating.field_rating_rating__publisher_id
 msgid "Commented by"
-msgstr "Komentirao"
+msgstr ""
 
 #. module: portal_rating
 #: model:ir.model.fields,field_description:portal_rating.field_rating_rating__publisher_datetime
 msgid "Commented on"
-msgstr "Komentirano na"
+msgstr ""
 
-# taken from hr.po
 #. module: portal_rating
 #. odoo-javascript
-#: code:addons/portal_rating/static/src/chatter/frontend/message_patch.xml:0
-#, python-format
+#: code:addons/portal_rating/static/src/chatter/portal/message_patch.xml:0
 msgid "Delete"
-msgstr "Obriši"
+msgstr ""
 
-# taken from hr.po
 #. module: portal_rating
 #. odoo-javascript
 #: code:addons/portal_rating/static/src/xml/portal_tools.xml:0
-#, python-format
 msgid "Details"
 msgstr "Detalji"
 
 #. module: portal_rating
 #: model:ir.model.fields,field_description:portal_rating.field_ir_http__display_name
+#: model:ir.model.fields,field_description:portal_rating.field_mail_message__display_name
+#: model:ir.model.fields,field_description:portal_rating.field_rating_rating__display_name
 msgid "Display Name"
-msgstr "Naziv za prikaz"
+msgstr ""
 
-# taken from hr.po
 #. module: portal_rating
 #. odoo-javascript
-#: code:addons/portal_rating/static/src/chatter/frontend/message_patch.xml:0
-#, python-format
+#: code:addons/portal_rating/static/src/chatter/portal/message_patch.xml:0
 msgid "Edit"
-msgstr "Uredi"
+msgstr ""
 
 #. module: portal_rating
 #. odoo-javascript
 #: code:addons/portal_rating/static/src/interactions/portal_rating_composer.js:0
-#, python-format
+#: model_terms:ir.ui.view,arch_db:portal_rating.rating_stars_static_popup_composer
 msgid "Edit Review"
-msgstr "Uredi recenziju"
+msgstr ""
 
 #. module: portal_rating
 #. odoo-javascript
-#: code:addons/portal_rating/static/src/chatter/frontend/composer_patch.xml:0
-#, python-format
+#: code:addons/portal_rating/static/src/chatter/portal/composer_patch.xml:0
+#: code:addons/portal_rating/static/src/xml/portal_tools.xml:0
 msgid "Empty star"
-msgstr "Prazna zvjezdica"
+msgstr ""
 
 #. module: portal_rating
 #. odoo-javascript
-#: code:addons/portal_rating/static/src/chatter/frontend/composer_patch.xml:0
-#, python-format
+#: code:addons/portal_rating/static/src/chatter/portal/composer_patch.xml:0
+#: code:addons/portal_rating/static/src/xml/portal_tools.xml:0
 msgid "Full star"
-msgstr "Puna zvjezdica"
+msgstr ""
 
-# taken from hr.po
 #. module: portal_rating
 #: model:ir.model,name:portal_rating.model_ir_http
 msgid "HTTP Routing"
-msgstr "HTTP usmjeravanje"
+msgstr ""
 
 #. module: portal_rating
 #. odoo-javascript
 #: code:addons/portal_rating/static/src/xml/portal_tools.xml:0
-#, python-format
 msgid "Half a star"
-msgstr "Pola zvjezdice"
+msgstr ""
 
 #. module: portal_rating
 #: model:ir.model.fields,field_description:portal_rating.field_ir_http__id
+#: model:ir.model.fields,field_description:portal_rating.field_mail_message__id
+#: model:ir.model.fields,field_description:portal_rating.field_rating_rating__id
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: portal_rating
 #. odoo-python
 #: code:addons/portal_rating/controllers/portal_rating.py:0
-#, python-format
 msgid "Invalid rating"
-msgstr "Nevažeća ocjena"
+msgstr ""
 
-# taken from hr.po
 #. module: portal_rating
 #: model:ir.model,name:portal_rating.model_mail_message
 msgid "Message"
@@ -154,174 +144,84 @@ msgstr "Poruka"
 #. module: portal_rating
 #. odoo-javascript
 #: code:addons/portal_rating/static/src/xml/portal_rating_composer.xml:0
-#, python-format
 msgid "Modify your review"
-msgstr "Izmijeni svoju recenziju"
+msgstr ""
 
 #. module: portal_rating
 #. odoo-javascript
 #: code:addons/portal_rating/static/src/interactions/portal_rating_composer.js:0
 msgid "Post review"
-msgstr "Objavi recenziju"
+msgstr ""
 
 #. module: portal_rating
 #. odoo-javascript
 #: code:addons/portal_rating/static/src/xml/portal_tools.xml:0
 msgid "Progress bar"
-msgstr "Traka napretka"
+msgstr ""
 
 #. module: portal_rating
 #. odoo-javascript
-#: code:addons/portal_rating/static/src/chatter/frontend/message_patch.xml:0
-#, python-format
+#: code:addons/portal_rating/static/src/chatter/portal/message_patch.xml:0
 msgid "Published on"
-msgstr "Objavljeno na"
+msgstr ""
 
 #. module: portal_rating
 #: model:ir.model.fields,field_description:portal_rating.field_rating_rating__publisher_comment
 msgid "Publisher comment"
-msgstr "Komentar izdavača"
+msgstr ""
 
-# taken from hr.po
 #. module: portal_rating
 #: model:ir.model,name:portal_rating.model_rating_rating
 msgid "Rating"
-msgstr "Ocjena"
+msgstr "Ocijena"
 
 #. module: portal_rating
 #. odoo-javascript
 #: code:addons/portal_rating/static/src/xml/portal_tools.xml:0
-#, python-format
 msgid "Remove Selection"
-msgstr "Ukloni odabir"
+msgstr ""
 
-# taken from hr.po
 #. module: portal_rating
 #. odoo-javascript
 #: code:addons/portal_rating/static/src/interactions/portal_rating_composer.js:0
-#, python-format
+#: model_terms:ir.ui.view,arch_db:portal_rating.rating_stars_static_popup_composer
 msgid "Review"
-msgstr "Pregledaj"
+msgstr ""
 
 #. module: portal_rating
 #. odoo-javascript
 #: code:addons/portal_rating/static/src/interactions/portal_composer.js:0
-#, python-format
 msgid ""
 "The rating is required. Please make sure to select one before sending your "
 "review."
 msgstr ""
-"Ocjena je obavezna. Molimo odaberite jednu prije slanja vaše recenzije."
 
 #. module: portal_rating
 #. odoo-javascript
 #: code:addons/portal_rating/static/src/interactions/portal_rating_composer.js:0
 msgid "Update review"
-msgstr "Ažuriraj recenziju"
+msgstr ""
 
 #. module: portal_rating
 #. odoo-python
 #: code:addons/portal_rating/models/rating_rating.py:0
 msgid "Updating rating comment require write access on related record"
 msgstr ""
-"Ažuriranje komentara ocjene zahtijeva pravo upisivanja na povezani zapis"
 
 #. module: portal_rating
 #. odoo-javascript
 #: code:addons/portal_rating/static/src/xml/portal_rating_composer.xml:0
-#, python-format
 msgid "Write a review"
-msgstr "Napiši recenziju"
+msgstr ""
 
 #. module: portal_rating
 #. odoo-javascript
 #: code:addons/portal_rating/static/src/xml/portal_tools.xml:0
 msgid "comments"
-msgstr "komentari"
+msgstr ""
 
-# taken from hr.po
 #. module: portal_rating
 #. odoo-javascript
 #: code:addons/portal_rating/static/src/xml/portal_tools.xml:0
-#, python-format
 msgid "stars"
-msgstr "zvijezdice"
-
-# taken from hr.po
-#. module: portal_rating
-#: code:addons/portal_rating/static/src/xml/portal_chatter.xml:0
-#, python-format
-msgid "Cancel"
-msgstr "Otkaži"
-
-# taken from hr.po
-#. module: portal_rating
-#: code:addons/portal_rating/static/src/js/portal_composer.js:0
-#, python-format
-msgid "I don't like it"
-msgstr "Ne sviđa mi se"
-
-# taken from hr.po
-#. module: portal_rating
-#: code:addons/portal_rating/static/src/js/portal_composer.js:0
-#, python-format
-msgid "I hate it"
-msgstr "Grozno"
-
-# taken from hr.po
-#. module: portal_rating
-#: code:addons/portal_rating/static/src/js/portal_composer.js:0
-#, python-format
-msgid "I like it"
-msgstr "Sviđa mi se"
-
-# taken from hr.po
-#. module: portal_rating
-#: code:addons/portal_rating/static/src/js/portal_composer.js:0
-#, python-format
-msgid "I love it"
-msgstr "Obožavam"
-
-# taken from hr.po
-#. module: portal_rating
-#: code:addons/portal_rating/static/src/js/portal_composer.js:0
-#, python-format
-msgid "It's okay"
-msgstr "U redu"
-
-# taken from hr.po
-#. module: portal_rating
-#: code:addons/portal_rating/static/src/xml/portal_chatter.xml:0
-#, python-format
-msgid "Loading..."
-msgstr "Učitavanje..."
-
-#. module: portal_rating
-#: code:addons/portal_rating/models/rating_rating.py:0
-#, python-format
-msgid "Only the publisher of the website can change the rating comment"
-msgstr "Samo izdavač web stranice može promijeniti komentar ocjene"
-
-#. module: portal_rating
-#: code:addons/portal_rating/static/src/xml/portal_chatter.xml:0
-#, python-format
-msgid "Post comment"
-msgstr "Objavi komentar"
-
-#. module: portal_rating
-#: code:addons/portal_rating/static/src/xml/portal_chatter.xml:0
-#, python-format
-msgid "Update comment"
-msgstr "Ažuriraj komentar"
-
-#. module: portal_rating
-#: code:addons/portal_rating/static/src/js/portal_chatter.js:0
-#, python-format
-msgid "Write your comment"
-msgstr "Napišite svoj komentar"
-
-#. module: portal_rating
-#: code:addons/portal_rating/static/src/xml/portal_chatter.xml:0
-#, python-format
-msgid "avatar"
 msgstr ""

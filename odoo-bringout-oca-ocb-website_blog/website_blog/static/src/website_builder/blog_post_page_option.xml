@@ -6,7 +6,7 @@
         <BuilderRow label.translate="Top Banner">
             <BuilderCheckbox id="'blog_cover_opt'" actionParam="{views: ['website_blog.opt_blog_cover_post']}"/>
         </BuilderRow>
-        <BuilderRow label.translate="Full-Width" t-if="isActiveItem('blog_cover_opt')" level="1">
+        <BuilderRow label.translate="Full-Width" t-if="this.isActiveItem('blog_cover_opt')" level="1">
             <BuilderCheckbox actionParam="{views: ['website_blog.opt_blog_cover_post_fullwidth_design']}"/>
         </BuilderRow>
         <BuilderRow label.translate="Layout">
@@ -24,7 +24,7 @@
         <BuilderRow label.translate="Sidebar">
             <BuilderCheckbox id="'blog_posts_sidebar_opt'" actionParam="{views: ['website_blog.opt_blog_sidebar_show']}"/>
         </BuilderRow>
-        <t t-if="isActiveItem('blog_posts_sidebar_opt')">
+        <t t-if="this.isActiveItem('blog_posts_sidebar_opt')">
             <BuilderRow label.translate="Archives" level="1">
                 <BuilderCheckbox actionParam="{views: ['website_blog.opt_sidebar_blog_index_archives']}"/>
             </BuilderRow>
@@ -51,6 +51,17 @@
             <BuilderCheckbox actionParam="{views: ['website_blog.opt_posts_loop_show_teaser']}"/>
         </BuilderRow>
     </BuilderContext>
+</t>
+
+<t t-inherit="website.BuilderOptions" t-inherit-mode="extension">
+    <xpath expr="//t[@id='page_options_hook']" position="after">
+        <blog_post_page_option
+            template="website_blog.blogPostPageOption"
+            selector="main:has(#o_wblog_index_content)"
+            title="Blogs Page"
+            groups='["website.group_website_designer"]'
+            editableOnly="false"/>
+    </xpath>
 </t>
 
 </templates>

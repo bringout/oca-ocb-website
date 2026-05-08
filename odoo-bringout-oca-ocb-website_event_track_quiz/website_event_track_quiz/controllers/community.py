@@ -33,7 +33,7 @@ class WebsiteEventTrackQuizCommunityController(EventCommunityController):
 
     def _get_community_leaderboard_render_values(self, event, search_term, page):
         values = self._get_leaderboard(event, search_term)
-        values.update({'event': event, 'search': search_term, 'slots': event.event_slot_ids._filter_open_slots().grouped('date')})
+        values.update({'event': event, 'search': search_term})
 
         user_count = len(values['visitors'])
         if user_count:
@@ -54,7 +54,7 @@ class WebsiteEventTrackQuizCommunityController(EventCommunityController):
         return values
 
     def _get_leaderboard(self, event, searched_name=None):
-        current_visitor = request.env['website.visitor']._get_visitor_from_request()
+        current_visitor = request.env['ir.http']._get_visitor_from_request()
         track_visitor_data = request.env['event.track.visitor'].sudo()._read_group(
             [('track_id', 'in', event.track_ids.ids),
              ('visitor_id', '!=', False),

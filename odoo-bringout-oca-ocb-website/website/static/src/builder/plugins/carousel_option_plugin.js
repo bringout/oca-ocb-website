@@ -4,11 +4,7 @@ import { registry } from "@web/core/registry";
 import { CarouselItemHeaderMiddleButtons } from "./carousel_item_header_buttons";
 import { renderToElement } from "@web/core/utils/render";
 import { BuilderAction } from "@html_builder/core/builder_action";
-import { withSequence } from "@html_editor/utils/resource";
-import { between } from "@html_builder/utils/option_sequence";
-import { WEBSITE_BACKGROUND_OPTIONS, BOX_BORDER_SHADOW } from "@website/builder/option_sequence";
 import { selectElements } from "@html_editor/utils/dom_traversal";
-import { BaseOptionComponent } from "@html_builder/core/utils";
 
 /**
  * @typedef { Object } CarouselOptionShared
@@ -16,8 +12,6 @@ import { BaseOptionComponent } from "@html_builder/core/utils";
  * @property { CarouselOptionPlugin['removeSlide'] } removeSlide
  * @property { CarouselOptionPlugin['slideCarousel'] } slideCarousel
  */
-
-export const CAROUSEL_CARDS_SEQUENCE = between(WEBSITE_BACKGROUND_OPTIONS, BOX_BORDER_SHADOW);
 
 const carouselWrapperSelector =
     ".s_carousel_wrapper, .s_carousel_intro_wrapper, .s_carousel_cards_wrapper, .s_quotes_carousel_wrapper";
@@ -27,26 +21,6 @@ const carouselControlsSelector =
 const carouselItemOptionSelector =
     ".s_carousel .carousel-item, .s_quotes_carousel .carousel-item, .s_carousel_intro .carousel-item, .s_carousel_cards .carousel-item";
 
-export class CarouselOption extends BaseOptionComponent {
-    static template = "website.CarouselOption";
-    static selector = "section";
-    static exclude =
-        ".s_carousel_intro_wrapper, .s_carousel_cards_wrapper, .s_quotes_carousel_wrapper:has(>.s_quotes_carousel_compact)";
-    static applyTo = ":scope > .carousel";
-}
-
-export class CarouselBottomControllersOption extends BaseOptionComponent {
-    static template = "website.CarouselBottomControllersOption";
-    static selector = "section";
-    static applyTo = ".s_carousel_intro, .s_quotes_carousel_compact";
-}
-
-export class CarouselCardsOption extends BaseOptionComponent {
-    static template = "website.CarouselCardsOption";
-    static selector = "section";
-    static applyTo = ".s_carousel_cards";
-}
-
 export class CarouselOptionPlugin extends Plugin {
     static id = "carouselOption";
     static dependencies = ["clone", "builderOptions", "builderActions"];
@@ -54,11 +28,6 @@ export class CarouselOptionPlugin extends Plugin {
 
     /** @type {import("plugins").WebsiteResources} */
     resources = {
-        builder_options: [
-            CarouselOption,
-            CarouselBottomControllersOption,
-            withSequence(CAROUSEL_CARDS_SEQUENCE, CarouselCardsOption),
-        ],
         builder_header_middle_buttons: {
             Component: CarouselItemHeaderMiddleButtons,
             selector: carouselItemOptionSelector,
@@ -83,13 +52,16 @@ export class CarouselOptionPlugin extends Plugin {
             SlideCarouselAction,
             ToggleControllersAction,
             ToggleCardImgAction,
+            SetCarouselTypeAction,
+            SetCarouselTimespanAction,
+            SetCarouselDurationAction,
         },
         on_cloned_handlers: this.onCloned.bind(this),
         on_snippet_dropped_handlers: this.onSnippetDropped.bind(this),
-        get_gallery_items_handlers: this.getGalleryItems.bind(this),
-        reorder_items_handlers: this.reorderCarouselItems.bind(this),
-        before_save_handlers: this.restoreCarousels.bind(this),
-        is_unremovable_selector: carouselItemOptionSelector,
+        gallery_items_providers: this.getGalleryItems.bind(this),
+        reorder_items_processors: this.reorderCarouselItems.bind(this),
+        on_will_save_handlers: this.restoreCarousels.bind(this),
+        is_unremovable_selectors: carouselItemOptionSelector,
     };
 
     /**
@@ -393,6 +365,109 @@ export class ToggleCardImgAction extends BuilderAction {
         const carouselEl = editingElement.closest(".carousel");
         const cardImgEl = carouselEl.querySelector(".o_card_img_wrapper");
         return !!cardImgEl;
+    }
+}
+
+function getTransitionDuration(el) {
+    if (el.matches(".carousel-instant")) {
+        return 0;
+    }
+
+    const customDuration = parseInt(el.style.getPropertyValue("--transition-duration"));
+    if (customDuration) {
+        return customDuration;
+    }
+
+    const carouselItemEl = el.querySelector(".carousel-item");
+    if (carouselItemEl) {
+        return parseFloat(getComputedStyle(carouselItemEl).transitionDuration) * 1000;
+    }
+
+    // Default Bootstrap carousel transition duration
+    return 600;
+}
+
+function updateCarouselType(el, typeClass) {
+    el.classList.add("slide");
+    el.classList.remove("carousel-fade", "carousel-instant");
+    if (typeClass) {
+        el.classList.add(typeClass);
+    }
+}
+
+export class SetCarouselTypeAction extends BuilderAction {
+    static id = "setCarouselType";
+    isApplied({ editingElement, params: { mainParam: carouselTypeClass } }) {
+        if (carouselTypeClass) {
+            return editingElement.classList.contains(carouselTypeClass);
+        }
+        return !(
+            editingElement.classList.contains("carousel-fade") ||
+            editingElement.classList.contains("carousel-instant")
+        );
+    }
+    apply({ editingElement, params: { mainParam: carouselTypeClass } }) {
+        const wasCarouselInstant = editingElement.classList.contains("carousel-instant");
+        const isCarouselInstant = carouselTypeClass === "carousel-instant";
+
+        if (wasCarouselInstant !== isCarouselInstant) {
+            if (wasCarouselInstant) {
+                // Remove the class "carousel-instant" before to compute the
+                // duration (otherwise transition-duration equals 0s)
+                updateCarouselType(editingElement, carouselTypeClass);
+            }
+
+            const duration = getTransitionDuration(editingElement);
+            const timespan = parseInt(editingElement.dataset.bsInterval, 10) || 1000;
+            editingElement.dataset.bsInterval =
+                timespan + (isCarouselInstant ? -duration : duration);
+
+            if (!wasCarouselInstant) {
+                // Add the class "carousel-instant" after to compute the
+                // duration (otherwise transition-duration equals 0s)
+                updateCarouselType(editingElement, carouselTypeClass);
+            }
+        } else {
+            updateCarouselType(editingElement, carouselTypeClass);
+        }
+    }
+}
+
+export class SetCarouselTimespanAction extends BuilderAction {
+    static id = "setCarouselTimespan";
+    setup() {
+        this.preview = false;
+    }
+    apply({ editingElement, value }) {
+        const duration = getTransitionDuration(editingElement);
+        const timespan = parseInt(value, 10);
+        editingElement.dataset.bsInterval = timespan + duration;
+    }
+    getValue({ editingElement }) {
+        const duration = getTransitionDuration(editingElement);
+        const timespan = parseInt(editingElement.dataset.bsInterval, 10) || 1000;
+        return timespan - duration;
+    }
+}
+
+export class SetCarouselDurationAction extends BuilderAction {
+    static id = "setCarouselDuration";
+    setup() {
+        this.preview = false;
+    }
+    apply({ editingElement, value }) {
+        if (!value) {
+            return;
+        }
+        const duration = getTransitionDuration(editingElement);
+        const timespan = parseInt(editingElement.dataset.bsInterval, 10) || 1000;
+        const newDuration = parseInt(value, 10);
+        editingElement.dataset.bsInterval = timespan + (newDuration - duration);
+        editingElement.style.setProperty("--transition-duration", value);
+    }
+    getValue({ editingElement }) {
+        const duration = getTransitionDuration(editingElement);
+        return duration;
     }
 }
 

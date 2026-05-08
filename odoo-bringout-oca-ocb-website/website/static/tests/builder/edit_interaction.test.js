@@ -3,7 +3,6 @@ import { contains, patchWithCleanup } from "@web/../tests/web_test_helpers";
 import { EditInteractionPlugin } from "@website/builder/plugins/edit_interaction_plugin";
 import {
     addActionOption,
-    addOption,
     defineWebsiteModels,
     setupWebsiteBuilder,
     setupWebsiteBuilderWithSnippet,
@@ -11,7 +10,11 @@ import {
 import { waitFor } from "@odoo/hoot-dom";
 import { xml } from "@odoo/owl";
 import { BuilderAction } from "@html_builder/core/builder_action";
-import { confirmAddSnippet, waitForEndOfOperation } from "@html_builder/../tests/helpers";
+import {
+    addBuilderOption,
+    confirmAddSnippet,
+    waitForEndOfOperation,
+} from "@html_builder/../tests/helpers";
 
 defineWebsiteModels();
 
@@ -47,7 +50,7 @@ test("ensure order of operations when hovering an option", async () => {
             }
         },
     });
-    addOption({
+    addBuilderOption({
         selector: ".test-options-target",
         template: xml`<BuilderButton action="'customAction'"/>`,
     });

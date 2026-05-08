@@ -7,7 +7,6 @@
     'sequence': 20,
     'summary': 'Enterprise website builder',
     'website': 'https://www.odoo.com/app/website',
-    'version': '1.0',
     'depends': [
         'digest',
         'web',
@@ -27,7 +26,6 @@
             'geoip2': 'python3-geoip2',
         },
     },
-    'installable': True,
     'data': [
         # security.xml first, data.xml need the group to exist (checking it)
         'security/website_security.xml',
@@ -69,6 +67,7 @@
         'views/snippets/s_carousel_intro.xml',
         'views/snippets/s_carousel_cards.xml',
         'views/snippets/s_alert.xml',
+        'views/snippets/s_icon_list.xml',
         'views/snippets/s_motto.xml',
         'views/snippets/s_card.xml',
         'views/snippets/s_cards_grid.xml',
@@ -134,6 +133,7 @@
         'views/snippets/s_pricelist_boxed.xml',
         'views/snippets/s_adventure.xml',
         'views/snippets/s_image_title.xml',
+        'views/snippets/s_bento_grid_avatars.xml',
         'views/snippets/s_key_images.xml',
         'views/snippets/s_kickoff.xml',
         'views/snippets/s_discovery.xml',
@@ -146,6 +146,7 @@
         'views/snippets/s_shape_image.xml',
         'views/snippets/s_empowerment.xml',
         'views/snippets/s_split_intro.xml',
+        'views/snippets/s_splash_intro.xml',
         'views/snippets/s_text_highlight.xml',
         'views/snippets/s_pricelist_cafe.xml',
         'views/snippets/s_progress_bar.xml',
@@ -180,8 +181,10 @@
         'views/snippets/s_freegrid.xml',
         'views/snippets/s_card_offset.xml',
         'views/snippets/s_image.xml',
+        'views/snippets/s_icon.xml',
         'views/snippets/s_video.xml',
         'views/snippets/s_cta_badge.xml',
+        'views/snippets/s_avatars.xml',
         'views/snippets/s_unveil.xml',
         'views/snippets/s_image_hexagonal.xml',
         'views/snippets/s_striped_center_top.xml',
@@ -196,6 +199,7 @@
         'views/snippets/s_banner_connected.xml',
         'views/snippets/s_ecomm_categories_showcase.xml',
         'views/snippets/s_banner_categories.xml',
+        'views/snippets/s_age_verification_popup.xml',
         'views/new_page_template_templates.xml',
         'views/website_views.xml',
         'views/website_pages_views.xml',
@@ -209,6 +213,7 @@
         'views/ir_model_views.xml',
         'views/res_partner_views.xml',
         'views/neutralize_views.xml',
+        'views/digest_digest_views.xml',
         'wizard/base_language_install_views.xml',
         'wizard/blocked_third_party_domains.xml',
         'wizard/website_robots.xml',
@@ -224,8 +229,14 @@
     'post_init_hook': 'post_init_hook',
     'uninstall_hook': 'uninstall_hook',
     'assets': {
+        "im_livechat.assets_embed_core": [
+            "website/static/src/mail/core/common/**/*",
+        ],
         "mail.assets_public": [
-            "website/static/src/**/common/**/*",
+            "website/static/src/mail/core/common/**/*",
+        ],
+        "portal.assets_chatter_helpers": [
+            "website/static/src/mail/core/common/**/*",
         ],
         'web.assets_frontend': [
             'html_builder/static/src/utils/scrolling.js',
@@ -238,23 +249,20 @@
             # Activated on-demand by website.ripple_effect_js.
             ('remove', 'website/static/src/interactions/ripple_effect.js'),
             ('remove', 'website/static/src/core/website_edit_service.js'),
-            ('replace', 'web/static/src/legacy/js/public/public_root_instance.js', 'website/static/src/js/content/website_root_instance.js'),
+            ('replace', 'web/static/src/public/public_root_instance.js', 'website/static/src/js/content/website_root_instance.js'),
             'website/static/src/snippets/**/*.js',
             ('remove', 'website/static/src/snippets/**/*.edit.js'),
-            'website/static/src/libs/zoomodoo/zoomodoo.scss',
             'website/static/src/scss/website.scss',
+            'website/static/src/scss/portal.scss',
             'website/static/src/scss/website_common.scss',
             'website/static/src/scss/website_controller_page.scss',
             'website/static/src/scss/website.ui.scss',
-            'website/static/src/libs/zoomodoo/zoomodoo.js',
             'website/static/src/libs/bootstrap/bootstrap.js',
             'website/static/src/js/utils.js',
             'web/static/src/core/autocomplete/*',
             'website/static/src/components/autocomplete_with_pages/*',
             'website/static/src/js/tours/tour_utils.js',
-            'website/static/src/js/content/website_root.js',
             'website/static/src/js/content/compatibility.js',
-            'website/static/src/js/content/snippets.animation.js',
             'website/static/src/js/user_custom_javascript.js',
             'website/static/src/js/http_cookie.js',
             'website/static/src/xml/website.xml',
@@ -272,6 +280,7 @@
             'website/static/src/js/content/redirect.js',
             'website/static/src/js/content/adapt_content.js',
             'website/static/src/js/content/generate_video_iframe.js',
+            'website/static/src/js/content/age_verification_content_blur.js',
         ],
         'web.assets_frontend_lazy': [
             # Remove assets_frontend_minimal
@@ -329,7 +338,7 @@
             'website/static/src/components/autocomplete_with_pages/*',
             'website/static/src/xml/website.xml',
             'website/static/src/scss/website_controller_page_kanban.scss',
-            'website/static/src/**/common/**/*',
+            'website/static/src/mail/core/common/**/*',
 
             'website/static/src/xml/website_form_editor.xml',
             # TODO Remove the module's form js - this is for testing.
@@ -345,7 +354,6 @@
             'website/static/src/components/website_loader/website_loader.dark.scss'
         ],
         'web.assets_unit_tests': [
-            'web/static/src/legacy/js/public/minimal_dom.js',
             'website/static/src/client_actions/website_preview/website_builder_action_test_mode.js',
             'website/static/tests/core/**/*',
             'website/static/tests/helpers.js',
@@ -356,14 +364,13 @@
             'website/static/tests/redirect_field.test.js',
             'website/static/tests/new_content_systray_item.test.js',
             'website/static/tests/page_url_field.test.js',
+            'website/static/tests/website_loader.test.js',
         ],
         'web.assets_unit_tests_setup': [
             'html_builder/static/src/utils/scrolling.js',
-            'web/static/src/legacy/js/core/class.js',
-            'web/static/src/legacy/js/public/lazyloader.js',
-            'web/static/src/legacy/js/public/minimal_dom.js',
-            'web/static/src/legacy/js/public/public_widget.js',
-            'web/static/src/legacy/js/public/public_root.js',
+            'web/static/src/public/utils.js',
+            'web/static/src/public/lazyloader.js',
+            'web/static/src/public/public_root.js',
             'website/static/lib/multirange/*.js',
             'website/static/src/js/content/auto_hide_menu.js',
             'website/static/src/core/**/*',
@@ -376,9 +383,6 @@
             'google_recaptcha/static/src/js/recaptcha.js',
             'website/static/src/js/content/generate_video_iframe.js',
         ],
-        'web.tests_assets': [
-            'website/static/tests/website_service_mock.js',
-        ],
         'web._assets_frontend_helpers': [
             ('prepend', 'website/static/src/scss/bootstrap_overridden.scss'),
         ],
@@ -386,6 +390,7 @@
             ('after', 'web/static/src/scss/utilities_custom.scss', 'html_builder/static/src/scss/utilities_custom.scss'),
         ],
         'html_editor.assets_link_popover': [
+            'html_builder/static/src/utils/utils_css.js',
             'website/static/src/js/editor/html_editor.js',
             'website/static/src/xml/html_editor.xml',
         ],
@@ -397,15 +402,11 @@
             'web/static/lib/bootstrap/scss/_variables-dark.scss',
             'web/static/lib/bootstrap/scss/_maps.scss',
             'website/static/src/scss/website.edit_mode.scss',
-            'website/static/src/snippets/s_image_gallery/000.xml',
-            'website/static/src/snippets/s_image_gallery/001.xml',
             'website/static/src/js/send_mail_form.js',
             'website/static/src/xml/website_form.xml',
             'website/static/src/xml/website_form_editor.xml',
             'website/static/src/xml/website.cookies_bar.xml',
-        ],
-        'website.assets_all_wysiwyg': [
-            ('include', 'website.assets_wysiwyg'),
+            'website/static/src/mail/core/common/**/*',
         ],
         'html_editor.assets_media_dialog': [
             'website/static/src/components/media_dialog/*',

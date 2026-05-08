@@ -2,6 +2,8 @@ import { BuilderAction } from "@html_builder/core/builder_action";
 import { Plugin } from "@html_editor/plugin";
 import { registry } from "@web/core/registry";
 import { convertCSSColorToRgba } from "@web/core/utils/colors";
+import { isImageCorsProtected } from "@html_editor/utils/image";
+import { loadImageInfo } from "@html_editor/utils/image_processing";
 
 /**
  * @typedef { Object } ImageHoverShared
@@ -12,7 +14,7 @@ import { convertCSSColorToRgba } from "@web/core/utils/colors";
 export class ImageHoverPlugin extends Plugin {
     static id = "imageHover";
     static shared = ["setHoverEffect", "removeHoverEffect"];
-    static dependencies = ["imagePostProcess", "imageToolOption"];
+    static dependencies = ["imagePostProcess", "imageShapeOption", "imageToolOption"];
 
     /** @type {import("plugins").WebsiteResources} */
     resources = {
@@ -23,9 +25,9 @@ export class ImageHoverPlugin extends Plugin {
             SetHoverEffectStrokeWidthAction,
         },
         system_attributes: ["data-original-src-before-hover"],
-        default_shape_handlers: (dataset) =>
+        default_shape_providers: (dataset) =>
             dataset.hoverEffect && "html_builder/geometric/geo_square",
-        post_compute_shape_listeners: async (svg, params) => {
+        on_shape_computed_handlers: async (svg, params) => {
             let rgba = null;
             let rbg = null;
             let opacity = null;
@@ -139,8 +141,13 @@ export class ImageHoverPlugin extends Plugin {
                 }
             }
         },
-        remove_hover_effect_handlers: this.removeHoverEffect.bind(this),
-        set_hover_effect_handlers: this.setHoverEffect.bind(this),
+        on_hover_animation_mode_cleaned_handlers: this.removeHoverEffect.bind(this),
+        on_hover_animation_mode_applied_handlers: this.setHoverEffect.bind(this),
+        can_have_hover_effect_predicates: (el, dataset) => this.canHaveHoverEffect(el, dataset),
+        hover_effect_image_dataset_providers: async (imgEl) => ({
+            ...Object.assign({}, imgEl.dataset, await loadImageInfo(imgEl)),
+            isCorsProtected: await isImageCorsProtected(imgEl),
+        }),
     };
 
     defaultHoverEffectIntensity = 20;
@@ -202,6 +209,15 @@ export class ImageHoverPlugin extends Plugin {
             ...defaultEffectValues[hoverEffectId]?.(),
             hoverEffect: hoverEffectId,
         };
+    }
+    canHaveHoverEffect(imgEl, dataset) {
+        return (
+            imgEl.tagName === "IMG" &&
+            !dataset.isCorsProtected &&
+            !(this.dependencies.imageShapeOption.getShapeCategory(imgEl) === "devices") &&
+            !this.dependencies.imageShapeOption.isAnimableShape(dataset.shape) &&
+            !!dataset.isImageSupportedForShapes
+        );
     }
 }
 export class SetHoverEffectAction extends BuilderAction {

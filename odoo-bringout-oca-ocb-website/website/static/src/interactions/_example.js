@@ -1,5 +1,6 @@
+import { useState } from "@web/owl2/utils";
 // import { registry } from "@web/core/registry";
-import { Component, xml, useState } from "@odoo/owl";
+import { Component, xml } from "@odoo/owl";
 import { useService } from "@web/core/utils/hooks";
 
 // -----------------------------------------------------------------------------
@@ -8,8 +9,8 @@ import { useService } from "@web/core/utils/hooks";
 export class Counter extends Component {
     static selector = "#wrapwrap h1";
     static template = xml`
-        <div class="btn btn-primary" t-on-click="increment">
-            Counter. Value=<t t-esc="state.value"/>
+        <div class="btn btn-primary" t-on-click="this.increment">
+            Counter. Value=<t t-out="this.state.value"/>
         </div>`;
     static props = {};
 

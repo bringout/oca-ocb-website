@@ -49,7 +49,6 @@ function applyForAJob(jobName, application) {
 }
 
 registry.category("web_tour.tours").add('website_hr_recruitment_tour', {
-    url: '/jobs',
     steps: () => [
     ...applyForAJob('Guru', {
         name: 'John Smith',
@@ -73,9 +72,7 @@ registry.category("web_tour.tours").add('website_hr_recruitment_tour', {
     }),
 ]});
 
-registerWebsitePreviewTour('website_hr_recruitment_tour_edit_form', {
-    url: '/jobs',
-}, () => [
+registerWebsitePreviewTour('website_hr_recruitment_tour_edit_form', {}, () => [
     stepUtils.waitIframeIsReady(),
 {
     content: 'Go to the Guru job page',
@@ -87,7 +84,7 @@ registerWebsitePreviewTour('website_hr_recruitment_tour_edit_form', {
     run: "click",
 }, {
     content: 'Check if the Guru form is present',
-    trigger: ':iframe form',
+    trigger: ':iframe #wrap form',
     run: "click",
 },
 ...clickOnEditAndWaitEditMode(),
@@ -101,7 +98,7 @@ registerWebsitePreviewTour('website_hr_recruitment_tour_edit_form', {
     },
 }, {
     content: 'Make the department_id field visible',
-    trigger: ':iframe form',
+    trigger: ':iframe #wrap form',
     run() {
         const departmentEl = this.anchor.querySelector('input[name="department_id"]');
         departmentEl.value = 'FAKE_DEPARTMENT_ID_DEFAULT_VAL';
@@ -160,30 +157,4 @@ registerWebsitePreviewTour('website_hr_recruitment_tour_edit_form', {
         }
     },
 },
-]);
-
-// This tour addresses an issue that occurred in a website form containing
-// the 'hide-change-model' attribute. Specifically, when a model-required
-// field is selected, the alert message should not display an undefined
-// action name.
-registerWebsitePreviewTour('model_required_field_should_have_action_name', {
-    url: '/jobs',
-}, () => [{
-    content: "Select Job",
-    trigger: ":iframe h3:contains('Guru')",
-    run: "click",
-}, {
-    content: "Apply",
-    trigger: ":iframe a:contains('Apply')",
-    run: "click",
-},
-...clickOnEditAndWaitEditMode(),
-{
-    content: "click on the your name field",
-    trigger: ":iframe #hr_recruitment_form div.s_website_form_model_required",
-    run: "click",
-}, {
-    content: "Select model-required field",
-    trigger: ".options-container .alert > span:not(:contains(undefined))",
-}
 ]);

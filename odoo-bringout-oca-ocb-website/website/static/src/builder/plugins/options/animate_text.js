@@ -1,12 +1,13 @@
-import { Component, onMounted, onWillDestroy, useChildSubEnv, useRef, useState } from "@odoo/owl";
+import { useChildSubEnv, useRef, useState } from "@web/owl2/utils";
+import { Component, onMounted, onWillDestroy } from "@odoo/owl";
 import { toolbarButtonProps } from "@html_editor/main/toolbar/toolbar";
 import { AnimateOption } from "./animate_option";
 import { usePopover } from "@web/core/popover/popover_hook";
 import { DependencyManager } from "@html_builder/core/dependency_manager";
-import { BaseOptionComponent } from "@html_builder/core/utils";
+import { BaseOptionComponent } from "@html_builder/core/base_option_component";
 import { POSITION_BUS } from "@web/core/position/position_hook";
 
-class AnimateTextPopover extends BaseOptionComponent {
+export class AnimateTextPopover extends BaseOptionComponent {
     static template = "website_builder.AnimateTextPopover";
     static props = {
         animateOptionProps: AnimateOption.props,

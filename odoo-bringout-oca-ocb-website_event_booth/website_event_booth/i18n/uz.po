@@ -333,11 +333,3 @@ msgstr "Veb-sayt tadbiri menyusi"
 #, fuzzy
 msgid "if you have any question."
 msgstr "agar biror savolingiz bo‘lsa."
-
-#, fuzzy
-#~ msgid "It looks like your email is linked to an existing account."
-#~ msgstr "Elektron pochtangiz mavjud hisobga bog‘langanga o‘xshaydi."
-
-#, fuzzy
-#~ msgid "Please Sign In."
-#~ msgstr "Iltimos, tizimga kiring."

@@ -12,6 +12,7 @@ from odoo import api, fields, models, tools, _
 from odoo.exceptions import AccessError, UserError, ValidationError
 from odoo.fields import Domain
 from odoo.tools import is_html_empty
+from odoo.tools.misc import format_duration
 
 _logger = logging.getLogger(__name__)
 
@@ -407,7 +408,7 @@ class SlideChannel(models.Model):
     def _compute_partner_has_new_content(self):
         new_published_slides = self.env['slide.slide'].sudo().search([
             ('is_published', '=', True),
-            ('date_published', '>', fields.Datetime.now() - relativedelta(days=7)),
+            ('published_date', '>', fields.Datetime.now() - relativedelta(days=7)),
             ('channel_id', 'in', self.ids),
             ('is_category', '=', False)
         ])
@@ -487,6 +488,28 @@ class SlideChannel(models.Model):
             """ % {'table_name': self._table}
             self.env.cr.execute(query)
 
+    def _populate_description_short(self, vals):
+        """ Populate the empty ``vals['description_short']`` with the non-empty ``vals['description']`` for the ``self``
+            record if the field `description_short` was not explicitly modified before.
+        """
+        if self:
+            self.ensure_one()
+        if not vals.get('description'):
+            return
+        description_dict = v if isinstance((v := vals.get('description')), dict) else {self.env.lang or 'en_US': v}
+        description_short_dict = v if isinstance((v := vals.get('description_short', {})), dict) else {self.env.lang or 'en_US': v or ''}
+        for lang, description in description_dict.items():
+            if (
+                is_html_empty(description_short_dict.get(lang)) and not is_html_empty(description)
+                and (self.with_context(lang=lang).description == self.with_context(lang=lang).description_short)
+            ):
+                description_short_dict[lang] = description
+        vals['description_short'] = (
+            description_short_dict[lang]
+            if len(description_short_dict) == 1 and lang in description_short_dict
+            else description_short_dict
+        )
+
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
@@ -495,8 +518,7 @@ class SlideChannel(models.Model):
                 vals['channel_partner_ids'] = [(0, 0, {
                     'partner_id': self.env.user.partner_id.id
                 })]
-            if not is_html_empty(vals.get('description')) and is_html_empty(vals.get('description_short')):
-                vals['description_short'] = vals['description']
+            self.browse()._populate_description_short(vals)
 
         channels = super(SlideChannel, self.with_context(mail_create_nosubscribe=True)).create(vals_list)
 
@@ -519,9 +541,8 @@ class SlideChannel(models.Model):
         return vals_list
 
     def write(self, vals):
-        # If description_short wasn't manually modified, there is an implicit link between this field and description.
-        if not is_html_empty(vals.get('description')) and is_html_empty(vals.get('description_short')) and self.description == self.description_short:
-            vals['description_short'] = vals.get('description')
+        if vals.get('description'):
+            self._populate_description_short(vals)
 
         res = super().write(vals)
 
@@ -612,6 +633,16 @@ class SlideChannel(models.Model):
     def _mail_get_partner_fields(self, introspect_fields=False):
         return []
 
+    def _mail_get_operation_for_mail_message_operation(self, message_operation):
+        # posting messages on channels user is a member requires only read access
+        operations = super()._mail_get_operation_for_mail_message_operation(message_operation)
+        if message_operation == 'create':
+            return (
+                (Domain('is_member', '=', True), 'read'),
+                *operations,
+            )
+        return operations
+
     # ---------------------------------------------------------
     # Business / Actions
     # ---------------------------------------------------------
@@ -672,7 +703,7 @@ class SlideChannel(models.Model):
         local_context = dict(
             self.env.context,
             default_channel_id=self.id if len(self) == 1 else False,
-            default_email_layout_xmlid='website_slides.mail_notification_channel_invite',
+            default_email_layout_xmlid='mail.mail_notification_layout',
             default_enroll_mode=enroll_mode,
             default_template_id=mail_template and mail_template.id or False,
             default_use_template=bool(mail_template),
@@ -1030,8 +1061,6 @@ class SlideChannel(models.Model):
 
     @api.model
     def _search_get_detail(self, website, order, options):
-        with_description = options['displayDescription']
-        with_date = options['displayDetail']
         my = options.get('my')
         search_tags = options.get('tag')
         slide_category = options.get('slide_category')
@@ -1051,19 +1080,16 @@ class SlideChannel(models.Model):
                 domain.append([('tag_ids', 'in', tags_.ids)])
         if slide_category and 'nbr_%s' % slide_category in self:
             domain.append([('nbr_%s' % slide_category, '>', 0)])
-        search_fields = ['name']
-        fetch_fields = ['name', 'website_url']
+        search_fields = ['name', 'tag_ids.name', 'description_short']
+        fetch_fields = ['name', 'website_url', 'total_time', 'description_short']
         mapping = {
             'name': {'name': 'name', 'type': 'text', 'match': True},
             'website_url': {'name': 'website_url', 'type': 'text', 'truncate': False},
+            'search_item_metadata': {'name': 'total_time', 'type': 'text'},
+            'image_url': {'name': 'image_url', 'type': 'html'},
+            'tags': {'name': 'tag_ids', 'type': 'tags', 'match': True},
+            'description': {'name': 'description_short', 'type': 'text', 'html': True, 'match': True},
         }
-        if with_description:
-            search_fields.append('description_short')
-            fetch_fields.append('description_short')
-            mapping['description'] = {'name': 'description_short', 'type': 'text', 'html': True, 'match': True}
-        if with_date:
-            fetch_fields.append('slide_last_update')
-            mapping['detail'] = {'name': 'slide_last_update', 'type': 'date'}
         return {
             'model': 'slide.channel',
             'base_domain': domain,
@@ -1071,7 +1097,18 @@ class SlideChannel(models.Model):
             'fetch_fields': fetch_fields,
             'mapping': mapping,
             'icon': 'fa-graduation-cap',
+            'group_name': self.env._("Courses"),
+            'sequence': 80,
         }
+
+    def _search_render_results(self, fetch_fields, mapping, icon, limit):
+        results_data = super()._search_render_results(fetch_fields, mapping, icon, limit)
+        for channel, data in zip(self, results_data):
+            data['tag_ids'] = channel.tag_ids.read(['name'])
+            data['image_url'] = '/web/image/slide.channel/%s/image_128' % data['id']
+            if data['total_time']:
+                data['total_time'] = format_duration(data['total_time'])
+        return results_data
 
     def _get_placeholder_filename(self, field):
         image_fields = ['image_%s' % size for size in [1920, 1024, 512, 256, 128]]

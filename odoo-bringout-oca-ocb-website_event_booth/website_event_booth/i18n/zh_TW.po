@@ -291,9 +291,3 @@ msgstr "網站活動功能表"
 #: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_registration
 msgid "if you have any question."
 msgstr "如果你有任何問題。"
-
-#~ msgid "It looks like your email is linked to an existing account."
-#~ msgstr "你的電郵地址似乎已有現有帳戶使用。"
-
-#~ msgid "Please Sign In."
-#~ msgstr "請登入。"

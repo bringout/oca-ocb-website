@@ -1,6 +1,5 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from odoo.http import Request
 from odoo.tests import HttpCase, tagged
 from odoo.tests.common import JsonRpcException
 from odoo.tools import mute_logger, urls
@@ -39,7 +38,6 @@ class TestPortalAddresses(BaseCommon, HttpCase):
         cls.account_b = cls._create_new_portal_user(login='portal_b')
         cls.company_partner = cls.env['res.partner'].create({
             'name': 'Test Odoo SA',
-            'is_company': True,
             'email': 'odoo@odoo.com',
             'street': 'Chau. de Namur 40',
             'city': 'Ramillies',
@@ -82,7 +80,7 @@ class TestPortalAddresses(BaseCommon, HttpCase):
     def test_required_values(self):
         """Check that empty values for required fields are correctly caught."""
         self.authenticate(self.portal_user.login, self.portal_user.login)
-        csrf_token = Request.csrf_token(self)
+        csrf_token = self.csrf_token()
         for fname in ('name', 'email', 'street', 'city', 'country_id', 'phone'):
             res = self._submit_address_values({
                 **self.default_address_values,
@@ -95,7 +93,7 @@ class TestPortalAddresses(BaseCommon, HttpCase):
     def test_email_validation(self):
         """Check that wrong email values are correctly caught."""
         self.authenticate(self.portal_user.login, self.portal_user.login)
-        csrf_token = Request.csrf_token(self)
+        csrf_token = self.csrf_token()
         res = self._submit_address_values({
             **self.default_address_values,
             'csrf_token': csrf_token,
@@ -120,7 +118,7 @@ class TestPortalAddresses(BaseCommon, HttpCase):
 
     def test_internal_user_cannot_update_name(self):
         self.authenticate(self.internal_user.login, self.internal_user.login)
-        csrf_token = Request.csrf_token(self)
+        csrf_token = self.csrf_token()
 
         internal_partner = self.internal_user.partner_id
         # Fill the incomplete address
@@ -137,7 +135,7 @@ class TestPortalAddresses(BaseCommon, HttpCase):
 
     def test_internal_user_cannot_update_email(self):
         self.authenticate(self.internal_user.login, self.internal_user.login)
-        csrf_token = Request.csrf_token(self)
+        csrf_token = self.csrf_token()
 
         internal_partner = self.internal_user.partner_id
         # Fill the incomplete address
@@ -154,7 +152,7 @@ class TestPortalAddresses(BaseCommon, HttpCase):
 
     def test_vat_update(self):
         self.authenticate(self.portal_user.login, self.portal_user.login)
-        csrf_token = Request.csrf_token(self)
+        csrf_token = self.csrf_token()
 
         res = self._submit_address_values({
             **self.default_address_values,
@@ -174,7 +172,7 @@ class TestPortalAddresses(BaseCommon, HttpCase):
         Customers are supposed to update it through their main address (and the route /my/account)
         """
         self.authenticate(self.account_a.login, self.account_a.login)
-        csrf_token = Request.csrf_token(self)
+        csrf_token = self.csrf_token()
 
         res = self._submit_address_values({
             **self.default_address_values,
@@ -186,7 +184,7 @@ class TestPortalAddresses(BaseCommon, HttpCase):
 
     def test_main_address_update(self):
         self.authenticate(self.portal_user.login, self.portal_user.login)
-        csrf_token = Request.csrf_token(self)
+        csrf_token = self.csrf_token()
 
         res = self._submit_address_values({
             **self.default_address_values,
@@ -201,7 +199,7 @@ class TestPortalAddresses(BaseCommon, HttpCase):
 
     def test_success_url(self):
         self.authenticate(self.portal_user.login, self.portal_user.login)
-        csrf_token = Request.csrf_token(self)
+        csrf_token = self.csrf_token()
 
         res = self._submit_address_values({
             **self.default_address_values,
@@ -217,7 +215,7 @@ class TestPortalAddresses(BaseCommon, HttpCase):
 
     def test_billing_address_creation(self):
         self.authenticate(self.portal_user.login, self.portal_user.login)
-        csrf_token = Request.csrf_token(self)
+        csrf_token = self.csrf_token()
 
         res = self._submit_address_values({
             **self.default_address_values,
@@ -235,7 +233,7 @@ class TestPortalAddresses(BaseCommon, HttpCase):
 
     def test_delivery_address_creation(self):
         self.authenticate(self.portal_user.login, self.portal_user.login)
-        csrf_token = Request.csrf_token(self)
+        csrf_token = self.csrf_token()
 
         res = self._submit_address_values({
             **self.default_address_values,
@@ -253,7 +251,7 @@ class TestPortalAddresses(BaseCommon, HttpCase):
 
     def test_delivery_use_as_billing_address_creation(self):
         self.authenticate(self.portal_user.login, self.portal_user.login)
-        csrf_token = Request.csrf_token(self)
+        csrf_token = self.csrf_token()
 
         res = self._submit_address_values({
             **self.default_address_values,

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 from markupsafe import Markup
@@ -10,7 +9,7 @@ from odoo.addons.im_livechat.tests.common import TestGetOperatorCommon
 from odoo.tools import html2plaintext
 
 
-@tests.tagged('post_install', '-at_install', 'is_tour')
+@tests.tagged("is_tour")
 class TestLivechatChatbotUICommon(TestGetOperatorCommon, TestWebsiteLivechatCommon, ChatbotCase):
     def setUp(self):
         super().setUp()
@@ -71,7 +70,6 @@ class TestLivechatChatbotUICommon(TestGetOperatorCommon, TestWebsiteLivechatComm
         self.start_tour("/contactus", "website_livechat.chatbot_redirect")
 
 
-@tests.tagged("post_install", "-at_install")
 class TestLivechatChatbotUI(TestLivechatChatbotUICommon):
 
     def _check_complete_chatbot_flow_result(self):
@@ -83,12 +81,8 @@ class TestLivechatChatbotUI(TestLivechatChatbotUICommon):
         ])
         self.assertTrue(bool(livechat_discuss_channel))
         self.assertEqual(len(livechat_discuss_channel), 1)
-
         conversation_messages = livechat_discuss_channel.message_ids.sorted('id')
-        operator_member = livechat_discuss_channel.channel_member_ids.filtered(
-            lambda m: m.partner_id == self.operator.partner_id
-        )
-
+        operator_member = livechat_discuss_channel.with_user(self.operator).self_member_id
         expected_messages = [
             ("Hello! I'm a bot!", operator, False),
             ("I help lost visitors find their way.", operator, False),
@@ -101,6 +95,11 @@ class TestLivechatChatbotUI(TestLivechatChatbotUICommon):
             ("'No, you won't get my email!' does not look like a valid email. Can you please try again?", operator, False),
             ("okfine@fakeemail.com", False, False),
             ("Your email is validated, thank you!", operator, False),
+            ("Can you give us your phone number please?", operator, False),
+            ("123456", False, False),
+            ("'123456' does not look like a valid phone number. Can you please try again?", operator, False),
+            ("+919876543210", False, False),
+            ("Your phone number is validated. thank you!", operator, False),
             ("Would you mind providing your website address?", operator, False),
             ("https://www.fakeaddress.com", False, False),
             ("Great, do you want to leave any feedback for us to improve?", operator, False),
@@ -128,15 +127,15 @@ class TestLivechatChatbotUI(TestLivechatChatbotUICommon):
             ("I will transfer you to a human.", operator, False),
             (
                 'invited <a href="#" data-oe-model="res.partner" data-oe-id="'
-                f'{operator_member.partner_id.id}">@El Deboulonnator</a> to the channel',
+                f'{operator_member.partner_id.id}" class="o_mail_redirect">@El Deboulonnator</a> to the conversation',
                 self.chatbot_script.operator_partner_id,
                 False,
             ),
         ]
 
         self.assertEqual(len(conversation_messages), len(expected_messages))
-        # "invited" notification is not taken into account in unread counter contribution.
-        self.assertEqual(len(conversation_messages) - 1, operator_member.message_unread_counter)
+        # New members land at latest message, so operator unread counter is 0.
+        self.assertEqual(operator_member.message_unread_counter, 0)
 
         # check that the whole conversation is correctly saved
         # including welcome steps: see chatbot.script#_post_welcome_steps
@@ -168,8 +167,10 @@ class TestLivechatChatbotUI(TestLivechatChatbotUICommon):
         for body, operator, _ in expected_messages[-6:-1]:
             message_author = operator or visitor_partner
             if previous_message_author != message_author:
+                if parts:
+                    parts.append(Markup("<br/>"))
                 parts.append(
-                    Markup("<br/><strong>%s:</strong><br/>")
+                    Markup("<strong>%s:</strong><br/>")
                     % (
                         (message_author.user_livechat_username if message_author._name == "res.partner" else None)
                         or message_author.name
@@ -372,31 +373,7 @@ class TestLivechatChatbotUI(TestLivechatChatbotUICommon):
         self.assertIn("test@example.com", user_answer_message.user_raw_answer, "Email was saved on last step")
         self.assertTrue(user_answer_message.discuss_channel_id.livechat_end_dt, "Livechat ended after last step")
 
-    def test_chatbot_restart_on_feedback(self):
-        chatbot_script = self.env["chatbot.script"].create({"title": "Restart on feedback Bot"})
-        _, restart_step = self.env["chatbot.script.step"].create([
-            {
-                "step_type": "question_email",
-                "chatbot_script_id": chatbot_script.id,
-                "message": "Enter your email address",
-            },
-            {
-                "step_type": "question_selection",
-                "chatbot_script_id": chatbot_script.id,
-                "message": "Do you want to restart the conversation?",
-            },
-        ])
-        self.env["chatbot.script.answer"].create({
-            "name": "Yes, restart please.",
-            "script_step_id": restart_step.id,
-        })
-        self.livechat_channel.rule_ids = self.env["im_livechat.channel.rule"].create(
-            {"chatbot_script_id": chatbot_script.id}
-        )
-        self.start_tour("/", "website_livechat.chatbot_restart_on_feedback_tour")
 
-
-@tests.tagged("post_install", "-at_install")
 class TestLivechatChatbotUIMoblie(TestLivechatChatbotUICommon):
     browser_size = '375x667'
 

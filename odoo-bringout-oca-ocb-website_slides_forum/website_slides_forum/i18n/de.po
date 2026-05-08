@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-25 18:37+0000\n"
+"POT-Creation-Date: 2025-12-16 18:37+0000\n"
 "PO-Revision-Date: 2025-10-31 13:04+0000\n"
 "Last-Translator: \"Larissa Manderfeld (lman)\" <lman@odoo.com>\n"
 "Language-Team: German <https://translate.odoo.com/projects/odoo-19/"
@@ -191,11 +191,6 @@ msgid ""
 msgstr ""
 "<span class=\"flex-grow-1\">Warum können andere Personen meine Fragen/"
 "Antworten bearbeiten?</span>"
-
-#. module: website_slides_forum
-#: model_terms:ir.ui.view,arch_db:website_slides_forum.website_slides_forum_breadcrumb
-msgid "<strong>Forum</strong>"
-msgstr "<strong>Forum</strong>"
 
 #. module: website_slides_forum
 #: model:forum.forum,name:website_slides_forum.forum_forum_demo_channel_0
@@ -582,40 +577,3 @@ msgid ""
 msgstr ""
 "Ihre Antwort zusammen mit der Frage gegeben wird und Sie weitere Antworten "
 "erwarten: „Ich verwende ______ für _______. Was brauchen Sie?“"
-
-#~ msgid "<b>What kinds of questions can I ask here?</b>"
-#~ msgstr "<b>Welche Fragen kann ich hier stellen?</b>"
-
-#~ msgid "<b>What should I avoid in my answers?</b>"
-#~ msgstr "<b>Was sollte ich bei meinen Antworten vermeiden?</b>"
-
-#~ msgid "<b>What should I avoid in my questions?</b>"
-#~ msgstr "<b>Was sollte ich in meinen Fragen vermeiden?</b>"
-
-#~ msgid "<b>Why can other people edit my questions/answers?</b>"
-#~ msgstr ""
-#~ "<b>Warum können andere Personen meine Fragen/Antworten bearbeiten?</b>"
-
-#~ msgid "<i class=\"fa fa-home\"/> Course"
-#~ msgstr "<i class=\"fa fa-home\"/> Kurse"
-
-#~ msgid "Courses Discussions"
-#~ msgstr "Kursdiskussionen"
-
-#~ msgid "Description"
-#~ msgstr "Beschreibung"
-
-#~ msgid "Forum Page"
-#~ msgstr "Forumseite"
-
-#~ msgid "Hide Intro"
-#~ msgstr "Intro ausblenden"
-
-#~ msgid "Register"
-#~ msgstr "Anmelden"
-
-#~ msgid "Reviews"
-#~ msgstr "Bewertungen"
-
-#~ msgid "See all Courses"
-#~ msgstr "Alle Kurse anschauen"

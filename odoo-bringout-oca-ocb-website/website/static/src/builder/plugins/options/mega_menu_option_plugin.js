@@ -1,8 +1,5 @@
-import { MegaMenuOption } from "@website/builder/plugins/options/mega_menu_option";
 import { Plugin } from "@html_editor/plugin";
 import { registry } from "@web/core/registry";
-import { withSequence } from "@html_editor/utils/resource";
-import { SNIPPET_SPECIFIC_NEXT } from "@html_builder/utils/option_sequence";
 
 /**
  * @typedef { Object } MegaMenuOptionShared
@@ -16,17 +13,23 @@ export class MegaMenuOptionPlugin extends Plugin {
 
     /** @type {import("plugins").WebsiteResources} */
     resources = {
-        builder_options: [withSequence(SNIPPET_SPECIFIC_NEXT, MegaMenuOption)],
-        dropzone_selector: {
+        dropzone_selectors: {
             selector: ".o_mega_menu .nav > .nav-link",
             dropIn: ".o_mega_menu nav",
             dropNear: ".o_mega_menu .nav-link",
         },
-        save_handlers: this.saveMegaMenuClasses.bind(this),
+        on_ready_to_save_document_handlers: this.saveMegaMenuClasses.bind(this),
         no_parent_containers: ".o_mega_menu",
-        is_unremovable_selector: ".o_mega_menu > section",
-        unsplittable_node_predicates: (node) =>
-            node?.nodeType === Node.ELEMENT_NODE && node.matches(".o_mega_menu .nav > .nav-link"), //avoid merge
+        is_unremovable_selectors: ".o_mega_menu > section",
+        is_node_splittable_predicates: (node) => {
+            //avoid merge
+            if (
+                node?.nodeType === Node.ELEMENT_NODE &&
+                node.matches(".o_mega_menu .nav > .nav-link")
+            ) {
+                return false;
+            }
+        },
     };
 
     getTemplatePrefix() {
@@ -43,7 +46,7 @@ export class MegaMenuOptionPlugin extends Plugin {
             // menu itself.
             const classes = [...megaMenuEl.classList].filter(
                 (megaMenuClass) =>
-                    !["dropdown-menu", "o_mega_menu", "o_editable"].includes(megaMenuClass)
+                    !["dropdown-menu", "o_mega_menu", "o_savable"].includes(megaMenuClass)
             );
 
             proms.push(

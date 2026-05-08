@@ -3,7 +3,6 @@ import { registerWebsitePreviewTour } from "@website/js/tours/tour_utils";
 registerWebsitePreviewTour(
     "forum_cover_dropzone",
     {
-        url: "/forum/help-1",
         edition: true,
     },
     () => [
@@ -53,14 +52,8 @@ registerWebsitePreviewTour(
         },
         {
             content: "Check that the search returns no results.",
-            trigger: '.o_add_snippet_dialog input[type="search"]',
-            run() {
-                const previewDocument =
-                    document.querySelector(".o_add_snippet_iframe").contentDocument;
-                if (previewDocument.querySelector(".o_snippet_preview_wrap")) {
-                    throw new Error("Expected no snippet results in the add snippet dialog.");
-                }
-            },
+            trigger:
+                "p:contains('Oops! No snippets found.'), p:contains('Take a look at the search bar, there might be a small typo!')",
         },
     ]
 );

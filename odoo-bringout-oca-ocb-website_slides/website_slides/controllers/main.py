@@ -3,7 +3,6 @@
 from ast import literal_eval
 from dateutil.relativedelta import relativedelta
 
-import base64
 import json
 import logging
 import math
@@ -17,6 +16,7 @@ from odoo.addons.website_profile.controllers.main import WebsiteProfile
 from odoo.exceptions import AccessError, ValidationError, UserError, MissingError
 from odoo.fields import Domain
 from odoo.http import request, Response
+from odoo.http.session import touch
 from odoo.tools import consteq, email_normalize_all
 from odoo.tools.translate import LazyTranslate
 
@@ -86,7 +86,7 @@ class WebsiteSlides(WebsiteProfile):
             if slide_id not in viewed_slides:
                 if tools.sql.increment_fields_skiplock(slide, 'public_views', 'total_views'):
                     viewed_slides[slide_id] = 1
-                    request.session.touch()
+                    touch(request.session)
         else:
             slide.action_set_viewed(quiz_attempts_inc=quiz_attempts_inc)
         return True
@@ -385,11 +385,6 @@ class WebsiteSlides(WebsiteProfile):
 
     def _get_slide_channel_search_options(self, my=None, slug_tags=None, slide_category=None, **post):
         return {
-            'displayDescription': True,
-            'displayDetail': False,
-            'displayExtraDetail': False,
-            'displayExtraLink': False,
-            'displayImage': False,
             'allowFuzzy': not post.get('noFuzzy'),
             'my': my,
             'tag': slug_tags or post.get('tag'),
@@ -399,9 +394,13 @@ class WebsiteSlides(WebsiteProfile):
     def _has_slide_channel_search(self, my=None, slug_tags=None, slide_category=None, **post):
         return my or post.get('search') or slug_tags or post.get('tag') or slide_category
 
+    def sitemap_slides_channel(env, rule, qs):
+        if not qs or qs.lower() in '/slides':
+            yield {"loc": "/slides"}
+
     @http.route(['/slides', '/slides/page/<int:page>',
                  '/slides/tag/<string:slug_tags>', '/slides/tag/<string:slug_tags>/page/<int:page>'],
-                type='http', auth="public", website=True, sitemap=True, readonly=True,
+                type='http', auth="public", website=True, sitemap=sitemap_slides_channel, readonly=True,
                 list_as_website_content=_lt("eLearning"))
     def slides_channel(self, slide_category=None, slug_tags=None, my=0, page=1, **post):
         my = 1 if str(my) == '1' else 0  # if in the URL parameters, it will be a string instead of a number
@@ -450,7 +449,7 @@ class WebsiteSlides(WebsiteProfile):
         search = post.get('search')
         order = self._channel_order_by_criterion.get(post.get('sorting'))
         search_count, details, fuzzy_search_term = request.website._search_with_fuzzy(
-            "slide_channels_only", search, limit=page * page_size if page else 1000, order=order, options=options)
+            'slide_channel', search, offset=0, limit=page * page_size if page else 1000, order=order, options=options)
         channels_all = details[0].get('results', request.env['slide.channel'])
         channels = channels_all[(page - 1) * page_size:page * page_size] if page else channels_all
         tag_groups = request.env['slide.channel.tag.group'].search(
@@ -967,8 +966,19 @@ class WebsiteSlides(WebsiteProfile):
     # SLIDE.SLIDE MAIN / SEARCH
     # --------------------------------------------------
 
+    def sitemap_slide_view(env, rule, qs):
+        slides = env['slide.slide'].search([('website_published', '=', True), ('active', '=', True)])
+        for slide in slides:
+            if slide.is_category:
+                loc = slide.channel_id.website_url
+            else:
+                loc = slide.website_url
+
+            if not qs or qs.lower() in loc.lower():
+                yield {'loc': loc}
+
     @http.route('/slides/slide/<model("slide.slide"):slide>', type='http', auth="public",
-                website=True, sitemap=True, handle_params_access_error=handle_wslide_error)
+                website=True, sitemap=sitemap_slide_view, handle_params_access_error=handle_wslide_error)
     def slide_view(self, slide, **kwargs):
         if not slide.channel_id.can_access_from_current_website() or not slide.active:
             raise werkzeug.exceptions.NotFound()
@@ -1035,7 +1045,7 @@ class WebsiteSlides(WebsiteProfile):
                 type='http', auth="public", website=True, sitemap=False, handle_params_access_error=handle_wslide_error)
     def slide_get_pdf_content(self, slide):
         response = Response()
-        response.data = slide.binary_content and base64.b64decode(slide.binary_content) or b''
+        response.data = slide.binary_content.content
         response.mimetype = 'application/pdf'
         return response
 
@@ -1429,11 +1439,12 @@ class WebsiteSlides(WebsiteProfile):
     def create_slide(self, *args, **post):
         # check the size only when we upload a file.
         if post.get('binary_content'):
-            file_size = len(post['binary_content']) * 3 / 4  # base64
-            if (file_size / 1024.0 / 1024.0) > 25:
+            file_size = len(post['binary_content'])
+            # binary_content is encoded in base64 (33% bigger than the real size)
+            if file_size * 3 // 4 > 25 * (1 << 20):
                 return {'error': _('File is too big. File size cannot exceed 25MB')}
 
-        values = dict((fname, post[fname]) for fname in self._get_valid_slide_post_values() if post.get(fname))
+        values = {fname: value for fname in self._get_valid_slide_post_values() if (value := post.get(fname))}
 
         # handle exception during creation of slide and sent error notification to the client
         # otherwise client slide create dialog box continue processing even server fail to create a slide

@@ -1,3 +1,4 @@
+import { reactive, useRef, useState } from "@web/owl2/utils";
 import { CodeEditor } from "@web/core/code_editor/code_editor";
 import { ConfirmationDialog } from "@web/core/confirmation_dialog/confirmation_dialog";
 import { Dropdown } from "@web/core/dropdown/dropdown";
@@ -14,7 +15,7 @@ import { useService } from "@web/core/utils/hooks";
 import { ResourceEditorWarningOverlay } from "./resource_editor_warning";
 import { checkSCSS, checkXML, formatXML } from "./utils";
 
-import { Component, onWillUnmount, onWillStart, reactive, useRef, useState } from "@odoo/owl";
+import { Component, onWillUnmount, onWillStart } from "@odoo/owl";
 
 const BUNDLES_RESTRICTION = [
     "web.assets_frontend",
@@ -358,7 +359,7 @@ export class ResourceEditor extends Component {
      *
      * @private
      * @param {Object} resource a SCSS or JS file to save
-     * @return {Promise} indicates if the save is finished or if an error occured.
+     * @return {Promise} indicates if the save is finished or if an error occurred.
      */
     async saveSCSSorJS(resource) {
         const { url, arch } = resource;
@@ -376,7 +377,7 @@ export class ResourceEditor extends Component {
      * Saves a unique XML view.
      *
      * @param {Object} resource an xml view to save
-     * @returns {Promise} indicates if the save is finished or if an error occured.
+     * @returns {Promise} indicates if the save is finished or if an error occurred.
      */
     async saveXML(resource) {
         const { id, arch } = resource;
@@ -486,10 +487,9 @@ export class ResourceEditor extends Component {
 
     onReset() {
         this.dialog.add(ConfirmationDialog, {
-            title: _t("Careful"),
-            body: _t(
-                "If you reset this file, all your customizations will be lost as it will be reverted to the default file."
-            ),
+            title: _t("Reset to default?"),
+            body: _t("All your custom changes will be lost. Are you sure?"),
+            confirmLabel: _t("Reset"),
             confirm: () => this.resetResource(),
             cancel: () => {},
         });
