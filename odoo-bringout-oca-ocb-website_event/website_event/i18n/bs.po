@@ -580,7 +580,7 @@ msgstr "Dizajn kartice"
 # model_terms:ir.ui.view,arch_db:website_event.display_timer_alert_widget
 #, []
 msgid "Close"
-msgstr "Amortizovano"
+msgstr "Zatvori"
 
 # model:
 # model:event.question.answer,name:website_event.event_question_about_1_answer_1

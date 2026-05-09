@@ -1281,7 +1281,7 @@ msgstr "Kliknite za odgovor."
 # model: model_terms:ir.ui.view,arch_db:website_forum.post_dropdown
 #, []
 msgid "Close"
-msgstr "Amortizovano"
+msgstr "Zatvori"
 
 # model: model:ir.ui.menu,name:website_forum.menu_forum_post_reasons
 #, []

@@ -304,7 +304,7 @@ msgstr "Može objaviti"
 # model_terms:ir.ui.view,arch_db:website_hr_recruitment.topbar_customizations
 #, []
 msgid "Close"
-msgstr "Amortizovano"
+msgstr "Zatvori"
 
 # model:
 # model:ir.model.fields,help:website_hr_recruitment.field_hr_job__job_details

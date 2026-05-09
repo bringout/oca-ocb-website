@@ -350,7 +350,7 @@ msgstr "Kliknite ovdje da vidite svoj dokument."
 # model: code:addons/portal/static/src/interactions/portal_security.js
 #, []
 msgid "Close"
-msgstr "Amortizovano"
+msgstr "Zatvori"
 
 # model: model_terms:ir.ui.view,arch_db:portal.address_form_fields
 #, []

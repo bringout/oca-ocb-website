@@ -34,7 +34,7 @@ msgstr "Prosjek"
 # model: code:addons/portal_rating/static/src/xml/portal_rating_composer.xml
 #, []
 msgid "Close"
-msgstr "Amortizovano"
+msgstr "Zatvori"
 
 # model: code:addons/portal_rating/static/src/chatter/portal/message_patch.xml
 #, []

@@ -193,7 +193,7 @@ msgstr "Može objaviti"
 # model_terms:ir.ui.view,arch_db:website_event_exhibitor.exhibitors_topbar
 #, []
 msgid "Close"
-msgstr "Amortizovano"
+msgstr "Zatvori"
 
 # model:
 # code:addons/website_event_exhibitor/static/src/components/exhibitor_connect_closed_dialog/exhibitor_connect_closed_dialog.xml

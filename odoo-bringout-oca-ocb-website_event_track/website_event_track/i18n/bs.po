@@ -1016,7 +1016,7 @@ msgstr "Klimatski pozitivno"
 # code:addons/website_event_track/static/src/xml/website_event_track_email_reminder.xml
 #, []
 msgid "Close"
-msgstr "Amortizovano"
+msgstr "Zatvori"
 
 # model:
 # model:ir.model.fields,field_description:website_event_track.field_event_track_stage__color

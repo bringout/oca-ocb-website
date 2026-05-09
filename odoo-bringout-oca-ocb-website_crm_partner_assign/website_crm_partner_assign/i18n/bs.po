@@ -296,7 +296,7 @@ msgstr "Grad"
 # model_terms:ir.ui.view,arch_db:website_crm_partner_assign.index_content
 #, []
 msgid "Close"
-msgstr "Amortizovano"
+msgstr "Zatvori"
 
 # model:
 # model_terms:ir.ui.view,arch_db:website_crm_partner_assign.portal_my_lead

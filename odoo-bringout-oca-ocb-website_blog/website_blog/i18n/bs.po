@@ -819,7 +819,7 @@ msgstr ""
 # model: model_terms:ir.ui.view,arch_db:website_blog.blogs_nav
 #, []
 msgid "Close"
-msgstr "Amortizovano"
+msgstr "Zatvori"
 
 # model:
 # model:ir.model.fields,field_description:website_blog.field_blog_tag__color

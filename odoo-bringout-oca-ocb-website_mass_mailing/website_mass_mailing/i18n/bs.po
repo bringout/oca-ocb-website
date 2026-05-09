@@ -148,7 +148,7 @@ msgstr ""
 # code:addons/website_mass_mailing/static/src/xml/website_mass_mailing.xml
 #, []
 msgid "Close"
-msgstr "Amortizovano"
+msgstr "Zatvori"
 
 # model:
 # model_terms:ir.ui.view,arch_db:website_mass_mailing.s_mail_block_footer_social

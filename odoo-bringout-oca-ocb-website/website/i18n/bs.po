@@ -5162,7 +5162,7 @@ msgstr "Klijenti su uštedjeli 32 miliona dolara našim uslugama."
 # code:addons/website/static/src/client_actions/website_preview/create_page_message.xml
 #, []
 msgid "Close"
-msgstr "Amortizovano"
+msgstr "Zatvori"
 
 # model:
 # code:addons/website/static/src/builder/plugins/options/popup_option.xml

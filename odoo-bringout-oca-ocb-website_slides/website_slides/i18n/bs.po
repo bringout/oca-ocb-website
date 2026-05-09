@@ -1963,7 +1963,7 @@ msgstr "Kliknite na svoj <b>Tečaj</b> da se vratite u sadržaj."
 # code:addons/website_slides/static/src/js/public/components/slide_quiz_finish_dialog/slide_quiz_finish_dialog.xml
 #, []
 msgid "Close"
-msgstr "Amortizovano"
+msgstr "Zatvori"
 
 # model:
 # model_terms:ir.ui.view,arch_db:website_slides.slide_channel_tag_group_view_form

@@ -109,7 +109,7 @@ msgstr "Klasa"
 # model: model_terms:ir.ui.view,arch_db:website_customer.index
 #, []
 msgid "Close"
-msgstr "Amortizovano"
+msgstr "Zatvori"
 
 # model: model:ir.model,name:website_customer.model_res_partner
 #, []
