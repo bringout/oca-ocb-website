@@ -1,577 +1,580 @@
-# Translation of Odoo Server.
-# This file contains the translation of the following modules:
-# * website_payment
 #
-# Translators:
-# Martin Trigaux, 2018
-# Boško Stojaković <bluesoft83@gmail.com>, 2018
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~11.5\n"
+"Project-Id-Version: Odoo Server master (website_payment)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-20 09:02+0000\n"
-"PO-Revision-Date: 2018-09-18 09:49+0000\n"
-"Last-Translator: Boško Stojaković <bluesoft83@gmail.com>, 2018\n"
-"Language-Team: Bosnian (https://www.transifex.com/odoo/teams/41243/bs/)\n"
+"Language-Team: Bosnian\n"
 "Language: bs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.donation_mail_body
+# model: model_terms:ir.ui.view,arch_db:website_payment.donation_mail_body
+#, []
 msgid ""
 ".\n"
 "                        <br/>\n"
-"                        We appreciate your support for our organization as "
-"such.\n"
+"                        We appreciate your support for our organization as such.\n"
 "                        <br/>\n"
 "                        Regards."
 msgstr ""
+".\n"
+"                        <br/>\n"
+"                        Cijenimo vašu podršku našoj organizaciji.\n"
+"                        <br/>\n"
+"                        Srdačan pozdrav."
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.donation_mail_body
+# model: model_terms:ir.ui.view,arch_db:website_payment.donation_mail_body
+#, []
 msgid "<b>Comment:</b>"
-msgstr ""
+msgstr "<b>Komentar:</b>"
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.donation_mail_body
+# model: model_terms:ir.ui.view,arch_db:website_payment.donation_mail_body
+#, []
 msgid "<b>Donation Date:</b>"
-msgstr ""
+msgstr "<b>Datum doniranja:</b>"
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.donation_mail_body
+# model: model_terms:ir.ui.view,arch_db:website_payment.donation_mail_body
+#, []
 msgid "<b>Donor Email:</b>"
-msgstr ""
+msgstr "<b>Email donatora:</b>"
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.donation_mail_body
+# model: model_terms:ir.ui.view,arch_db:website_payment.donation_mail_body
+#, []
 msgid "<b>Donor Name:</b>"
-msgstr ""
+msgstr "<b>Donor ime:</b>"
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.donation_mail_body
+# model: model_terms:ir.ui.view,arch_db:website_payment.donation_mail_body
+#, []
 msgid "<b>Payment ID:</b>"
-msgstr ""
+msgstr "<b>ID plaćanja:</b>"
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.donation_mail_body
+# model: model_terms:ir.ui.view,arch_db:website_payment.donation_mail_body
+#, []
 msgid "<b>Payment Method:</b>"
-msgstr ""
+msgstr "<b>Način plaćanja:</b>"
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.donation_input
+# model: model_terms:ir.ui.view,arch_db:website_payment.donation_input
+#, []
 msgid ""
 "<small class=\"text-danger d-none\" id=\"warning_message_id\">Please enter "
 "the amount to donate.</small>"
 msgstr ""
+"<small class=\"text-danger d-none\" id=\"warning_message_id\">Unesite iznos "
+"za donaciju.</small>"
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.res_config_settings_view_form
+# model:
+# model_terms:ir.ui.view,arch_db:website_payment.res_config_settings_view_form
+#, []
 msgid ""
 "<span class=\"oe_inline pe-0\">\n"
-"                            Enable a payment provider to accept online "
-"payments.\n"
+"                            Enable a payment provider to accept online payments.\n"
 "                        </span>"
 msgstr ""
+"<span class=\"oe_inline pe-0\">\n"
+"                            Omogućite provajdera plaćanja za prihvatanje online plaćanja.\n"
+"                        </span>"
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.res_config_settings_view_form
+# model:
+# model_terms:ir.ui.view,arch_db:website_payment.res_config_settings_view_form
+#, []
 msgid "<span class=\"oe_inline px-0\">or</span>"
-msgstr ""
+msgstr "<span class=\"oe_inline px-0\">ili</span>"
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.s_donation_button
+# model: model_terms:ir.ui.view,arch_db:website_payment.s_donation_button
+#, []
 msgid "<span class=\"s_donation_currency pe-1\">$</span>"
-msgstr ""
+msgstr "<span class=\"s_donation_currency pe-1\">$</span>"
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.s_donation_button
+# model: model_terms:ir.ui.view,arch_db:website_payment.s_donation_button
+#, []
 msgid "<span class=\"s_donation_currency pe-1\">$</span>10"
-msgstr ""
+msgstr "<span class=\"s_donation_currency pe-1\">$</span>10"
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.s_donation_button
+# model: model_terms:ir.ui.view,arch_db:website_payment.s_donation_button
+#, []
 msgid "<span class=\"s_donation_currency pe-1\">$</span>100"
-msgstr ""
+msgstr "<span class=\"s_donation_currency pe-1\">$</span>100"
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.s_donation_button
+# model: model_terms:ir.ui.view,arch_db:website_payment.s_donation_button
+#, []
 msgid "<span class=\"s_donation_currency pe-1\">$</span>25"
-msgstr ""
+msgstr "<span class=\"s_donation_currency pe-1\">$</span>25"
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.s_donation_button
+# model: model_terms:ir.ui.view,arch_db:website_payment.s_donation_button
+#, []
 msgid "<span class=\"s_donation_currency pe-1\">$</span>50"
-msgstr ""
+msgstr "<span class=\"s_donation_currency pe-1\">$</span>50"
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.website_payment_donation_form
+# model:
+# model_terms:ir.ui.view,arch_db:website_payment.website_payment_donation_form
+#, []
 msgid ""
 "<span class=\"s_website_form_label_content\">Country</span>\n"
 "                            <span class=\"s_website_form_mark\"> *</span>"
 msgstr ""
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.website_payment_donation_form
+# model:
+# model_terms:ir.ui.view,arch_db:website_payment.website_payment_donation_form
+#, []
 msgid ""
 "<span class=\"s_website_form_label_content\">Email</span>\n"
 "                            <span class=\"s_website_form_mark\"> *</span>"
 msgstr ""
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.website_payment_donation_form
+# model:
+# model_terms:ir.ui.view,arch_db:website_payment.website_payment_donation_form
+#, []
 msgid ""
 "<span class=\"s_website_form_label_content\">Name</span>\n"
 "                            <span class=\"s_website_form_mark\"> *</span>"
 msgstr ""
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.res_config_settings_view_form
+# model:
+# model_terms:ir.ui.view,arch_db:website_payment.res_config_settings_view_form
+#, []
 msgid "<span>Enable a payment provider to accept online payments.</span>"
 msgstr ""
+"<span>Omogućite provajdera plaćanja za prihvatanje online plaćanja.</span>"
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.res_config_settings_view_form
+# model:
+# model_terms:ir.ui.view,arch_db:website_payment.res_config_settings_view_form
+#, []
 msgid "<span>or</span>"
-msgstr ""
+msgstr "<span>ili</span>"
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.donation_page_layout
+# model: model_terms:ir.ui.view,arch_db:website_payment.donation_page_layout
+#, []
 msgid "<strong>Warning</strong> The currency is missing or incorrect."
-msgstr ""
+msgstr "<strong>Upozorenje</strong> Valuta nedostaje ili ne netočna."
 
-#. module: website_payment
-#. odoo-python
-#: code:addons/website_payment/models/payment_transaction.py:0
+# model: code:addons/website_payment/models/payment_transaction.py
+#, []
 msgid "A donation has been made on your website"
-msgstr ""
+msgstr "Donacija je uplaćena na vašoj web stranici"
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.s_donation_button
+# model: model_terms:ir.ui.view,arch_db:website_payment.s_donation_button
+#, []
 msgid "A year of cultural awakening."
-msgstr ""
+msgstr "Godina kulturnog buđenja."
 
-#. module: website_payment
-#. odoo-javascript
-#: code:addons/website_payment/static/src/website_builder/donation_option.xml:0
+# model:
+# code:addons/website_payment/static/src/website_builder/donation_option.xml
+#, []
 msgid "Add"
-msgstr ""
+msgstr "Dodaj"
 
-#. module: website_payment
-#. odoo-javascript
-#: code:addons/website_payment/static/src/website_builder/donation_option.xml:0
-#: code:addons/website_payment/static/src/website_builder/donation_option_plugin.js:0
+# model:
+# code:addons/website_payment/static/src/website_builder/donation_option.xml
+#, []
 msgid "Add a description here"
-msgstr ""
+msgstr "Dodaj opis ovdje"
 
-#. module: website_payment
-#. odoo-javascript
-#: code:addons/website_payment/static/src/website_builder/donation_option.xml:0
-#: model_terms:ir.ui.view,arch_db:website_payment.s_donation_button
+# model:
+# code:addons/website_payment/static/src/website_builder/donation_option.xml
+#, []
 msgid "Amount"
-msgstr ""
+msgstr "Iznos"
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.donation_information
+# model: model_terms:ir.ui.view,arch_db:website_payment.donation_information
+#, []
 msgid "Amount ("
-msgstr ""
+msgstr "Iznos ("
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.donation_input
+# model: model_terms:ir.ui.view,arch_db:website_payment.donation_input
+#, []
 msgid "Amount to donate"
-msgstr ""
+msgstr "Iznos donacije"
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.donation_mail_body
+# model: model_terms:ir.ui.view,arch_db:website_payment.donation_mail_body
+#, []
 msgid "Amount("
-msgstr ""
+msgstr "Iznos("
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.s_donation_button
+# model: model_terms:ir.ui.view,arch_db:website_payment.s_donation_button
+#, []
 msgid "Caring for a baby for 1 month."
-msgstr ""
+msgstr "Briga o bebi tokom 1 mjeseca."
 
-#. module: website_payment
-#. odoo-javascript
-#: code:addons/website_payment/static/src/website_builder/donation_option.xml:0
+# model:
+# code:addons/website_payment/static/src/website_builder/donation_option.xml
+#, []
 msgid "Choose Your Amount"
-msgstr ""
+msgstr "Odaberite svoj iznos"
 
-#. module: website_payment
-#: model:ir.model,name:website_payment.model_res_config_settings
+# model: model:ir.model,name:website_payment.model_res_config_settings
+#, []
 msgid "Config Settings"
-msgstr ""
+msgstr "Postavke konfiguracije"
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.res_config_settings_view_form
+# model:
+# model_terms:ir.ui.view,arch_db:website_payment.res_config_settings_view_form
+#, []
 msgid "Configure"
-msgstr ""
+msgstr "Konfiguriši"
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.res_config_settings_view_form
+# model:
+# model_terms:ir.ui.view,arch_db:website_payment.res_config_settings_view_form
+#, []
 msgid "Configure Payment Methods"
-msgstr ""
+msgstr "Konfigurišite metode plaćanja"
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.res_config_settings_view_form
+# model:
+# model_terms:ir.ui.view,arch_db:website_payment.res_config_settings_view_form
+#, []
 msgid "Connect"
 msgstr ""
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.res_config_settings_view_form
+# model:
+# model_terms:ir.ui.view,arch_db:website_payment.res_config_settings_view_form
+#, []
 msgid "Connect Stripe"
 msgstr ""
 
-#. module: website_payment
-#. odoo-javascript
-#: code:addons/website_payment/static/src/interactions/payment_form.js:0
+# model: code:addons/website_payment/static/src/interactions/payment_form.js
+#, []
 msgid "Country"
-msgstr ""
+msgstr "Država"
 
-#. module: website_payment
-#. odoo-python
-#: code:addons/website_payment/controllers/portal.py:0
+# model: code:addons/website_payment/controllers/portal.py
+#, []
 msgid "Country is required."
-msgstr ""
+msgstr "Država je obavezna."
 
-#. module: website_payment
-#. odoo-javascript
-#: code:addons/website_payment/static/src/website_builder/donation_option.xml:0
-#: model_terms:ir.ui.view,arch_db:website_payment.s_donation_button
+# model:
+# code:addons/website_payment/static/src/website_builder/donation_option.xml
+#, []
 msgid "Custom Amount"
-msgstr ""
+msgstr "Prilagođeni iznos"
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.donation_mail_body
+# model: model_terms:ir.ui.view,arch_db:website_payment.donation_mail_body
+#, []
 msgid "Dear"
-msgstr ""
+msgstr "Poštovani"
 
-#. module: website_payment
-#. odoo-javascript
-#: code:addons/website_payment/static/src/website_builder/donation_option.xml:0
+# model:
+# code:addons/website_payment/static/src/website_builder/donation_option.xml
+#, []
 msgid "Default Amount"
-msgstr ""
+msgstr "Zadani iznos"
 
-#. module: website_payment
-#. odoo-javascript
-#: code:addons/website_payment/static/src/website_builder/donation_option.xml:0
+# model:
+# code:addons/website_payment/static/src/website_builder/donation_option.xml
+#, []
 msgid "Descriptions"
-msgstr ""
+msgstr "Opisi"
 
-#. module: website_payment
-#: model:ir.model.fields,field_description:website_payment.field_account_payment__display_name
-#: model:ir.model.fields,field_description:website_payment.field_payment_provider__display_name
-#: model:ir.model.fields,field_description:website_payment.field_payment_transaction__display_name
-#: model:ir.model.fields,field_description:website_payment.field_res_config_settings__display_name
+# model:
+# model:ir.model.fields,field_description:website_payment.field_account_payment__display_name
+#, []
 msgid "Display Name"
-msgstr ""
+msgstr "Naziv za prikaz"
 
-#. module: website_payment
-#. odoo-javascript
-#: code:addons/website_payment/static/src/website_builder/donation_option.xml:0
+# model:
+# code:addons/website_payment/static/src/website_builder/donation_option.xml
+#, []
 msgid "Display Options"
-msgstr ""
+msgstr "Opcije prikaza"
 
-#. module: website_payment
-#. odoo-python
-#: code:addons/website_payment/controllers/portal.py:0
+# model: code:addons/website_payment/controllers/portal.py
+#, []
 msgid "Donate"
-msgstr ""
+msgstr "Doniraj"
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.s_donation_button
+# model: model_terms:ir.ui.view,arch_db:website_payment.s_donation_button
+#, []
 msgid "Donate Now"
-msgstr ""
+msgstr "Doniraj sada"
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.donation_mail_body
-#: model_terms:ir.ui.view,arch_db:website_payment.donation_page_layout
-#: model_terms:ir.ui.view,arch_db:website_payment.snippets
+# model: model_terms:ir.ui.view,arch_db:website_payment.donation_mail_body
+#, []
 msgid "Donation"
-msgstr ""
+msgstr "Donacija"
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.snippets
+# model: model_terms:ir.ui.view,arch_db:website_payment.snippets
+#, []
 msgid "Donation Button"
-msgstr ""
+msgstr "Dugme za donaciju"
 
-#. module: website_payment
-#: model:ir.model.fields,field_description:website_payment.field_payment_transaction__donation_log_message
+# model:
+# model:ir.model.fields,field_description:website_payment.field_payment_transaction__donation_log_message
+#, []
 msgid "Donation Log Message"
 msgstr ""
 
-#. module: website_payment
-#. odoo-python
-#: code:addons/website_payment/controllers/portal.py:0
+# model: code:addons/website_payment/controllers/portal.py
+#, []
 msgid "Donation Payment"
-msgstr ""
+msgstr "Plaćanje donacije"
 
-#. module: website_payment
-#. odoo-python
-#: code:addons/website_payment/controllers/portal.py:0
+# model: code:addons/website_payment/controllers/portal.py
+#, []
 msgid "Donation amount must be at least %.2f."
-msgstr ""
+msgstr "Iznos donacije mora biti najmanje %.2f."
 
-#. module: website_payment
-#. odoo-python
-#: code:addons/website_payment/models/payment_transaction.py:0
+# model: code:addons/website_payment/models/payment_transaction.py
+#, []
 msgid "Donation confirmation"
-msgstr ""
+msgstr "Potvrda donacije"
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.donation_mail_body
+# model: model_terms:ir.ui.view,arch_db:website_payment.donation_mail_body
+#, []
 msgid "Donation notification"
-msgstr ""
+msgstr "Obavijest o donaciji"
 
-#. module: website_payment
-#. odoo-javascript
-#: code:addons/website_payment/static/src/interactions/payment_form.js:0
+# model: code:addons/website_payment/static/src/interactions/payment_form.js
+#, []
 msgid "Email"
-msgstr ""
+msgstr "E-pošta"
 
-#. module: website_payment
-#. odoo-python
-#: code:addons/website_payment/controllers/portal.py:0
+# model: code:addons/website_payment/controllers/portal.py
+#, []
 msgid "Email is required."
-msgstr ""
+msgstr "Email je obavezan."
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.donation_input
+# model: model_terms:ir.ui.view,arch_db:website_payment.donation_input
+#, []
 msgid "Enter a valid number!"
-msgstr ""
+msgstr "Unesite ispravan broj!"
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.res_config_settings_view_form
+# model:
+# model_terms:ir.ui.view,arch_db:website_payment.res_config_settings_view_form
+#, []
 msgid "Find a Payment Provider"
-msgstr ""
+msgstr "Pronađite provajdera plaćanja"
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.res_config_settings_view_form
+# model:
+# model_terms:ir.ui.view,arch_db:website_payment.res_config_settings_view_form
+#, []
 msgid "Find another provider"
-msgstr ""
+msgstr "Pronađite drugog provajdera"
 
-#. module: website_payment
-#. odoo-javascript
-#: code:addons/website_payment/static/src/website_builder/supported_payment_methods_option.xml:0
+# model:
+# code:addons/website_payment/static/src/website_builder/supported_payment_methods_option.xml
+#, []
 msgid "Height"
-msgstr ""
+msgstr "Visina"
 
-#. module: website_payment
-#: model:ir.model.fields,field_description:website_payment.field_account_payment__id
-#: model:ir.model.fields,field_description:website_payment.field_payment_provider__id
-#: model:ir.model.fields,field_description:website_payment.field_payment_transaction__id
-#: model:ir.model.fields,field_description:website_payment.field_res_config_settings__id
+# model:
+# model:ir.model.fields,field_description:website_payment.field_account_payment__id
+#, []
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
-#. module: website_payment
-#. odoo-javascript
-#: code:addons/website_payment/static/src/website_builder/donation_option.xml:0
+# model:
+# code:addons/website_payment/static/src/website_builder/donation_option.xml
+#, []
 msgid "Input"
-msgstr ""
+msgstr "Ulaz"
 
-#. module: website_payment
-#: model:ir.model.fields,field_description:website_payment.field_account_payment__is_donation
+# model:
+# model:ir.model.fields,field_description:website_payment.field_account_payment__is_donation
+#, []
 msgid "Is Donation"
-msgstr ""
+msgstr "Je donacija"
 
-#. module: website_payment
-#: model:ir.model.fields,field_description:website_payment.field_payment_transaction__is_donation
+# model:
+# model:ir.model.fields,field_description:website_payment.field_payment_transaction__is_donation
+#, []
 msgid "Is donation"
-msgstr ""
+msgstr "Je donacija"
 
-#. module: website_payment
-#. odoo-javascript
-#: code:addons/website_payment/static/src/website_builder/supported_payment_methods_option.xml:0
+# model:
+# code:addons/website_payment/static/src/website_builder/supported_payment_methods_option.xml
+#, []
 msgid "Limit"
-msgstr ""
+msgstr "Ograničenje"
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.s_donation
+# model: model_terms:ir.ui.view,arch_db:website_payment.s_donation
+#, []
 msgid "Make a Donation"
-msgstr ""
+msgstr "Napravite donaciju"
 
-#. module: website_payment
-#. odoo-javascript
-#: code:addons/website_payment/static/src/website_builder/donation_option.xml:0
+# model:
+# code:addons/website_payment/static/src/website_builder/donation_option.xml
+#, []
 msgid "Maximum"
-msgstr ""
+msgstr "Maksimum"
 
-#. module: website_payment
-#. odoo-javascript
-#: code:addons/website_payment/static/src/website_builder/donation_option.xml:0
+# model:
+# code:addons/website_payment/static/src/website_builder/donation_option.xml
+#, []
 msgid "Minimum"
-msgstr ""
+msgstr "Minimum"
 
-#. module: website_payment
-#. odoo-javascript
-#: code:addons/website_payment/static/src/interactions/payment_form.js:0
+# model: code:addons/website_payment/static/src/interactions/payment_form.js
+#, []
 msgid "Name"
-msgstr ""
+msgstr "Naziv"
 
-#. module: website_payment
-#. odoo-python
-#: code:addons/website_payment/controllers/portal.py:0
+# model: code:addons/website_payment/controllers/portal.py
+#, []
 msgid "Name is required."
-msgstr ""
+msgstr "Ime je potrebno."
 
-#. module: website_payment
-#. odoo-javascript
-#: code:addons/website_payment/static/src/snippets/s_supported_payment_methods/000.edit.xml:0
+# model:
+# code:addons/website_payment/static/src/snippets/s_supported_payment_methods/000.edit.xml
+#, []
 msgid "No published payment methods"
-msgstr ""
+msgstr "Nema objavljenih metoda plaćanja"
 
-#. module: website_payment
-#. odoo-javascript
-#: code:addons/website_payment/static/src/website_builder/donation_option.xml:0
+# model:
+# code:addons/website_payment/static/src/website_builder/donation_option.xml
+#, []
 msgid "None"
-msgstr ""
+msgstr "Nijedan"
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.s_donation_button
+# model: model_terms:ir.ui.view,arch_db:website_payment.s_donation_button
+#, []
 msgid "One year in elementary school."
-msgstr ""
+msgstr "Jedna godina osnovne škole."
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.s_donation_button
+# model: model_terms:ir.ui.view,arch_db:website_payment.s_donation_button
+#, []
 msgid "One year in high school."
-msgstr ""
+msgstr "Jedna godina u srednjoj školi."
 
-#. module: website_payment
-#: model:ir.model,name:website_payment.model_account_payment
+# model: model:ir.model,name:website_payment.model_account_payment
+#, []
 msgid "Payment"
-msgstr ""
+msgstr "Plaćanje"
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.donation_information
+# model: model_terms:ir.ui.view,arch_db:website_payment.donation_information
+#, []
 msgid "Payment Details"
-msgstr ""
+msgstr "Detalji plaćanja"
 
-#. module: website_payment
-#: model:ir.model,name:website_payment.model_payment_provider
+# model: model:ir.model,name:website_payment.model_payment_provider
+#, []
 msgid "Payment Provider"
-msgstr ""
+msgstr "Pružatelj usluge naplate"
 
-#. module: website_payment
-#: model:ir.model,name:website_payment.model_payment_transaction
+# model: model:ir.model,name:website_payment.model_payment_transaction
+#, []
 msgid "Payment Transaction"
-msgstr ""
+msgstr "Transakcija plaćanja"
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.res_config_settings_view_form
+# model:
+# model_terms:ir.ui.view,arch_db:website_payment.res_config_settings_view_form
+#, []
 msgid "Payments"
-msgstr ""
+msgstr "Plaćanja"
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.website_payment_donation_form
+# model:
+# model_terms:ir.ui.view,arch_db:website_payment.website_payment_donation_form
+#, []
 msgid "Please enter a valid email address."
-msgstr ""
+msgstr "Unesite ispravnu email adresu."
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.website_payment_donation_form
+# model:
+# model_terms:ir.ui.view,arch_db:website_payment.website_payment_donation_form
+#, []
 msgid "Please provide a name."
-msgstr ""
+msgstr "Unesite naziv."
 
-#. module: website_payment
-#. odoo-javascript
-#: code:addons/website_payment/static/src/snippets/s_donation/donation_snippet.js:0
+# model:
+# code:addons/website_payment/static/src/snippets/s_donation/donation_snippet.js
+#, []
 msgid "Please select or enter an amount"
-msgstr ""
+msgstr "molimo select or enter an amount"
 
-#. module: website_payment
-#. odoo-javascript
-#: code:addons/website_payment/static/src/website_builder/donation_option.xml:0
+# model:
+# code:addons/website_payment/static/src/website_builder/donation_option.xml
+#, []
 msgid "Pre-filled Options"
-msgstr ""
+msgstr "Predefinisane opcije"
 
-#. module: website_payment
-#. odoo-javascript
-#: code:addons/website_payment/static/src/website_builder/donation_option.xml:0
+# model:
+# code:addons/website_payment/static/src/website_builder/donation_option.xml
+#, []
 msgid "Recipient Email"
-msgstr ""
+msgstr "Email primaoca"
 
-#. module: website_payment
-#. odoo-javascript
-#: code:addons/website_payment/static/src/website_builder/donation_option.xml:0
+# model:
+# code:addons/website_payment/static/src/website_builder/donation_option.xml
+#, []
 msgid "Slider"
-msgstr ""
+msgstr "Klizač"
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.s_donation
+# model: model_terms:ir.ui.view,arch_db:website_payment.s_donation
+#, []
 msgid "Small or large, your contribution is essential."
-msgstr ""
+msgstr "Mala ili velika, vaša donacija je važna."
 
-#. module: website_payment
-#. odoo-javascript
-#: code:addons/website_payment/static/src/website_builder/donation_option.xml:0
+# model:
+# code:addons/website_payment/static/src/website_builder/donation_option.xml
+#, []
 msgid "Step"
-msgstr ""
+msgstr "Korak"
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.res_config_settings_view_form
+# model:
+# model_terms:ir.ui.view,arch_db:website_payment.res_config_settings_view_form
+#, []
 msgid ""
 "Stripe Connect is not available in your country, please use another payment "
 "provider."
 msgstr ""
+"Stripe Connect nije dostupan u vašoj državi, koristite drugog provajdera "
+"plaćanja."
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.snippets
+# model: model_terms:ir.ui.view,arch_db:website_payment.snippets
+#, []
 msgid "Supported Payment Methods"
-msgstr ""
+msgstr "Podržani načini plaćanja"
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.donation_mail_body
+# model: model_terms:ir.ui.view,arch_db:website_payment.donation_mail_body
+#, []
 msgid "Thank you for your donation of"
-msgstr ""
+msgstr "Hvala vam na donaciji od"
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.donation_input
+# model: model_terms:ir.ui.view,arch_db:website_payment.donation_input
+#, []
 msgid "The minimum donation amount is"
-msgstr ""
+msgstr "Minimalni iznos donacije je"
 
-#. module: website_payment
-#. odoo-javascript
-#: code:addons/website_payment/static/src/snippets/s_donation/donation_snippet.js:0
+# model:
+# code:addons/website_payment/static/src/snippets/s_donation/donation_snippet.js
+#, []
 msgid "The minimum donation amount is %(amount)s"
-msgstr ""
+msgstr "Minimalni iznos donacije je %(amount)s"
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.donation_page_layout
+# model: model_terms:ir.ui.view,arch_db:website_payment.donation_page_layout
+#, []
 msgid "There is nothing to pay."
-msgstr ""
+msgstr "Nema ničega za platiti."
 
-#. module: website_payment
-#. odoo-javascript
-#: code:addons/website_payment/static/src/snippets/s_supported_payment_methods/000.edit.xml:0
+# model:
+# code:addons/website_payment/static/src/snippets/s_supported_payment_methods/000.edit.xml
+#, []
 msgid "View providers"
-msgstr ""
+msgstr "Pogledaj provajdere"
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.res_config_settings_view_form
+# model:
+# model_terms:ir.ui.view,arch_db:website_payment.res_config_settings_view_form
+#, []
 msgid ""
-"Visa, Mastercard, Maestro, UPI, Netbanking, PayNow, Klarna, etc., as well as "
-"recurring charges."
+"Visa, Mastercard, Maestro, UPI, Netbanking, PayNow, Klarna, etc., as well as"
+" recurring charges."
 msgstr ""
 
-#. module: website_payment
-#: model:ir.model.fields,field_description:website_payment.field_payment_provider__website_id
+# model:
+# model:ir.model.fields,field_description:website_payment.field_payment_provider__website_id
+#, []
 msgid "Website"
 msgstr "Web stranica"
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.donation_information
+# model: model_terms:ir.ui.view,arch_db:website_payment.donation_information
+#, []
 msgid "Write us a comment"
-msgstr ""
+msgstr "Napišite nam komentar"
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.donation_information
+# model: model_terms:ir.ui.view,arch_db:website_payment.donation_information
+#, []
 msgid "Your comment"
-msgstr ""
+msgstr "Vaš komentar"
 
-#. module: website_payment
-#: model_terms:ir.ui.view,arch_db:website_payment.donation_mail_body
+# model: model_terms:ir.ui.view,arch_db:website_payment.donation_mail_body
+#, []
 msgid "made on"
-msgstr ""
+msgstr "izvršeno"

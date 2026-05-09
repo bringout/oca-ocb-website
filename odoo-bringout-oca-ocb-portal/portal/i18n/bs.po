@@ -1,1519 +1,1407 @@
-# Translation of Odoo Server.
-# This file contains the translation of the following modules:
-# * portal
 #
-# Translators:
-# Martin Trigaux, 2018
-# Boško Stojaković <bluesoft83@gmail.com>, 2018
-# Bole <bole@dajmi5.com>, 2018
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~11.5\n"
+"Project-Id-Version: Odoo Server master (portal)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-12 18:38+0000\n"
-"PO-Revision-Date: 2018-09-21 13:18+0000\n"
-"Last-Translator: Bole <bole@dajmi5.com>, 2018\n"
-"Language-Team: Bosnian (https://www.transifex.com/odoo/teams/41243/bs/)\n"
+"Language-Team: Bosnian\n"
 "Language: bs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+# model: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+#, []
 msgid "\" to validate your action."
-msgstr ""
+msgstr "\" da potvrdite svoju akciju."
 
-#. module: portal
-#. odoo-javascript
-#: code:addons/portal/static/src/interactions/sidebar.js:0
+# model: code:addons/portal/static/src/interactions/sidebar.js
+#, []
 msgid "%s days overdue"
-msgstr ""
+msgstr "%s dana zakašnjenja"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.portal_docs_entry
+# model: model_terms:ir.ui.view,arch_db:portal.portal_docs_entry
+#, []
 msgid "'Icon for %s' % entry.name"
 msgstr ""
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+# model: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+#, []
 msgid "1. Enter your password to confirm you own this account"
-msgstr ""
+msgstr "1. Unesite svoju lozinku da potvrdite da posjedujete ovaj račun"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+# model: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+#, []
 msgid ""
 "2. Confirm you want to delete your account by\n"
 "                                        copying down your login ("
 msgstr ""
+"2. Potvrdite da želite obrisati svoj račun\n"
+"                                        prepisivanjem svoje prijave ("
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.my_account_link
+# model: model_terms:ir.ui.view,arch_db:portal.my_account_link
+#, []
 msgid ""
 "<i class=\"fa fa-fw fa-id-card-o me-1 small text-primary-emphasis\"/> My "
 "Account"
 msgstr ""
+"<i class=\"fa fa-fw fa-id-card-o me-1 small text-primary-emphasis\"/> Moj "
+"račun"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.user_dropdown
+# model: model_terms:ir.ui.view,arch_db:portal.user_dropdown
+#, []
 msgid "<i class=\"fa fa-fw fa-sign-out small text-primary-emphasis\"/> Logout"
 msgstr ""
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.user_dropdown
+# model: model_terms:ir.ui.view,arch_db:portal.user_dropdown
+#, []
 msgid "<i class=\"fa fa-fw fa-th me-1 small text-primary-emphasis\"/> Apps"
-msgstr ""
+msgstr "<i class=\"fa fa-fw fa-th me-1 small text-primary-emphasis\"/> Aplikacije"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.profile_picture_card
+# model: model_terms:ir.ui.view,arch_db:portal.profile_picture_card
+#, []
 msgid "<i class=\"fa fa-pencil\" title=\"Edit\"/>"
 msgstr ""
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.side_content
+# model: model_terms:ir.ui.view,arch_db:portal.side_content
+#, []
 msgid "<i class=\"fa fa-pencil\"/> Edit information"
-msgstr ""
+msgstr "<i class=\"fa fa-pencil\"/> Uredi informacije"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.profile_picture_card
+# model: model_terms:ir.ui.view,arch_db:portal.profile_picture_card
+#, []
 msgid "<i class=\"fa fa-trash-o\" title=\"Clear\"/>"
 msgstr ""
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.address_footer
+# model: model_terms:ir.ui.view,arch_db:portal.address_footer
+#, []
 msgid "<i class=\"fw-light fa fa-angle-left me-2\"/>Discard"
-msgstr ""
+msgstr "<i class=\"fw-light fa fa-angle-left me-2\"/>Odbaci"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.portal_back_in_edit_mode
+# model: model_terms:ir.ui.view,arch_db:portal.portal_back_in_edit_mode
+#, []
 msgid "<i class=\"oi oi-arrow-right me-1\"/>Back to edit mode"
-msgstr ""
+msgstr "<i class=\"oi oi-arrow-right me-1\"/>Natrag u način uređivanja"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.record_pager
+# model: model_terms:ir.ui.view,arch_db:portal.record_pager
+#, []
 msgid ""
 "<i class=\"oi oi-chevron-left\" role=\"img\" aria-label=\"Previous\" "
 "title=\"Previous\"/>"
 msgstr ""
+"<i class=\"oi oi-chevron-left\" role=\"img\" aria-label=\"Prethodno\" "
+"title=\"Prethodno\"/>"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.record_pager
-msgid ""
-"<i class=\"oi oi-chevron-right\" role=\"img\" aria-label=\"Next\" "
-"title=\"Next\"/>"
+# model: model_terms:ir.ui.view,arch_db:portal.record_pager
+#, []
+msgid "<i class=\"oi oi-chevron-right\" role=\"img\" aria-label=\"Next\" title=\"Next\"/>"
 msgstr ""
+"<i class=\"oi oi-chevron-right\" role=\"img\" aria-label=\"Sljedeće\" "
+"title=\"Sljedeće\"/>"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.my_addresses
+# model: model_terms:ir.ui.view,arch_db:portal.my_addresses
+#, []
 msgid "<i class=\"oi oi-plus me-2\"/>Add Address"
-msgstr ""
+msgstr "<i class=\"oi oi-plus me-2\"/>Dodaj adresu"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.portal_my_security
-msgid ""
-"<i title=\"Documentation\" class=\"fa fa-fw o_button_icon fa-info-circle\"/>"
-msgstr ""
+# model: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+#, []
+msgid "<i title=\"Documentation\" class=\"fa fa-fw o_button_icon fa-info-circle\"/>"
+msgstr "<i title=\"Dokumentacija\" class=\"fa fa-fw o_button_icon fa-info-circle\"/>"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.address_form_fields
+# model: model_terms:ir.ui.view,arch_db:portal.address_form_fields
+#, []
 msgid ""
 "<small class=\"form-text text-muted\">\n"
-"                            Changing VAT number is not allowed once "
-"document(s) have\n"
-"                            been issued for your account. Please contact us "
-"directly for this\n"
+"                            Changing VAT number is not allowed once document(s) have\n"
+"                            been issued for your account. Please contact us directly for this\n"
 "                            operation.\n"
 "                        </small>"
 msgstr ""
+"<small class=\"form-text text-muted\">\n"
+"                            Promjena PDV broja nije dozvoljena nakon što su\n"
+"                            dokumenti izdani za vaš račun. Molimo kontaktirajte\n"
+"                            nas izravno za ovu operaciju.\n"
+"                        </small>"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.address_form_fields
+# model: model_terms:ir.ui.view,arch_db:portal.address_form_fields
+#, []
 msgid ""
 "<small class=\"form-text text-muted\">\n"
-"                            The VAT number can only be updated on the "
-"company account.\n"
+"                            The VAT number can only be updated on the company account.\n"
 "                        </small>"
 msgstr ""
+"<small class=\"form-text text-muted\">\n"
+"                            PDV broj može se ažurirati samo na računu kompanije.\n"
+"                        </small>"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.address_form_fields
+# model: model_terms:ir.ui.view,arch_db:portal.address_form_fields
+#, []
 msgid ""
 "<small class=\"form-text text-muted\">\n"
 "                    Changing country is not allowed once document(s) have\n"
-"                    been issued for your account. Please contact us directly "
-"for this\n"
+"                    been issued for your account. Please contact us directly for this\n"
 "                    operation.\n"
 "                </small>"
 msgstr ""
+"<small class=\"form-text text-muted\">\n"
+"                    Promjena države nije dozvoljena nakon što su dokumenti izdani\n"
+"                    za vaš račun. Molimo kontaktirajte nas izravno za ovu\n"
+"                    operaciju.\n"
+"                </small>"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.pager
+# model: model_terms:ir.ui.view,arch_db:portal.pager
+#, []
 msgid ""
 "<span class=\"oi oi-chevron-left\" role=\"img\" aria-label=\"Previous\" "
 "title=\"Previous\"/>"
 msgstr ""
+"<span class=\"oi oi-chevron-left\" role=\"img\" aria-label=\"Prethodno\" "
+"title=\"Prethodno\"/>"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.pager
-msgid ""
-"<span class=\"oi oi-chevron-right\" role=\"img\" aria-label=\"Next\" "
-"title=\"Next\"/>"
+# model: model_terms:ir.ui.view,arch_db:portal.pager
+#, []
+msgid "<span class=\"oi oi-chevron-right\" role=\"img\" aria-label=\"Next\" title=\"Next\"/>"
 msgstr ""
+"<span class=\"oi oi-chevron-right\" role=\"img\" aria-label=\"Sljedeće\" "
+"title=\"Sljedeće\"/>"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.address_footer
+# model: model_terms:ir.ui.view,arch_db:portal.address_footer
+#, []
 msgid "<span class=\"px-3\">or</span>"
-msgstr ""
+msgstr "<span class=\"px-3\">ili</span>"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.portal_searchbar
+# model: model_terms:ir.ui.view,arch_db:portal.portal_searchbar
+#, []
 msgid "<span class=\"small me-1 navbar-text\">Filter By:</span>"
-msgstr ""
+msgstr "<span class=\"small me-1 navbar-text\">Filtriraj po:</span>"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.portal_searchbar
+# model: model_terms:ir.ui.view,arch_db:portal.portal_searchbar
+#, []
 msgid "<span class=\"small me-1 navbar-text\">Group By:</span>"
-msgstr ""
+msgstr "<span class=\"small me-1 navbar-text\">Grupiraj po:</span>"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.portal_searchbar
+# model: model_terms:ir.ui.view,arch_db:portal.portal_searchbar
+#, []
 msgid "<span class=\"small me-1 navbar-text\">Sort By:</span>"
-msgstr ""
+msgstr "<span class=\"small me-1 navbar-text\">Sortiraj po:</span>"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.portal_share_template
+# model: model_terms:ir.ui.view,arch_db:portal.portal_share_template
+#, []
 msgid "<strong>Open </strong>"
-msgstr ""
+msgstr "<strong>Otvoreno </strong>"
 
-#. module: portal
-#: model:ir.model,name:portal.model_res_users_apikeys_description
+# model: model:ir.model,name:portal.model_res_users_apikeys_description
+#, []
 msgid "API Key Description"
-msgstr ""
+msgstr "Opis API ključa"
 
-#. module: portal
-#. odoo-javascript
-#: code:addons/portal/static/src/interactions/portal_security.js:0
+# model: code:addons/portal/static/src/interactions/portal_security.js
+#, []
 msgid "API Key Ready"
-msgstr ""
+msgstr "API ključ spreman"
 
-#. module: portal
-#. odoo-javascript
-#: code:addons/portal/static/src/signature_form/signature_form.js:0
+# model: code:addons/portal/static/src/signature_form/signature_form.js
+#, []
 msgid "Accept & Sign"
-msgstr ""
+msgstr "<span class=\"small mr-1 navbar-text\">Filtriraj po:</span>"
 
-#. module: portal
-#: model:ir.model.fields,field_description:portal.field_portal_mixin__access_warning
-#: model:ir.model.fields,field_description:portal.field_portal_share__access_warning
+# model:
+# model:ir.model.fields,field_description:portal.field_portal_mixin__access_warning
+#, []
 msgid "Access warning"
-msgstr ""
+msgstr "Upozorenje pristupa"
 
-#. module: portal
-#. odoo-python
-#: code:addons/portal/controllers/portal.py:0
+# model: code:addons/portal/controllers/portal.py
+#, []
 msgid "Account deleted!"
-msgstr ""
+msgstr "<span class=\"small mr-1 navbar-text\">Sortiraj po:</span>"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.portal_share_wizard
+# model: model_terms:ir.ui.view,arch_db:portal.portal_share_wizard
+#, []
 msgid "Add a note"
-msgstr ""
+msgstr "Dodaj bilješku"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.my_addresses
+# model: model_terms:ir.ui.view,arch_db:portal.my_addresses
+#, []
 msgid "Add an address"
-msgstr ""
+msgstr "Dodaj adresu"
 
-#. module: portal
-#. odoo-javascript
-#: code:addons/portal/static/src/xml/portal_chatter.xml:0
+# model: code:addons/portal/static/src/xml/portal_chatter.xml
+#, []
 msgid "Add attachment"
-msgstr ""
+msgstr "Dodaj privitak"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.portal_share_wizard
+# model: model_terms:ir.ui.view,arch_db:portal.portal_share_wizard
+#, []
 msgid "Add contacts to share the document..."
-msgstr ""
+msgstr "Dodajte kontakte da podijelite dokument..."
 
-#. module: portal
-#: model:ir.model.fields,help:portal.field_portal_share__note
+# model: model:ir.model.fields,help:portal.field_portal_share__note
+#, []
 msgid "Add extra content to display in the email"
-msgstr ""
+msgstr "Dodajte dodatni sadržaj za prikaz u emailu"
 
-#. module: portal
-#: model:portal.entry,description:portal.portal_entry_addresses
+# model: model:portal.entry,description:portal.portal_entry_addresses
+#, []
 msgid "Add, remove or modify your addresses"
-msgstr ""
+msgstr "Dodajte, uklonite ili izmijenite svoje adrese"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+# model: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+#, []
 msgid "Added On"
-msgstr ""
+msgstr "Dodano dana"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.address_management
+# model: model_terms:ir.ui.view,arch_db:portal.address_management
+#, []
 msgid "Address Management"
-msgstr ""
+msgstr "Upravljanje adresama"
 
-#. module: portal
-#: model:portal.entry,name:portal.portal_entry_addresses
-#: model_terms:ir.ui.view,arch_db:portal.portal_breadcrumbs
+# model: model:portal.entry,name:portal.portal_entry_addresses
+#, []
 msgid "Addresses"
-msgstr ""
+msgstr "Adrese"
 
-#. module: portal
-#: model:ir.model.fields.selection,name:portal.selection__portal_wizard_user__email_state__exist
+# model:
+# model:ir.model.fields.selection,name:portal.selection__portal_wizard_user__email_state__exist
+#, []
 msgid "Already Registered"
-msgstr ""
+msgstr "Već registrovan"
 
-#. module: portal
-#. odoo-javascript
-#: code:addons/portal/static/src/interactions/portal_profile_editor.js:0
+# model: code:addons/portal/static/src/interactions/portal_profile_editor.js
+#, []
 msgid "An error occurred while saving your profile."
 msgstr ""
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.address_form_fields
+# model: model_terms:ir.ui.view,arch_db:portal.address_form_fields
+#, []
 msgid "Apartment, suite, etc."
-msgstr ""
+msgstr "Broj stana ili slično."
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+# model: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+#, []
 msgid "Are you sure you want to do this?"
-msgstr ""
+msgstr "Jeste li sigurni da želite ovo uraditi?"
 
-#. module: portal
-#. odoo-javascript
-#: code:addons/portal/static/src/xml/portal_chatter.xml:0
+# model: code:addons/portal/static/src/xml/portal_chatter.xml
+#, []
 msgid "Avatar"
-msgstr ""
+msgstr "Avatar"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.address_card
+# model: model_terms:ir.ui.view,arch_db:portal.address_card
+#, []
 msgid "Billing Address"
-msgstr ""
+msgstr "Adresa za naplatu"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.address_management
-#: model_terms:ir.ui.view,arch_db:portal.my_addresses
+# model: model_terms:ir.ui.view,arch_db:portal.address_management
+#, []
 msgid "Billing address"
-msgstr ""
+msgstr "Adresa za naplatu"
 
-#. module: portal
-#: model:ir.model.fields,field_description:portal.field_portal_entry__category
+# model:
+# model:ir.model.fields,field_description:portal.field_portal_entry__category
+#, []
 msgid "Category"
 msgstr ""
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+# model: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+#, []
 msgid "Change Password"
-msgstr ""
+msgstr "Promijeni zaporku"
 
-#. module: portal
-#. odoo-python
-#: code:addons/portal/controllers/portal.py:0
+# model: code:addons/portal/controllers/portal.py
+#, []
 msgid ""
 "Changing VAT number is not allowed once document(s) have been issued for "
 "your account. Please contact us directly for this operation."
 msgstr ""
+"Promjena PDV broja nije dozvoljena nakon što su dokumenti izdani za vaš "
+"račun. Molimo kontaktirajte nas direktno za ovu operaciju."
 
-#. module: portal
-#. odoo-python
-#: code:addons/portal/controllers/portal.py:0
+# model: code:addons/portal/controllers/portal.py
+#, []
 msgid ""
 "Changing your country is not allowed once document(s) have been issued for "
 "your account. Please contact us directly for this operation."
 msgstr ""
+"Promjena države nije dozvoljena nakon što su dokumenti izdani za vaš račun. "
+"Molimo kontaktirajte nas izravno za ovu operaciju."
 
-#. module: portal
-#. odoo-javascript
-#: code:addons/portal/static/src/interactions/portal_security.js:0
+# model: code:addons/portal/static/src/interactions/portal_security.js
+#, []
 msgid "Check failed"
-msgstr ""
+msgstr "Provjera neuspješna"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.address_form_fields
+# model: model_terms:ir.ui.view,arch_db:portal.address_form_fields
+#, []
 msgid "City"
 msgstr "Grad"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.profile_picture_card
+# model: model_terms:ir.ui.view,arch_db:portal.profile_picture_card
+#, []
 msgid "Clear"
 msgstr ""
 
-#. module: portal
-#. odoo-javascript
-#: code:addons/portal/static/src/signature_form/signature_form.xml:0
+# model: code:addons/portal/static/src/signature_form/signature_form.xml
+#, []
 msgid "Click here to see your document."
-msgstr ""
+msgstr "Kliknite ovdje da vidite svoj dokument."
 
-#. module: portal
-#. odoo-javascript
-#: code:addons/portal/static/src/interactions/portal_security.js:0
-#: model_terms:ir.ui.view,arch_db:portal.portal_back_in_edit_mode
-#: model_terms:ir.ui.view,arch_db:portal.side_content
-#: model_terms:ir.ui.view,arch_db:portal.wizard_view
+# model: code:addons/portal/static/src/interactions/portal_security.js
+#, []
 msgid "Close"
-msgstr "Zatvori"
+msgstr "Amortizovano"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.address_form_fields
+# model: model_terms:ir.ui.view,arch_db:portal.address_form_fields
+#, []
 msgid "Company Name"
 msgstr "Naziv firme"
 
-#. module: portal
-#: model:ir.model.fields,field_description:portal.field_portal_entry__is_config_card
+# model:
+# model:ir.model.fields,field_description:portal.field_portal_entry__is_config_card
+#, []
 msgid "Config Card"
 msgstr ""
 
-#. module: portal
-#: model:ir.model,name:portal.model_res_config_settings
+# model: model:ir.model,name:portal.model_res_config_settings
+#, []
 msgid "Config Settings"
-msgstr ""
+msgstr "Postavke konfiguracije"
 
-#. module: portal
-#: model:portal.entry,description:portal.portal_entry_base
+# model: model:portal.entry,description:portal.portal_entry_base
+#, []
 msgid "Configure your connection parameters"
-msgstr ""
+msgstr "Konfigurirajte parametre veze"
 
-#. module: portal
-#. odoo-javascript
-#: code:addons/portal/static/src/interactions/portal_security.js:0
+# model: code:addons/portal/static/src/interactions/portal_security.js
+#, []
 msgid "Confirm"
-msgstr ""
+msgstr "Potvrdi"
 
-#. module: portal
-#. odoo-javascript
-#: code:addons/portal/static/src/interactions/portal_security.js:0
+# model: code:addons/portal/static/src/interactions/portal_security.js
+#, []
 msgid "Confirm Password"
-msgstr ""
+msgstr "Potvrdi lozinku"
 
-#. module: portal
-#: model:portal.entry,name:portal.portal_entry_base
+# model: model:portal.entry,name:portal.portal_entry_base
+#, []
 msgid "Connection & Security"
 msgstr ""
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+# model: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+#, []
 msgid "Connection &amp; Security"
-msgstr ""
+msgstr "Veza &amp; Sigurnost"
 
-#. module: portal
-#: model:ir.model,name:portal.model_res_partner
-#: model:ir.model.fields,field_description:portal.field_portal_wizard_user__partner_id
-#: model_terms:ir.ui.view,arch_db:portal.portal_layout
-#: model_terms:ir.ui.view,arch_db:portal.portal_my_contact
-#: model_terms:ir.ui.view,arch_db:portal.side_content
+# model: model:ir.model,name:portal.model_res_partner
+#, []
 msgid "Contact"
 msgstr "Kontakt"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.portal_my_details
+# model: model_terms:ir.ui.view,arch_db:portal.portal_my_details
+#, []
 msgid "Contact Details"
-msgstr ""
+msgstr "Detalji o kontaktu"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.wizard_view
+# model: model_terms:ir.ui.view,arch_db:portal.wizard_view
+#, []
 msgid "Contacts"
 msgstr "Kontakti"
 
-#. module: portal
-#. odoo-javascript
-#: code:addons/portal/static/src/interactions/portal_composer.js:0
+# model: code:addons/portal/static/src/interactions/portal_composer.js
+#, []
 msgid "Could not save file %s"
-msgstr ""
+msgstr "Neuspješno spremanje fajla %s"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.address_form_fields
+# model: model_terms:ir.ui.view,arch_db:portal.address_form_fields
+#, []
 msgid "Country"
 msgstr "Država"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.address_form_fields
+# model: model_terms:ir.ui.view,arch_db:portal.address_form_fields
+#, []
 msgid "Country..."
 msgstr ""
 
-#. module: portal
-#: model:ir.model,website_form_label:portal.model_res_partner
+# model: model:ir.model,website_form_label:portal.model_res_partner
+#, []
 msgid "Create a Customer"
-msgstr ""
+msgstr "Kreirajte kupca"
 
-#. module: portal
-#: model:ir.model.fields,field_description:portal.field_portal_entry__create_uid
-#: model:ir.model.fields,field_description:portal.field_portal_share__create_uid
-#: model:ir.model.fields,field_description:portal.field_portal_wizard__create_uid
-#: model:ir.model.fields,field_description:portal.field_portal_wizard_user__create_uid
+# model:
+# model:ir.model.fields,field_description:portal.field_portal_entry__create_uid
+#, []
 msgid "Created by"
 msgstr "Kreirao"
 
-#. module: portal
-#: model:ir.model.fields,field_description:portal.field_portal_entry__create_date
-#: model:ir.model.fields,field_description:portal.field_portal_share__create_date
-#: model:ir.model.fields,field_description:portal.field_portal_wizard__create_date
-#: model:ir.model.fields,field_description:portal.field_portal_wizard_user__create_date
+# model:
+# model:ir.model.fields,field_description:portal.field_portal_entry__create_date
+#, []
 msgid "Created on"
 msgstr "Kreirano"
 
-#. module: portal
-#: model:ir.model.fields,field_description:portal.field_res_config_settings__portal_allow_api_keys
+# model:
+# model:ir.model.fields,field_description:portal.field_res_config_settings__portal_allow_api_keys
+#, []
 msgid "Customer API Keys"
-msgstr ""
+msgstr "API ključevi kupaca"
 
-#. module: portal
-#: model:ir.model.fields,help:portal.field_portal_mixin__access_url
+# model: model:ir.model.fields,help:portal.field_portal_mixin__access_url
+#, []
 msgid "Customer Portal URL"
-msgstr ""
+msgstr "Korisnik za prijavu"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.res_config_settings_view_form
+# model: model_terms:ir.ui.view,arch_db:portal.res_config_settings_view_form
+#, []
 msgid "Customers can generate API Keys"
-msgstr ""
+msgstr "Kupci mogu generirati API ključeve"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.portal_share_template
+# model: model_terms:ir.ui.view,arch_db:portal.portal_share_template
+#, []
 msgid "Dear"
-msgstr "Dragi"
+msgstr "Poštovani"
 
-#. module: portal
-#. odoo-javascript
-#: code:addons/portal/static/src/xml/portal_chatter.xml:0
+# model: code:addons/portal/static/src/xml/portal_chatter.xml
+#, []
 msgid "Delete"
-msgstr ""
+msgstr "Izbriši"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+# model: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+#, []
 msgid "Delete Account"
-msgstr ""
+msgstr "Obriši račun"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.address_card
+# model: model_terms:ir.ui.view,arch_db:portal.address_card
+#, []
 msgid "Delivery Address"
-msgstr ""
+msgstr "Adresa isporuke"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.address_management
-#: model_terms:ir.ui.view,arch_db:portal.my_addresses
+# model: model_terms:ir.ui.view,arch_db:portal.address_management
+#, []
 msgid "Delivery address"
-msgstr ""
+msgstr "Adresa isporuke"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+# model: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+#, []
 msgid "Description"
-msgstr ""
+msgstr "Opis"
 
-#. module: portal
-#: model:ir.model.fields,field_description:portal.field_portal_entry__description
+# model:
+# model:ir.model.fields,field_description:portal.field_portal_entry__description
+#, []
 msgid "Description of Card"
 msgstr ""
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.portal_breadcrumbs
+# model: model_terms:ir.ui.view,arch_db:portal.portal_breadcrumbs
+#, []
 msgid "Details"
-msgstr ""
+msgstr "Detalji"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+# model: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+#, []
 msgid "Developer API Keys"
-msgstr ""
+msgstr "Razvojni API ključ"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+# model: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+#, []
 msgid ""
 "Disable your account, preventing any further login.<br/>\n"
 "                                        <b>\n"
-"                                            <i class=\"fa fa-exclamation-"
-"triangle text-danger\"/>\n"
+"                                            <i class=\"fa fa-exclamation-triangle text-danger\"/>\n"
 "                                            This action cannot be undone.\n"
 "                                        </b>"
 msgstr ""
+"Onemogućite svoj račun, sprječavajući dalju prijavu.<br/>\n"
+"                                        <b>\n"
+"                                            <i class=\"fa fa-exclamation-triangle text-danger\"/>\n"
+"                                            Ova akcija se ne može poništiti.\n"
+"                                        </b>"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+# model: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+#, []
 msgid "Discard"
 msgstr ""
 
-#. module: portal
-#: model:ir.model.fields,field_description:portal.field_ir_http__display_name
-#: model:ir.model.fields,field_description:portal.field_ir_qweb__display_name
-#: model:ir.model.fields,field_description:portal.field_ir_ui_view__display_name
-#: model:ir.model.fields,field_description:portal.field_mail_message__display_name
-#: model:ir.model.fields,field_description:portal.field_mail_thread__display_name
-#: model:ir.model.fields,field_description:portal.field_portal_entry__display_name
-#: model:ir.model.fields,field_description:portal.field_portal_mixin__display_name
-#: model:ir.model.fields,field_description:portal.field_portal_share__display_name
-#: model:ir.model.fields,field_description:portal.field_portal_wizard__display_name
-#: model:ir.model.fields,field_description:portal.field_portal_wizard_user__display_name
-#: model:ir.model.fields,field_description:portal.field_res_config_settings__display_name
-#: model:ir.model.fields,field_description:portal.field_res_partner__display_name
-#: model:ir.model.fields,field_description:portal.field_res_users_apikeys_description__display_name
+# model:
+# model:ir.model.fields,field_description:portal.field_ir_http__display_name
+#, []
 msgid "Display Name"
-msgstr "Prikazani naziv"
+msgstr "Naziv za prikaz"
 
-#. module: portal
-#. odoo-javascript
-#: code:addons/portal/static/src/interactions/sidebar.js:0
+# model: code:addons/portal/static/src/interactions/sidebar.js
+#, []
 msgid "Due in %s days"
-msgstr ""
+msgstr "Rok dospijeća: %s dana"
 
-#. module: portal
-#. odoo-javascript
-#: code:addons/portal/static/src/interactions/sidebar.js:0
+# model: code:addons/portal/static/src/interactions/sidebar.js
+#, []
 msgid "Due today"
-msgstr ""
+msgstr "Dospijeva danas"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.profile_picture_card
+# model: model_terms:ir.ui.view,arch_db:portal.profile_picture_card
+#, []
 msgid "Edit"
 msgstr ""
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.address_card
+# model: model_terms:ir.ui.view,arch_db:portal.address_card
+#, []
 msgid "Edit this address"
-msgstr ""
+msgstr "Uredi ovu adresu"
 
-#. module: portal
-#: model:ir.model.fields,field_description:portal.field_portal_wizard_user__email
-#: model_terms:ir.ui.view,arch_db:portal.address_form_fields
+# model:
+# model:ir.model.fields,field_description:portal.field_portal_wizard_user__email
+#, []
 msgid "Email"
 msgstr "E-Mail"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.wizard_view
+# model: model_terms:ir.ui.view,arch_db:portal.wizard_view
+#, []
 msgid "Email Address already taken by another user"
-msgstr ""
+msgstr "Email adresa već je zauzeta od strane drugog korisnika"
 
-#. module: portal
-#: model:ir.model,name:portal.model_mail_thread
+# model: model:ir.model,name:portal.model_mail_thread
+#, []
 msgid "Email Thread"
 msgstr "Nit e-pošte"
 
-#. module: portal
-#. odoo-javascript
-#: code:addons/portal/static/src/xml/portal_security.xml:0
+# model: code:addons/portal/static/src/xml/portal_security.xml
+#, []
 msgid "Enter a description of and purpose for the key."
-msgstr ""
+msgstr "Nacrtajte svoj potpis"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+# model: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+#, []
 msgid "Expiration Date"
-msgstr ""
+msgstr "Datum isteka"
 
-#. module: portal
-#. odoo-javascript
-#: code:addons/portal/static/src/xml/portal_security.xml:0
+# model: code:addons/portal/static/src/xml/portal_security.xml
+#, []
 msgid "Forgot password?"
-msgstr ""
+msgstr "Zaboravljena lozinka?"
 
-#. module: portal
-#. odoo-javascript
-#: code:addons/portal/static/src/xml/portal_security.xml:0
+# model: code:addons/portal/static/src/xml/portal_security.xml
+#, []
 msgid "Give a duration for the key's validity"
-msgstr ""
+msgstr "Navedite trajanje važenja ključa"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+# model: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+#, []
 msgid "Go Back"
-msgstr ""
+msgstr "Nazad"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.wizard_view
+# model: model_terms:ir.ui.view,arch_db:portal.wizard_view
+#, []
 msgid "Grant Access"
-msgstr ""
+msgstr "Dodijeli pristup"
 
-#. module: portal
-#: model:ir.model,name:portal.model_portal_wizard
+# model: model:ir.model,name:portal.model_portal_wizard
+#, []
 msgid "Grant Portal Access"
-msgstr ""
+msgstr "Dodijeli pristup portalu"
 
-#. module: portal
-#: model:ir.actions.act_window,name:portal.partner_wizard_action
-#: model:ir.actions.server,name:portal.partner_wizard_action_create_and_open
+# model: model:ir.actions.act_window,name:portal.partner_wizard_action
+#, []
 msgid "Grant portal access"
-msgstr ""
+msgstr "Dodijeli pristup portalu"
 
-#. module: portal
-#: model:ir.model,name:portal.model_ir_http
+# model: model:ir.model,name:portal.model_ir_http
+#, []
 msgid "HTTP Routing"
-msgstr ""
+msgstr "HTTP rutiranje"
 
-#. module: portal
-#. odoo-javascript
-#: code:addons/portal/static/src/xml/portal_security.xml:0
+# model: code:addons/portal/static/src/xml/portal_security.xml
+#, []
 msgid ""
 "Here is your new API key, use it instead of a password for RPC access.\n"
 "                Your login is still necessary for interactive usage."
 msgstr ""
+"Evo vašeg novog API ključa, koristite ga umjesto lozinke za RPC pristup.\n"
+"                Vaše korisničko ime je i dalje potrebno za interaktivno korištenje."
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.portal_breadcrumbs
+# model: model_terms:ir.ui.view,arch_db:portal.portal_breadcrumbs
+#, []
 msgid "Home"
 msgstr "Početna"
 
-#. module: portal
-#: model:ir.model.fields,field_description:portal.field_ir_http__id
-#: model:ir.model.fields,field_description:portal.field_ir_qweb__id
-#: model:ir.model.fields,field_description:portal.field_ir_ui_view__id
-#: model:ir.model.fields,field_description:portal.field_mail_message__id
-#: model:ir.model.fields,field_description:portal.field_mail_thread__id
-#: model:ir.model.fields,field_description:portal.field_portal_entry__id
-#: model:ir.model.fields,field_description:portal.field_portal_mixin__id
-#: model:ir.model.fields,field_description:portal.field_portal_share__id
-#: model:ir.model.fields,field_description:portal.field_portal_wizard__id
-#: model:ir.model.fields,field_description:portal.field_portal_wizard_user__id
-#: model:ir.model.fields,field_description:portal.field_res_config_settings__id
-#: model:ir.model.fields,field_description:portal.field_res_partner__id
-#: model:ir.model.fields,field_description:portal.field_res_users_apikeys_description__id
+# model: model:ir.model.fields,field_description:portal.field_ir_http__id
+#, []
 msgid "ID"
 msgstr "ID"
 
-#. module: portal
-#. odoo-python
-#: code:addons/portal/controllers/portal.py:0
+# model: code:addons/portal/controllers/portal.py
+#, []
 msgid ""
 "If you are ordering for an external person, please place your order via the "
 "backend. If you wish to change your name or email address, please do so in "
 "the account settings or contact your administrator."
 msgstr ""
+"Ako naručujete za vanjsku osobu, molimo vas da narudžbu izvršite putem "
+"pozadinskog sistema. Ako želite promijeniti ime ili adresu e-pošte, učinite "
+"to u postavkama računa ili se obratite administratoru."
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.address_form_fields
+# model: model_terms:ir.ui.view,arch_db:portal.address_form_fields
+#, []
 msgid "If you want to modify it, update"
-msgstr ""
+msgstr "Ako ga želite izmijeniti, ažurirajte"
 
-#. module: portal
-#: model:ir.model.fields,field_description:portal.field_portal_entry__image
+# model:
+# model:ir.model.fields,field_description:portal.field_portal_entry__image
+#, []
 msgid "Image"
 msgstr ""
 
-#. module: portal
-#. odoo-javascript
-#: code:addons/portal/static/src/xml/portal_security.xml:0
+# model: code:addons/portal/static/src/xml/portal_security.xml
+#, []
 msgid "Important:"
-msgstr ""
+msgstr "Važno:"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.wizard_view
+# model: model_terms:ir.ui.view,arch_db:portal.wizard_view
+#, []
 msgid "Internal User"
-msgstr ""
+msgstr "Interni korisnik"
 
-#. module: portal
-#: model:ir.model.fields.selection,name:portal.selection__portal_wizard_user__email_state__ko
+# model:
+# model:ir.model.fields.selection,name:portal.selection__portal_wizard_user__email_state__ko
+#, []
 msgid "Invalid"
-msgstr ""
+msgstr "Neispravno"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.wizard_view
+# model: model_terms:ir.ui.view,arch_db:portal.wizard_view
+#, []
 msgid "Invalid Email Address"
-msgstr ""
+msgstr "Neispravna email adresa"
 
-#. module: portal
-#. odoo-python
-#: code:addons/portal/controllers/portal.py:0
+# model: code:addons/portal/controllers/portal.py
+#, []
 msgid "Invalid Email! Please enter a valid email address."
 msgstr "Nepravilan email! Molimo unesite validnu email adresu."
 
-#. module: portal
-#. odoo-python
-#: code:addons/portal/controllers/portal.py:0
+# model: code:addons/portal/controllers/portal.py
+#, []
 msgid "Invalid report type: %s"
-msgstr ""
+msgstr "Neispravna vrsta izvještaja: %s"
 
-#. module: portal
-#: model:ir.model.fields,field_description:portal.field_portal_wizard__welcome_message
+# model:
+# model:ir.model.fields,field_description:portal.field_portal_wizard__welcome_message
+#, []
 msgid "Invitation Message"
-msgstr ""
+msgstr "Pozivnica"
 
-#. module: portal
-#. odoo-python
-#: code:addons/portal/wizard/portal_share.py:0
+# model: code:addons/portal/wizard/portal_share.py
+#, []
 msgid "Invitation to access %s"
-msgstr ""
+msgstr "Pozivnica za pristup %s"
 
-#. module: portal
-#: model:ir.model.fields,field_description:portal.field_portal_wizard_user__is_internal
+# model:
+# model:ir.model.fields,field_description:portal.field_portal_wizard_user__is_internal
+#, []
 msgid "Is Internal"
-msgstr ""
+msgstr "Je interni"
 
-#. module: portal
-#: model:ir.model.fields,field_description:portal.field_portal_wizard_user__is_portal
+# model:
+# model:ir.model.fields,field_description:portal.field_portal_wizard_user__is_portal
+#, []
 msgid "Is Portal"
-msgstr ""
+msgstr "Je portal"
 
-#. module: portal
-#. odoo-javascript
-#: code:addons/portal/static/src/xml/portal_security.xml:0
+# model: code:addons/portal/static/src/xml/portal_security.xml
+#, []
 msgid ""
 "It is very important that this description be clear\n"
 "                and complete,"
 msgstr ""
+"Vrlo je važno da ovaj opis bude jasan \n"
+"i potpun,"
 
-#. module: portal
-#: model:ir.model.fields,field_description:portal.field_portal_entry__write_uid
-#: model:ir.model.fields,field_description:portal.field_portal_share__write_uid
-#: model:ir.model.fields,field_description:portal.field_portal_wizard__write_uid
-#: model:ir.model.fields,field_description:portal.field_portal_wizard_user__write_uid
+# model:
+# model:ir.model.fields,field_description:portal.field_portal_entry__write_uid
+#, []
 msgid "Last Updated by"
-msgstr "Zadnji ažurirao"
+msgstr "Posljednji put ažurirao"
 
-#. module: portal
-#: model:ir.model.fields,field_description:portal.field_portal_entry__write_date
-#: model:ir.model.fields,field_description:portal.field_portal_share__write_date
-#: model:ir.model.fields,field_description:portal.field_portal_wizard__write_date
-#: model:ir.model.fields,field_description:portal.field_portal_wizard_user__write_date
+# model:
+# model:ir.model.fields,field_description:portal.field_portal_entry__write_date
+#, []
 msgid "Last Updated on"
-msgstr "Zadnje ažurirano"
+msgstr "Posljednji put ažurirano"
 
-#. module: portal
-#: model:ir.model.fields,field_description:portal.field_portal_wizard_user__login_date
+# model:
+# model:ir.model.fields,field_description:portal.field_portal_wizard_user__login_date
+#, []
 msgid "Latest Authentication"
-msgstr ""
+msgstr "Posljednje povezivanje"
 
-#. module: portal
-#. odoo-javascript
-#: code:addons/portal/static/src/xml/portal_chatter.xml:0
+# model: code:addons/portal/static/src/xml/portal_chatter.xml
+#, []
 msgid "Leave a comment"
-msgstr ""
+msgstr "Ostavi komentar"
 
-#. module: portal
-#: model:ir.model.fields,field_description:portal.field_portal_share__share_link
+# model:
+# model:ir.model.fields,field_description:portal.field_portal_share__share_link
+#, []
 msgid "Link"
 msgstr "Veza"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+# model: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+#, []
 msgid "Log out from all devices"
-msgstr ""
+msgstr "Odjava sa svih uređaja"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.address_card
+# model: model_terms:ir.ui.view,arch_db:portal.address_card
+#, []
 msgid "Main Address"
-msgstr ""
+msgstr "Glavna adresa"
 
-#. module: portal
-#: model:ir.model,name:portal.model_mail_message
+# model: model:ir.model,name:portal.model_mail_message
+#, []
 msgid "Message"
 msgstr "Poruka"
 
-#. module: portal
-#. odoo-python
-#: code:addons/portal/models/mail_thread.py:0
+# model: code:addons/portal/models/mail_thread.py
+#, []
 msgid ""
 "Model %(model_name)s does not support token signature, as it does not have "
 "%(field_name)s field."
 msgstr ""
+"Model %(model_name)s ne podržava potpis tokena, jer nema polje "
+"%(field_name)s."
 
-#. module: portal
-#. odoo-python
-#: code:addons/portal/controllers/portal.py:0
+# model: code:addons/portal/controllers/portal.py
+#, []
 msgid "Multi company reports are not supported."
-msgstr ""
+msgstr "Izvještaji za više kompanija nisu podržani."
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.portal_layout
+# model: model_terms:ir.ui.view,arch_db:portal.portal_layout
+#, []
 msgid "My account"
-msgstr ""
+msgstr "Moj račun"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.my_addresses
+# model: model_terms:ir.ui.view,arch_db:portal.my_addresses
+#, []
 msgid "My addresses"
-msgstr ""
+msgstr "Moje adrese"
 
-#. module: portal
-#. odoo-javascript
-#: code:addons/portal/static/src/xml/portal_security.xml:0
+# model: code:addons/portal/static/src/xml/portal_security.xml
+#, []
 msgid "Name your key"
-msgstr ""
+msgstr "Nazovite ključ"
 
-#. module: portal
-#. odoo-javascript
-#: code:addons/portal/static/src/interactions/portal_security.js:0
-#: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+# model: code:addons/portal/static/src/interactions/portal_security.js
+#, []
 msgid "New API Key"
-msgstr ""
+msgstr "novi API ključ"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+# model: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+#, []
 msgid "New Password:"
-msgstr ""
+msgstr "Nova lozinka:"
 
-#. module: portal
-#. odoo-javascript
-#: code:addons/portal/static/src/xml/portal_chatter.xml:0
+# model: code:addons/portal/static/src/xml/portal_chatter.xml
+#, []
 msgid "Next"
 msgstr "Slijedeće"
 
-#. module: portal
-#: model:ir.model.fields,field_description:portal.field_portal_share__note
+# model:
+# model:ir.model.fields,field_description:portal.field_portal_share__note
+#, []
 msgid "Note"
 msgstr "Zabilješka"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.portal_record_sidebar
+# model: model_terms:ir.ui.view,arch_db:portal.portal_record_sidebar
+#, []
 msgid "Odoo Logo"
-msgstr ""
+msgstr "Odoo Logo"
 
-#. module: portal
-#. odoo-python
-#: code:addons/portal/models/res_users_apikeys_description.py:0
+# model: code:addons/portal/models/res_users_apikeys_description.py
+#, []
 msgid "Only internal and portal users can create API keys"
-msgstr ""
+msgstr "Samo interni i portal korisnici mogu kreirati API ključeve"
 
-#. module: portal
-#. odoo-javascript
-#: code:addons/portal/static/src/xml/portal_chatter.xml:0
+# model: code:addons/portal/static/src/xml/portal_chatter.xml
+#, []
 msgid "Oops! Something went wrong. Try to reload the page and log in."
 msgstr ""
+"Ups! Nešto je pošlo po zlu. Pokušajte ponovo učitati stranicu i prijaviti "
+"se."
 
-#. module: portal
-#: model:ir.model.fields,field_description:portal.field_portal_wizard__partner_ids
+# model:
+# model:ir.model.fields,field_description:portal.field_portal_wizard__partner_ids
+#, []
 msgid "Partners"
-msgstr ""
+msgstr "Partneri"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+# model: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+#, []
 msgid "Password"
-msgstr ""
+msgstr "Zaporka"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+# model: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+#, []
 msgid "Password Updated!"
-msgstr ""
+msgstr "Lozinka ažurirana!"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+# model: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+#, []
 msgid "Password:"
-msgstr ""
+msgstr "Lozinka:"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.address_form_fields
+# model: model_terms:ir.ui.view,arch_db:portal.address_form_fields
+#, []
 msgid "Phone"
 msgstr "Telefon"
 
-#. module: portal
-#: model:ir.model.fields,field_description:portal.field_portal_entry__placeholder_count
+# model:
+# model:ir.model.fields,field_description:portal.field_portal_entry__placeholder_count
+#, []
 msgid "Placeholder Count"
 msgstr ""
 
-#. module: portal
-#. odoo-javascript
-#: code:addons/portal/static/src/xml/portal_security.xml:0
+# model: code:addons/portal/static/src/xml/portal_security.xml
+#, []
 msgid "Please enter your password to confirm you own this account"
-msgstr ""
+msgstr "Molimo unesite svoju lozinku da potvrdite da posjedujete ovaj račun"
 
-#. module: portal
-#. odoo-python
-#: code:addons/portal/wizard/portal_wizard.py:0
-#: model_terms:ir.ui.view,arch_db:portal.wizard_view
+# model: code:addons/portal/wizard/portal_wizard.py
+#, []
 msgid "Portal Access Management"
-msgstr ""
+msgstr "Upravljanje pristupom portalu"
 
-#. module: portal
-#: model:ir.model.fields,field_description:portal.field_portal_mixin__access_url
+# model:
+# model:ir.model.fields,field_description:portal.field_portal_mixin__access_url
+#, []
 msgid "Portal Access URL"
-msgstr ""
+msgstr "URL za pristup portalu"
 
-#. module: portal
-#: model:ir.model,name:portal.model_portal_entry
+# model: model:ir.model,name:portal.model_portal_entry
+#, []
 msgid "Portal Entry"
 msgstr ""
 
-#. module: portal
-#: model:ir.model,name:portal.model_portal_mixin
+# model: model:ir.model,name:portal.model_portal_mixin
+#, []
 msgid "Portal Mixin"
-msgstr ""
+msgstr "Portal mixin"
 
-#. module: portal
-#: model:ir.model,name:portal.model_portal_share
+# model: model:ir.model,name:portal.model_portal_share
+#, []
 msgid "Portal Sharing"
-msgstr ""
+msgstr "Portal dijeljenje"
 
-#. module: portal
-#: model:ir.model,name:portal.model_portal_wizard_user
+# model: model:ir.model,name:portal.model_portal_wizard_user
+#, []
 msgid "Portal User Config"
-msgstr ""
+msgstr "Konfiguracija korisnika portala"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.portal_record_sidebar
+# model: model_terms:ir.ui.view,arch_db:portal.portal_record_sidebar
+#, []
 msgid "Powered by"
 msgstr "Podržano od strane"
 
-#. module: portal
-#. odoo-javascript
-#: code:addons/portal/static/src/xml/portal_chatter.xml:0
+# model: code:addons/portal/static/src/xml/portal_chatter.xml
+#, []
 msgid "Previous"
-msgstr ""
+msgstr "Prethodni"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+# model: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+#, []
 msgid ""
-"Put my email and phone in a block list to make sure I'm never contacted again"
+"Put my email and phone in a block list to make sure I'm never contacted "
+"again"
 msgstr ""
+"Stavite moj email i telefon u spisak blokiranih da se nikad više ne "
+"kontaktiram"
 
-#. module: portal
-#: model:ir.model,name:portal.model_ir_qweb
+# model: model:ir.model,name:portal.model_ir_qweb
+#, []
 msgid "Qweb"
-msgstr ""
+msgstr "Qweb"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.wizard_view
+# model: model_terms:ir.ui.view,arch_db:portal.wizard_view
+#, []
 msgid "Re-Invite"
-msgstr ""
+msgstr "Ponovno pozovi"
 
-#. module: portal
-#: model:ir.model.fields,field_description:portal.field_portal_share__partner_ids
+# model:
+# model:ir.model.fields,field_description:portal.field_portal_share__partner_ids
+#, []
 msgid "Recipients"
 msgstr "Primaoci"
 
-#. module: portal
-#: model:ir.model.fields,field_description:portal.field_portal_share__resource_ref
+# model:
+# model:ir.model.fields,field_description:portal.field_portal_share__resource_ref
+#, []
 msgid "Related Document"
-msgstr ""
+msgstr "Povezani dokument"
 
-#. module: portal
-#: model:ir.model.fields,field_description:portal.field_portal_share__res_id
+# model:
+# model:ir.model.fields,field_description:portal.field_portal_share__res_id
+#, []
 msgid "Related Document ID"
 msgstr "Povezani ID dokumenta"
 
-#. module: portal
-#: model:ir.model.fields,field_description:portal.field_portal_share__res_model
+# model:
+# model:ir.model.fields,field_description:portal.field_portal_share__res_model
+#, []
 msgid "Related Document Model"
 msgstr "Povezani model dokumenta"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.address_card
+# model: model_terms:ir.ui.view,arch_db:portal.address_card
+#, []
 msgid "Remove this address"
-msgstr ""
+msgstr "Ukloni ovu adresu"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.wizard_view
+# model: model_terms:ir.ui.view,arch_db:portal.wizard_view
+#, []
 msgid "Revoke Access"
-msgstr ""
+msgstr "Oduzmi pristup"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+# model: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+#, []
 msgid "Revoke All Sessions"
-msgstr ""
+msgstr "Opozovi sve sesije"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.my_addresses
+# model: model_terms:ir.ui.view,arch_db:portal.my_addresses
+#, []
 msgid "Same as delivery address"
-msgstr ""
+msgstr "Isto kao i adresa za isporuku"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.address_footer
+# model: model_terms:ir.ui.view,arch_db:portal.address_footer
+#, []
 msgid "Save Address"
-msgstr ""
+msgstr "Spremi adresu"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+# model: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+#, []
 msgid "Scope"
-msgstr ""
+msgstr "Opseg"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.portal_searchbar
+# model: model_terms:ir.ui.view,arch_db:portal.portal_searchbar
+#, []
 msgid "Search"
 msgstr "Pretraži"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+# model: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+#, []
 msgid "Security"
-msgstr ""
+msgstr "Sigurnost"
 
-#. module: portal
-#. odoo-javascript
-#: code:addons/portal/static/src/interactions/portal_security.js:0
+# model: code:addons/portal/static/src/interactions/portal_security.js
+#, []
 msgid "Security Control"
-msgstr ""
+msgstr "Sigurnosna kontrola"
 
-#. module: portal
-#: model:ir.model.fields,field_description:portal.field_portal_mixin__access_token
+# model:
+# model:ir.model.fields,field_description:portal.field_portal_mixin__access_token
+#, []
 msgid "Security Token"
 msgstr "Sigurnosni token"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.wizard_view
+# model: model_terms:ir.ui.view,arch_db:portal.wizard_view
+#, []
 msgid ""
 "Select which contacts should belong to the portal in the list below.\n"
-"                        The email address of each selected contact must be "
-"valid and unique.\n"
-"                        If necessary, you can fix any contact's email "
-"address directly in the list."
+"                        The email address of each selected contact must be valid and unique.\n"
+"                        If necessary, you can fix any contact's email address directly in the list."
 msgstr ""
+"Na donjoj listi odaberite kontakte koji bi trebali pripadati portalu.\n"
+"                        E-mail adresa svakog odabranog kontakta mora biti ispravna i jedinstvena.\n"
+"                        Ako je potrebno možete popraviti e-mail adresu izravno na listi."
 
-#. module: portal
-#. odoo-javascript
-#: code:addons/portal/static/src/interactions/portal_composer.js:0
-#: model_terms:ir.ui.view,arch_db:portal.portal_share_wizard
+# model: code:addons/portal/static/src/interactions/portal_composer.js
+#, []
 msgid "Send"
 msgstr "Pošalji"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.portal_my_contact
+# model: model_terms:ir.ui.view,arch_db:portal.portal_my_contact
+#, []
 msgid "Send message"
-msgstr ""
+msgstr "Pošalji poruku"
 
-#. module: portal
-#: model:ir.actions.act_window,name:portal.portal_share_action
-#: model_terms:ir.ui.view,arch_db:portal.portal_share_wizard
+# model: model:ir.actions.act_window,name:portal.portal_share_action
+#, []
 msgid "Share Document"
-msgstr ""
+msgstr "Podijeli dokument"
 
-#. module: portal
-#: model:ir.model.fields,field_description:portal.field_ir_ui_view__customize_show
+# model:
+# model:ir.model.fields,field_description:portal.field_ir_ui_view__customize_show
+#, []
 msgid "Show As Optional Inherit"
-msgstr ""
+msgstr "Prikaži kao opcionalno nasljeđivanje"
 
-#. module: portal
-#: model:ir.model.fields,field_description:portal.field_portal_entry__show_in_portal
+# model:
+# model:ir.model.fields,field_description:portal.field_portal_entry__show_in_portal
+#, []
 msgid "Show in Portal"
 msgstr ""
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.user_sign_in
+# model: model_terms:ir.ui.view,arch_db:portal.user_sign_in
+#, []
 msgid "Sign in"
-msgstr ""
+msgstr "Prijava"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.frontend_layout
+# model: model_terms:ir.ui.view,arch_db:portal.frontend_layout
+#, []
 msgid "Skip to Content"
-msgstr ""
+msgstr "Preskoči na sadržaj"
 
-#. module: portal
-#. odoo-javascript
-#: code:addons/portal/static/src/interactions/portal_composer.js:0
+# model: code:addons/portal/static/src/interactions/portal_composer.js
+#, []
 msgid ""
 "Some fields are required. Please make sure to write a message or attach a "
 "document"
 msgstr ""
+"Neki polja su obavezna. Molimo provjerite da ste napisali poruku ili "
+"priložili dokument"
 
-#. module: portal
-#. odoo-python
-#: code:addons/portal/controllers/portal.py:0
+# model: code:addons/portal/controllers/portal.py
+#, []
 msgid "Some required fields are empty."
 msgstr "Neka od obaveznih polja su prazna."
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.address_form_fields
+# model: model_terms:ir.ui.view,arch_db:portal.address_form_fields
+#, []
 msgid "State / Province"
 msgstr "Rep./Fed."
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.address_form_fields
+# model: model_terms:ir.ui.view,arch_db:portal.address_form_fields
+#, []
 msgid "State / Province..."
 msgstr ""
 
-#. module: portal
-#: model:ir.model.fields,field_description:portal.field_portal_wizard_user__email_state
+# model:
+# model:ir.model.fields,field_description:portal.field_portal_wizard_user__email_state
+#, []
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.address_form_fields
+# model: model_terms:ir.ui.view,arch_db:portal.address_form_fields
+#, []
 msgid "Street and Number"
-msgstr ""
+msgstr "Ulica i broj"
 
-#. module: portal
-#: model:ir.model.fields,field_description:portal.field_portal_entry__url
+# model:
+# model:ir.model.fields,field_description:portal.field_portal_entry__url
+#, []
 msgid "Target URL"
 msgstr ""
 
-#. module: portal
-#. odoo-javascript
-#: code:addons/portal/static/src/signature_form/signature_form.xml:0
+# model: code:addons/portal/static/src/signature_form/signature_form.xml
+#, []
 msgid "Thank You!"
-msgstr ""
+msgstr "Hvala Vam!"
 
-#. module: portal
-#. odoo-python
-#: code:addons/portal/controllers/portal.py:0
+# model: code:addons/portal/controllers/portal.py
+#, []
 msgid "The %(field_name)s is managed on your company account."
-msgstr ""
+msgstr "Poljem %(field_name)s se upravlja na Vašem poslovnom računu."
 
-#. module: portal
-#. odoo-python
-#: code:addons/portal/controllers/portal.py:0
+# model: code:addons/portal/controllers/portal.py
+#, []
 msgid "The %(field_name)s is managed on your main account address."
-msgstr ""
+msgstr "Poljem %(field_name)s se upravlja na adresi Vašeg glavnog računa."
 
-#. module: portal
-#. odoo-python
-#: code:addons/portal/controllers/portal.py:0
+# model: code:addons/portal/controllers/portal.py
+#, []
 msgid "The attachment %s cannot be removed because it is linked to a message."
-msgstr ""
+msgstr "Prilog %s se ne može ukloniti jer je povezan sa porukom."
 
-#. module: portal
-#. odoo-python
-#: code:addons/portal/controllers/portal.py:0
+# model: code:addons/portal/controllers/portal.py
+#, []
 msgid ""
 "The attachment %s cannot be removed because it is not in a pending state."
-msgstr ""
+msgstr "Prilog %s se ne može ukloniti jer nije u stanju čekanja."
 
-#. module: portal
-#. odoo-python
-#: code:addons/portal/controllers/portal.py:0
+# model: code:addons/portal/controllers/portal.py
+#, []
 msgid ""
 "The attachment does not exist or you do not have the rights to access it."
-msgstr ""
+msgstr "Prilog ne postoji ili nemate prava da mu pristupite."
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.address_form_fields
+# model: model_terms:ir.ui.view,arch_db:portal.address_form_fields
+#, []
 msgid ""
 "The company name and VAT number can only be updated on your main account."
 msgstr ""
+"Naziv kompanije i PDV broj mogu se ažurirati samo na vašem glavnom računu."
 
-#. module: portal
-#. odoo-python
-#: code:addons/portal/wizard/portal_wizard.py:0
+# model: code:addons/portal/wizard/portal_wizard.py
+#, []
 msgid "The contact \"%s\" does not have a valid email."
-msgstr ""
+msgstr "Kontakt \"%s\" nema važeću e-mail adresu."
 
-#. module: portal
-#. odoo-python
-#: code:addons/portal/wizard/portal_wizard.py:0
+# model: code:addons/portal/wizard/portal_wizard.py
+#, []
 msgid "The contact \"%s\" has the same email as an existing user"
-msgstr ""
+msgstr "Kontakt \"%s\" ima istu email adresu kao postojeći korisnik"
 
-#. module: portal
-#. odoo-javascript
-#: code:addons/portal/static/src/xml/portal_security.xml:0
+# model: code:addons/portal/static/src/xml/portal_security.xml
+#, []
 msgid "The key cannot be retrieved later and provides"
-msgstr ""
+msgstr "Ključ se ne može kasnije dohvatiti i pruža"
 
-#. module: portal
-#. odoo-javascript
-#: code:addons/portal/static/src/xml/portal_security.xml:0
+# model: code:addons/portal/static/src/xml/portal_security.xml
+#, []
 msgid "The key will be deleted once this period has elapsed."
-msgstr ""
+msgstr "Ključ će biti izbrisan nakon isteka ovog perioda."
 
-#. module: portal
-#. odoo-python
-#: code:addons/portal/controllers/portal.py:0
+# model: code:addons/portal/controllers/portal.py
+#, []
 msgid "The new password and its confirmation must be identical."
-msgstr ""
+msgstr "Nova zaporka i potvrda zaporke moraju biti identične."
 
-#. module: portal
-#. odoo-python
-#: code:addons/portal/controllers/portal.py:0
+# model: code:addons/portal/controllers/portal.py
+#, []
 msgid ""
 "The old password you provided is incorrect, your password was not changed."
-msgstr ""
+msgstr "Trenutna lozinka nije tačno upisana. Lozinka nije promijenjena."
 
-#. module: portal
-#. odoo-python
-#: code:addons/portal/wizard/portal_wizard.py:0
+# model: code:addons/portal/wizard/portal_wizard.py
+#, []
 msgid "The partner \"%s\" already has the portal access."
-msgstr ""
+msgstr "Kontakt \"%s\" već ima pristup portalu."
 
-#. module: portal
-#. odoo-python
-#: code:addons/portal/wizard/portal_wizard.py:0
+# model: code:addons/portal/wizard/portal_wizard.py
+#, []
 msgid "The partner \"%s\" has no portal access or is internal."
-msgstr ""
+msgstr "Kontakt \"%s\" već ima pristup portalu ili je interni kontakt."
 
-#. module: portal
-#. odoo-python
-#: code:addons/portal/wizard/portal_wizard.py:0
+# model: code:addons/portal/wizard/portal_wizard.py
+#, []
 msgid ""
 "The template \"Portal: new user\" not found for sending email to the portal "
 "user."
 msgstr ""
+"Predložak \"Portal: novi korisnik\" nije pronađen za slanje emaila portal "
+"korisniku."
 
-#. module: portal
-#. odoo-python
-#: code:addons/portal/controllers/portal.py:0
+# model: code:addons/portal/controllers/portal.py
+#, []
 msgid "This document does not exist."
-msgstr ""
+msgstr "Ovaj dokument ne postoji."
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.portal_back_in_edit_mode
+# model: model_terms:ir.ui.view,arch_db:portal.portal_back_in_edit_mode
+#, []
 msgid "This is a preview of the customer portal."
-msgstr ""
+msgstr "Ovo je pregled sa korisničkog portala"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.wizard_view
+# model: model_terms:ir.ui.view,arch_db:portal.wizard_view
+#, []
 msgid ""
 "This partner is linked to an internal User and already has access to the "
 "Portal."
 msgstr ""
+"Ovaj partner je povezan s internim korisnikom i već ima pristup portalu."
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.wizard_view
-msgid "This text is included at the end of the email sent to new portal users."
+# model: model_terms:ir.ui.view,arch_db:portal.wizard_view
+#, []
+msgid ""
+"This text is included at the end of the email sent to new portal users."
 msgstr ""
+"Ovaj tekst se nalazi na kraju e-pošte poslane novim korisnicima portala."
 
-#. module: portal
-#: model:ir.model.fields,help:portal.field_portal_wizard__welcome_message
+# model:
+# model:ir.model.fields,help:portal.field_portal_wizard__welcome_message
+#, []
 msgid "This text is included in the email sent to new users of the portal."
 msgstr ""
+"Ovaj je tekst uključen u e-mail koji se šalje novim korisnicima portala."
 
-#. module: portal
-#: model:ir.model.fields,field_description:portal.field_portal_entry__name
+# model:
+# model:ir.model.fields,field_description:portal.field_portal_entry__name
+#, []
 msgid "Title of Card"
 msgstr ""
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.portal_searchbar
+# model: model_terms:ir.ui.view,arch_db:portal.portal_searchbar
+#, []
 msgid "Toggle filters"
-msgstr ""
+msgstr "Prekidač filtera"
 
-#. module: portal
-#: model:ir.model.fields,field_description:portal.field_portal_wizard_user__user_id
+# model:
+# model:ir.model.fields,field_description:portal.field_portal_wizard_user__user_id
+#, []
 msgid "User"
-msgstr ""
+msgstr "Korisnik"
 
-#. module: portal
-#. odoo-python
-#: code:addons/portal/controllers/portal.py:0
+# model: code:addons/portal/controllers/portal.py
+#, []
 msgid "User Dashboard"
-msgstr ""
+msgstr "Nadzorna ploča korisnika"
 
-#. module: portal
-#: model:ir.model.fields,field_description:portal.field_portal_wizard__user_ids
+# model:
+# model:ir.model.fields,field_description:portal.field_portal_wizard__user_ids
+#, []
 msgid "Users"
 msgstr "Korisnici"
 
-#. module: portal
-#. odoo-python
-#: code:addons/portal/controllers/portal.py:0
+# model: code:addons/portal/controllers/portal.py
+#, []
 msgid "VAT"
-msgstr ""
+msgstr "PDV"
 
-#. module: portal
-#: model:ir.model.fields.selection,name:portal.selection__portal_wizard_user__email_state__ok
+# model:
+# model:ir.model.fields.selection,name:portal.selection__portal_wizard_user__email_state__ok
+#, []
 msgid "Valid"
-msgstr ""
+msgstr "Važeće"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.wizard_view
+# model: model_terms:ir.ui.view,arch_db:portal.wizard_view
+#, []
 msgid "Valid Email Address"
-msgstr ""
+msgstr "Valjana email adresa"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+# model: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+#, []
 msgid "Verify New Password:"
-msgstr ""
+msgstr "Ovaj tekst je uključen u email poslat novim portal korisnicima."
 
-#. module: portal
-#: model:ir.model,name:portal.model_ir_ui_view
+# model: model:ir.model,name:portal.model_ir_ui_view
+#, []
 msgid "View"
-msgstr ""
+msgstr "Pogledaj"
 
-#. module: portal
-#: model:ir.model.fields,field_description:portal.field_account_analytic_account__website_message_ids
-#: model:ir.model.fields,field_description:portal.field_calendar_event__website_message_ids
-#: model:ir.model.fields,field_description:portal.field_crm_team__website_message_ids
-#: model:ir.model.fields,field_description:portal.field_crm_team_member__website_message_ids
-#: model:ir.model.fields,field_description:portal.field_discuss_channel__website_message_ids
-#: model:ir.model.fields,field_description:portal.field_fleet_vehicle__website_message_ids
-#: model:ir.model.fields,field_description:portal.field_fleet_vehicle_log_contract__website_message_ids
-#: model:ir.model.fields,field_description:portal.field_fleet_vehicle_log_services__website_message_ids
-#: model:ir.model.fields,field_description:portal.field_fleet_vehicle_model__website_message_ids
-#: model:ir.model.fields,field_description:portal.field_gamification_badge__website_message_ids
-#: model:ir.model.fields,field_description:portal.field_gamification_badge_user__website_message_ids
-#: model:ir.model.fields,field_description:portal.field_gamification_challenge__website_message_ids
-#: model:ir.model.fields,field_description:portal.field_iap_account__website_message_ids
-#: model:ir.model.fields,field_description:portal.field_ir_actions_server__website_message_ids
-#: model:ir.model.fields,field_description:portal.field_ir_cron__website_message_ids
-#: model:ir.model.fields,field_description:portal.field_lunch_supplier__website_message_ids
-#: model:ir.model.fields,field_description:portal.field_mail_blacklist__website_message_ids
-#: model:ir.model.fields,field_description:portal.field_mail_thread__website_message_ids
-#: model:ir.model.fields,field_description:portal.field_mail_thread_blacklist__website_message_ids
-#: model:ir.model.fields,field_description:portal.field_mail_thread_main_attachment__website_message_ids
-#: model:ir.model.fields,field_description:portal.field_mail_thread_phone__website_message_ids
-#: model:ir.model.fields,field_description:portal.field_mail_thread_subject_suggested__website_message_ids
-#: model:ir.model.fields,field_description:portal.field_mail_tracking_duration_mixin__website_message_ids
-#: model:ir.model.fields,field_description:portal.field_maintenance_equipment__website_message_ids
-#: model:ir.model.fields,field_description:portal.field_maintenance_request__website_message_ids
-#: model:ir.model.fields,field_description:portal.field_maintenance_team__website_message_ids
-#: model:ir.model.fields,field_description:portal.field_phone_blacklist__website_message_ids
-#: model:ir.model.fields,field_description:portal.field_product_category__website_message_ids
-#: model:ir.model.fields,field_description:portal.field_product_pricelist__website_message_ids
-#: model:ir.model.fields,field_description:portal.field_product_product__website_message_ids
-#: model:ir.model.fields,field_description:portal.field_product_template__website_message_ids
-#: model:ir.model.fields,field_description:portal.field_rating_mixin__website_message_ids
-#: model:ir.model.fields,field_description:portal.field_res_partner__website_message_ids
-#: model:ir.model.fields,field_description:portal.field_res_users__website_message_ids
+# model:
+# model:ir.model.fields,field_description:portal.field_account_analytic_account__website_message_ids
+#, []
 msgid "Website Messages"
-msgstr "Poruke sa website-a"
+msgstr "Poruke web stranice"
 
-#. module: portal
-#: model:ir.model.fields,help:portal.field_account_analytic_account__website_message_ids
-#: model:ir.model.fields,help:portal.field_calendar_event__website_message_ids
-#: model:ir.model.fields,help:portal.field_crm_team__website_message_ids
-#: model:ir.model.fields,help:portal.field_crm_team_member__website_message_ids
-#: model:ir.model.fields,help:portal.field_discuss_channel__website_message_ids
-#: model:ir.model.fields,help:portal.field_fleet_vehicle__website_message_ids
-#: model:ir.model.fields,help:portal.field_fleet_vehicle_log_contract__website_message_ids
-#: model:ir.model.fields,help:portal.field_fleet_vehicle_log_services__website_message_ids
-#: model:ir.model.fields,help:portal.field_fleet_vehicle_model__website_message_ids
-#: model:ir.model.fields,help:portal.field_gamification_badge__website_message_ids
-#: model:ir.model.fields,help:portal.field_gamification_badge_user__website_message_ids
-#: model:ir.model.fields,help:portal.field_gamification_challenge__website_message_ids
-#: model:ir.model.fields,help:portal.field_iap_account__website_message_ids
-#: model:ir.model.fields,help:portal.field_ir_actions_server__website_message_ids
-#: model:ir.model.fields,help:portal.field_ir_cron__website_message_ids
-#: model:ir.model.fields,help:portal.field_lunch_supplier__website_message_ids
-#: model:ir.model.fields,help:portal.field_mail_blacklist__website_message_ids
-#: model:ir.model.fields,help:portal.field_mail_thread__website_message_ids
-#: model:ir.model.fields,help:portal.field_mail_thread_blacklist__website_message_ids
-#: model:ir.model.fields,help:portal.field_mail_thread_main_attachment__website_message_ids
-#: model:ir.model.fields,help:portal.field_mail_thread_phone__website_message_ids
-#: model:ir.model.fields,help:portal.field_mail_thread_subject_suggested__website_message_ids
-#: model:ir.model.fields,help:portal.field_mail_tracking_duration_mixin__website_message_ids
-#: model:ir.model.fields,help:portal.field_maintenance_equipment__website_message_ids
-#: model:ir.model.fields,help:portal.field_maintenance_request__website_message_ids
-#: model:ir.model.fields,help:portal.field_maintenance_team__website_message_ids
-#: model:ir.model.fields,help:portal.field_phone_blacklist__website_message_ids
-#: model:ir.model.fields,help:portal.field_product_category__website_message_ids
-#: model:ir.model.fields,help:portal.field_product_pricelist__website_message_ids
-#: model:ir.model.fields,help:portal.field_product_product__website_message_ids
-#: model:ir.model.fields,help:portal.field_product_template__website_message_ids
-#: model:ir.model.fields,help:portal.field_rating_mixin__website_message_ids
-#: model:ir.model.fields,help:portal.field_res_partner__website_message_ids
-#: model:ir.model.fields,help:portal.field_res_users__website_message_ids
+# model:
+# model:ir.model.fields,help:portal.field_account_analytic_account__website_message_ids
+#, []
 msgid "Website communication history"
-msgstr ""
+msgstr "Historija komunikacije web stranice"
 
-#. module: portal
-#. odoo-javascript
-#: code:addons/portal/static/src/xml/portal_security.xml:0
+# model: code:addons/portal/static/src/xml/portal_security.xml
+#, []
 msgid "What's this key for?"
-msgstr ""
+msgstr "Čemu služi ovaj ključ?"
 
-#. module: portal
-#: model:ir.model.fields,field_description:portal.field_portal_wizard_user__wizard_id
+# model:
+# model:ir.model.fields,field_description:portal.field_portal_wizard_user__wizard_id
+#, []
 msgid "Wizard"
 msgstr "Čarobnjak"
 
-#. module: portal
-#. odoo-javascript
-#: code:addons/portal/static/src/xml/portal_chatter.xml:0
+# model: code:addons/portal/static/src/xml/portal_chatter.xml
+#, []
 msgid "Write a message..."
-msgstr ""
+msgstr "Napišite poruku..."
 
-#. module: portal
-#. odoo-javascript
-#: code:addons/portal/static/src/chatter/portal_project/composer_patch.js:0
+# model:
+# code:addons/portal/static/src/chatter/portal_project/composer_patch.js
+#, []
 msgid "Write a message…"
-msgstr ""
+msgstr "Napišite poruku…"
 
-#. module: portal
-#. odoo-javascript
-#: code:addons/portal/static/src/xml/portal_security.xml:0
+# model: code:addons/portal/static/src/xml/portal_security.xml
+#, []
 msgid "Write down your key"
-msgstr ""
+msgstr "Zapišite svoj ključ"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+# model: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+#, []
 msgid "Wrong password."
-msgstr ""
+msgstr "Pogrešna lozinka."
 
-#. module: portal
-#. odoo-python
-#: code:addons/portal/controllers/portal.py:0
+# model: code:addons/portal/controllers/portal.py
+#, []
 msgid "You cannot archive your main address"
-msgstr ""
+msgstr "Ne možete arhivirati svoju glavnu adresu"
 
-#. module: portal
-#. odoo-python
-#: code:addons/portal/controllers/portal.py:0
+# model: code:addons/portal/controllers/portal.py
+#, []
 msgid "You cannot edit another user's profile."
 msgstr ""
 
-#. module: portal
-#. odoo-python
-#: code:addons/portal/controllers/portal.py:0
+# model: code:addons/portal/controllers/portal.py
+#, []
 msgid "You cannot leave any password empty."
-msgstr ""
+msgstr "Popunite sva polja."
 
-#. module: portal
-#. odoo-javascript
-#: code:addons/portal/static/src/xml/portal_chatter.xml:0
+# model: code:addons/portal/static/src/xml/portal_chatter.xml
+#, []
 msgid "You must be"
-msgstr ""
+msgstr "Morate biti"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+# model: model_terms:ir.ui.view,arch_db:portal.portal_my_security
+#, []
 msgid "You should enter \""
-msgstr ""
+msgstr "Trebali biste unijeti \""
 
-#. module: portal
-#. odoo-python
-#: code:addons/portal/wizard/portal_wizard.py:0
+# model: code:addons/portal/wizard/portal_wizard.py
+#, []
 msgid "You should first grant the portal access to the partner \"%s\"."
-msgstr ""
+msgstr "Prvo trebate dodijeliti pristup portalu kontaktu \"%s\"."
 
-#. module: portal
-#. odoo-python
-#: code:addons/portal/wizard/portal_wizard.py:0
+# model: code:addons/portal/wizard/portal_wizard.py
+#, []
 msgid "Your Account"
 msgstr ""
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.portal_contact
+# model: model_terms:ir.ui.view,arch_db:portal.portal_contact
+#, []
 msgid "Your contact"
 msgstr ""
+"Morate imati email adresu u vašim korisničkim podešavanjima da biste slali "
+"emailove."
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.address_form_fields
+# model: model_terms:ir.ui.view,arch_db:portal.address_form_fields
+#, []
 msgid "Your name"
-msgstr ""
+msgstr "Vaše ime"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.address_form_fields
+# model: model_terms:ir.ui.view,arch_db:portal.address_form_fields
+#, []
 msgid "Zip Code"
-msgstr ""
+msgstr "Poštanski broj"
 
-#. module: portal
-#. odoo-javascript
-#: code:addons/portal/static/src/xml/portal_security.xml:0
+# model: code:addons/portal/static/src/xml/portal_security.xml
+#, []
 msgid "full access"
-msgstr ""
+msgstr "puni pristup"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.portal_share_template
+# model: model_terms:ir.ui.view,arch_db:portal.portal_share_template
+#, []
 msgid "has invited you to access the following"
-msgstr ""
+msgstr "vas je pozvao/la da pristupite sljedećem"
 
-#. module: portal
-#. odoo-javascript
-#: code:addons/portal/static/src/xml/portal_security.xml:0
+# model: code:addons/portal/static/src/xml/portal_security.xml
+#, []
 msgid ""
 "it will be the only way to\n"
 "                identify the key once created"
 msgstr ""
+"to će biti jedini način da se identificira\n"
+"                ključ nakon što bude kreiran"
 
-#. module: portal
-#. odoo-javascript
-#: code:addons/portal/static/src/xml/portal_chatter.xml:0
+# model: code:addons/portal/static/src/xml/portal_chatter.xml
+#, []
 msgid "logged in"
-msgstr ""
+msgstr "prijavljeni"
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.portal_record_sidebar
+# model: model_terms:ir.ui.view,arch_db:portal.portal_record_sidebar
+#, []
 msgid "odoo"
-msgstr ""
+msgstr "odoo"
 
-#. module: portal
-#: model:ir.model.fields,field_description:portal.field_portal_entry__sequence
+# model:
+# model:ir.model.fields,field_description:portal.field_portal_entry__sequence
+#, []
 msgid "sequence"
 msgstr ""
 
-#. module: portal
-#. odoo-javascript
-#: code:addons/portal/static/src/xml/portal_chatter.xml:0
+# model: code:addons/portal/static/src/xml/portal_chatter.xml
+#, []
 msgid "to post a comment."
-msgstr ""
+msgstr "objaviti komentar"
 
-#. module: portal
-#. odoo-javascript
-#: code:addons/portal/static/src/xml/portal_security.xml:0
+# model: code:addons/portal/static/src/xml/portal_security.xml
+#, []
 msgid "to your user account, it is very important to store it securely."
-msgstr ""
+msgstr "u vaš korisnički račun, veoma je važno da ga sigurno čuvate."
 
-#. module: portal
-#: model_terms:ir.ui.view,arch_db:portal.address_form_fields
+# model: model_terms:ir.ui.view,arch_db:portal.address_form_fields
+#, []
 msgid "your account details"
-msgstr ""
+msgstr "podatke o vašem računu"

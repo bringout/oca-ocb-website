@@ -1,420 +1,440 @@
-# Translation of Odoo Server.
-# This file contains the translation of the following modules:
-# * website_mass_mailing
 #
-# Translators:
-# Martin Trigaux, 2018
-# Boško Stojaković <bluesoft83@gmail.com>, 2018
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~11.5\n"
+"Project-Id-Version: Odoo Server master (website_mass_mailing)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-12 18:37+0000\n"
-"PO-Revision-Date: 2018-09-21 13:18+0000\n"
-"Last-Translator: Boško Stojaković <bluesoft83@gmail.com>, 2018\n"
-"Language-Team: Bosnian (https://www.transifex.com/odoo/teams/41243/bs/)\n"
+"Language-Team: Bosnian\n"
 "Language: bs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#. module: website_mass_mailing
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_benefits_popup
+# model:
+# model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_benefits_popup
+#, []
 msgid ""
 "<i class=\"fa fa-check text-o-color-1\" role=\"img\"/>  Curated Industry "
 "Insights"
 msgstr ""
+"<i class=\"fa fa-check text-o-color-1\" role=\"img\"/>  Kurirani "
+"industrijski uvidi"
 
-#. module: website_mass_mailing
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_benefits_popup
+# model:
+# model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_benefits_popup
+#, []
 msgid ""
 "<i class=\"fa fa-check text-o-color-1\" role=\"img\"/>  Expert Tips &amp; "
 "How-Tos"
 msgstr ""
+"<i class=\"fa fa-check text-o-color-1\" role=\"img\"/>  Stručni savjeti i "
+"upute"
 
-#. module: website_mass_mailing
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_benefits_popup
+# model:
+# model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_benefits_popup
+#, []
+msgid "<i class=\"fa fa-check text-o-color-1\" role=\"img\"/>  Guides &amp; Resources"
+msgstr "<i class=\"fa fa-check text-o-color-1\" role=\"img\"/>  Vodiči i resursi"
+
+# model: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_grid
+#, []
+msgid "<i class=\"fa fa-check-circle-o\" role=\"img\"/> Thanks for registering!"
+msgstr "<i class=\"fa fa-check-circle-o\" role=\"img\"/> Hvala na registraciji!"
+
+# model:
+# model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_aside
+#, []
 msgid ""
-"<i class=\"fa fa-check text-o-color-1\" role=\"img\"/>  Guides &amp; "
-"Resources"
+"<span class=\"s_website_form_field_description small form-text text-muted\">\n"
+"                                        We send one weekly newsletter per list and always try to keep it interesting. You can unsubscribe at any time.\n"
+"                                    </span>"
 msgstr ""
 
-#. module: website_mass_mailing
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_grid
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_subscribe_form
+# model:
+# model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_block_form_template
+#, []
 msgid ""
-"<i class=\"fa fa-check-circle-o\" role=\"img\"/> Thanks for registering!"
+"<span class=\"s_website_form_field_description small form-text text-muted\">\n"
+"                                    We send one weekly newsletter per list and always try to keep it interesting. You can unsubscribe at any time.\n"
+"                                </span>"
 msgstr ""
 
-#. module: website_mass_mailing
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_aside
+# model:
+# model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_aside
+#, []
 msgid ""
 "<span class=\"s_website_form_label_content\">Email</span>\n"
-"                                        <span class=\"s_website_form_mark\"> "
-"*</span>"
+"                                        <span class=\"s_website_form_mark\"> *</span>"
 msgstr ""
 
-#. module: website_mass_mailing
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_block_form_template
+# model:
+# model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_block_form_template
+#, []
 msgid ""
 "<span class=\"s_website_form_label_content\">Email</span>\n"
 "                                <span class=\"s_website_form_mark\"> *</span>"
 msgstr ""
+"<span class=\"s_website_form_label_content\">Email</span>\n"
+"                                <span class=\"s_website_form_mark\"> *</span>"
 
-#. module: website_mass_mailing
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_block_form_template
+# model:
+# model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_block_form_template
+#, []
 msgid ""
-"<span class=\"s_website_form_label_content\">I agree to receive updates</"
-"span>\n"
+"<span class=\"s_website_form_label_content\">I agree to receive updates</span>\n"
 "                                <span class=\"s_website_form_mark\"> *</span>"
 msgstr ""
+"<span class=\"s_website_form_label_content\">Slažem se da primam ažuriranja</span>\n"
+"                                <span class=\"s_website_form_mark\"> *</span>"
 
-#. module: website_mass_mailing
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_aside
+# model:
+# model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_aside
+#, []
 msgid ""
 "<span class=\"s_website_form_label_content\">Name</span>\n"
-"                                        <span class=\"s_website_form_mark\"> "
-"*</span>"
+"                                        <span class=\"s_website_form_mark\"> *</span>"
 msgstr ""
 
-#. module: website_mass_mailing
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_block_form_template
+# model:
+# model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_block_form_template
+#, []
 msgid ""
 "<span class=\"s_website_form_label_content\">Name</span>\n"
 "                                <span class=\"s_website_form_mark\"> *</span>"
 msgstr ""
+"<span class=\"s_website_form_label_content\">Naziv</span>\n"
+"                                <span class=\"s_website_form_mark\"> *</span>"
 
-#. module: website_mass_mailing
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_aside
+# model:
+# model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_aside
+#, []
 msgid ""
 "<span class=\"s_website_form_label_content\">Our mailing lists</span>\n"
-"                                        <span class=\"s_website_form_mark\"> "
-"*</span>"
+"                                        <span class=\"s_website_form_mark\"> *</span>"
 msgstr ""
 
-#. module: website_mass_mailing
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_block_form_template
+# model:
+# model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_block_form_template
+#, []
 msgid ""
 "<span class=\"s_website_form_label_content\">Subscribe to</span>\n"
 "                                <span class=\"s_website_form_mark\"> *</span>"
 msgstr ""
+"<span class=\"s_website_form_label_content\">Prijavi se na</span>\n"
+"                                <span class=\"s_website_form_mark\"> *</span>"
 
-#. module: website_mass_mailing
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_subscribe_popup
+# model:
+# model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_subscribe_popup
+#, []
 msgid "Always <b>First</b>."
-msgstr ""
+msgstr "Uvijek <b>prvi</b>."
 
-#. module: website_mass_mailing
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_grid
+# model: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_grid
+#, []
 msgid "Be the first to find out all the latest new, products and trends."
 msgstr ""
+"Budite prvi koji će saznati sve najnovije vijesti, proizvode i trendove."
 
-#. module: website_mass_mailing
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_subscribe_popup
+# model:
+# model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_subscribe_popup
+#, []
 msgid ""
 "Be the first to find out all the latest news,<br/> products, and trends."
 msgstr ""
+"Budite prvi koji će saznati sve najnovije vijesti,<br/> proizvode i "
+"trendove."
 
-#. module: website_mass_mailing
-#. odoo-javascript
-#: code:addons/website_mass_mailing/static/src/xml/website_mass_mailing.xml:0
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_benefits_popup
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_subscribe_popup
+# model:
+# code:addons/website_mass_mailing/static/src/xml/website_mass_mailing.xml
+#, []
 msgid "Close"
-msgstr ""
+msgstr "Amortizovano"
 
-#. module: website_mass_mailing
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_mail_block_footer_social
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_mail_block_footer_social_left
+# model:
+# model_terms:ir.ui.view,arch_db:website_mass_mailing.s_mail_block_footer_social
+#, []
 msgid "Contact"
 msgstr "Kontakt"
 
-#. module: website_mass_mailing
-#. odoo-javascript
-#: code:addons/website_mass_mailing/static/src/website_builder/mailing_list_subscribe_option.xml:0
-#: code:addons/website_mass_mailing/static/src/website_builder/toggle_thanks_message_traslation_option.xml:0
+# model:
+# code:addons/website_mass_mailing/static/src/website_builder/mailing_list_subscribe_option.xml
+#, []
 msgid "Display Thanks Message"
-msgstr ""
+msgstr "Prikaži poruku zahvale"
 
-#. module: website_mass_mailing
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_box
+# model: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_box
+#, []
 msgid "Don't miss our upcoming updates"
-msgstr ""
+msgstr "Ne propustite naša nadolazeća ažuriranja"
 
-#. module: website_mass_mailing
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_subscribe_form
+# model:
+# model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_subscribe_form
+#, []
 msgid "Email Address"
-msgstr ""
+msgstr "Email adresa"
 
-#. module: website_mass_mailing
-#. odoo-javascript
-#: code:addons/website_mass_mailing/static/src/website_builder/newsletter_layout_option.xml:0
+# model:
+# code:addons/website_mass_mailing/static/src/website_builder/newsletter_layout_option.xml
+#, []
 msgid "Email Subscription"
-msgstr ""
+msgstr "email Subscription"
 
-#. module: website_mass_mailing
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_block_form_template
+# model:
+# model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_block_form_template
+#, []
 msgid "First Name"
-msgstr ""
+msgstr "Ime"
 
-#. module: website_mass_mailing
-#. odoo-javascript
-#: code:addons/website_mass_mailing/static/src/website_builder/newsletter_layout_option.xml:0
+# model:
+# code:addons/website_mass_mailing/static/src/website_builder/newsletter_layout_option.xml
+#, []
 msgid "Form Subscription"
-msgstr ""
+msgstr "Pretplata putem forme"
 
-#. module: website_mass_mailing
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_block_default_template
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_box
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_centered
+# model:
+# model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_block_default_template
+#, []
 msgid ""
 "Get all the latest news, blog posts and product updates from our company, "
 "delivered directly to your inbox."
 msgstr ""
+"Primajte sve najnovije vijesti, blog postove i ažuriranja proizvoda od naše "
+"kompanije, direktno u vaš inbox."
 
-#. module: website_mass_mailing
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_aside
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_block_form_template
+# model:
+# model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_aside
+#, []
 msgid "John Smith"
-msgstr ""
+msgstr "John Smith"
 
-#. module: website_mass_mailing
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_benefits_popup
+# model:
+# model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_benefits_popup
+#, []
 msgid ""
 "Join our mailing list to receive carefully curated resources, tips, and "
 "updates straight to your inbox."
 msgstr ""
+"Pridružite se našoj mailing listi da biste primali pažljivo odabrane "
+"resurse, savjete i ažuriranja direktno u svoj inbox."
 
-#. module: website_mass_mailing
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_block_form_template
+# model:
+# model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_block_form_template
+#, []
 msgid "Last Name"
-msgstr ""
+msgstr "Prezime"
 
-#. module: website_mass_mailing
-#. odoo-python
-#: code:addons/website_mass_mailing/controllers/website_form.py:0
+# model: code:addons/website_mass_mailing/controllers/website_form.py
+#, []
 msgid "Mailing List(s) not found!"
-msgstr ""
+msgstr "Mailing lista(s) not found!"
 
-#. module: website_mass_mailing
-#. odoo-javascript
-#: code:addons/website_mass_mailing/static/src/website_builder/mailing_list_subscribe_option.xml:0
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_aside
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.snippets
+# model:
+# code:addons/website_mass_mailing/static/src/website_builder/mailing_list_subscribe_option.xml
+#, []
 msgid "Newsletter"
 msgstr "Newsletter"
 
-#. module: website_mass_mailing
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.snippets
+# model: model_terms:ir.ui.view,arch_db:website_mass_mailing.snippets
+#, []
 msgid "Newsletter Aside"
 msgstr ""
 
-#. module: website_mass_mailing
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.snippets
+# model: model_terms:ir.ui.view,arch_db:website_mass_mailing.snippets
+#, []
 msgid "Newsletter Benefits"
-msgstr ""
+msgstr "Prednosti newslettera"
 
-#. module: website_mass_mailing
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.snippets
+# model: model_terms:ir.ui.view,arch_db:website_mass_mailing.snippets
+#, []
 msgid "Newsletter Block"
-msgstr ""
+msgstr "Blok newslettera"
 
-#. module: website_mass_mailing
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.snippets
+# model: model_terms:ir.ui.view,arch_db:website_mass_mailing.snippets
+#, []
 msgid "Newsletter Box"
-msgstr ""
+msgstr "Okvir newslettera"
 
-#. module: website_mass_mailing
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.snippets
+# model: model_terms:ir.ui.view,arch_db:website_mass_mailing.snippets
+#, []
 msgid "Newsletter Centered"
-msgstr ""
+msgstr "Newsletter centriran"
 
-#. module: website_mass_mailing
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.snippets
+# model: model_terms:ir.ui.view,arch_db:website_mass_mailing.snippets
+#, []
 msgid "Newsletter Grid"
-msgstr ""
+msgstr "Mreža newslettera"
 
-#. module: website_mass_mailing
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.snippets
+# model: model_terms:ir.ui.view,arch_db:website_mass_mailing.snippets
+#, []
 msgid "Newsletter Popup"
-msgstr ""
+msgstr "Newsletter popup"
 
-#. module: website_mass_mailing
-#. odoo-javascript
-#: code:addons/website_mass_mailing/static/src/website_builder/mailing_list_subscribe_translation_option_plugin.js:0
+# model:
+# code:addons/website_mass_mailing/static/src/website_builder/toggle_thanks_message_translation_option.xml
+#, []
 msgid "Newsletter block"
 msgstr ""
 
-#. module: website_mass_mailing
-#. odoo-javascript
-#: code:addons/website_mass_mailing/static/src/website_builder/mailing_list_subscribe_translation_option_plugin.js:0
+# model:
+# code:addons/website_mass_mailing/static/src/website_builder/toggle_thanks_message_translation_option.xml
+#, []
 msgid "Newsletter popup"
 msgstr ""
 
-#. module: website_mass_mailing
-#. odoo-javascript
-#: code:addons/website_mass_mailing/static/src/website_builder/mailing_list_subscribe_option_plugin.js:0
+# model:
+# code:addons/website_mass_mailing/static/src/website_builder/mailing_list_subscribe_option_plugin.js
+#, []
 msgid ""
 "No mailing list found, do you want to create a new one? This will save all "
 "your changes, are you sure you want to proceed?"
 msgstr ""
+"Nijedna mailing lista nije pronađena, želite li kreirati novu? Ovo će "
+"sačuvati sve vaše promjene, jeste li sigurni da želite nastaviti?"
 
-#. module: website_mass_mailing
-#. odoo-javascript
-#: code:addons/website_mass_mailing/static/src/website_builder/mailing_list_subscribe_option.xml:0
+# model:
+# code:addons/website_mass_mailing/static/src/website_builder/mailing_list_subscribe_option.xml
+#, []
 msgid "None"
-msgstr ""
+msgstr "Nijedan"
 
-#. module: website_mass_mailing
-#. odoo-javascript
-#: code:addons/website_mass_mailing/static/src/interactions/subscribe_list_missing_error.xml:0
+# model:
+# code:addons/website_mass_mailing/static/src/interactions/subscribe_list_missing_error.xml
+#, []
 msgid "Pick one or remove this block."
 msgstr ""
 
-#. module: website_mass_mailing
-#. odoo-javascript
-#: code:addons/website_mass_mailing/static/src/website_builder/mailing_list_subscribe_option.xml:0
+# model:
+# code:addons/website_mass_mailing/static/src/website_builder/mailing_list_subscribe_option.xml
+#, []
 msgid "Placeholder"
-msgstr ""
+msgstr "Rezervisano mjesto"
 
-#. module: website_mass_mailing
-#. odoo-javascript
-#: code:addons/website_mass_mailing/static/src/website_builder/recaptcha_subscribe_option.xml:0
+# model:
+# code:addons/website_mass_mailing/static/src/website_builder/recaptcha_subscribe_option.xml
+#, []
 msgid "Show reCaptcha Policy"
-msgstr ""
+msgstr "Prikaži reCaptcha politiku"
 
-#. module: website_mass_mailing
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_benefits_popup
+# model:
+# model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_benefits_popup
+#, []
 msgid "Stay Ahead with weekly insights &amp; updates"
-msgstr ""
+msgstr "Ostanite ispred uz sedmične uvide i ažuriranja"
 
-#. module: website_mass_mailing
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_aside
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_block_form_template
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_subscribe_form
+# model:
+# model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_aside
+#, []
 msgid "Subscribe"
-msgstr ""
+msgstr "Pretplatite se"
 
-#. module: website_mass_mailing
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_aside
+# model:
+# model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_aside
+#, []
 msgid "Subscribe for updates, offers <br/>and insights!"
 msgstr ""
 
-#. module: website_mass_mailing
-#. odoo-javascript
-#: code:addons/website_mass_mailing/static/src/js/mass_mailing_form_editor.js:0
+# model:
+# code:addons/website_mass_mailing/static/src/js/mass_mailing_form_editor.js
+#, []
 msgid "Subscribe to"
-msgstr ""
+msgstr "pretplati se to"
 
-#. module: website_mass_mailing
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_block_default_template
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_centered
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_grid
+# model:
+# model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_block_default_template
+#, []
 msgid "Subscribe to our newsletter"
-msgstr ""
+msgstr "Prijavi se na naš newsletter"
 
-#. module: website_mass_mailing
-#. odoo-javascript
-#: code:addons/website_mass_mailing/static/src/website_builder/newsletter_layout_option.xml:0
+# model:
+# code:addons/website_mass_mailing/static/src/website_builder/newsletter_layout_option.xml
+#, []
 msgid "Template"
-msgstr ""
+msgstr "Predložak"
 
-#. module: website_mass_mailing
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_aside
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_block_form_template
+# model:
+# model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_aside
+#, []
 msgid "Thank you for subscribing!"
-msgstr ""
+msgstr "Hvala na prijavi!"
 
-#. module: website_mass_mailing
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_benefits_popup
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_box
+# model:
+# model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_benefits_popup
+#, []
 msgid "Thanks for registering!"
-msgstr ""
+msgstr "Hvala na registraciji!"
 
-#. module: website_mass_mailing
-#. odoo-python
-#: code:addons/website_mass_mailing/controllers/main.py:0
+# model: code:addons/website_mass_mailing/controllers/main.py
+#, []
 msgid "Thanks for subscribing!"
-msgstr ""
+msgstr "Sadržaj popup-a"
 
-#. module: website_mass_mailing
-#. odoo-javascript
-#: code:addons/website_mass_mailing/static/src/interactions/subscribe_list_missing_error.xml:0
+# model:
+# code:addons/website_mass_mailing/static/src/interactions/subscribe_list_missing_error.xml
+#, []
 msgid "This block is not linked to an active Newsletter."
 msgstr ""
 
-#. module: website_mass_mailing
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_aside
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_block_form_template
-msgid ""
-"We send one weekly newsletter per list and always try to keep it "
-"interesting. You can unsubscribe at any time."
-msgstr ""
-
-#. module: website_mass_mailing
-#. odoo-python
-#: code:addons/website_mass_mailing/controllers/website_form.py:0
+# model: code:addons/website_mass_mailing/controllers/website_form.py
+#, []
 msgid "You cannot subscribe to the following list anymore : %s"
-msgstr ""
+msgstr "You cannot pretplati se to the following lista anymore : %s"
 
-#. module: website_mass_mailing
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_aside
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_block_form_template
+# model:
+# model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_aside
+#, []
 msgid "You will now be informed about the latest news."
-msgstr ""
+msgstr "Sada ćete biti informisani o najnovijim vijestima."
 
-#. module: website_mass_mailing
-#. odoo-javascript
-#: code:addons/website_mass_mailing/static/src/js/mass_mailing_form_editor.js:0
+# model:
+# code:addons/website_mass_mailing/static/src/js/mass_mailing_form_editor.js
+#, []
 msgid "Your Email"
-msgstr ""
+msgstr "Vaš e-mail"
 
-#. module: website_mass_mailing
-#. odoo-javascript
-#: code:addons/website_mass_mailing/static/src/js/mass_mailing_form_editor.js:0
+# model:
+# code:addons/website_mass_mailing/static/src/js/mass_mailing_form_editor.js
+#, []
 msgid "Your Name"
-msgstr ""
+msgstr "Vaše ime ..."
 
-#. module: website_mass_mailing
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.snippets
+# model: model_terms:ir.ui.view,arch_db:website_mass_mailing.snippets
+#, []
 msgid ""
 "form, updates, digest, bulletin, announcements, notifications, "
 "communication, email, prompt, subscription"
 msgstr ""
 
-#. module: website_mass_mailing
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_aside
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_block_form_template
+# model:
+# model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_aside
+#, []
 msgid "johnsmith@example.com"
-msgstr ""
+msgstr "johnsmith@example.com"
 
-#. module: website_mass_mailing
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.snippets
+# model: model_terms:ir.ui.view,arch_db:website_mass_mailing.snippets
+#, []
 msgid ""
 "updates, digest, bulletin, announcements, notifications, communication, "
 "promotional, email, prompt, subscription, subscribe, mailing-list, news"
 msgstr ""
 
-#. module: website_mass_mailing
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.snippets
+# model: model_terms:ir.ui.view,arch_db:website_mass_mailing.snippets
+#, []
 msgid ""
 "updates, digest, bulletin, announcements, notifications, communication, "
 "promotional, email, prompt, subscription, subscribe, mailing-list, news, "
 "box, image, picture"
 msgstr ""
 
-#. module: website_mass_mailing
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.snippets
+# model: model_terms:ir.ui.view,arch_db:website_mass_mailing.snippets
+#, []
 msgid ""
 "updates, digest, bulletin, announcements, notifications, communication, "
 "promotional, email, prompt, subscription, subscribe, mailing-list, news, "
 "grid, image, picture"
 msgstr ""
 
-#. module: website_mass_mailing
-#: model_terms:ir.ui.view,arch_db:website_mass_mailing.snippets
+# model: model_terms:ir.ui.view,arch_db:website_mass_mailing.snippets
+#, []
 msgid ""
 "updates, digest, bulletin, announcements, notifications, communication, "
 "promotional, email, subscription, subscribe, mailing-list, news, grid, "
