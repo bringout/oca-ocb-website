@@ -86,3 +86,8 @@ msgid ""
 msgstr ""
 "ažuriranja, sažetak, bilten, obavještenja, notifikacije, komunikacija, "
 "promotivno, sms, upozorenje, dijalog, upit, pretplata, prijava, vijesti"
+
+#. module: website_mass_mailing_sms
+#: model_terms:ir.ui.view,arch_db:website_mass_mailing_sms.snippets
+msgid "Newsletter"
+msgstr ""

@@ -278,7 +278,7 @@ msgstr ""
 #: code:addons/website_links/static/src/interactions/website_links_charts.js:0
 #, python-format
 msgid "Undefined"
-msgstr "Nedefinisano"
+msgstr "Nedefinirano"
 
 #. module: website_links
 #. odoo-python
@@ -528,3 +528,15 @@ msgstr "npr. Junska Rasprodaja, Paris Roadshow, ..."
 #: code:addons/website_links/static/src/interactions/website_links.js:0
 msgid "e.g. LinkedIn, Facebook, Leads, ..."
 msgstr "npr. LinkedIn, Facebook, Lidovi, ..."
+
+#. module: website_links
+#: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
+msgid ""
+"<a class=\"copy-to-clipboard btn btn-success text-nowrap o_translate_inline\"><i class=\"fa fa-copy me-2\"/>Copy</a>\n"
+"                                        <a class=\"download-qr-code btn btn-info text-nowrap o_translate_inline\"><i class=\"fa fa-qrcode align-middle me-2\"/>Download QR Code</a>"
+msgstr ""
+
+#. module: website_links
+#: model_terms:ir.ui.view,arch_db:website_links.graphs
+msgid "<i class=\"fa fa-qrcode align-middle me-2\"/>Download QR Code"
+msgstr ""

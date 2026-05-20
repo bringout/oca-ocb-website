@@ -119,3 +119,8 @@ msgstr "Partner objavljen"
 #: model:mail.message.subtype,name:website_partner.mt_partner_unpublished
 msgid "Partner unpublished"
 msgstr "Partner povučen"
+
+#. module: website_partner
+#: model_terms:ir.ui.view,arch_db:website_partner.partner_page
+msgid "Drag blocks here to add them on all partners"
+msgstr ""

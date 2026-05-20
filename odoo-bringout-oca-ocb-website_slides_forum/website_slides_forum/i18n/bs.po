@@ -598,3 +598,8 @@ msgstr "Prikaži kurs za"
 #: code:addons/website_slides_forum/static/src/website_builder/slides_forum_page_option_plugin.js:0
 msgid "Slides Forum Snippet Options"
 msgstr "Opcije Slides Forum isječka"
+
+#. module: website_slides_forum
+#: code:addons/website_slides_forum/static/src/website_builder/slides_forum_page_option.xml:0
+msgid "Slides Forum Page"
+msgstr ""

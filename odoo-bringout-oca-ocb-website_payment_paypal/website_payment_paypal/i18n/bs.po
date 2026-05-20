@@ -19,7 +19,7 @@ msgstr ""
 #. module: website_payment_paypal
 #: model:ir.model,name:website_payment_paypal.model_res_config_settings
 msgid "Config Settings"
-msgstr "Postavke"
+msgstr "Postavke konfiguracije"
 
 #. module: website_payment_paypal
 #: model:ir.model.fields,field_description:website_payment_paypal.field_res_config_settings__paypal_email_account

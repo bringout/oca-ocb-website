@@ -787,3 +787,20 @@ msgstr ""
 "Uh-oh! Ne možete obrisati ankete koje se koriste kao certifikacija kursa! Inače, studenti bi mogli pomisliti da diplome rastu na drveću.\n"
 "Kursevi kojima trebaju su:\n"
 "%s"
+
+#. module: website_slides_survey
+#: model_terms:ir.ui.view,arch_db:website_slides_survey.survey_fill_form_done_inherit_website_slides
+msgid ""
+"<i class=\"fa fa-share-alt d-none d-md-inline\" aria-label=\"Share certification\" title=\"Share certification\"/>\n"
+"                        <span class=\"d-md-none\">Share certification</span>"
+msgstr ""
+
+#. module: website_slides_survey
+#: model_terms:ir.ui.view,arch_db:website_slides_survey.survey_fill_form_done_inherit_website_slides
+msgid "<i class=\"oi oi-chevron-left me-2\" aria-hidden=\"true\"/>Go back to course"
+msgstr ""
+
+#. module: website_slides_survey
+#: model:ir.model,name:website_slides_survey.model_slide_slide
+msgid "Slide"
+msgstr ""

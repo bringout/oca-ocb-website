@@ -110,7 +110,7 @@ msgstr ""
 #. module: website_mass_mailing
 #: model:ir.model,name:website_mass_mailing.model_res_company
 msgid "Companies"
-msgstr "Ukucajte ovdje ..."
+msgstr "Kompanije"
 
 # taken from hr.po
 #. module: website_mass_mailing
@@ -489,3 +489,108 @@ msgstr ""
 "ažuriranja, sažetak, bilten, obavještenja, notifikacije, komunikacija, "
 "promotivno, email, upozorenje, dijalog, upit, pretplata, prijava, mailing-"
 "lista, vijesti, mreža, slika"
+
+#. module: website_mass_mailing
+#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_aside
+msgid ""
+"<span class=\"s_website_form_field_description small form-text text-muted\">\n"
+"                                        We send one weekly newsletter per list and always try to keep it interesting. You can unsubscribe at any time.\n"
+"                                    </span>"
+msgstr ""
+
+#. module: website_mass_mailing
+#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_block_form_template
+msgid ""
+"<span class=\"s_website_form_field_description small form-text text-muted\">\n"
+"                                    We send one weekly newsletter per list and always try to keep it interesting. You can unsubscribe at any time.\n"
+"                                </span>"
+msgstr ""
+
+#. module: website_mass_mailing
+#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_aside
+msgid ""
+"<span class=\"s_website_form_label_content\">Email</span>\n"
+"                                        <span class=\"s_website_form_mark\"> *</span>"
+msgstr ""
+
+#. module: website_mass_mailing
+#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_aside
+msgid ""
+"<span class=\"s_website_form_label_content\">Name</span>\n"
+"                                        <span class=\"s_website_form_mark\"> *</span>"
+msgstr ""
+
+#. module: website_mass_mailing
+#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_aside
+msgid ""
+"<span class=\"s_website_form_label_content\">Our mailing lists</span>\n"
+"                                        <span class=\"s_website_form_mark\"> *</span>"
+msgstr ""
+
+#. module: website_mass_mailing
+#: model_terms:ir.ui.view,arch_db:website_mass_mailing.snippets
+msgid "Newsletter Aside"
+msgstr ""
+
+#. module: website_mass_mailing
+#: code:addons/website_mass_mailing/static/src/website_builder/toggle_thanks_message_translation_option.xml:0
+msgid "Newsletter block"
+msgstr ""
+
+#. module: website_mass_mailing
+#: code:addons/website_mass_mailing/static/src/website_builder/toggle_thanks_message_translation_option.xml:0
+msgid "Newsletter popup"
+msgstr ""
+
+#. module: website_mass_mailing
+#: code:addons/website_mass_mailing/static/src/interactions/subscribe_list_missing_error.xml:0
+msgid "Pick one or remove this block."
+msgstr ""
+
+#. module: website_mass_mailing
+#: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_aside
+msgid "Subscribe for updates, offers <br/>and insights!"
+msgstr ""
+
+#. module: website_mass_mailing
+#: code:addons/website_mass_mailing/static/src/interactions/subscribe_list_missing_error.xml:0
+msgid "This block is not linked to an active Newsletter."
+msgstr ""
+
+#. module: website_mass_mailing
+#: model_terms:ir.ui.view,arch_db:website_mass_mailing.snippets
+msgid ""
+"form, updates, digest, bulletin, announcements, notifications, "
+"communication, email, prompt, subscription"
+msgstr ""
+
+#. module: website_mass_mailing
+#: model_terms:ir.ui.view,arch_db:website_mass_mailing.snippets
+msgid ""
+"updates, digest, bulletin, announcements, notifications, communication, "
+"promotional, email, prompt, subscription, subscribe, mailing-list, news"
+msgstr ""
+
+#. module: website_mass_mailing
+#: model_terms:ir.ui.view,arch_db:website_mass_mailing.snippets
+msgid ""
+"updates, digest, bulletin, announcements, notifications, communication, "
+"promotional, email, prompt, subscription, subscribe, mailing-list, news, "
+"box, image, picture"
+msgstr ""
+
+#. module: website_mass_mailing
+#: model_terms:ir.ui.view,arch_db:website_mass_mailing.snippets
+msgid ""
+"updates, digest, bulletin, announcements, notifications, communication, "
+"promotional, email, prompt, subscription, subscribe, mailing-list, news, "
+"grid, image, picture"
+msgstr ""
+
+#. module: website_mass_mailing
+#: model_terms:ir.ui.view,arch_db:website_mass_mailing.snippets
+msgid ""
+"updates, digest, bulletin, announcements, notifications, communication, "
+"promotional, email, subscription, subscribe, mailing-list, news, grid, "
+"image, picture"
+msgstr ""
